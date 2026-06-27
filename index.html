@@ -3,218 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#0f0f0f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Programme Sport 12 Semaines</title>
-<link rel="manifest" href="manifest.json">
 <style>
-  :root {
-    --bg: #111111;
-    --bg2: #1a1a1a;
-    --bg3: #222222;
-    --border: #2e2e2e;
-    --text: #f0f0f0;
-    --muted: #888888;
-    --run: #378ADD;
-    --muscu: #3B6D11;
-    --mob: #BA7517;
-    --accent: #e05c2a;
-    --radius: 10px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; min-height: 100vh; }
+:root {
+  --bg:#0f0f0f; --bg2:#181818; --bg3:#222; --bg4:#2a2a2a;
+  --border:#2e2e2e; --border2:#3a3a3a;
+  --text:#f0f0f0; --muted:#888; --muted2:#555;
+  --run:#378ADD; --muscu:#5a9e1a; --mob:#d4830a; --rest:#555;
+  --accent:#e05c2a; --accent2:#ff7a45;
+  --radius:12px; --radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
 
-  /* === HEADER === */
-  header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
-  header h1 { font-size: 17px; font-weight: 600; letter-spacing: -0.3px; }
-  header span { font-size: 12px; color: var(--accent); font-weight: 600; background: rgba(224,92,42,0.12); padding: 3px 10px; border-radius: 20px; }
+/* HEADER */
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.header-left h1{font-size:17px;font-weight:700;letter-spacing:-0.3px}
+.header-left p{font-size:11px;color:var(--muted);margin-top:1px}
+.week-pill{font-size:12px;color:var(--accent);font-weight:700;background:rgba(224,92,42,0.15);padding:4px 12px;border-radius:20px;border:1px solid rgba(224,92,42,0.3)}
 
-  /* === NAV === */
-  nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--border); display: flex; z-index: 50; padding-bottom: env(safe-area-inset-bottom, 0px); }
-  nav button { flex: 1; padding: 10px 4px 8px; background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 500; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: color 0.15s; }
-  nav button svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  nav button.active { color: var(--accent); }
+/* NAV */
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:10px 4px 8px;background:none;border:none;color:var(--muted);font-size:10px;font-weight:500;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.15s}
+nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.active{color:var(--accent)}
 
-  /* === CONTENT === */
-  main { padding: 16px 16px 90px; max-width: 600px; margin: 0 auto; }
+/* MAIN */
+main{padding:16px 16px 90px;max-width:640px;margin:0 auto}
+.tab{display:none}.tab.active{display:block}
 
-  /* === WEEK SELECTOR === */
-  .week-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .week-bar h2 { font-size: 20px; font-weight: 700; }
-  .week-btns { display: flex; gap: 6px; }
-  .week-btns button { width: 34px; height: 34px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: background 0.15s; }
-  .week-btns button:hover { background: var(--border); }
-  .week-btns button:disabled { opacity: 0.3; cursor: default; }
+/* WEEK BAR */
+.week-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.week-bar h2{font-size:22px;font-weight:800;letter-spacing:-0.5px}
+.week-nav-btns{display:flex;gap:6px}
+.week-nav-btns button{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.week-nav-btns button:hover{background:var(--bg4)}
+.week-nav-btns button:disabled{opacity:0.3;cursor:default}
 
-  /* === PROGRESS BAR === */
-  .prog-wrap { margin-bottom: 16px; }
-  .prog-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
-  .prog-track { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-  .prog-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
-  .prog-fill.run { background: var(--run); }
-  .prog-fill.muscu { background: #639922; }
-  .prog-fill.mob { background: var(--mob); }
-  .prog-fill.global { background: var(--accent); }
+/* PROGRESS */
+.prog-wrap{margin-bottom:16px}
+.prog-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px}
+.prog-track{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width 0.5s ease}
+.prog-fill.global{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.prog-fill.run{background:var(--run)}
+.prog-fill.muscu{background:var(--muscu)}
+.prog-fill.mob{background:var(--mob)}
 
-  /* === DAY CARD === */
-  .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; }
-  .day-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; cursor: pointer; }
-  .day-left { display: flex; align-items: center; gap: 11px; }
-  .day-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-  .day-name { font-size: 14px; font-weight: 600; }
-  .day-type { font-size: 12px; color: var(--muted); margin-top: 1px; }
-  .day-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-  .badge-done { background: rgba(59,109,17,0.2); color: #7cba2e; }
-  .badge-pending { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
-  .chevron { font-size: 10px; color: var(--muted); margin-left: 4px; transition: transform 0.2s; }
-  .chevron.open { transform: rotate(180deg); }
+/* TYPE PILLS */
+.type-pills{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.type-pill{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid;cursor:pointer;transition:all 0.15s}
+.type-pill.all{border-color:var(--border2);color:var(--muted);background:var(--bg3)}
+.type-pill.all.active,.type-pill.all:hover{background:var(--accent);border-color:var(--accent);color:white}
+.type-pill.run{border-color:rgba(55,138,221,0.4);color:var(--run);background:rgba(55,138,221,0.1)}
+.type-pill.run.active{background:var(--run);color:white}
+.type-pill.muscu{border-color:rgba(90,158,26,0.4);color:var(--muscu);background:rgba(90,158,26,0.1)}
+.type-pill.muscu.active{background:var(--muscu);color:white}
+.type-pill.mob{border-color:rgba(212,131,10,0.4);color:var(--mob);background:rgba(212,131,10,0.1)}
+.type-pill.mob.active{background:var(--mob);color:white}
 
-  /* === EXERCISES === */
-  .day-body { display: none; border-top: 1px solid var(--border); }
-  .day-body.open { display: block; }
-  .ex-row { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
-  .ex-row:last-of-type { border-bottom: none; }
-  .ex-check { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-  .ex-check.done { background: #3B6D11; border-color: #3B6D11; }
-  .ex-check.done::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
-  .ex-info { flex: 1; min-width: 0; }
-  .ex-name { font-size: 13px; font-weight: 500; }
-  .ex-name.done { text-decoration: line-through; color: var(--muted); }
-  .ex-detail { font-size: 12px; color: var(--muted); margin-top: 1px; }
-  .timer-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: 7px; padding: 5px 10px; font-size: 11px; color: var(--muted); cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 4px; flex-shrink: 0; transition: border-color 0.15s; }
-  .timer-btn:hover { border-color: var(--run); color: var(--run); }
-  .validate-btn { width: calc(100% - 28px); margin: 10px 14px; padding: 11px; background: rgba(59,109,17,0.15); border: 1px solid rgba(59,109,17,0.4); border-radius: 8px; color: #7cba2e; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-  .validate-btn:hover { background: rgba(59,109,17,0.25); }
+/* DAY CARD */
+.day-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color 0.2s}
+.day-card:hover{border-color:var(--border2)}
+.day-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none}
+.day-left{display:flex;align-items:center;gap:12px}
+.day-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.day-icon.muscu{background:rgba(90,158,26,0.15)}
+.day-icon.course{background:rgba(55,138,221,0.15)}
+.day-icon.mob{background:rgba(212,131,10,0.15)}
+.day-icon.repos{background:rgba(85,85,85,0.15)}
+.day-meta h3{font-size:14px;font-weight:700}
+.day-meta p{font-size:12px;color:var(--muted);margin-top:2px}
+.day-right{display:flex;align-items:center;gap:8px}
+.day-badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px}
+.badge-done{background:rgba(90,158,26,0.2);color:#7cba2e;border:1px solid rgba(90,158,26,0.3)}
+.badge-pending{background:var(--bg3);color:var(--muted);border:1px solid var(--border2)}
+.chevron{color:var(--muted);font-size:12px;transition:transform 0.25s}
+.chevron.open{transform:rotate(180deg)}
 
-  /* === REST CARD === */
-  .rest-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 14px; text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+/* DAY BODY */
+.day-body{display:none;border-top:1px solid var(--border)}
+.day-body.open{display:block}
 
-  /* === TIMER MODAL === */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; align-items: flex-end; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal-box { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px)); width: 100%; max-width: 500px; border: 1px solid var(--border); border-bottom: none; }
-  .modal-title { font-size: 13px; color: var(--muted); margin-bottom: 4px; text-align: center; }
-  .timer-display { font-size: 72px; font-weight: 700; text-align: center; letter-spacing: -2px; font-variant-numeric: tabular-nums; margin: 8px 0 16px; }
-  .timer-display.done { color: #7cba2e; }
-  .timer-display.running { color: var(--accent); }
-  .slider-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-  .slider-wrap label { font-size: 12px; color: var(--muted); white-space: nowrap; }
-  input[type=range] { flex: 1; accent-color: var(--accent); height: 4px; cursor: pointer; }
-  .modal-btns { display: flex; gap: 10px; }
-  .modal-btn { flex: 1; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; }
-  .modal-btn.secondary { background: var(--bg3); color: var(--text); }
-  .modal-btn.primary { background: var(--accent); color: white; }
+/* SESSION INFO */
+.session-info{padding:12px 16px;background:var(--bg3);display:flex;gap:16px;flex-wrap:wrap}
+.session-stat{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)}
+.session-stat strong{color:var(--text);font-weight:600}
 
-  /* === DASHBOARD === */
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
-  .stat-num { font-size: 28px; font-weight: 700; }
-  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .section-title { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; margin-top: 20px; }
+/* EXERCISE CARD */
+.ex-card{border-bottom:1px solid var(--border);padding:14px 16px}
+.ex-card:last-of-type{border-bottom:none}
+.ex-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ex-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.ex-check.done{background:var(--muscu);border-color:var(--muscu)}
+.ex-check.done::after{content:'✓';color:white;font-size:13px;font-weight:700}
+.ex-title{flex:1;min-width:0}
+.ex-title h4{font-size:14px;font-weight:700;transition:all 0.2s}
+.ex-title h4.done{text-decoration:line-through;color:var(--muted)}
+.ex-title p{font-size:12px;color:var(--accent);font-weight:600;margin-top:2px}
+.timer-btn{background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:6px 12px;font-size:11px;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:all 0.15s;flex-shrink:0}
+.timer-btn:hover{border-color:var(--run);color:var(--run)}
 
-  /* === WEEK GRID === */
-  .week-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-  .wk { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
-  .wk.done { background: rgba(59,109,17,0.2); border-color: rgba(59,109,17,0.5); color: #7cba2e; }
-  .wk.current { border: 2px solid var(--accent); color: var(--accent); }
+/* ILLUSTRATION SVG */
+.ex-illustration{margin:0 0 12px;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg3);border:1px solid var(--border)}
+.ex-illustration svg{width:100%;display:block}
 
-  /* === NOTIFICATIONS === */
-  .notif-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
-  .notif-info h3 { font-size: 14px; font-weight: 500; }
-  .notif-info p { font-size: 12px; color: var(--muted); margin-top: 3px; }
-  .toggle { position: relative; width: 44px; height: 26px; flex-shrink: 0; }
-  .toggle input { opacity: 0; width: 0; height: 0; }
-  .toggle-sl { position: absolute; inset: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 13px; cursor: pointer; transition: 0.2s; }
-  .toggle-sl::before { content: ''; position: absolute; width: 20px; height: 20px; left: 2px; top: 2px; background: var(--muted); border-radius: 50%; transition: 0.2s; }
-  .toggle input:checked + .toggle-sl { background: var(--accent); border-color: var(--accent); }
-  .toggle input:checked + .toggle-sl::before { transform: translateX(18px); background: white; }
-  .cta-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 6px; transition: opacity 0.15s; }
-  .cta-btn:hover { opacity: 0.88; }
+/* DETAILS TABS */
+.detail-tabs{display:flex;gap:0;margin-bottom:10px;background:var(--bg3);border-radius:var(--radius-sm);padding:3px}
+.detail-tab{flex:1;padding:6px 4px;font-size:11px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;border-radius:6px;transition:all 0.15s;text-align:center}
+.detail-tab.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+.detail-content{display:none;font-size:13px;line-height:1.6;color:var(--muted)}
+.detail-content.active{display:block}
+.detail-content ul{padding-left:16px}
+.detail-content ul li{margin-bottom:4px}
+.muscle-tag{display:inline-block;background:rgba(224,92,42,0.15);border:1px solid rgba(224,92,42,0.3);color:var(--accent2);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;margin:2px}
+.warn-tag{display:inline-block;background:rgba(212,131,10,0.15);border:1px solid rgba(212,131,10,0.3);color:var(--mob);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;margin:2px}
+.tip-tag{display:inline-block;background:rgba(90,158,26,0.15);border:1px solid rgba(90,158,26,0.3);color:#7cba2e;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;margin:2px}
 
-  /* === HIDDEN === */
-  .tab { display: none; }
-  .tab.active { display: block; }
+/* YOUTUBE EMBED */
+.yt-wrap{position:relative;padding-bottom:56.25%;height:0;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:10px;background:var(--bg3)}
+.yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.yt-thumb{position:absolute;inset:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:var(--bg3)}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;opacity:0.7}
+.yt-play{width:56px;height:56px;background:rgba(255,0,0,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;transition:transform 0.15s}
+.yt-play:hover{transform:scale(1.1)}
+.yt-play::after{content:'';border-left:20px solid white;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px}
+
+/* VALIDATE BTN */
+.validate-btn{width:calc(100% - 28px);margin:12px 14px;padding:13px;background:linear-gradient(135deg,rgba(90,158,26,0.2),rgba(90,158,26,0.1));border:1px solid rgba(90,158,26,0.4);border-radius:var(--radius-sm);color:#7cba2e;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;letter-spacing:0.3px}
+.validate-btn:hover{background:rgba(90,158,26,0.25)}
+
+/* REST CARD */
+.rest-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;margin-bottom:10px}
+.rest-card h3{font-size:16px;font-weight:700;margin-top:8px}
+.rest-card p{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+
+/* TIMER MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border-radius:20px 20px 0 0;padding:28px 24px calc(28px + env(safe-area-inset-bottom,0px));width:100%;max-width:500px;border:1px solid var(--border);border-bottom:none}
+.modal-name{font-size:12px;color:var(--muted);text-align:center;margin-bottom:2px}
+.timer-display{font-size:80px;font-weight:800;text-align:center;letter-spacing:-3px;font-variant-numeric:tabular-nums;margin:8px 0 20px;transition:color 0.3s}
+.timer-display.running{color:var(--accent)}
+.timer-display.finished{color:#7cba2e}
+.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.slider-row label{font-size:12px;color:var(--muted);white-space:nowrap}
+input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
+.modal-btns{display:flex;gap:10px}
+.modal-btn{flex:1;padding:14px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;border:none;transition:all 0.15s}
+.modal-btn.sec{background:var(--bg3);color:var(--text)}
+.modal-btn.prim{background:var(--accent);color:white}
+
+/* DASHBOARD */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.stat-num{font-size:32px;font-weight:800;letter-spacing:-1px}
+.stat-label{font-size:12px;color:var(--muted);margin-top:3px}
+.stat-card.accent{border-color:rgba(224,92,42,0.3);background:rgba(224,92,42,0.05)}
+.stat-card.accent .stat-num{color:var(--accent)}
+.section-head{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin:22px 0 10px}
+.week-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.wk{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.wk:hover{border-color:var(--border2);color:var(--text)}
+.wk.done{background:rgba(90,158,26,0.2);border-color:rgba(90,158,26,0.5);color:#7cba2e}
+.wk.current{border:2px solid var(--accent);color:var(--accent);background:rgba(224,92,42,0.1)}
+
+/* NUTRITION */
+.nutri-day{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.nutri-header{padding:13px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.nutri-header h3{font-size:14px;font-weight:700}
+.nutri-header p{font-size:12px;color:var(--muted)}
+.nutri-body{display:none;border-top:1px solid var(--border);padding:14px 16px}
+.nutri-body.open{display:block}
+.meal{margin-bottom:14px}
+.meal:last-child{margin-bottom:0}
+.meal-name{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
+.meal-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.meal-item:last-child{border-bottom:none}
+.meal-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0;margin-top:5px}
+.meal-item-info{flex:1}
+.meal-item-info strong{display:block;color:var(--text);font-weight:500}
+.meal-item-info span{font-size:11px;color:var(--muted)}
+.macros{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.macro{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;text-align:center;flex:1;min-width:60px}
+.macro-val{font-size:15px;font-weight:700}
+.macro-label{font-size:10px;color:var(--muted);margin-top:1px}
+.macro.pro .macro-val{color:#378ADD}
+.macro.carb .macro-val{color:var(--mob)}
+.macro.fat .macro-val{color:#d45a9e}
+.macro.kcal .macro-val{color:var(--accent)}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>💪 Programme Sport</h1>
-  <span id="header-week">S1 / 12</span>
+  <div class="header-left">
+    <h1>💪 Programme Sport</h1>
+    <p>Force & Endurance — 12 semaines</p>
+  </div>
+  <div class="week-pill" id="header-week">S1 / 12</div>
 </header>
 
 <main>
-  <!-- TAB : PROGRAMME -->
+  <!-- TAB PROGRAMME -->
   <div class="tab active" id="tab-programme">
     <div class="week-bar">
       <h2 id="week-label">Semaine 1</h2>
-      <div class="week-btns">
+      <div class="week-nav-btns">
         <button id="prev-week" onclick="changeWeek(-1)" disabled>‹</button>
         <button id="next-week" onclick="changeWeek(1)">›</button>
       </div>
     </div>
     <div class="prog-wrap">
-      <div class="prog-label"><span>Progression du programme</span><span id="global-pct">0%</span></div>
+      <div class="prog-label"><span>Progression globale</span><span id="global-pct">0%</span></div>
       <div class="prog-track"><div class="prog-fill global" id="global-bar" style="width:0%"></div></div>
+    </div>
+    <div class="type-pills">
+      <button class="type-pill all active" onclick="filterType('all',this)">Tous</button>
+      <button class="type-pill muscu" onclick="filterType('muscu',this)">🏋️ Muscu</button>
+      <button class="type-pill run" onclick="filterType('course',this)">🏃 Course</button>
+      <button class="type-pill mob" onclick="filterType('mob',this)">🧘 Mobilité</button>
     </div>
     <div id="days-list"></div>
   </div>
 
-  <!-- TAB : DASHBOARD -->
+  <!-- TAB DASHBOARD -->
   <div class="tab" id="tab-dashboard">
-    <h2 style="font-size:20px;font-weight:700;margin-bottom:14px;">Mes progrès</h2>
+    <h2 style="font-size:22px;font-weight:800;margin-bottom:14px">Mes progrès</h2>
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num" id="d-total">0</div><div class="stat-label">séances faites</div></div>
+      <div class="stat-card accent"><div class="stat-num" id="d-total">0</div><div class="stat-label">séances faites</div></div>
       <div class="stat-card"><div class="stat-num" id="d-pct">0%</div><div class="stat-label">du programme</div></div>
       <div class="stat-card"><div class="stat-num" id="d-run">0</div><div class="stat-label">séances course</div></div>
       <div class="stat-card"><div class="stat-num" id="d-muscu">0</div><div class="stat-label">séances muscu</div></div>
     </div>
-    <div class="section-title">Progression par type</div>
-    <div class="prog-wrap">
-      <div class="prog-label"><span>Course à pied</span><span id="run-pct">0%</span></div>
-      <div class="prog-track"><div class="prog-fill run" id="run-bar" style="width:0%"></div></div>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-label"><span>Musculation</span><span id="muscu-pct">0%</span></div>
-      <div class="prog-track"><div class="prog-fill muscu" id="muscu-bar" style="width:0%"></div></div>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-label"><span>Mobilité</span><span id="mob-pct">0%</span></div>
-      <div class="prog-track"><div class="prog-fill mob" id="mob-bar" style="width:0%"></div></div>
-    </div>
-    <div class="section-title">Calendrier 12 semaines</div>
+    <div class="section-head">Par type d'entraînement</div>
+    <div class="prog-wrap"><div class="prog-label"><span>Course à pied</span><span id="run-pct">0%</span></div><div class="prog-track"><div class="prog-fill run" id="run-bar" style="width:0%"></div></div></div>
+    <div class="prog-wrap"><div class="prog-label"><span>Musculation</span><span id="muscu-pct">0%</span></div><div class="prog-track"><div class="prog-fill muscu" id="muscu-bar" style="width:0%"></div></div></div>
+    <div class="prog-wrap"><div class="prog-label"><span>Mobilité</span><span id="mob-pct">0%</span></div><div class="prog-track"><div class="prog-fill mob" id="mob-bar" style="width:0%"></div></div></div>
+    <div class="section-head">Calendrier 12 semaines</div>
     <div class="week-grid" id="week-grid"></div>
   </div>
 
-  <!-- TAB : NOTIFICATIONS -->
-  <div class="tab" id="tab-notifs">
-    <h2 style="font-size:20px;font-weight:700;margin-bottom:6px;">Rappels</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Active les rappels pour ne manquer aucune séance.</p>
-    <div class="notif-card">
-      <div class="notif-info"><h3>Rappel séance du matin</h3><p>7h00 les jours d'entraînement</p></div>
-      <label class="toggle"><input type="checkbox" checked><span class="toggle-sl"></span></label>
-    </div>
-    <div class="notif-card">
-      <div class="notif-info"><h3>Mobilité quotidienne</h3><p>Chaque matin à 8h00</p></div>
-      <label class="toggle"><input type="checkbox" checked><span class="toggle-sl"></span></label>
-    </div>
-    <div class="notif-card">
-      <div class="notif-info"><h3>Hydratation</h3><p>Rappel pendant les séances</p></div>
-      <label class="toggle"><input type="checkbox"><span class="toggle-sl"></span></label>
-    </div>
-    <div class="notif-card">
-      <div class="notif-info"><h3>Récap hebdo</h3><p>Dimanche à 18h00</p></div>
-      <label class="toggle"><input type="checkbox"><span class="toggle-sl"></span></label>
-    </div>
-    <button class="cta-btn" onclick="requestNotif()">🔔 Activer les notifications</button>
-    <div style="margin-top:20px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;">
-      <p style="font-size:13px;color:var(--muted);line-height:1.6;">📱 <strong style="color:var(--text)">Installer l'appli sur ton téléphone</strong><br>Sur iPhone : appuie sur Partager → "Sur l'écran d'accueil".<br>Sur Android : appuie sur le menu ⋮ → "Ajouter à l'écran d'accueil".</p>
-    </div>
+  <!-- TAB NUTRITION -->
+  <div class="tab" id="tab-nutrition">
+    <h2 style="font-size:22px;font-weight:800;margin-bottom:6px">Plan nutrition</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">Adapté à ton programme muscu + course. Ajuste les quantités selon ton poids.</p>
+    <div id="nutri-list"></div>
   </div>
 </main>
 
-<!-- NAV -->
 <nav>
   <button class="active" id="nav-programme" onclick="showTab('programme')">
     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -224,363 +264,1145 @@
     <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     Progrès
   </button>
-  <button id="nav-notifs" onclick="showTab('notifs')">
-    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-    Rappels
+  <button id="nav-nutrition" onclick="showTab('nutrition')">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+    Nutrition
   </button>
 </nav>
 
 <!-- TIMER MODAL -->
 <div class="modal-overlay" id="timerModal">
   <div class="modal-box">
-    <div class="modal-title" id="timerExName">Repos entre séries</div>
+    <div class="modal-name" id="timerName">Repos</div>
     <div class="timer-display" id="timerDisplay">01:30</div>
-    <div class="slider-wrap">
+    <div class="slider-row">
       <label>Durée</label>
-      <input type="range" min="10" max="300" step="5" value="90" id="timerSlider" oninput="setTimerDuration(+this.value)">
-      <label id="timerSliderVal" style="min-width:36px;text-align:right">90s</label>
+      <input type="range" min="10" max="300" step="5" value="90" id="timerSlider" oninput="setTimerDur(+this.value)">
+      <label id="timerVal" style="min-width:36px;text-align:right">90s</label>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn secondary" onclick="closeTimer()">Fermer</button>
-      <button class="modal-btn primary" id="timerStartBtn" onclick="toggleTimer()">Démarrer</button>
+      <button class="modal-btn sec" onclick="closeTimer()">Fermer</button>
+      <button class="modal-btn prim" id="timerBtn" onclick="toggleTimer()">Démarrer</button>
     </div>
   </div>
 </div>
 
 <script>
-// ─────────────────────────────────────────────
-// DONNÉES DU PROGRAMME
-// ─────────────────────────────────────────────
-const PROGRAMME = [
-  { jour:'Lundi',    type:'muscu',  dot:'#639922', label:'Haut du corps A', exercises:[
-    { n:'Développé couché',     d:'4 × 8 reps',  t:true },
-    { n:'Rowing haltère',       d:'4 × 10 reps', t:true },
-    { n:'Développé militaire',  d:'3 × 10 reps', t:true },
-    { n:'Curl biceps',          d:'3 × 12 reps', t:true },
-    { n:'Dips triceps',         d:'3 × 12 reps', t:true },
-    { n:'Gainage planche',      d:'3 × 45s',     t:true }
-  ]},
-  { jour:'Mardi',    type:'course', dot:'#378ADD', label:'Endurance fondamentale', exercises:[
-    { n:'Échauffement marche',  d:'5 minutes',             t:true },
-    { n:'Course zone 2',        d:'45 min — FC 60–70%',    t:true },
-    { n:'Retour au calme',      d:'5 min marche',          t:true }
-  ]},
-  { jour:'Mercredi', type:'mob',    dot:'#BA7517', label:'Mobilité 10 min', exercises:[
-    { n:'Mobilité chevilles',   d:'10 cercles chaque côté',  t:false },
-    { n:'Mobilité hanches',     d:'10 reps',                 t:false },
-    { n:'Étirement mollets',    d:'30s × 2 chaque côté',     t:true  },
-    { n:'Squat profond tenu',   d:'3 × 30s',                 t:true  },
-    { n:'Ouverture de hanches', d:'10 reps',                 t:false },
-    { n:'Gainage',              d:'3 × 30s',                 t:true  }
-  ]},
-  { jour:'Jeudi',    type:'course', dot:'#378ADD', label:'Fractionné', exercises:[
-    { n:'Échauffement',         d:'10 min facile',                          t:true },
-    { n:'Intervalles rapides',  d:'10 × 1 min rapide / 1 min récup',       t:true },
-    { n:'Retour au calme',      d:'5 min marche + étirements',             t:true }
-  ]},
-  { jour:'Vendredi', type:'muscu',  dot:'#639922', label:'Haut du corps B', exercises:[
-    { n:'Tractions (assistées)', d:'4 × max',       t:true },
-    { n:'Développé incliné',    d:'4 × 10 reps',   t:true },
-    { n:'Élévations latérales', d:'3 × 15 reps',   t:true },
-    { n:'Face pull',            d:'3 × 15 reps',   t:true },
-    { n:'Gainage latéral',      d:'3 × 30s chaque côté', t:true }
-  ]},
-  { jour:'Samedi',   type:'course', dot:'#378ADD', label:'Sortie longue', exercises:[
-    { n:'Course longue',        d:'60–90 min rythme facile', t:true },
-    { n:'Étirements post-course', d:'10 minutes',            t:true }
-  ]},
-  { jour:'Dimanche', type:'repos',  dot:'#555', label:'Repos actif', exercises:[] }
-];
+// ═══════════════════════════════════════════
+// DONNÉES EXERCICES
+// ═══════════════════════════════════════════
+const EXERCISES = {
+  'Développé couché': {
+    sets:'4 × 8 reps', timer:true,
+    muscles:['Pectoraux','Triceps','Deltoïdes ant.'],
+    erreurs:['Ne pas rebondir la barre sur le sternum','Garder les omoplates rétractées','Ne pas décoller les fesses du banc'],
+    respiration:'Inspire en descendant la barre, expire en poussant',
+    conseil:'Commence avec 60% de ton max pour les premières semaines. Augmente de 2.5kg toutes les 2 semaines.',
+    yt:'https://www.youtube.com/embed/rT7DgCr-3pg',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Banc -->
+      <rect x="40" y="75" width="180" height="12" rx="4" fill="#333"/>
+      <rect x="55" y="87" width="8" height="25" rx="2" fill="#333"/>
+      <rect x="195" y="87" width="8" height="25" rx="2" fill="#333"/>
+      <!-- Barre -->
+      <rect x="20" y="45" width="260" height="6" rx="3" fill="#555"/>
+      <circle cx="20" cy="48" r="10" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <circle cx="280" cy="48" r="10" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <!-- Corps -->
+      <ellipse cx="130" cy="70" rx="35" ry="12" fill="#e05c2a" opacity="0.8"/>
+      <!-- Bras -->
+      <line x1="100" y1="70" x2="65" y2="48" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="160" y1="70" x2="195" y2="48" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Tête -->
+      <circle cx="130" cy="55" r="10" fill="#ccc"/>
+      <!-- Labels -->
+      <text x="130" y="108" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Pectoraux ● Triceps ● Épaules</text>
+    </svg>`
+  },
+  'Rowing haltère': {
+    sets:'4 × 10 reps', timer:true,
+    muscles:['Grand dorsal','Rhomboïdes','Biceps'],
+    erreurs:['Ne pas arrondir le dos','Tirer le coude vers le haut, pas vers le côté','Stabiliser le tronc'],
+    respiration:'Expire en tirant, inspire en redescendant',
+    conseil:'Appuie ton genou et ta main sur le banc pour stabiliser. Sens la contraction dans le dos en haut du mouvement.',
+    yt:'https://www.youtube.com/embed/roCP6wCXPqo',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Banc -->
+      <rect x="30" y="65" width="120" height="10" rx="3" fill="#333"/>
+      <rect x="40" y="75" width="7" height="30" rx="2" fill="#333"/>
+      <rect x="135" y="75" width="7" height="30" rx="2" fill="#333"/>
+      <!-- Corps incliné -->
+      <line x1="60" y1="65" x2="140" y2="50" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <!-- Bras tirant -->
+      <line x1="140" y1="52" x2="175" y2="40" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="140" y1="52" x2="175" y2="65" stroke="#ccc" stroke-width="4" stroke-linecap="round" stroke-dasharray="3,2"/>
+      <!-- Haltère -->
+      <rect x="178" y="36" width="20" height="8" rx="2" fill="#555"/>
+      <circle cx="176" cy="40" r="5" fill="#444" stroke="#666" stroke-width="1"/>
+      <circle cx="200" cy="40" r="5" fill="#444" stroke="#666" stroke-width="1"/>
+      <!-- Tête -->
+      <circle cx="60" cy="58" r="9" fill="#ccc"/>
+      <!-- Dos mis en avant -->
+      <ellipse cx="100" cy="52" rx="28" ry="10" fill="#e05c2a" opacity="0.6" transform="rotate(-10,100,52)"/>
+      <text x="200" y="100" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Grand dorsal ● Rhomboïdes</text>
+    </svg>`
+  },
+  'Développé militaire': {
+    sets:'3 × 10 reps', timer:true,
+    muscles:['Deltoïdes','Triceps','Trapèzes'],
+    erreurs:['Ne pas creuser excessivement le bas du dos','Serrer les fessiers pour stabiliser','Barre dans l\'axe des oreilles en haut'],
+    respiration:'Inspire avant de pousser, expire pendant la poussée',
+    conseil:'Debout ou assis, garde les abdominaux gainés. En debout, l\'exercice est plus difficile mais plus fonctionnel.',
+    yt:'https://www.youtube.com/embed/2yjwXTZQDDI',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Corps debout -->
+      <line x1="150" y1="30" x2="150" y2="90" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <!-- Jambes -->
+      <line x1="150" y1="90" x2="130" y2="120" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="90" x2="170" y2="120" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Barre au-dessus -->
+      <rect x="80" y="18" width="140" height="6" rx="3" fill="#555"/>
+      <circle cx="80" cy="21" r="9" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <circle cx="220" cy="21" r="9" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <!-- Bras levés -->
+      <line x1="150" y1="45" x2="110" y2="22" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="45" x2="190" y2="22" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Tête -->
+      <circle cx="150" cy="20" r="11" fill="#ccc"/>
+      <!-- Épaules mis en avant -->
+      <ellipse cx="150" cy="45" rx="22" ry="10" fill="#e05c2a" opacity="0.7"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Deltoïdes ● Triceps ● Trapèzes</text>
+    </svg>`
+  },
+  'Curl biceps': {
+    sets:'3 × 12 reps', timer:true,
+    muscles:['Biceps brachial','Brachial','Avant-bras'],
+    erreurs:['Ne pas balancer le corps','Coudes fixes sur les côtés','Contrôler la descente'],
+    respiration:'Expire en montant, inspire en descendant',
+    conseil:'Mouvement lent et contrôlé. Serre fort en haut du mouvement pendant 1 seconde.',
+    yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Corps -->
+      <line x1="150" y1="35" x2="150" y2="100" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="130" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="170" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras fléchi -->
+      <line x1="150" y1="55" x2="115" y2="65" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="115" y1="65" x2="110" y2="45" stroke="#e05c2a" stroke-width="5" stroke-linecap="round"/>
+      <!-- Bras bas -->
+      <line x1="150" y1="55" x2="185" y2="65" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="185" y1="65" x2="185" y2="90" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Haltères -->
+      <rect x="100" y="38" width="18" height="6" rx="2" fill="#555"/>
+      <rect x="179" y="87" width="18" height="6" rx="2" fill="#555"/>
+      <!-- Biceps highlight -->
+      <ellipse cx="113" cy="55" rx="8" ry="12" fill="#e05c2a" opacity="0.8" transform="rotate(-20,113,55)"/>
+      <!-- Tête -->
+      <circle cx="150" cy="24" r="11" fill="#ccc"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Biceps ● Brachial ● Avant-bras</text>
+    </svg>`
+  },
+  'Dips triceps': {
+    sets:'3 × 12 reps', timer:true,
+    muscles:['Triceps','Pectoraux inf.','Deltoïdes ant.'],
+    erreurs:['Ne pas descendre trop bas (risque épaules)','Corps légèrement incliné vers l\'avant','Coudes qui restent proches du corps'],
+    respiration:'Inspire en descendant, expire en montant',
+    conseil:'Si trop difficile, utilise une machine assistée ou fais des dips au banc. Augmente progressivement.',
+    yt:'https://www.youtube.com/embed/2z8JmcrW-As',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Barres parallèles -->
+      <rect x="50" y="40" width="8" height="70" rx="3" fill="#444"/>
+      <rect x="242" y="40" width="8" height="70" rx="3" fill="#444"/>
+      <line x1="50" y1="40" x2="58" y2="40" stroke="#555" stroke-width="4"/>
+      <line x1="242" y1="40" x2="250" y2="40" stroke="#555" stroke-width="4"/>
+      <!-- Corps suspendu -->
+      <line x1="150" y1="50" x2="150" y2="100" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <!-- Jambes repliées -->
+      <line x1="150" y1="100" x2="135" y2="120" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="165" y2="120" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras -->
+      <line x1="150" y1="55" x2="100" y2="42" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="55" x2="200" y2="42" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Triceps highlight -->
+      <ellipse cx="120" cy="46" rx="12" ry="6" fill="#e05c2a" opacity="0.8" transform="rotate(-20,120,46)"/>
+      <ellipse cx="180" cy="46" rx="12" ry="6" fill="#e05c2a" opacity="0.8" transform="rotate(20,180,46)"/>
+      <!-- Tête -->
+      <circle cx="150" cy="40" r="11" fill="#ccc"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Triceps ● Pectoraux ● Épaules</text>
+    </svg>`
+  },
+  'Gainage planche': {
+    sets:'3 × 45s', timer:true,
+    muscles:['Abdominaux','Transverse','Érecteurs du rachis'],
+    erreurs:['Ne pas laisser les hanches tomber','Ne pas lever les fesses','Respirer normalement, ne pas bloquer'],
+    respiration:'Respiration abdominale profonde et régulière',
+    conseil:'Corps droit comme une planche. Contracte les abdos et les fessiers. Regarde le sol.',
+    yt:'https://www.youtube.com/embed/pSHjTRCQxIw',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <!-- Sol -->
+      <line x1="20" y1="80" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+      <!-- Corps horizontal -->
+      <line x1="60" y1="60" x2="220" y2="60" stroke="#ccc" stroke-width="10" stroke-linecap="round"/>
+      <!-- Avant-bras au sol -->
+      <line x1="80" y1="60" x2="70" y2="78" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="200" y1="60" x2="210" y2="78" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Core highlight -->
+      <ellipse cx="140" cy="60" rx="40" ry="7" fill="#e05c2a" opacity="0.6"/>
+      <!-- Tête -->
+      <circle cx="60" cy="55" r="10" fill="#ccc"/>
+      <!-- Flèche corps droit -->
+      <line x1="140" y1="45" x2="140" y2="38" stroke="#5a9e1a" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="140" y="34" text-anchor="middle" fill="#5a9e1a" font-size="9" font-family="sans-serif">Corps droit !</text>
+      <text x="150" y="92" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Core ● Transverse ● Érecteurs</text>
+    </svg>`
+  },
+  'Tractions (assistées)': {
+    sets:'4 × max', timer:true,
+    muscles:['Grand dorsal','Biceps','Rhomboïdes','Trapèzes inf.'],
+    erreurs:['Ne pas balancer','Descendre complètement (bras tendus)','Éviter de hausser les épaules'],
+    respiration:'Expire en montant, inspire en descendant',
+    conseil:'Si tu ne peux pas faire de tractions seul, utilise une bande élastique sous les genoux ou une machine assistée.',
+    yt:'https://www.youtube.com/embed/eGo4IYlbE5g',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Barre -->
+      <rect x="60" y="15" width="180" height="8" rx="4" fill="#555"/>
+      <!-- Corps -->
+      <line x1="150" y1="35" x2="150" y2="100" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="132" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="168" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras -->
+      <line x1="150" y1="40" x2="110" y2="20" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="40" x2="190" y2="20" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Dos highlight -->
+      <ellipse cx="150" cy="60" rx="20" ry="18" fill="#e05c2a" opacity="0.6"/>
+      <!-- Tête -->
+      <circle cx="150" cy="28" r="11" fill="#ccc"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Grand dorsal ● Biceps ● Rhomboïdes</text>
+    </svg>`
+  },
+  'Développé incliné': {
+    sets:'4 × 10 reps', timer:true,
+    muscles:['Pectoraux sup.','Deltoïdes ant.','Triceps'],
+    erreurs:['Angle du banc entre 30 et 45°, pas plus','Mêmes principes que le développé couché','Ne pas perdre le contact des pieds au sol'],
+    respiration:'Inspire en descendant, expire en poussant',
+    conseil:'L\'inclinaison cible mieux la partie haute des pectoraux. Idéal pour un développé complet.',
+    yt:'https://www.youtube.com/embed/DbFgADa2PL8',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Banc incliné -->
+      <rect x="40" y="55" width="160" height="12" rx="4" fill="#333" transform="rotate(-25,120,61)"/>
+      <!-- Corps incliné -->
+      <ellipse cx="115" cy="62" rx="38" ry="13" fill="#e05c2a" opacity="0.7" transform="rotate(-25,115,62)"/>
+      <!-- Barre -->
+      <rect x="55" y="25" width="150" height="6" rx="3" fill="#555"/>
+      <circle cx="55" cy="28" r="9" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <circle cx="205" cy="28" r="9" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <!-- Bras -->
+      <line x1="90" y1="55" x2="70" y2="30" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="140" y1="55" x2="160" y2="30" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Tête -->
+      <circle cx="75" cy="48" r="10" fill="#ccc"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Pectoraux sup. ● Épaules ● Triceps</text>
+    </svg>`
+  },
+  'Élévations latérales': {
+    sets:'3 × 15 reps', timer:true,
+    muscles:['Deltoïdes lat.','Sus-épineux','Trapèzes sup.'],
+    erreurs:['Ne pas monter au-dessus de l\'horizontale','Légère flexion du coude','Contrôler la descente'],
+    respiration:'Expire en montant, inspire en descendant',
+    conseil:'Prends des haltères légers. Ce qui compte c\'est la qualité du mouvement, pas le poids.',
+    yt:'https://www.youtube.com/embed/3VcKaXpzqRo',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <line x1="150" y1="35" x2="150" y2="100" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="130" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="100" x2="170" y2="125" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras levés horizontalement -->
+      <line x1="150" y1="50" x2="80" y2="50" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="50" x2="220" y2="50" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Haltères -->
+      <rect x="62" y="46" width="16" height="7" rx="2" fill="#555"/>
+      <rect x="222" y="46" width="16" height="7" rx="2" fill="#555"/>
+      <!-- Épaules highlight -->
+      <circle cx="150" cy="48" r="14" fill="#e05c2a" opacity="0.6"/>
+      <!-- Tête -->
+      <circle cx="150" cy="24" r="11" fill="#ccc"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Deltoïdes latéraux ● Trapèzes</text>
+    </svg>`
+  },
+  'Face pull': {
+    sets:'3 × 15 reps', timer:true,
+    muscles:['Deltoïdes post.','Rotateurs ext.','Rhomboïdes'],
+    erreurs:['Tirer vers le visage, pas vers le cou','Coudes au-dessus des épaules','Mouvement lent et contrôlé'],
+    respiration:'Expire en tirant, inspire en revenant',
+    conseil:'Excellent exercice pour la santé des épaules et la posture. Ne jamais négliger cet exercice.',
+    yt:'https://www.youtube.com/embed/rep-qVOkqgk',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Poulie -->
+      <rect x="240" y="20" width="15" height="40" rx="4" fill="#444"/>
+      <circle cx="247" cy="35" r="8" fill="#555" stroke="#666" stroke-width="1"/>
+      <!-- Corde -->
+      <line x1="247" y1="43" x2="175" y2="55" stroke="#888" stroke-width="2"/>
+      <line x1="247" y1="43" x2="175" y2="65" stroke="#888" stroke-width="2"/>
+      <!-- Corps -->
+      <line x1="100" y1="40" x2="100" y2="95" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <line x1="100" y1="95" x2="80" y2="115" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="100" y1="95" x2="120" y2="115" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras tirés -->
+      <line x1="100" y1="55" x2="175" y2="55" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="100" y1="55" x2="175" y2="65" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Épaules post highlight -->
+      <ellipse cx="100" cy="50" rx="16" ry="12" fill="#e05c2a" opacity="0.7"/>
+      <circle cx="100" cy="30" r="10" fill="#ccc"/>
+      <text x="150" y="112" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Deltoïdes post. ● Rotateurs ● Rhomboïdes</text>
+    </svg>`
+  },
+  'Gainage latéral': {
+    sets:'3 × 30s chaque côté', timer:true,
+    muscles:['Obliques','Carré des lombes','Fessiers moy.'],
+    erreurs:['Hanches qui tombent','Ne pas retenir sa respiration','Corps aligné de la tête aux pieds'],
+    respiration:'Respiration régulière et profonde',
+    conseil:'Si trop difficile, appuie sur le genou au lieu du pied. Sens la contraction des obliques.',
+    yt:'https://www.youtube.com/embed/K-o98XzmEJ8',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <line x1="20" y1="82" x2="280" y2="82" stroke="#333" stroke-width="2"/>
+      <!-- Corps latéral -->
+      <line x1="70" y1="55" x2="220" y2="55" stroke="#ccc" stroke-width="10" stroke-linecap="round"/>
+      <!-- Appui coude -->
+      <line x1="80" y1="55" x2="72" y2="80" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Pieds -->
+      <line x1="215" y1="55" x2="220" y2="78" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Bras levé -->
+      <line x1="150" y1="55" x2="150" y2="32" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Obliques highlight -->
+      <ellipse cx="145" cy="55" rx="35" ry="7" fill="#e05c2a" opacity="0.6"/>
+      <!-- Tête -->
+      <circle cx="72" cy="47" r="9" fill="#ccc"/>
+      <text x="150" y="95" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Obliques ● Carré des lombes</text>
+    </svg>`
+  },
+  'Course zone 2': {
+    sets:'45 min FC 60–70%', timer:true,
+    muscles:['Cœur','Jambes','Endurance aérobie'],
+    erreurs:['Aller trop vite (on doit pouvoir parler)','Négliger l\'échauffement','Oublier de s\'hydrater'],
+    respiration:'Respiration nasale si possible, profonde et régulière',
+    conseil:'La zone 2 = tu peux tenir une conversation. FC cible = 180 - ton âge. C\'est la base de l\'endurance.',
+    yt:'https://www.youtube.com/embed/BYLn1kA0rEo',
+    svg:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="110" fill="#1a1a1a"/>
+      <!-- Coureur -->
+      <circle cx="120" cy="30" r="12" fill="#ccc"/>
+      <!-- Torse -->
+      <line x1="120" y1="42" x2="120" y2="75" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <!-- Bras -->
+      <line x1="120" y1="50" x2="95" y2="62" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <line x1="120" y1="50" x2="148" y2="42" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <!-- Jambes -->
+      <line x1="120" y1="75" x2="100" y2="95" stroke="#378ADD" stroke-width="5" stroke-linecap="round"/>
+      <line x1="120" y1="75" x2="145" y2="88" stroke="#378ADD" stroke-width="5" stroke-linecap="round"/>
+      <line x1="100" y1="95" x2="90" y2="100" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <line x1="145" y1="88" x2="158" y2="100" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <!-- Zone 2 indicator -->
+      <rect x="180" y="25" width="100" height="55" rx="8" fill="#1e2a1e" stroke="#5a9e1a" stroke-width="1"/>
+      <text x="230" y="42" text-anchor="middle" fill="#5a9e1a" font-size="10" font-family="sans-serif" font-weight="700">ZONE 2</text>
+      <text x="230" y="55" text-anchor="middle" fill="#ccc" font-size="12" font-family="sans-serif" font-weight="700">60–70%</text>
+      <text x="230" y="68" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">FC max</text>
+      <text x="150" y="108" text-anchor="middle" fill="#378ADD" font-size="10" font-family="sans-serif" font-weight="600">Endurance aérobie ● Récupération active</text>
+    </svg>`
+  },
+  'Intervalles rapides': {
+    sets:'10 × 1 min rapide / 1 min récup', timer:true,
+    muscles:['VO2max','Vitesse','Puissance cardiaque'],
+    erreurs:['Ne pas partir trop vite sur le premier interval','Bien récupérer entre chaque effort','Toujours s\'échauffer avant'],
+    respiration:'Haletante pendant l\'effort, récupération active entre les séries',
+    conseil:'Les "1 min rapide" = 80-85% de ton max. Tu dois être essoufflé mais pas à bout. La récup se fait en trottinant.',
+    yt:'https://www.youtube.com/embed/5tLfNh5MZ8A',
+    svg:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="110" fill="#1a1a1a"/>
+      <!-- Graphe intervalles -->
+      <rect x="20" y="80" width="260" height="2" fill="#333"/>
+      <!-- Barres effort -->
+      <rect x="25" y="30" width="20" height="50" rx="3" fill="#e05c2a" opacity="0.9"/>
+      <rect x="55" y="60" width="20" height="20" rx="3" fill="#378ADD" opacity="0.7"/>
+      <rect x="85" y="30" width="20" height="50" rx="3" fill="#e05c2a" opacity="0.9"/>
+      <rect x="115" y="60" width="20" height="20" rx="3" fill="#378ADD" opacity="0.7"/>
+      <rect x="145" y="30" width="20" height="50" rx="3" fill="#e05c2a" opacity="0.9"/>
+      <rect x="175" y="60" width="20" height="20" rx="3" fill="#378ADD" opacity="0.7"/>
+      <rect x="205" y="30" width="20" height="50" rx="3" fill="#e05c2a" opacity="0.9"/>
+      <rect x="235" y="60" width="20" height="20" rx="3" fill="#378ADD" opacity="0.7"/>
+      <!-- Légende -->
+      <rect x="25" y="90" width="10" height="6" rx="1" fill="#e05c2a"/>
+      <text x="40" y="96" fill="#888" font-size="9" font-family="sans-serif">Effort rapide</text>
+      <rect x="110" y="90" width="10" height="6" rx="1" fill="#378ADD"/>
+      <text x="125" y="96" fill="#888" font-size="9" font-family="sans-serif">Récupération</text>
+      <text x="150" y="108" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">VO2max ● Vitesse ● Puissance cardiaque</text>
+    </svg>`
+  },
+  'Course longue': {
+    sets:'60–90 min rythme facile', timer:true,
+    muscles:['Endurance fondamentale','Mental','Lipolyse'],
+    erreurs:['Trop vite = sortie inefficace','Ne pas s\'alimenter si >75 min','Varier les terrains si possible'],
+    respiration:'Lente, profonde, par le nez si possible',
+    conseil:'Rythme conversationnel absolu. L\'objectif est d\'habituer le corps à l\'effort long, pas la vitesse. Écoute de la musique ou un podcast !',
+    yt:'https://www.youtube.com/embed/kVnyY17VS9Y',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <!-- Route -->
+      <path d="M10,85 Q150,65 290,75" stroke="#333" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- Coureur -->
+      <circle cx="150" cy="52" r="10" fill="#ccc"/>
+      <line x1="150" y1="62" x2="150" y2="82" stroke="#378ADD" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="68" x2="135" y2="75" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="68" x2="165" y2="62" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="82" x2="140" y2="92" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="82" x2="162" y2="90" stroke="#378ADD" stroke-width="4" stroke-linecap="round"/>
+      <!-- Timer -->
+      <rect x="195" y="30" width="90" height="35" rx="8" fill="#1a1a2e" stroke="#378ADD" stroke-width="1"/>
+      <text x="240" y="45" text-anchor="middle" fill="#378ADD" font-size="11" font-family="sans-serif" font-weight="700">60–90 min</text>
+      <text x="240" y="58" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">rythme facile</text>
+      <text x="150" y="98" text-anchor="middle" fill="#378ADD" font-size="10" font-family="sans-serif" font-weight="600">Endurance ● Lipolyse ● Mental</text>
+    </svg>`
+  },
+  'Presse inclinée': {
+    sets:'4 × 10 reps', timer:true,
+    muscles:['Quadriceps','Fessiers','Ischio-jambiers'],
+    erreurs:['Ne pas décoller les talons','Genoux dans l\'axe des pieds','Ne pas verrouiller les genoux en extension'],
+    respiration:'Expire en poussant, inspire en pliant',
+    conseil:'Exercice roi pour les jambes sans stress sur le dos. Place les pieds hauts pour plus de fessiers, bas pour plus de quadriceps.',
+    yt:'https://www.youtube.com/embed/IZxyjW7MPJQ',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Machine presse -->
+      <rect x="20" y="20" width="180" height="90" rx="8" fill="#222" stroke="#333" stroke-width="1"/>
+      <!-- Plateforme inclinée -->
+      <rect x="30" y="50" width="120" height="8" rx="3" fill="#444" transform="rotate(-30,90,54)"/>
+      <!-- Dossier -->
+      <rect x="130" y="25" width="60" height="70" rx="6" fill="#333"/>
+      <!-- Corps sur la machine -->
+      <line x1="155" y1="55" x2="155" y2="85" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <!-- Jambes sur la plateforme -->
+      <line x1="155" y1="65" x2="110" y2="55" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="155" y1="70" x2="110" y2="65" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <!-- Tête -->
+      <circle cx="155" cy="46" r="10" fill="#ccc"/>
+      <text x="230" y="60" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Quadri</text>
+      <text x="230" y="72" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Fessiers</text>
+      <text x="150" y="115" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Quadriceps ● Fessiers ● Ischio</text>
+    </svg>`
+  },
+  'Soulevé de terre roumain': {
+    sets:'4 × 8 reps', timer:true,
+    muscles:['Ischio-jambiers','Fessiers','Érecteurs rachis'],
+    erreurs:['Dos rond = blessure !','Barre glisse le long des jambes','Hanches poussées en arrière, pas vers le bas'],
+    respiration:'Grande inspiration avant de descendre, expire en remontant',
+    conseil:'L\'exercice numéro 1 pour les ischio-jambiers. Sens l\'étirement à l\'arrière des cuisses en descendant.',
+    yt:'https://www.youtube.com/embed/jEy_czb3RKA',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Barre -->
+      <rect x="60" y="75" width="180" height="7" rx="3" fill="#555"/>
+      <circle cx="60" cy="78" r="12" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <circle cx="240" cy="78" r="12" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <!-- Corps incliné -->
+      <line x1="150" y1="75" x2="150" y2="40" stroke="#ccc" stroke-width="8" stroke-linecap="round" transform="rotate(-30,150,75)"/>
+      <!-- Jambes droites -->
+      <line x1="150" y1="75" x2="140" y2="115" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="150" y1="75" x2="160" y2="115" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <!-- Ischio highlight -->
+      <ellipse cx="150" cy="90" rx="14" ry="22" fill="#e05c2a" opacity="0.6"/>
+      <!-- Dos highlight -->
+      <line x1="135" y1="70" x2="150" y2="42" stroke="#e05c2a" stroke-width="4" stroke-linecap="round" opacity="0.8" transform="rotate(-30,143,56)"/>
+      <!-- Tête -->
+      <circle cx="127" cy="30" r="10" fill="#ccc"/>
+      <text x="150" y="125" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Ischio-jambiers ● Fessiers ● Dos</text>
+    </svg>`
+  },
+  'Fentes marchées': {
+    sets:'3 × 12 reps', timer:true,
+    muscles:['Quadriceps','Fessiers','Équilibre'],
+    erreurs:['Genou avant ne dépasse pas la pointe du pied','Torse droit','Genou arrière touche presque le sol'],
+    respiration:'Inspire en descendant, expire en remontant',
+    conseil:'Exercice excellent pour l\'équilibre et la coordination. Utilise des haltères pour augmenter la difficulté.',
+    yt:'https://www.youtube.com/embed/D7KaRcUTQeE',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Sol -->
+      <line x1="20" y1="115" x2="280" y2="115" stroke="#333" stroke-width="2"/>
+      <!-- Fente avant -->
+      <circle cx="130" cy="32" r="11" fill="#ccc"/>
+      <line x1="130" y1="43" x2="130" y2="80" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <!-- Jambe avant fléchie -->
+      <line x1="130" y1="80" x2="155" y2="100" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="155" y1="100" x2="165" y2="115" stroke="#e05c2a" stroke-width="5" stroke-linecap="round"/>
+      <!-- Jambe arrière -->
+      <line x1="130" y1="80" x2="105" y2="100" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="105" y1="100" x2="100" y2="115" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <!-- Bras -->
+      <line x1="130" y1="52" x2="110" y2="68" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <line x1="130" y1="52" x2="150" y2="66" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <!-- Quadri highlight -->
+      <ellipse cx="148" cy="97" rx="10" ry="16" fill="#e05c2a" opacity="0.6" transform="rotate(-20,148,97)"/>
+      <text x="150" y="125" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Quadriceps ● Fessiers ● Équilibre</text>
+    </svg>`
+  },
+  'Hip Thrust': {
+    sets:'4 × 10 reps', timer:true,
+    muscles:['Grand fessier','Ischio-jambiers','Core'],
+    erreurs:['Ne pas creuser le bas du dos en haut','Pieds à plat sur le sol','Menton rentré'],
+    respiration:'Expire en poussant les hanches vers le haut',
+    conseil:'L\'exercice roi pour les fessiers. Pousse à travers les talons. Barre sur les hanches avec un coussin.',
+    yt:'https://www.youtube.com/embed/xDmFkJxPzeM',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Banc appui dos -->
+      <rect x="40" y="50" width="70" height="30" rx="5" fill="#333"/>
+      <!-- Sol -->
+      <line x1="20" y1="108" x2="280" y2="108" stroke="#333" stroke-width="2"/>
+      <!-- Corps pont -->
+      <line x1="80" y1="55" x2="200" y2="55" stroke="#ccc" stroke-width="9" stroke-linecap="round"/>
+      <!-- Jambes vers sol -->
+      <line x1="200" y1="55" x2="210" y2="100" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="200" y1="55" x2="185" y2="100" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <!-- Barre sur hanches -->
+      <rect x="130" y="48" width="100" height="7" rx="3" fill="#555"/>
+      <circle cx="130" cy="51" r="10" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <circle cx="230" cy="51" r="10" fill="#444" stroke="#666" stroke-width="1.5"/>
+      <!-- Fessiers highlight -->
+      <ellipse cx="185" cy="60" rx="25" ry="12" fill="#e05c2a" opacity="0.7"/>
+      <!-- Tête -->
+      <circle cx="80" cy="46" r="10" fill="#ccc"/>
+      <text x="150" y="115" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Grand fessier ● Ischio ● Core</text>
+    </svg>`
+  },
+  'Mollets debout': {
+    sets:'4 × 20 reps', timer:true,
+    muscles:['Gastrocnémiens','Soléaire'],
+    erreurs:['Ne pas rebondir en bas','Amplitude complète','Tempo lent sur la descente'],
+    respiration:'Libre, rythme régulier',
+    conseil:'Utilisez une marche pour augmenter l\'amplitude. Monte haut sur les pointes, descends lentement.',
+    yt:'https://www.youtube.com/embed/gwLzBJYoWlI',
+    svg:`<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="130" fill="#1a1a1a"/>
+      <!-- Marche -->
+      <rect x="90" y="90" width="120" height="20" rx="4" fill="#333" stroke="#444" stroke-width="1"/>
+      <!-- Corps -->
+      <line x1="150" y1="30" x2="150" y2="85" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="150" cy="20" r="11" fill="#ccc"/>
+      <!-- Bras avec haltères -->
+      <line x1="150" y1="48" x2="120" y2="55" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="48" x2="180" y2="55" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <rect x="105" y="52" width="14" height="6" rx="2" fill="#555"/>
+      <rect x="181" y="52" width="14" height="6" rx="2" fill="#555"/>
+      <!-- Jambes sur pointe -->
+      <line x1="150" y1="85" x2="138" y2="90" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="85" x2="162" y2="90" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <!-- Pointe des pieds -->
+      <ellipse cx="133" cy="92" rx="8" ry="4" fill="#e05c2a" opacity="0.8"/>
+      <ellipse cx="167" cy="92" rx="8" ry="4" fill="#e05c2a" opacity="0.8"/>
+      <!-- Mollets highlight -->
+      <ellipse cx="138" cy="88" rx="7" ry="10" fill="#e05c2a" opacity="0.5"/>
+      <ellipse cx="162" cy="88" rx="7" ry="10" fill="#e05c2a" opacity="0.5"/>
+      <text x="150" y="120" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Gastrocnémiens ● Soléaire</text>
+    </svg>`
+  },
+  'Tibialis Raises': {
+    sets:'4 × 20 reps', timer:false,
+    muscles:['Tibial antérieur','Prévention blessures'],
+    erreurs:['Mouvement lent et contrôlé','Ne pas compenser avec les genoux','Dos contre le mur'],
+    respiration:'Libre',
+    conseil:'Exercice indispensable pour les coureurs ! Prévient les périostites et les blessures au tibia. Dos au mur, soulève la pointe des pieds.',
+    yt:'https://www.youtube.com/embed/AcVORl3SZSo',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <!-- Mur -->
+      <rect x="20" y="10" width="10" height="100" rx="2" fill="#333"/>
+      <!-- Sol -->
+      <line x1="20" y1="108" x2="280" y2="108" stroke="#333" stroke-width="2"/>
+      <!-- Corps debout dos au mur -->
+      <line x1="35" y1="30" x2="35" y2="90" stroke="#ccc" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="35" cy="20" r="10" fill="#ccc"/>
+      <!-- Jambes -->
+      <line x1="35" y1="90" x2="28" y2="107" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="35" y1="90" x2="42" y2="107" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <!-- Tibia highlight pointe levée -->
+      <ellipse cx="28" cy="100" rx="6" ry="4" fill="#e05c2a" opacity="0.9"/>
+      <ellipse cx="42" cy="100" rx="6" ry="4" fill="#e05c2a" opacity="0.9"/>
+      <line x1="28" y1="96" x2="25" y2="88" stroke="#e05c2a" stroke-width="2" stroke-dasharray="2,2"/>
+      <line x1="42" y1="96" x2="45" y2="88" stroke="#e05c2a" stroke-width="2" stroke-dasharray="2,2"/>
+      <!-- Explication -->
+      <rect x="70" y="25" width="200" height="70" rx="8" fill="#1a1a2e" stroke="#378ADD" stroke-width="1"/>
+      <text x="170" y="42" text-anchor="middle" fill="#378ADD" font-size="11" font-family="sans-serif" font-weight="700">Tibialis Raise</text>
+      <text x="170" y="58" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Dos au mur, talons au sol</text>
+      <text x="170" y="70" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Soulève la pointe des pieds</text>
+      <text x="170" y="84" text-anchor="middle" fill="#5a9e1a" font-size="9" font-family="sans-serif">= prévention blessures coureurs</text>
+      <text x="150" y="112" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Tibial antérieur ● Prévention</text>
+    </svg>`
+  },
+  'Mobilité chevilles': {
+    sets:'10 cercles chaque côté', timer:false,
+    muscles:['Cheville','Proprioception'],
+    erreurs:['Amplitude maximale','Lent et contrôlé'],
+    respiration:'Libre et détendue',
+    conseil:'Essentiel avant de courir. Améliore la proprioception et réduit le risque d\'entorse.',
+    yt:'https://www.youtube.com/embed/F9vTuT7HHXU',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <circle cx="150" cy="50" r="35" fill="none" stroke="#e05c2a" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <ellipse cx="150" cy="50" rx="15" ry="20" fill="#333" stroke="#555" stroke-width="1"/>
+      <ellipse cx="150" cy="65" rx="20" ry="8" fill="#444" stroke="#555" stroke-width="1"/>
+      <circle cx="150" cy="25" r="5" fill="#e05c2a"/>
+      <path d="M185,50 Q190,40 183,35" stroke="#e05c2a" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+      <text x="150" y="92" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Mobilité ● Proprioception ● Prévention</text>
+    </svg>`
+  },
+  'Mobilité hanches': {
+    sets:'10 reps', timer:false,
+    muscles:['Fléchisseurs de hanche','Rotateurs','Stabilisateurs'],
+    erreurs:['Ne pas forcer l\'amplitude','Mouvement fluide et contrôlé'],
+    respiration:'Expire sur l\'ouverture, inspire sur le retour',
+    conseil:'Les hanches sont souvent le point faible des coureurs. Ces rotations améliorent la foulée et préviennent les blessures.',
+    yt:'https://www.youtube.com/embed/F9vTuT7HHXU',
+    svg:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="110" fill="#1a1a1a"/>
+      <circle cx="150" cy="40" r="11" fill="#ccc"/>
+      <line x1="150" y1="51" x2="150" y2="80" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="150" y1="80" x2="128" y2="100" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="80" x2="172" y2="100" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="150" cy="72" rx="25" ry="15" fill="#e05c2a" opacity="0.5"/>
+      <path d="M125,72 Q150,50 175,72" stroke="#e05c2a" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+      <text x="150" y="108" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Fléchisseurs ● Rotateurs ● Stabilité</text>
+    </svg>`
+  },
+  'Étirement mollets': {
+    sets:'30s × 2 chaque côté', timer:true,
+    muscles:['Gastrocnémiens','Soléaire','Fascia plantaire'],
+    erreurs:['Ne pas rebondir','Maintenir la position','Talon bien à plat'],
+    respiration:'Longues expirations pour relâcher la tension',
+    conseil:'Essentiel pour les coureurs. Contre le mur, pied arrière talon au sol, jambe tendue.',
+    yt:'https://www.youtube.com/embed/EVE4DxKx2CE',
+    svg:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="110" fill="#1a1a1a"/>
+      <rect x="200" y="10" width="15" height="95" rx="3" fill="#333"/>
+      <line x1="20" y1="100" x2="215" y2="100" stroke="#333" stroke-width="2"/>
+      <circle cx="100" cy="28" r="10" fill="#ccc"/>
+      <line x1="100" y1="38" x2="100" y2="75" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="100" y1="75" x2="130" y2="95" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="100" y1="75" x2="75" y2="98" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="100" y1="52" x2="175" y2="38" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="80" cy="96" rx="12" ry="6" fill="#e05c2a" opacity="0.6"/>
+      <text x="150" y="108" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Gastrocnémiens ● Soléaire</text>
+    </svg>`
+  },
+  'Squat profond tenu': {
+    sets:'3 × 30s', timer:true,
+    muscles:['Hanches','Chevilles','Quadriceps','Bas du dos'],
+    erreurs:['Ne pas laisser les genoux rentrer vers l\'intérieur','Talon au sol','Dos droit'],
+    respiration:'Longues respirations abdominales',
+    conseil:'Le squat profond est la position naturelle de l\'humain. Si difficile, tiens une porte ou un poteau pour t\'aider au début.',
+    yt:'https://www.youtube.com/embed/qTuHPuEGnQ0',
+    svg:`<svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="120" fill="#1a1a1a"/>
+      <line x1="20" y1="112" x2="280" y2="112" stroke="#333" stroke-width="2"/>
+      <circle cx="150" cy="38" r="11" fill="#ccc"/>
+      <line x1="150" y1="49" x2="150" y2="78" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="150" y1="78" x2="120" y2="100" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="78" x2="180" y2="100" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="120" y1="100" x2="112" y2="112" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="180" y1="100" x2="188" y2="112" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="56" x2="120" y2="65" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="56" x2="180" y2="65" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="150" cy="88" rx="35" ry="15" fill="#e05c2a" opacity="0.3"/>
+      <text x="150" y="118" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Mobilité globale ● Hanches ● Chevilles</text>
+    </svg>`
+  },
+  'Ouverture de hanches': {
+    sets:'10 reps', timer:false,
+    muscles:['Fessiers','Rotateurs ext. de hanche','Adducteurs'],
+    erreurs:['Ne pas compenser avec le bas du dos','Mouvement de hanche pur'],
+    respiration:'Expire sur l\'ouverture',
+    conseil:'Debout sur un pied, lève le genou et ouvre la hanche vers l\'extérieur. Excellent pour la course.',
+    yt:'https://www.youtube.com/embed/F9vTuT7HHXU',
+    svg:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="110" fill="#1a1a1a"/>
+      <line x1="20" y1="105" x2="280" y2="105" stroke="#333" stroke-width="2"/>
+      <circle cx="130" cy="28" r="11" fill="#ccc"/>
+      <line x1="130" y1="39" x2="130" y2="80" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="130" y1="80" x2="120" y2="105" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="130" y1="80" x2="170" y2="68" stroke="#e05c2a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="170" y1="68" x2="175" y2="85" stroke="#e05c2a" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="150" cy="76" rx="22" ry="12" fill="#e05c2a" opacity="0.5"/>
+      <path d="M130,80 Q155,70 170,68" stroke="#e05c2a" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+      <text x="150" y="108" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Fessiers ● Rotateurs ● Adducteurs</text>
+    </svg>`
+  },
+  'Gainage': {
+    sets:'3 × 30s', timer:true,
+    muscles:['Core','Transverse','Obliques'],
+    erreurs:['Hanches ni trop hautes ni trop basses','Respirer normalement'],
+    respiration:'Continue et régulière',
+    conseil:'La base de tous les exercices. Un core fort protège le dos et améliore les performances.',
+    yt:'https://www.youtube.com/embed/pSHjTRCQxIw',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <line x1="20" y1="82" x2="280" y2="82" stroke="#333" stroke-width="2"/>
+      <line x1="60" y1="58" x2="230" y2="58" stroke="#ccc" stroke-width="10" stroke-linecap="round"/>
+      <line x1="80" y1="58" x2="70" y2="80" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="210" y1="58" x2="220" y2="80" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="145" cy="58" rx="45" ry="7" fill="#e05c2a" opacity="0.6"/>
+      <circle cx="60" cy="50" r="9" fill="#ccc"/>
+      <text x="150" y="96" text-anchor="middle" fill="#e05c2a" font-size="10" font-family="sans-serif" font-weight="600">Core ● Transverse ● Stabilité</text>
+    </svg>`
+  },
+  'Échauffement marche': {
+    sets:'5 minutes', timer:true,
+    muscles:['Activation générale','Articulations'],
+    erreurs:['Ne jamais sauter l\'échauffement','Augmenter progressivement le rythme'],
+    respiration:'Naturelle',
+    conseil:'5 minutes de marche rapide pour élever la fréquence cardiaque et préparer les articulations.',
+    yt:'https://www.youtube.com/embed/BYLn1kA0rEo',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <line x1="20" y1="90" x2="280" y2="90" stroke="#333" stroke-width="2"/>
+      <circle cx="150" cy="28" r="10" fill="#ccc"/>
+      <line x1="150" y1="38" x2="150" y2="70" stroke="#ccc" stroke-width="7" stroke-linecap="round"/>
+      <line x1="150" y1="70" x2="130" y2="90" stroke="#5a9e1a" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="70" x2="168" y2="82" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="50" x2="130" y2="62" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <line x1="150" y1="50" x2="168" y2="58" stroke="#ccc" stroke-width="4" stroke-linecap="round"/>
+      <text x="150" y="98" text-anchor="middle" fill="#5a9e1a" font-size="10" font-family="sans-serif" font-weight="600">Échauffement ● Activation ● Préparation</text>
+    </svg>`
+  },
+  'Retour au calme': {
+    sets:'5 min marche', timer:true,
+    muscles:['Récupération','FC normalisée'],
+    erreurs:['Ne jamais s\'arrêter brutalement après un effort'],
+    respiration:'Progressive, qui revient à la normale',
+    conseil:'5 minutes de marche douce pour redescendre la fréquence cardiaque progressivement. Évite les malaises.',
+    yt:'https://www.youtube.com/embed/BYLn1kA0rEo',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <path d="M30,70 Q80,30 130,50 Q180,70 230,40 Q260,25 270,35" stroke="#378ADD" stroke-width="2" fill="none"/>
+      <path d="M160,70 Q200,55 240,60 Q265,62 270,65" stroke="#5a9e1a" stroke-width="2" fill="none"/>
+      <text x="50" y="45" fill="#378ADD" font-size="9" font-family="sans-serif">FC effort</text>
+      <text x="170" y="85" fill="#5a9e1a" font-size="9" font-family="sans-serif">FC récup →</text>
+      <text x="150" y="98" text-anchor="middle" fill="#5a9e1a" font-size="10" font-family="sans-serif" font-weight="600">Récupération ● Retour FC normale</text>
+    </svg>`
+  },
+  'Étirements post-course': {
+    sets:'10 minutes', timer:true,
+    muscles:['Mollets','Quadriceps','Ischio-jambiers','Hanches'],
+    erreurs:['Pas d\'étirements statiques avant la course','Toujours après, jamais avant'],
+    respiration:'Longues expirations pour relâcher',
+    conseil:'10 min d\'étirements statiques après chaque course. Accélère la récupération et améliore la souplesse.',
+    yt:'https://www.youtube.com/embed/EVE4DxKx2CE',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <line x1="20" y1="88" x2="280" y2="88" stroke="#333" stroke-width="2"/>
+      <circle cx="100" cy="30" r="10" fill="#ccc"/>
+      <line x1="100" y1="40" x2="100" y2="65" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="100" y1="65" x2="75" y2="88" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <line x1="100" y1="65" x2="140" y2="75" stroke="#e05c2a" stroke-width="5" stroke-linecap="round"/>
+      <line x1="140" y1="75" x2="165" y2="88" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="130" cy="79" rx="20" ry="8" fill="#e05c2a" opacity="0.5"/>
+      <text x="150" y="98" text-anchor="middle" fill="#5a9e1a" font-size="10" font-family="sans-serif" font-weight="600">Récupération ● Souplesse ● Prévention</text>
+    </svg>`
+  },
+  'Échauffement': {
+    sets:'10 min facile', timer:true,
+    muscles:['Activation cardio','Articulations'],
+    erreurs:['Ne pas partir trop vite','10 minutes minimum'],
+    respiration:'Aisée, nasale',
+    conseil:'Footing très lent, tu dois pouvoir chanter. Active progressivement le système cardio-vasculaire.',
+    yt:'https://www.youtube.com/embed/BYLn1kA0rEo',
+    svg:`<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="100" fill="#1a1a1a"/>
+      <path d="M30,80 Q150,40 270,60" stroke="#5a9e1a" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+      <circle cx="150" cy="25" r="10" fill="#ccc"/>
+      <line x1="150" y1="35" x2="150" y2="65" stroke="#ccc" stroke-width="6" stroke-linecap="round"/>
+      <line x1="150" y1="65" x2="133" y2="82" stroke="#5a9e1a" stroke-width="5" stroke-linecap="round"/>
+      <line x1="150" y1="65" x2="165" y2="78" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+      <text x="150" y="96" text-anchor="middle" fill="#5a9e1a" font-size="10" font-family="sans-serif" font-weight="600">Montée progressive ● Activation</text>
+    </svg>`
+  }
+};
 
-const JAMBES = { jour:'Jeudi (sem. paires)', type:'muscu', dot:'#639922', label:'Séance jambes', exercises:[
-  { n:'Presse inclinée',           d:'4 × 10 reps', t:true },
-  { n:'Soulevé de terre roumain',  d:'4 × 8 reps',  t:true },
-  { n:'Fentes marchées',           d:'3 × 12 reps', t:true },
-  { n:'Hip Thrust',                d:'4 × 10 reps', t:true },
-  { n:'Mollets debout',            d:'4 × 20 reps', t:true },
-  { n:'Tibialis Raises',           d:'4 × 20 reps', t:true }
-]};
+// ═══════════════════════════════════════════
+// PROGRAMME
+// ═══════════════════════════════════════════
+const BASE_PROGRAMME = [
+  { jour:'Lundi', type:'muscu', icon:'🏋️', label:'Haut du corps A', duration:'~60 min', exercises:['Développé couché','Rowing haltère','Développé militaire','Curl biceps','Dips triceps','Gainage planche'] },
+  { jour:'Mardi', type:'course', icon:'🏃', label:'Endurance fondamentale', duration:'~60 min', exercises:['Échauffement marche','Course zone 2','Retour au calme'] },
+  { jour:'Mercredi', type:'mob', icon:'🧘', label:'Mobilité 10 min', duration:'~15 min', exercises:['Mobilité chevilles','Mobilité hanches','Étirement mollets','Squat profond tenu','Ouverture de hanches','Gainage'] },
+  { jour:'Jeudi', type:'course', icon:'⚡', label:'Fractionné', duration:'~45 min', exercises:['Échauffement','Intervalles rapides','Retour au calme'] },
+  { jour:'Vendredi', type:'muscu', icon:'💪', label:'Haut du corps B', duration:'~60 min', exercises:['Tractions (assistées)','Développé incliné','Élévations latérales','Face pull','Gainage latéral'] },
+  { jour:'Samedi', type:'course', icon:'🌄', label:'Sortie longue', duration:'~90 min', exercises:['Course longue','Étirements post-course'] },
+  { jour:'Dimanche', type:'repos', icon:'😴', label:'Repos actif', duration:'', exercises:[] }
+];
+const JAMBES = { jour:'Jeudi', type:'muscu', icon:'🦵', label:'Séance jambes', duration:'~55 min', exercises:['Presse inclinée','Soulevé de terre roumain','Fentes marchées','Hip Thrust','Mollets debout','Tibialis Raises'] };
 
 function getDays(week) {
-  const days = JSON.parse(JSON.stringify(PROGRAMME));
+  const days = JSON.parse(JSON.stringify(BASE_PROGRAMME));
   if (week % 2 === 0) days[3] = JSON.parse(JSON.stringify(JAMBES));
   return days;
 }
 
-// ─────────────────────────────────────────────
-// ÉTAT (persiste via localStorage)
-// ─────────────────────────────────────────────
-let state = { week: 1, checked: {}, done: {} };
-function loadState() {
-  try { const s = localStorage.getItem('sport_state'); if (s) state = JSON.parse(s); } catch(e) {}
-}
-function saveState() {
-  try { localStorage.setItem('sport_state', JSON.stringify(state)); } catch(e) {}
-}
-loadState();
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let state = { week:1, checked:{}, done:{}, openDays:{}, openDetail:{} };
+try { const s = localStorage.getItem('sport12_v2'); if(s) state = {...state, ...JSON.parse(s)}; } catch(e) {}
+function save() { try { localStorage.setItem('sport12_v2', JSON.stringify(state)); } catch(e) {} }
 
-// ─────────────────────────────────────────────
-// NAVIGATION
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════
 function showTab(id) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  document.getElementById('nav-' + id).classList.add('active');
-  if (id === 'dashboard') renderDashboard();
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  if(id==='dashboard') renderDashboard();
+  if(id==='nutrition') renderNutrition();
 }
 
-// ─────────────────────────────────────────────
-// SEMAINE
-// ─────────────────────────────────────────────
-function changeWeek(delta) {
-  state.week = Math.max(1, Math.min(12, state.week + delta));
-  saveState();
+let currentFilter = 'all';
+function filterType(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.type-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
   renderProgramme();
 }
 
-// ─────────────────────────────────────────────
-// PROGRAMME
-// ─────────────────────────────────────────────
+function changeWeek(delta) {
+  state.week = Math.max(1, Math.min(12, state.week + delta));
+  save();
+  renderProgramme();
+}
+
+// ═══════════════════════════════════════════
+// PROGRAMME RENDER
+// ═══════════════════════════════════════════
 function renderProgramme() {
   const w = state.week;
   const days = getDays(w);
   document.getElementById('week-label').textContent = 'Semaine ' + w;
   document.getElementById('header-week').textContent = 'S' + w + ' / 12';
-  document.getElementById('prev-week').disabled = w === 1;
-  document.getElementById('next-week').disabled = w === 12;
+  document.getElementById('prev-week').disabled = w===1;
+  document.getElementById('next-week').disabled = w===12;
 
-  // Global progress
-  let total = 0, done = 0;
-  for (let ww = 1; ww <= 12; ww++) {
-    getDays(ww).forEach((d, di) => {
-      if (d.type !== 'repos') { total++; if (state.done[ww + '-' + di]) done++; }
-    });
-  }
-  const pct = total > 0 ? Math.round(done / total * 100) : 0;
-  document.getElementById('global-pct').textContent = pct + '%';
-  document.getElementById('global-bar').style.width = pct + '%';
+  let total=0, done=0;
+  for(let ww=1;ww<=12;ww++) getDays(ww).forEach((d,di)=>{ if(d.type!=='repos'){total++;if(state.done[ww+'-'+di])done++;} });
+  const pct = total>0?Math.round(done/total*100):0;
+  document.getElementById('global-pct').textContent = pct+'%';
+  document.getElementById('global-bar').style.width = pct+'%';
 
-  // Days list
   const list = document.getElementById('days-list');
   list.innerHTML = '';
   days.forEach((day, di) => {
-    const sk = w + '-' + di;
+    if(currentFilter!=='all' && day.type!==currentFilter && day.type!=='repos') return;
+    const sk = w+'-'+di;
     const isDone = !!state.done[sk];
-    const checkedCount = day.exercises.filter((_, ei) => state.checked[sk + '-' + ei]).length;
+    const isOpen = !!state.openDays[sk];
+    const checkedCount = day.exercises.filter((_,ei)=>state.checked[sk+'-'+ei]).length;
 
-    if (day.type === 'repos') {
-      const r = document.createElement('div');
-      r.className = 'rest-card';
-      r.innerHTML = '😴 <strong>' + day.jour + '</strong> — Repos actif / récupération';
-      list.appendChild(r);
-      return;
+    if(day.type==='repos') {
+      const r=document.createElement('div'); r.className='rest-card';
+      r.innerHTML=`<div style="font-size:32px">${day.icon}</div><h3>${day.jour} — Repos actif</h3><p>Récupération, marche légère, étirements doux.<br>Le repos fait partie du programme.</p>`;
+      list.appendChild(r); return;
     }
 
-    const card = document.createElement('div');
-    card.className = 'day-card';
+    const card=document.createElement('div'); card.className='day-card';
+    const typeColor = day.type==='muscu'?'var(--muscu)':day.type==='course'?'var(--run)':'var(--mob)';
+    card.style.borderLeft = isDone ? '3px solid '+typeColor : '';
+
+    let exHTML = '';
+    day.exercises.forEach((exName, ei) => {
+      const ex = EXERCISES[exName] || {sets:'',timer:false,muscles:[],erreurs:[],respiration:'',conseil:'',yt:'',svg:''};
+      const ck = !!state.checked[sk+'-'+ei];
+      const detKey = sk+'-'+ei;
+      const detOpen = state.openDetail[detKey] || 'muscles';
+      exHTML += `<div class="ex-card">
+        <div class="ex-top">
+          <div class="ex-check ${ck?'done':''}" onclick="toggleEx(${di},${ei})" role="checkbox" aria-label="${exName}"></div>
+          <div class="ex-title">
+            <h4 class="${ck?'done':''}">${exName}</h4>
+            <p>${ex.sets||''}</p>
+          </div>
+          ${ex.timer?`<button class="timer-btn" onclick="openTimer('${exName.replace(/'/g,"\\'")}')">⏱ Timer</button>`:''}
+        </div>
+        ${ex.svg?`<div class="ex-illustration">${ex.svg}</div>`:''}
+        <div class="detail-tabs">
+          <button class="detail-tab ${detOpen==='muscles'?'active':''}" onclick="switchDetail('${detKey}','muscles')">Muscles</button>
+          <button class="detail-tab ${detOpen==='erreurs'?'active':''}" onclick="switchDetail('${detKey}','erreurs')">Erreurs</button>
+          <button class="detail-tab ${detOpen==='conseil'?'active':''}" onclick="switchDetail('${detKey}','conseil')">Conseils</button>
+          <button class="detail-tab ${detOpen==='video'?'active':''}" onclick="switchDetail('${detKey}','video')">Vidéo</button>
+        </div>
+        <div id="detail-muscles-${detKey}" class="detail-content ${detOpen==='muscles'?'active':''}">
+          ${ex.muscles?ex.muscles.map(m=>`<span class="muscle-tag">${m}</span>`).join(''):''}
+          <br><br><strong style="font-size:12px;color:var(--text)">Respiration :</strong><br>${ex.respiration||''}
+        </div>
+        <div id="detail-erreurs-${detKey}" class="detail-content ${detOpen==='erreurs'?'active':''}">
+          <ul>${(ex.erreurs||[]).map(e=>`<li><span class="warn-tag">⚠</span> ${e}</li>`).join('')}</ul>
+        </div>
+        <div id="detail-conseil-${detKey}" class="detail-content ${detOpen==='conseil'?'active':''}">
+          <span class="tip-tag">💡 Pro tip</span><br><br>${ex.conseil||''}
+        </div>
+        <div id="detail-video-${detKey}" class="detail-content ${detOpen==='video'?'active':''}">
+          ${ex.yt?`<div class="yt-wrap"><iframe src="${ex.yt}?rel=0" allowfullscreen loading="lazy"></iframe></div>`:'<p style="color:var(--muted)">Vidéo non disponible.</p>'}
+        </div>
+      </div>`;
+    });
+
     card.innerHTML = `
-      <div class="day-header" onclick="toggleDay(${di})">
+      <div class="day-header" onclick="toggleDay('${sk}')">
         <div class="day-left">
-          <div class="day-dot" style="background:${day.dot}"></div>
-          <div>
-            <div class="day-name">${day.jour}</div>
-            <div class="day-type">${day.label}</div>
+          <div class="day-icon ${day.type}">${day.icon}</div>
+          <div class="day-meta">
+            <h3>${day.jour}</h3>
+            <p>${day.label}${day.duration?' · '+day.duration:''}</p>
           </div>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <span class="day-badge ${isDone ? 'badge-done' : 'badge-pending'}">${isDone ? '✓ Fait' : checkedCount + '/' + day.exercises.length}</span>
-          <span class="chevron" id="chev-${di}">▾</span>
+        <div class="day-right">
+          <span class="day-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ Fait':checkedCount+'/'+day.exercises.length}</span>
+          <span class="chevron ${isOpen?'open':''}" id="chev-${sk}">▾</span>
         </div>
       </div>
-      <div class="day-body" id="body-${di}">
-        ${day.exercises.map((ex, ei) => {
-          const ck = state.checked[sk + '-' + ei];
-          return `<div class="ex-row">
-            <div class="ex-check ${ck ? 'done' : ''}" onclick="toggleEx(${di},${ei})" role="checkbox" aria-label="${ex.n}"></div>
-            <div class="ex-info">
-              <div class="ex-name ${ck ? 'done' : ''}">${ex.n}</div>
-              <div class="ex-detail">${ex.d}</div>
-            </div>
-            ${ex.t ? `<button class="timer-btn" onclick="openTimer('${ex.n.replace(/'/g,"\\'")}')">⏱ Timer</button>` : ''}
-          </div>`;
-        }).join('')}
-        <button class="validate-btn" onclick="validateSession(${di})">✓ Valider la séance</button>
+      <div class="day-body ${isOpen?'open':''}" id="body-${sk}">
+        <div class="session-info">
+          <div class="session-stat">⏱ <strong>${day.duration||'—'}</strong></div>
+          <div class="session-stat">🏋️ <strong>${day.exercises.length}</strong> exercices</div>
+          <div class="session-stat" style="color:${typeColor}">● ${day.type==='muscu'?'Musculation':day.type==='course'?'Course':'Mobilité'}</div>
+        </div>
+        ${exHTML}
+        <button class="validate-btn" onclick="validateSession(${di})">✓ Valider la séance complète</button>
       </div>`;
     list.appendChild(card);
   });
 }
 
-function toggleDay(di) {
-  const body = document.getElementById('body-' + di);
-  const chev = document.getElementById('chev-' + di);
-  if (!body) return;
-  body.classList.toggle('open');
-  if (chev) chev.classList.toggle('open');
-}
-
-function toggleEx(di, ei) {
-  const sk = state.week + '-' + di + '-' + ei;
-  state.checked[sk] = !state.checked[sk];
-  saveState();
-  renderProgramme();
-  const body = document.getElementById('body-' + di);
-  if (body) body.classList.add('open');
-  const chev = document.getElementById('chev-' + di);
-  if (chev) chev.classList.add('open');
-}
-
-function validateSession(di) {
-  const w = state.week;
-  const sk = w + '-' + di;
-  state.done[sk] = true;
-  const days = getDays(w);
-  days[di].exercises.forEach((_, ei) => { state.checked[sk + '-' + ei] = true; });
-  saveState();
-  renderProgramme();
-  const body = document.getElementById('body-' + di);
-  if (body) body.classList.add('open');
-}
-
-// ─────────────────────────────────────────────
-// DASHBOARD
-// ─────────────────────────────────────────────
-function renderDashboard() {
-  let total = 0, done = 0, runDone = 0, muscuDone = 0, mobDone = 0;
-  let totalRun = 0, totalMuscu = 0, totalMob = 0;
-  for (let w = 1; w <= 12; w++) {
-    getDays(w).forEach((d, di) => {
-      if (d.type === 'repos') return;
-      total++;
-      if (d.type === 'course') totalRun++;
-      if (d.type === 'muscu') totalMuscu++;
-      if (d.type === 'mob') totalMob++;
-      if (state.done[w + '-' + di]) {
-        done++;
-        if (d.type === 'course') runDone++;
-        if (d.type === 'muscu') muscuDone++;
-        if (d.type === 'mob') mobDone++;
-      }
-    });
-  }
-  const pct = total > 0 ? Math.round(done / total * 100) : 0;
-  const runP = totalRun > 0 ? Math.round(runDone / totalRun * 100) : 0;
-  const muscuP = totalMuscu > 0 ? Math.round(muscuDone / totalMuscu * 100) : 0;
-  const mobP = totalMob > 0 ? Math.round(mobDone / totalMob * 100) : 0;
-
-  document.getElementById('d-total').textContent = done;
-  document.getElementById('d-pct').textContent = pct + '%';
-  document.getElementById('d-run').textContent = runDone;
-  document.getElementById('d-muscu').textContent = muscuDone;
-  document.getElementById('run-pct').textContent = runP + '%';
-  document.getElementById('run-bar').style.width = runP + '%';
-  document.getElementById('muscu-pct').textContent = muscuP + '%';
-  document.getElementById('muscu-bar').style.width = muscuP + '%';
-  document.getElementById('mob-pct').textContent = mobP + '%';
-  document.getElementById('mob-bar').style.width = mobP + '%';
-
-  const grid = document.getElementById('week-grid');
-  grid.innerHTML = '';
-  for (let w = 1; w <= 12; w++) {
-    const days = getDays(w);
-    const t = days.filter(d => d.type !== 'repos').length;
-    const d = days.filter((dd, di) => state.done[w + '-' + di]).length;
-    const cls = d === t ? 'done' : w === state.week ? 'current' : '';
-    const wk = document.createElement('div');
-    wk.className = 'wk ' + cls;
-    wk.textContent = w;
-    wk.title = 'Semaine ' + w + ' — ' + d + '/' + t;
-    wk.onclick = () => { state.week = w; saveState(); showTab('programme'); renderProgramme(); };
-    grid.appendChild(wk);
-  }
-}
-
-// ─────────────────────────────────────────────
-// TIMER
-// ─────────────────────────────────────────────
-let timerSec = 90, timerCurrent = 90, timerInterval = null, timerRunning = false;
-
-function openTimer(name) {
-  document.getElementById('timerExName').textContent = name || 'Repos';
-  timerCurrent = timerSec;
-  updateTimerDisplay();
-  document.getElementById('timerDisplay').className = 'timer-display';
-  document.getElementById('timerStartBtn').textContent = 'Démarrer';
-  clearInterval(timerInterval);
-  timerRunning = false;
-  document.getElementById('timerModal').classList.add('open');
-}
-
-function closeTimer() {
-  clearInterval(timerInterval);
-  timerRunning = false;
-  document.getElementById('timerModal').classList.remove('open');
-}
-
-function setTimerDuration(v) {
-  timerSec = v;
-  timerCurrent = v;
-  document.getElementById('timerSliderVal').textContent = v + 's';
-  clearInterval(timerInterval);
-  timerRunning = false;
-  document.getElementById('timerStartBtn').textContent = 'Démarrer';
-  document.getElementById('timerDisplay').className = 'timer-display';
-  updateTimerDisplay();
-}
-
-function updateTimerDisplay() {
-  const m = Math.floor(timerCurrent / 60);
-  const s = timerCurrent % 60;
-  document.getElementById('timerDisplay').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-}
-
-function toggleTimer() {
-  if (timerRunning) {
-    clearInterval(timerInterval);
-    timerRunning = false;
-    document.getElementById('timerStartBtn').textContent = 'Reprendre';
-    document.getElementById('timerDisplay').className = 'timer-display';
-  } else {
-    if (timerCurrent <= 0) { timerCurrent = timerSec; updateTimerDisplay(); }
-    timerRunning = true;
-    document.getElementById('timerStartBtn').textContent = 'Pause';
-    document.getElementById('timerDisplay').className = 'timer-display running';
-    timerInterval = setInterval(() => {
-      timerCurrent--;
-      updateTimerDisplay();
-      if (timerCurrent <= 0) {
-        clearInterval(timerInterval);
-        timerRunning = false;
-        document.getElementById('timerStartBtn').textContent = 'Recommencer';
-        document.getElementById('timerDisplay').className = 'timer-display done';
-        document.getElementById('timerDisplay').textContent = '✓ Terminé';
-        if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-      }
-    }, 1000);
-  }
-}
-
-document.getElementById('timerModal').addEventListener('click', function(e) {
-  if (e.target === this) closeTimer();
-});
-
-// ─────────────────────────────────────────────
-// NOTIFICATIONS
-// ─────────────────────────────────────────────
-function requestNotif() {
-  if (!('Notification' in window)) { alert('Notifications non supportées sur ce navigateur.'); return; }
-  Notification.requestPermission().then(p => {
-    if (p === 'granted') {
-      new Notification('Programme Sport 💪', { body: 'Notifications activées ! Bonne séance !' });
-    } else {
-      alert('Autorisation refusée. Active les notifications dans les paramètres du navigateur.');
-    }
+function switchDetail(key, tab) {
+  state.openDetail[key] = tab;
+  ['muscles','erreurs','conseil','video'].forEach(t=>{
+    const el = document.getElementById('detail-'+t+'-'+key);
+    if(el) el.classList.toggle('active', t===tab);
+  });
+  document.querySelectorAll(`[onclick="switchDetail('${key}','${tab}')"]`).forEach(btn=>{
+    btn.closest('.detail-tabs')?.querySelectorAll('.detail-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
   });
 }
 
-// ─────────────────────────────────────────────
+function toggleDay(sk) {
+  state.openDays[sk] = !state.openDays[sk];
+  const body = document.getElementById('body-'+sk);
+  const chev = document.getElementById('chev-'+sk);
+  if(body) body.classList.toggle('open', state.openDays[sk]);
+  if(chev) chev.classList.toggle('open', state.openDays[sk]);
+}
+
+function toggleEx(di, ei) {
+  const sk = state.week+'-'+di;
+  const ck = sk+'-'+ei;
+  state.checked[ck] = !state.checked[ck];
+  state.openDays[sk] = true;
+  save(); renderProgramme();
+}
+
+function validateSession(di) {
+  const w = state.week, sk = w+'-'+di;
+  state.done[sk] = true;
+  getDays(w)[di].exercises.forEach((_,ei)=>{ state.checked[sk+'-'+ei]=true; });
+  state.openDays[sk] = true;
+  save(); renderProgramme();
+}
+
+// ═══════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════
+function renderDashboard() {
+  let total=0,done=0,runD=0,muscuD=0,mobD=0,totalRun=0,totalMuscu=0,totalMob=0;
+  for(let w=1;w<=12;w++) getDays(w).forEach((d,di)=>{
+    if(d.type==='repos') return; total++;
+    if(d.type==='course')totalRun++; if(d.type==='muscu')totalMuscu++; if(d.type==='mob')totalMob++;
+    if(state.done[w+'-'+di]){done++;if(d.type==='course')runD++;if(d.type==='muscu')muscuD++;if(d.type==='mob')mobD++;}
+  });
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('d-total').textContent=done;
+  document.getElementById('d-pct').textContent=pct+'%';
+  document.getElementById('d-run').textContent=runD;
+  document.getElementById('d-muscu').textContent=muscuD;
+  const rP=totalRun>0?Math.round(runD/totalRun*100):0;
+  const mP=totalMuscu>0?Math.round(muscuD/totalMuscu*100):0;
+  const mbP=totalMob>0?Math.round(mobD/totalMob*100):0;
+  document.getElementById('run-pct').textContent=rP+'%'; document.getElementById('run-bar').style.width=rP+'%';
+  document.getElementById('muscu-pct').textContent=mP+'%'; document.getElementById('muscu-bar').style.width=mP+'%';
+  document.getElementById('mob-pct').textContent=mbP+'%'; document.getElementById('mob-bar').style.width=mbP+'%';
+  const grid=document.getElementById('week-grid'); grid.innerHTML='';
+  for(let w=1;w<=12;w++){
+    const days=getDays(w), t=days.filter(d=>d.type!=='repos').length, d=days.filter((dd,di)=>state.done[w+'-'+di]).length;
+    const wk=document.createElement('div');
+    wk.className='wk'+(d===t?' done':w===state.week?' current':'');
+    wk.textContent=w; wk.title='Semaine '+w+' — '+d+'/'+t;
+    wk.onclick=()=>{state.week=w;save();showTab('programme');renderProgramme();}; grid.appendChild(wk);
+  }
+}
+
+// ═══════════════════════════════════════════
+// NUTRITION
+// ═══════════════════════════════════════════
+const NUTRITION = [
+  { jour:'Jour muscu (Lun, Ven)', icon:'🏋️', macros:{pro:'2g/kg',carb:'4g/kg',fat:'1g/kg',kcal:'+300'}, meals:[
+    { name:'Petit-déjeuner', items:[
+      {n:'Flocons d\'avoine',d:'80g — énergie longue durée'},
+      {n:'Protéine en poudre ou œufs',d:'30g protéines'},
+      {n:'Banane',d:'Potassium + glucides rapides'},
+      {n:'Lait demi-écrémé',d:'200ml'}
+    ]},
+    { name:'Déjeuner (avant séance)', items:[
+      {n:'Riz blanc ou pâtes',d:'150g cru — carburant pour la séance'},
+      {n:'Poulet ou thon',d:'200g — protéines complètes'},
+      {n:'Légumes variés',d:'200g — vitamines, fibres'},
+      {n:'Huile d\'olive',d:'1 cuillère'}
+    ]},
+    { name:'Collation post-séance (30 min après)', items:[
+      {n:'Protéine en poudre',d:'30-40g — fenêtre anabolique'},
+      {n:'Banane ou dattes',d:'Sucres rapides pour la récupération'},
+      {n:'Yaourt grec',d:'150g — caséine lente'}
+    ]},
+    { name:'Dîner', items:[
+      {n:'Saumon ou viande rouge',d:'200g — protéines + oméga 3'},
+      {n:'Patate douce ou quinoa',d:'150g cuit'},
+      {n:'Brocolis, épinards',d:'200g — anti-inflammatoire'}
+    ]}
+  ]},
+  { jour:'Jour course (Mar, Jeu, Sam)', icon:'🏃', macros:{pro:'1.6g/kg',carb:'5g/kg',fat:'1.2g/kg',kcal:'+200'}, meals:[
+    { name:'Petit-déjeuner (2h avant)', items:[
+      {n:'Pain complet ou riz',d:'100g — glucides complexes'},
+      {n:'Miel ou confiture',d:'1 cuillère — sucres rapides'},
+      {n:'Banane',d:'Potassium — anti-crampes'},
+      {n:'Thé ou café léger',d:'Caféine = performance +3-5%'}
+    ]},
+    { name:'Pendant la course (>60 min)', items:[
+      {n:'Gel énergétique ou dattes',d:'Toutes les 30-40 min'},
+      {n:'Eau',d:'150-200ml toutes les 15-20 min'}
+    ]},
+    { name:'Déjeuner / récupération', items:[
+      {n:'Pâtes ou riz',d:'200g cuit — reconstituer le glycogène'},
+      {n:'Protéine animale',d:'150g — réparation musculaire'},
+      {n:'Légumes verts',d:'200g'},
+      {n:'Jus d\'orange',d:'Vitamine C — antioxydant'}
+    ]},
+    { name:'Dîner', items:[
+      {n:'Poisson blanc ou œufs',d:'Protéines légères'},
+      {n:'Légumes et légumineuses',d:'Fibres et minéraux'},
+      {n:'Fromage blanc',d:'Caséine = récupération nocturne'}
+    ]}
+  ]},
+  { jour:'Jour mobilité (Mer)', icon:'🧘', macros:{pro:'1.6g/kg',carb:'3g/kg',fat:'1.2g/kg',kcal:'maintenance'}, meals:[
+    { name:'Petit-déjeuner', items:[
+      {n:'Œufs brouillés',d:'3 œufs — protéines complètes'},
+      {n:'Avocat',d:'1/2 — acides gras essentiels'},
+      {n:'Pain complet',d:'1 tranche'},
+      {n:'Fruits rouges',d:'Antioxydants — récupération'}
+    ]},
+    { name:'Déjeuner', items:[
+      {n:'Salade composée',d:'Légumes variés + féculents'},
+      {n:'Poulet ou légumineuses',d:'Protéines'},
+      {n:'Huile d\'olive + citron',d:'Anti-inflammatoire'}
+    ]},
+    { name:'Dîner', items:[
+      {n:'Poisson gras (maquereau, sardine)',d:'Oméga 3 — récupération articulaire'},
+      {n:'Légumes vapeur',d:'200g'},
+      {n:'Riz complet',d:'100g cuit'}
+    ]}
+  ]},
+  { jour:'Dimanche — Repos', icon:'😴', macros:{pro:'1.4g/kg',carb:'2.5g/kg',fat:'1g/kg',kcal:'-200'}, meals:[
+    { name:'Toute la journée', items:[
+      {n:'Aliments anti-inflammatoires',d:'Curcuma, gingembre, fruits rouges'},
+      {n:'Hydratation++',d:'2.5L minimum — récupération active'},
+      {n:'Protéines réparties',d:'Sur 4 repas — synthèse protéique'},
+      {n:'Légumes à volonté',d:'Micronutriments essentiels'}
+    ]}
+  ]}
+];
+
+function renderNutrition() {
+  const list = document.getElementById('nutri-list');
+  list.innerHTML = '';
+  NUTRITION.forEach((day, ni) => {
+    const isOpen = !!state['nutri-open-'+ni];
+    const div = document.createElement('div'); div.className = 'nutri-day';
+    div.innerHTML = `
+      <div class="nutri-header" onclick="toggleNutri(${ni})">
+        <div><h3>${day.icon} ${day.jour}</h3><p>${Object.entries(day.macros).map(([k,v])=>`${k.toUpperCase()}: ${v}`).join(' · ')}</p></div>
+        <span class="chevron ${isOpen?'open':''}">▾</span>
+      </div>
+      <div class="nutri-body ${isOpen?'open':''}" id="nutri-body-${ni}">
+        <div class="macros">
+          <div class="macro pro"><div class="macro-val">${day.macros.pro}</div><div class="macro-label">Protéines</div></div>
+          <div class="macro carb"><div class="macro-val">${day.macros.carb}</div><div class="macro-label">Glucides</div></div>
+          <div class="macro fat"><div class="macro-val">${day.macros.fat}</div><div class="macro-label">Lipides</div></div>
+          <div class="macro kcal"><div class="macro-val">${day.macros.kcal}</div><div class="macro-label">Calories</div></div>
+        </div>
+        ${day.meals.map(meal=>`
+          <div class="meal">
+            <div class="meal-name">${meal.name}</div>
+            ${meal.items.map(item=>`
+              <div class="meal-item">
+                <div class="meal-dot"></div>
+                <div class="meal-item-info"><strong>${item.n}</strong><span>${item.d}</span></div>
+              </div>`).join('')}
+          </div>`).join('')}
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+function toggleNutri(ni) {
+  state['nutri-open-'+ni] = !state['nutri-open-'+ni];
+  const body = document.getElementById('nutri-body-'+ni);
+  if(body) body.classList.toggle('open', state['nutri-open-'+ni]);
+  document.querySelectorAll('.nutri-header .chevron')[ni]?.classList.toggle('open', state['nutri-open-'+ni]);
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+let timerSec=90, timerCur=90, timerInt=null, timerOn=false;
+function openTimer(name) {
+  document.getElementById('timerName').textContent = name;
+  timerCur=timerSec; updateTimerDisp();
+  document.getElementById('timerDisplay').className='timer-display';
+  document.getElementById('timerBtn').textContent='Démarrer';
+  clearInterval(timerInt); timerOn=false;
+  document.getElementById('timerModal').classList.add('open');
+}
+function closeTimer() { clearInterval(timerInt); timerOn=false; document.getElementById('timerModal').classList.remove('open'); }
+function setTimerDur(v) { timerSec=v; timerCur=v; document.getElementById('timerVal').textContent=v+'s'; clearInterval(timerInt); timerOn=false; document.getElementById('timerBtn').textContent='Démarrer'; document.getElementById('timerDisplay').className='timer-display'; updateTimerDisp(); }
+function updateTimerDisp() { const m=Math.floor(timerCur/60),s=timerCur%60; document.getElementById('timerDisplay').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+function toggleTimer() {
+  if(timerOn) { clearInterval(timerInt); timerOn=false; document.getElementById('timerBtn').textContent='Reprendre'; document.getElementById('timerDisplay').className='timer-display'; }
+  else {
+    if(timerCur<=0){timerCur=timerSec;updateTimerDisp();}
+    timerOn=true; document.getElementById('timerBtn').textContent='Pause'; document.getElementById('timerDisplay').className='timer-display running';
+    timerInt=setInterval(()=>{
+      timerCur--;updateTimerDisp();
+      if(timerCur<=0){ clearInterval(timerInt); timerOn=false; document.getElementById('timerBtn').textContent='Recommencer'; document.getElementById('timerDisplay').className='timer-display finished'; document.getElementById('timerDisplay').textContent='✓ Fini !'; if(navigator.vibrate)navigator.vibrate([300,100,300]); }
+    },1000);
+  }
+}
+document.getElementById('timerModal').addEventListener('click',function(e){if(e.target===this)closeTimer();});
+
 // INIT
-// ─────────────────────────────────────────────
 renderProgramme();
 </script>
 </body>
