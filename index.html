@@ -1027,9 +1027,9 @@ const TYPE_GRAD = {
 // ══════════════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════════════
-let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{} };
+let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{}, logData:{}, prData:{}, onboarded:false, installDismissed:false };
 try { const raw = localStorage.getItem('fp_v3'); if(raw) S = {...S,...JSON.parse(raw)}; } catch(e){}
-const save = () => { try { localStorage.setItem('fp_v3', JSON.stringify(S)); } catch(e){} };
+const save = () => { try { localStorage.setItem('fp_v3', JSON.stringify(S)); if(typeof showSaveToast==='function')showSaveToast(); } catch(e){} };
 
 // ══════════════════════════════════════════════════════
 // NAVIGATION
@@ -1206,9 +1206,9 @@ function renderProgramme() {
             </div>
             <div id="edc-log-${detKey}" class="edt-content ${activeTab==='log'?'active':''}">
             <div style="padding:12px 0">
-              <div style="font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--push);margin-bottom:10px">📝 Log — Semaine ${S.week}</div>
-              ${Array.from({length:Math.min(parseInt(ex.sets)||3,5)},(_, i)=>i+1).map(s=>{const lk=exName+'_w'+S.week;const ld=(S.logData&&S.logData[lk])||{};return '<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center"><span style="font-size:11px;color:var(--muted);font-weight:600;width:44px">Série '+s+'</span><input style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:600;text-align:center;outline:none;max-width:70px;font-family:var(--fb)" type="number" placeholder="kg" min="0" max="500" value="'+(ld['kg'+s]||'')+'" id="lk-${detKey}-'+s+'" inputmode="decimal"><span style="font-size:11px;color:var(--muted)">×</span><input style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:600;text-align:center;outline:none;max-width:65px;font-family:var(--fb)" type="number" placeholder="reps" min="0" max="100" value="'+(ld['reps'+s]||'')+'" id="lr-${detKey}-'+s+'" inputmode="numeric"></div>';}).join('')}
-              <button style="width:100%;margin-top:8px;padding:10px;background:rgba(255,77,109,.15);border:1px solid rgba(255,77,109,.4);border-radius:8px;color:var(--push);font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.5px;text-transform:uppercase" onclick="saveLog('${detKey}','${exName.replace(/'/g,\"\\'\")}',Math.min(parseInt(EX['${exName}']&&EX['${exName}'].sets||'3')||3,5))">Enregistrer</button>
+              <div style="font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--push);margin-bottom:10px">📝 Mes charges — Semaine ${S.week}</div>
+              ${buildLogRows(detKey, exName, ex.sets)}
+              <button style="width:100%;margin-top:8px;padding:10px;background:rgba(255,77,109,.15);border:1px solid rgba(255,77,109,.4);border-radius:8px;color:var(--push);font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.5px;text-transform:uppercase" onclick="saveLog('${detKey}','${exName.replace(/'/g,\"\\'\")}',${Math.min(parseInt(ex.sets)||3,5)})">💾 Enregistrer</button>
               <div id="ls-${detKey}" style="font-size:11px;color:var(--course);font-weight:600;text-align:center;margin-top:6px;display:none">✓ Sauvegardé !</div>
             </div>
           </div>
@@ -1497,6 +1497,26 @@ function saveLog(detKey,exName,seriesCount){
 // ── PR KEYS ──
 const PR_KEYS=[{key:'pr_dc',label:'Dév. Couché',unit:'kg'},{key:'pr_trac',label:'Tractions',unit:'reps'},{key:'pr_mil',label:'Militaire',unit:'kg'}];
 
+
+
+// ── BUILD LOG ROWS ──
+function buildLogRows(detKey, exName, setsStr) {
+  const n = Math.min(parseInt(setsStr) || 3, 5);
+  const lk = exName + '_w' + S.week;
+  const ld = (S.logData && S.logData[lk]) || {};
+  let html = '';
+  for (let s = 1; s <= n; s++) {
+    html += '<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">' +
+      '<span style="font-size:11px;color:var(--muted);font-weight:600;width:48px;flex-shrink:0">Série ' + s + '</span>' +
+      '<input style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:600;text-align:center;outline:none;max-width:72px;font-family:var(--fb)" ' +
+        'type="number" placeholder="kg" min="0" max="500" value="' + (ld['kg'+s]||'') + '" id="lk-' + detKey + '-' + s + '" inputmode="decimal">' +
+      '<span style="font-size:13px;color:var(--muted)">×</span>' +
+      '<input style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;font-weight:600;text-align:center;outline:none;max-width:65px;font-family:var(--fb)" ' +
+        'type="number" placeholder="reps" min="0" max="100" value="' + (ld['reps'+s]||'') + '" id="lr-' + detKey + '-' + s + '" inputmode="numeric">' +
+      '</div>';
+  }
+  return html;
+}
 
 // Hide install banner if dismissed
 if(S.installDismissed){const b=document.getElementById('installBanner');if(b)b.classList.add('hidden');}
