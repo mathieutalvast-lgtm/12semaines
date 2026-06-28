@@ -581,7 +581,7 @@ body.light .theme-toggle { background:var(--bg3); border-color:var(--border2) }
 
 /* SUGGESTION CHIP */
 .suggestion-chip{background:rgba(255,215,10,.1);border:1px solid rgba(255,215,10,.3);border-radius:var(--rsm);padding:6px 10px;font-size:11px;color:var(--jambes);font-weight:600;margin-top:6px;display:inline-block}
-.suggestion-chip::before{content:'💡 '}
+.suggestion-chip::before{content:''}
 
 /* LIGHT THEME PROFILE */
 body.light .profile-input{background:var(--bg3);border-color:var(--border2);color:var(--text)}
@@ -626,6 +626,13 @@ body.light .day-card{background:var(--bg2);border-color:rgba(0,0,0,.06);box-shad
 body.light .stat-card{background:linear-gradient(135deg,#fff,var(--bg3));border-color:rgba(0,0,0,.06)}
 body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255,51,85,.04) 0%, transparent 70%)}
 
+
+/* ICON SYSTEM */
+.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ico svg{display:block}
+.nav-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.brand-icon-svg{width:20px;height:20px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
 </style>
 </head>
 <body>
@@ -634,12 +641,12 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
 <div class="loading-screen" id="loadingScreen">
   <div class="loading-icon">⚡</div>
   <div class="loading-txt">Chargement...</div>
-  <div class="sync-badge" id="syncBadge">☁️ Synchronisation en cours</div>
+  <div class="sync-badge" id="syncBadge">Synchronisation en cours</div>
 </div>
 
 <!-- AUTH -->
 <div class="auth-screen hidden" id="authScreen">
-  <div style="position:absolute;top:20px;right:20px"><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Changer le thème">🌙</button></div><div class="auth-logo">⚡</div>
+  <div style="position:absolute;top:20px;right:20px"><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Changer le thème">🌙</button></div><div class="auth-logo"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#authGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="authGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff8800"/></linearGradient></defs><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
   <div class="auth-title">Force & Performance</div>
   <div class="auth-sub">Programme 12 semaines · Muscu + Course<br>Connecte-toi pour sauvegarder ta progression</div>
   <div class="auth-card">
@@ -690,7 +697,7 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
   <div class="save-toast" id="saveToast">✓ Sauvegardé</div>
   <header class="app-header">
     <div class="header-brand">
-      <div class="brand-icon">⚡</div>
+      <div class="brand-icon"><svg class="brand-icon-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
       <div>
         <div class="brand-name">Force & Perf</div>
         <div class="brand-sub">12 semaines</div>
@@ -744,14 +751,14 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
       <div class="dash-wrap">
         <div class="dash-h2">Rappels</div>
         <div class="notif-card">
-          <div class="notif-card-title">🔔 Statut des notifications</div>
+          <div class="notif-card-title">Statut des notifications</div>
           <div class="notif-status default" id="notif-status-badge">Vérification...</div>
           <button class="notif-enable-btn" id="notif-enable-btn" onclick="requestNotifPermission()">
-            🔔 Activer les notifications
+            Activer les notifications
           </button>
         </div>
         <div class="notif-card">
-          <div class="notif-card-title">⏰ Heure du rappel quotidien</div>
+          <div class="notif-card-title">Heure du rappel</div>
           <div class="time-picker">
             <label>Rappel à</label>
             <select class="time-select" id="notif-hour">
@@ -777,29 +784,29 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
           </div>
         </div>
         <div class="notif-card">
-          <div class="notif-card-title">📅 Rappels par séance</div>
+          <div class="notif-card-title">Rappels par type de séance</div>
           <div class="notif-row">
-            <div class="notif-row-info"><div class="notif-row-label">🏋️ Séance muscu (Lun, Mer, Ven)</div><div class="notif-row-sub">PUSH · PULL · UPPER · JAMBES</div></div>
+            <div class="notif-row-info"><div class="notif-row-label">Séance muscu (Lun, Mer, Ven)</div><div class="notif-row-sub">PUSH · PULL · UPPER · JAMBES</div></div>
             <label class="notif-toggle"><input type="checkbox" id="notif-muscu" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
           </div>
           <div class="notif-row">
-            <div class="notif-row-info"><div class="notif-row-label">🏃 Séance course (Mar, Jeu, Sam)</div><div class="notif-row-sub">Endurance · Fractionné · Sortie longue</div></div>
+            <div class="notif-row-info"><div class="notif-row-label">Séance course (Mar, Jeu, Sam)</div><div class="notif-row-sub">Endurance · Fractionné · Sortie longue</div></div>
             <label class="notif-toggle"><input type="checkbox" id="notif-course" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
           </div>
           <div class="notif-row">
-            <div class="notif-row-info"><div class="notif-row-label">🧘 Mobilité quotidienne</div><div class="notif-row-sub">Chaque matin — Non négociable</div></div>
+            <div class="notif-row-info"><div class="notif-row-label">Mobilité quotidienne</div><div class="notif-row-sub">Chaque matin — Non négociable</div></div>
             <label class="notif-toggle"><input type="checkbox" id="notif-mob" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
           </div>
           <div class="notif-row">
-            <div class="notif-row-info"><div class="notif-row-label">😴 Dimanche repos / jambes</div><div class="notif-row-sub">Récupération · Semaines paires = Jambes</div></div>
+            <div class="notif-row-info"><div class="notif-row-label">Dimanche repos / jambes</div><div class="notif-row-sub">Récupération · Semaines paires = Jambes</div></div>
             <label class="notif-toggle"><input type="checkbox" id="notif-repos" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
           </div>
           <button class="notif-enable-btn" onclick="saveNotifSettings(true)" style="margin-top:14px;background:linear-gradient(135deg,#9b5de5,#4cc9f0)">
-            💾 Enregistrer les rappels
+            Enregistrer les rappels
           </button>
         </div>
         <div class="notif-card">
-          <div class="notif-card-title">📱 Installer l'appli</div>
+          <div class="notif-card-title">Installer l'appli</div>
           <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">Pour recevoir les notifications, installe d'abord l'appli sur ton téléphone.</p>
           <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;font-size:12px;color:var(--muted);line-height:1.8">
             <strong style="color:var(--text)">iPhone / iPad :</strong><br>
@@ -817,7 +824,7 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
       <div id="decharge-wrap"></div>
 
       <div class="profile-section">
-        <div class="profile-section-title">👤 Mon profil</div>
+        <div class="profile-section-title">Mon profil</div>
         <div class="profile-field">
           <label>Prénom</label>
           <input class="profile-input" id="p-name" type="text" placeholder="Ton prénom">
@@ -835,42 +842,42 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
         <div class="profile-field">
           <label>Objectif principal</label>
           <select class="profile-select" id="p-goal">
-            <option value="physique">💪 Physique athlétique & musclé</option>
-            <option value="force">🏋️ Gagner en force pure</option>
-            <option value="endurance">🏃 Améliorer l'endurance cardio</option>
-            <option value="sante">❤️ Santé & prévention blessures</option>
-            <option value="poids">⚖️ Perte de poids & rééquilibrage</option>
+            <option value="physique">Physique athlétique &amp; musclé</option>
+            <option value="force">Gagner en force pure</option>
+            <option value="endurance">Améliorer l'endurance cardio</option>
+            <option value="sante">Santé &amp; prévention blessures</option>
+            <option value="poids">Perte de poids &amp; rééquilibrage</option>
           </select>
         </div>
         <div class="profile-field">
           <label>Niveau</label>
           <select class="profile-select" id="p-level">
-            <option value="debutant">🌱 Débutant (< 1 an)</option>
-            <option value="intermediaire" selected>📈 Intermédiaire (1-3 ans)</option>
-            <option value="avance">🔥 Avancé (> 3 ans)</option>
+            <option value="debutant">Débutant (&lt; 1 an)</option>
+            <option value="intermediaire" selected>Intermédiaire (1-3 ans)</option>
+            <option value="avance">Avancé (&gt; 3 ans)</option>
           </select>
         </div>
-        <button class="profile-save-btn" onclick="saveProfile()">💾 Sauvegarder mon profil</button>
+        <button class="profile-save-btn" onclick="saveProfile()">Sauvegarder</button>
       </div>
 
       <div class="profile-section">
-        <div class="profile-section-title">🎯 Objectifs de charges</div>
+        <div class="profile-section-title">Objectifs de charges</div>
         <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">Tes objectifs sur les 12 semaines — mis à jour automatiquement selon ta progression.</p>
         <div id="charge-goals"></div>
       </div>
 
       <div class="profile-section" style="margin-bottom:14px">
-        <div class="profile-section-title">📊 Mes stats</div>
+        <div class="profile-section-title">Mes stats</div>
         <div id="profile-stats"></div>
       </div>
     </div>
   </main>
   <nav class="app-nav">
-    <button class="nav-btn active" id="nav-programme" onclick="showTab('programme')"><span class="nav-icon">📅</span>Programme</button>
-    <button class="nav-btn" id="nav-dashboard" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Progrès</button>
-    <button class="nav-btn" id="nav-nutrition" onclick="showTab('nutrition')"><span class="nav-icon">🥗</span>Nutrition</button>
-    <button class="nav-btn" id="nav-notifs" onclick="showTab('notifs')"><span class="nav-icon">🔔</span>Rappels</button>
-    <button class="nav-btn" id="nav-profile" onclick="showTab('profile')"><span class="nav-icon">👤</span>Profil</button>
+    <button class="nav-btn active" id="nav-programme" onclick="showTab('programme')"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg></span>Programme</button>
+    <button class="nav-btn" id="nav-dashboard" onclick="showTab('dashboard')"><span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Progrès</button>
+    <button class="nav-btn" id="nav-nutrition" onclick="showTab('nutrition')"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/><path d="M12 6v6l4 2"/></svg></span>Nutrition</button>
+    <button class="nav-btn" id="nav-notifs" onclick="showTab('notifs')"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>Rappels</button>
+    <button class="nav-btn" id="nav-profile" onclick="showTab('profile')"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>Profil</button>
   </nav>
 </div>
 
@@ -1148,8 +1155,8 @@ function renderProgramme(){
 
     if(day.type==='mob'){
       html+=`<div class="day-card ${isDone?'done-card t-mob':''}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':'REPOS'}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
-      <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="warmup" style="background:rgba(155,93,229,.1);border:1px solid rgba(155,93,229,.3);color:rgba(200,180,255,.85)"><strong>🧘 Routine quotidienne</strong><br>Chevilles → Mollets → Hanches → Squat profond → Ouverture hanches → Gainage<br><span style="font-size:11px;opacity:.8">PRIORITÉ ABSOLUE — Chaque jour, même repos.</span></div>
-      ${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ VALIDÉE — Appuyer pour annuler':'✓ VALIDER LA MOBILITÉ'}</button></div></div></div>`;
+      <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="warmup" style="background:rgba(155,93,229,.1);border:1px solid rgba(155,93,229,.3);color:rgba(200,180,255,.85)"><strong>Routine de mobilité</strong><br>Chevilles → Mollets → Hanches → Squat profond → Ouverture hanches → Gainage<br><span style="font-size:11px;opacity:.8">PRIORITÉ ABSOLUE — Chaque jour, même repos.</span></div>
+      ${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ VALIDÉE — Appuyer pour annuler':'VALIDER LA MOBILITÉ'}</button></div></div></div>`;
       return;
     }
 
@@ -1167,19 +1174,19 @@ function renderProgramme(){
       for(let s=1;s<=n;s++){logRows+=`<div class="log-row"><span class="log-serie-lbl">Série ${s}</span><input class="log-input" type="number" placeholder="kg" min="0" max="500" value="${ld['kg'+s]||''}" id="lk-${detKey}-${s}" inputmode="decimal" style="max-width:72px"><span class="log-sep">×</span><input class="log-input" type="number" placeholder="reps" min="0" max="100" value="${ld['reps'+s]||''}" id="lr-${detKey}-${s}" inputmode="numeric" style="max-width:65px"></div>`;}
       exRows+=`<div class="ex-item"><div class="ex-header" onclick="toggleExDetail('${sk}',${ei},'${detKey}')"><div class="ex-check ${ck?'checked':''}" onclick="checkEx(event,'${sk}',${ei})">${ck?'✓':''}</div><span class="ex-num">${String(ei+1).padStart(2,'0')}</span><div class="ex-info"><div class="ex-name ${ck?'done':''}">${exName}</div><div class="ex-sets">${ex.sets||''}</div></div><div class="ex-right">${ex.rest?`<span class="rest-chip">⏸ ${ex.rest}</span>`:''} ${ex.restSec?`<span class="timer-chip" onclick="openTimer(event,'${exName}',${ex.restSec})">⏱</span>`:''}<span class="ex-chev ${isExOpen?'open':''}">▾</span></div></div>
       <div class="ex-detail ${isExOpen?'open':''}" id="exd-${detKey}"><img class="ex-detail-photo" src="${ex.photo||photoUrl}" alt="${exName}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80&fit=crop'">
-      <div class="edt-tabs"><button class="edt-btn ${activeTab==='tech'?'active':''}" onclick="switchExTab(event,'${detKey}','tech')">Technique</button><button class="edt-btn ${activeTab==='err'?'active':''}" onclick="switchExTab(event,'${detKey}','err')">Erreurs</button><button class="edt-btn ${activeTab==='mus'?'active':''}" onclick="switchExTab(event,'${detKey}','mus')">Muscles</button><button class="edt-btn ${activeTab==='log'?'active':''}" onclick="switchExTab(event,'${detKey}','log')">📝 Log</button><button class="edt-btn ${activeTab==='vid'?'active':''}" onclick="switchExTab(event,'${detKey}','vid')">Vidéo</button></div>
+      <div class="edt-tabs"><button class="edt-btn ${activeTab==='tech'?'active':''}" onclick="switchExTab(event,'${detKey}','tech')">Technique</button><button class="edt-btn ${activeTab==='err'?'active':''}" onclick="switchExTab(event,'${detKey}','err')">Erreurs</button><button class="edt-btn ${activeTab==='mus'?'active':''}" onclick="switchExTab(event,'${detKey}','mus')">Muscles</button><button class="edt-btn ${activeTab==='log'?'active':''}" onclick="switchExTab(event,'${detKey}','log')">Journal</button><button class="edt-btn ${activeTab==='vid'?'active':''}" onclick="switchExTab(event,'${detKey}','vid')">Vidéo</button></div>
       <div id="edc-tech-${detKey}" class="edt-content ${activeTab==='tech'?'active':''}"><div class="tip-box"><div class="tip-lbl">✓ Conseil technique</div><div class="tip-txt">${ex.technique||''}</div></div><div class="breath-box"><div class="breath-lbl">Respiration</div><div class="breath-txt">${ex.respiration||''}</div></div></div>
-      <div id="edc-err-${detKey}" class="edt-content ${activeTab==='err'?'active':''}">${(ex.erreurs||[]).map(e=>`<div class="err-item"><span style="color:#ffd60a">⚠</span>&nbsp;<span>${e}</span></div>`).join('')}</div>
+      <div id="edc-err-${detKey}" class="edt-content ${activeTab==='err'?'active':''}">${(ex.erreurs||[]).map(e=>`<div class="err-item"><span style="color:#ffd60a;font-weight:700;font-size:11px;font-family:var(--fd)">!</span>&nbsp;<span>${e}</span></div>`).join('')}</div>
       <div id="edc-mus-${detKey}" class="edt-content ${activeTab==='mus'?'active':''}"><div class="m-tags">${(ex.muscles||[]).map(m=>`<span class="m-tag">${m}</span>`).join('')}</div></div>
-      <div id="edc-log-${detKey}" class="edt-content ${activeTab==='log'?'active':''}"><div style="padding-top:2px"><div class="log-title">📝 Mes charges — Semaine ${w}</div>${logRows}<button class="log-save-btn" onclick="saveLog('${detKey}','${exName.replace(/'/g,"`")}',${n})">💾 Enregistrer</button><div id="ls-${detKey}" class="log-saved">✓ Sauvegardé !</div></div></div>
+      <div id="edc-log-${detKey}" class="edt-content ${activeTab==='log'?'active':''}"><div style="padding-top:2px"><div class="log-title">Charges — Semaine ${w}</div>${logRows}<button class="log-save-btn" onclick="saveLog('${detKey}','${exName.replace(/'/g,"`")}',${n})">Enregistrer</button><div id="ls-${detKey}" class="log-saved">✓ Sauvegardé !</div></div></div>
       <div id="edc-vid-${detKey}" class="edt-content ${activeTab==='vid'?'active':''}">${ex.yt?`<div class="yt-wrap"><iframe src="${ex.yt}?rel=0" allowfullscreen loading="lazy"></iframe></div>`:'<p style="color:var(--muted);font-size:13px">Vidéo non disponible.</p>'}</div>
       </div></div>`;
     });
 
     html+=`<div class="day-card ${isDone?'done-card t-'+day.type:''}" id="card-${sk}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name" style="background:${TYPE_GRAD[day.type]};-webkit-background-clip:text;-webkit-text-fill-color:transparent">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><div class="card-dot" style="background:${col}"></div><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':checkedCount+'/'+day.exercises.length}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
     <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="ses-meta"><div class="ses-meta-item"><div class="smi-val">${day.dur}</div><div class="smi-lbl">Durée</div></div><div class="ses-meta-item"><div class="smi-val">${day.exercises.length}</div><div class="smi-lbl">Exercices</div></div><div class="ses-meta-item"><div class="smi-val" style="color:${col}">${day.type.toUpperCase()}</div><div class="smi-lbl">Type</div></div></div>
-    ${day.warmup?`<div class="warmup" style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);color:rgba(255,200,150,.9)"><strong>🔥 Échauffement</strong><br>${day.warmup}</div>`:''}
-    ${exRows}${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA SÉANCE'}</button></div></div></div>`;
+    ${day.warmup?`<div class="warmup" style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);color:rgba(255,200,150,.9)"><strong style="font-family:var(--fd);font-size:11px;letter-spacing:1px;text-transform:uppercase">Échauffement</strong><br>${day.warmup}</div>`:''}
+    ${exRows}${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'SÉANCE VALIDÉE':'VALIDER LA SÉANCE'}</button></div></div></div>`;
   });
   document.getElementById('programme-content').innerHTML=html;
 }
@@ -1229,7 +1236,7 @@ function renderDashboard(){
 
 // ── NUTRITION ──
 const NUTRI=[
-  {label:'Jour MUSCU',sub:'Lun · Mer · Ven',icon:'🏋️',grad:'linear-gradient(135deg,#ff4d6d,#f77f00)',macros:[{l:'Protéines',v:'2g/kg',cls:'pro'},{l:'Glucides',v:'4-5g/kg',cls:'carb'},{l:'Lipides',v:'1g/kg',cls:'fat'},{l:'Calories',v:'+300',cls:'kcal'}],meals:[{name:'Petit-déjeuner',items:[{f:"Flocons d'avoine",d:'80g — énergie longue durée'},{f:'Œufs ou protéine en poudre',d:'30g de protéines'},{f:'Banane',d:'Potassium + glucides rapides'}]},{name:'Déjeuner (avant séance)',items:[{f:'Riz blanc ou pâtes',d:'150g cru — carburant séance'},{f:'Poulet ou thon',d:'200g — protéines complètes'},{f:'Légumes variés',d:'200g'}]},{name:'Collation post-séance',items:[{f:'Protéine en poudre',d:'30-40g — fenêtre anabolique'},{f:'Banane ou dattes',d:'Sucres rapides pour récupération'},{f:'Yaourt grec',d:'150g — caséine lente'}]},{name:'Dîner',items:[{f:'Saumon ou viande rouge',d:'200g — protéines + oméga 3'},{f:'Patate douce ou quinoa',d:'150g cuit'},{f:'Brocolis, épinards',d:'200g'}]}]},
+  {label:'Jour MUSCU',sub:'Lun · Mer · Ven',icon:'🏋️',grad:'linear-gradient(135deg,#ff3355,#ff8800)',macros:[{l:'Protéines',v:'2g/kg',cls:'pro'},{l:'Glucides',v:'4-5g/kg',cls:'carb'},{l:'Lipides',v:'1g/kg',cls:'fat'},{l:'Calories',v:'+300',cls:'kcal'}],meals:[{name:'Petit-déjeuner',items:[{f:"Flocons d'avoine",d:'80g — énergie longue durée'},{f:'Œufs ou protéine en poudre',d:'30g de protéines'},{f:'Banane',d:'Potassium + glucides rapides'}]},{name:'Déjeuner (avant séance)',items:[{f:'Riz blanc ou pâtes',d:'150g cru — carburant séance'},{f:'Poulet ou thon',d:'200g — protéines complètes'},{f:'Légumes variés',d:'200g'}]},{name:'Collation post-séance',items:[{f:'Protéine en poudre',d:'30-40g — fenêtre anabolique'},{f:'Banane ou dattes',d:'Sucres rapides pour récupération'},{f:'Yaourt grec',d:'150g — caséine lente'}]},{name:'Dîner',items:[{f:'Saumon ou viande rouge',d:'200g — protéines + oméga 3'},{f:'Patate douce ou quinoa',d:'150g cuit'},{f:'Brocolis, épinards',d:'200g'}]}]},
   {label:'Jour COURSE',sub:'Mar · Jeu · Sam',icon:'🏃',grad:'linear-gradient(135deg,#06d6a0,#4cc9f0)',macros:[{l:'Protéines',v:'1.6g/kg',cls:'pro'},{l:'Glucides',v:'5-6g/kg',cls:'carb'},{l:'Lipides',v:'1.2g/kg',cls:'fat'},{l:'Calories',v:'+200',cls:'kcal'}],meals:[{name:'Petit-déjeuner (2h avant)',items:[{f:'Pain complet ou riz',d:'100g — glucides complexes'},{f:'Banane',d:'Potassium — anti-crampes'},{f:'Café léger',d:'Caféine = +3-5% performance'}]},{name:'Pendant la course (>60 min)',items:[{f:'Gel énergétique ou dattes',d:'Toutes les 30-40 min'},{f:'Eau + électrolytes',d:'150-200 ml toutes les 15-20 min'}]},{name:'Récupération',items:[{f:'Pâtes ou riz',d:'200g cuit — reconstituer le glycogène'},{f:'Protéine animale',d:'150g — réparation musculaire'},{f:'Fromage blanc',d:'Caséine = récupération nocturne'}]}]},
   {label:'Dimanche REPOS',sub:'Semaines impaires',icon:'😴',grad:'linear-gradient(135deg,#9b5de5,#4cc9f0)',macros:[{l:'Protéines',v:'1.4g/kg',cls:'pro'},{l:'Glucides',v:'2.5g/kg',cls:'carb'},{l:'Lipides',v:'1g/kg',cls:'fat'},{l:'Calories',v:'-200',cls:'kcal'}],meals:[{name:'Toute la journée',items:[{f:'Aliments anti-inflammatoires',d:'Curcuma, gingembre, fruits rouges'},{f:'Hydratation++',d:'2.5L minimum'},{f:'Protéines sur 4 repas',d:'Synthèse protéique continue'}]}]},
   {label:'Suppléments',sub:'Recommandations',icon:'💊',grad:'linear-gradient(135deg,#ffd60a,#f77f00)',macros:[{l:'Créatine',v:'3-5g/j',cls:'pro'},{l:'Protéines',v:'1.8-2.2g/kg',cls:'carb'},{l:'Oméga 3',v:'2-3g/j',cls:'fat'},{l:'Eau',v:'35-45ml/kg',cls:'kcal'}],meals:[{name:'Supplémentation de base',items:[{f:'Créatine monohydrate',d:'3-5g/j avec un repas — effet réel en force'},{f:'Oméga 3',d:'Anti-inflammatoire, santé articulaire'},{f:'Magnésium',d:'Récupération musculaire et sommeil'}]}]},
@@ -1274,7 +1281,7 @@ function renderJournal(sk) {
           return `<div class="jh-entry">
             <div class="jh-entry-top">
               <span class="jh-week">Semaine ${w}</span>
-              <span class="jh-scores">😊${e.mood||'—'} ⚡${e.energy||'—'} 🩹${e.pain||'—'}</span>
+              <span class="jh-scores">H${e.mood||'—'} E${e.energy||'—'} D${e.pain||'—'}</span>
             </div>
             ${e.note ? `<div class="jh-note">"${e.note}"</div>` : ''}
           </div>`;
@@ -1284,23 +1291,23 @@ function renderJournal(sk) {
   }
 
   return `<div class="journal-wrap">
-    <div class="journal-title">📓 Ressenti de la séance</div>
+    <div class="journal-title">Ressenti de la séance</div>
     <div class="slider-block">
-      <div class="slider-label"><span>😊 Humeur</span><span class="slider-val mood" id="mood-val-${sk}">${mood}/5</span></div>
+      <div class="slider-label"><span>Humeur</span><span class="slider-val mood" id="mood-val-${sk}">${mood}/5</span></div>
       <input class="journal-slider mood" type="range" min="1" max="5" step="1" value="${mood}" oninput="document.getElementById('mood-val-${sk}').textContent=this.value+'/5'">
-      <div class="emoji-row"><span>😞</span><span>😐</span><span>🙂</span><span>😊</span><span>🤩</span></div>
+      <div class="emoji-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
     </div>
     <div class="slider-block">
-      <div class="slider-label"><span>⚡ Énergie</span><span class="slider-val energy" id="energy-val-${sk}">${energy}/5</span></div>
+      <div class="slider-label"><span>Énergie</span><span class="slider-val energy" id="energy-val-${sk}">${energy}/5</span></div>
       <input class="journal-slider energy" type="range" min="1" max="5" step="1" value="${energy}" oninput="document.getElementById('energy-val-${sk}').textContent=this.value+'/5'">
-      <div class="emoji-row"><span>🪫</span><span>😴</span><span>🙂</span><span>💪</span><span>🔥</span></div>
+      <div class="emoji-row"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
     </div>
     <div class="slider-block">
-      <div class="slider-label"><span>🩹 Douleurs</span><span class="slider-val pain" id="pain-val-${sk}">${pain}/5</span></div>
+      <div class="slider-label"><span>Douleurs</span><span class="slider-val pain" id="pain-val-${sk}">${pain}/5</span></div>
       <input class="journal-slider pain" type="range" min="0" max="5" step="1" value="${pain}" oninput="document.getElementById('pain-val-${sk}').textContent=this.value+'/5'">
-      <div class="emoji-row"><span>0️⃣</span><span>faible</span><span>modéré</span><span>fort</span><span>🆘</span></div>
+      <div class="emoji-row"><span>0</span><span>1</span><span>2</span><span>3</span><span>5</span></div>
     </div>
-    <textarea class="journal-textarea" id="journal-note-${sk}" rows="3" placeholder="Notes libres... technique, sensations, PR, météo intérieure...">${note}</textarea>
+    <textarea class="journal-textarea" id="journal-note-${sk}" rows="3" placeholder="Notes libres — technique, sensations, PR du jour...">${note}</textarea>
     <button class="journal-save-btn" onclick="saveJournal('${sk}')">📓 Enregistrer le ressenti</button>
     <div class="journal-saved" id="journal-saved-${sk}">✓ Ressenti sauvegardé !</div>
     ${historyHtml}
@@ -1427,7 +1434,7 @@ function renderCharts() {
       </div>
       ${svg
         ? `<div class="chart-wrap">${svg}</div>${xLabels}`
-        : `<div class="chart-empty">${data.length === 1 ? '📊 Encore 1 semaine pour voir la courbe' : '📝 Log tes charges pour voir ta progression'}</div>`
+        : `<div class="chart-empty">${data.length === 1 ? '📊 Encore 1 semaine pour voir la courbe' : 'Journal tes charges pour voir ta progression'}</div>`
       }
     </div>`;
   });
@@ -1483,21 +1490,21 @@ function updateNotifStatus() {
   if (!badge) return;
   if (!('Notification' in window)) {
     badge.className = 'notif-status denied';
-    badge.textContent = '❌ Notifications non supportées — Essaie depuis Safari (iPhone) ou Chrome (Android)';
+    badge.textContent = 'Notifications non supportées — Essaie depuis Safari (iPhone) ou Chrome (Android)';
     return;
   }
   const perm = Notification.permission;
   if (perm === 'granted') {
     badge.className = 'notif-status granted';
-    badge.textContent = '✓ Notifications activées !';
+    badge.textContent = 'Notifications activées — Rappels actifs';
     if (btn) {
-      btn.textContent = '🔔 Envoyer un rappel test';
+      btn.textContent = 'Envoyer un rappel test';
       btn.disabled = false;
       btn.onclick = sendTestNotif;
     }
   } else if (perm === 'denied') {
     badge.className = 'notif-status denied';
-    badge.textContent = '❌ Bloquées — Va dans Réglages > Navigateur > Notifications pour autoriser';
+    badge.textContent = 'Bloquées — Va dans Réglages > Navigateur > Notifications pour autoriser';
     if (btn) {
       btn.textContent = 'Notifications bloquées';
       btn.disabled = false;
@@ -1505,9 +1512,9 @@ function updateNotifStatus() {
     }
   } else {
     badge.className = 'notif-status default';
-    badge.textContent = '⚪ Clique le bouton pour activer les rappels';
+    badge.textContent = 'Cliquez pour activer les rappels';
     if (btn) {
-      btn.textContent = '🔔 Activer les notifications';
+      btn.textContent = 'Activer les notifications';
       btn.disabled = false;
       btn.onclick = requestNotifPermission;
     }
@@ -1624,8 +1631,8 @@ window.renderProfileHero = function renderProfileHero() {
   const name = p.name || (currentUser?.email?.split('@')[0]) || 'Athlète';
   const week = S.week || 1;
   const phase = week<=4 ? 'Phase 1 — Adaptation' : week<=8 ? 'Phase 2 — Progression' : 'Phase 3 — Consolidation';
-  const goal = {physique:'💪 Physique athlétique',force:'🏋️ Force pure',endurance:'🏃 Endurance',sante:'❤️ Santé',poids:'⚖️ Perte de poids'}[p.goal||'physique'];
-  const level = {debutant:'🌱 Débutant',intermediaire:'📈 Intermédiaire',avance:'🔥 Avancé'}[p.level||'intermediaire'];
+  const goal = {physique:'Physique athlétique',force:'Force pure',endurance:'Endurance',sante:'Santé',poids:'Perte de poids'}[p.goal||'physique'];
+  const level = {debutant:'Débutant',intermediaire:'Intermédiaire',avance:'Avancé'}[p.level||'intermediaire'];
 
   // Count sessions done
   let done = 0;
@@ -1633,7 +1640,7 @@ window.renderProfileHero = function renderProfileHero() {
 
   wrap.innerHTML = `<div class="profile-hero" style="margin-top:14px">
     <div class="profile-hero-content">
-      <div class="profile-avatar">🧑‍💪</div>
+      <div class="profile-avatar"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <div class="profile-name">${name}</div>
       <div class="profile-email">${currentUser?.email||''}</div>
       <div class="profile-badges">
@@ -1657,9 +1664,9 @@ window.renderDechargeWrap = function renderDechargeWrap() {
   const nextDecharge = 4 - (w % 4);
   if (isDecharge) {
     wrap.innerHTML = `<div class="decharge-banner">
-      <div class="decharge-title">🧘 Semaine de décharge</div>
+      <div class="decharge-title">Semaine de décharge</div>
       <div class="decharge-text">Cette semaine, réduis toutes tes charges de <strong>20%</strong> et le volume de course. C'est pendant cette semaine que les muscles progressent réellement — ne la saute pas !</div>
-      <span class="decharge-badge">Charges × 0.8 · Volume course −20%</span>
+      <div style="margin-top:8px;font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mob);opacity:.8">Charges × 0.8 · Volume −20%</div>
     </div>`;
   } else {
     wrap.innerHTML = `<div style="margin:8px 14px 0;font-size:11px;color:var(--muted2);text-align:center">Prochaine semaine de décharge dans <strong style="color:var(--mob)">${nextDecharge} semaine${nextDecharge>1?'s':''}</strong></div>`;
@@ -1770,7 +1777,7 @@ window.renderProfileStats = function renderProfileStats() {
         <div style="font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.3px">Volume total</div>
       </div>
     </div>
-    ${protNeeded ? `<div class="suggestion-chip">Objectif protéines : ${protNeeded}g / jour (2g × ${p.weight}kg)</div>` : ''}
+    ${protNeeded ? `<div class="suggestion-chip">Protéines recommandées : ${protNeeded}g / jour (2g × ${p.weight}kg)</div>` : ''}
     ${p.age ? `<div class="suggestion-chip" style="margin-left:6px">FCmax estimée : ${220-p.age} bpm · Zone 2 : ${Math.round((220-p.age)*0.6)}-${Math.round((220-p.age)*0.7)} bpm</div>` : ''}
   `;
 }
@@ -1807,10 +1814,10 @@ function renderStreakBar() {
   if (totalDone === 0) { wrap.innerHTML=''; return; }
   wrap.innerHTML = `<div class="streak-bar">
     <div class="streak-left">
-      <span class="streak-fire">🔥</span>
+      <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#fbbf24,#f77f00);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#000;font-family:var(--fd)">STK</div>
       <div class="streak-info">
         <h3>${streak > 0 ? streak + ' semaine'+(streak>1?'s':'') : totalDone+' séance'+(totalDone>1?'s':'')} !</h3>
-        <p>${streak > 0 ? 'Semaines complètes consécutives' : 'Continue comme ça 💪'}</p>
+        <p>${streak > 0 ? 'Semaines consécutives' : 'Continue comme ça 💪'}</p>
       </div>
     </div>
     <div class="streak-count">${streak > 0 ? '🔥' : totalDone}</div>
@@ -1823,7 +1830,7 @@ function renderBadges() {
   const earned = getEarnedBadges().map(b=>b.id);
   wrap.innerHTML = '<div class="badge-row">' + BADGES.map(b=>`
     <div class="badge-item ${earned.includes(b.id)?'earned':''}">
-      <span class="badge-emoji">${earned.includes(b.id)?b.emoji:'🔒'}</span>
+      <span class="badge-emoji">${earned.includes(b.id)?b.emoji:'—'}</span>
       <span class="badge-name">${b.name}</span>
     </div>`).join('') + '</div>';
 }
