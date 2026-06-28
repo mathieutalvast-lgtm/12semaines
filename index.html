@@ -544,6 +544,46 @@ body.light .theme-toggle { background:var(--bg3); border-color:var(--border2) }
 .notif-status.denied{background:rgba(255,77,109,.1);color:var(--push)}
 .notif-status.default{background:var(--bg3);color:var(--muted)}
 
+
+/* PROFILE */
+.profile-hero{background:linear-gradient(135deg,#ff4d6d,#f77f00);margin:14px 14px 0;border-radius:var(--radius);padding:24px 20px;position:relative;overflow:hidden}
+.profile-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80') center/cover;opacity:.15}
+.profile-hero-content{position:relative}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:12px;cursor:pointer;transition:all .2s;overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-avatar:hover{border-color:white}
+.profile-name{font-family:var(--fd);font-size:28px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.5px}
+.profile-email{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
+.profile-badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.profile-badge{background:rgba(0,0,0,.25);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.9);font-family:var(--fd);letter-spacing:.5px;text-transform:uppercase}
+
+/* PROFILE FORM */
+.profile-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:10px 14px 0}
+.profile-section-title{font-family:var(--fd);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px}
+.profile-field{margin-bottom:12px}
+.profile-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.profile-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rsm);padding:10px 13px;color:var(--text);font-size:14px;font-family:var(--fb);outline:none;transition:border-color .15s}
+.profile-input:focus{border-color:var(--push)}
+.profile-select{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rsm);padding:10px 13px;color:var(--text);font-size:14px;font-family:var(--fb);outline:none;cursor:pointer}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile-save-btn{width:100%;padding:13px;background:linear-gradient(135deg,#ff4d6d,#f77f00);border:none;border-radius:var(--radius);font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:white;cursor:pointer;margin-top:4px;transition:opacity .15s}
+.profile-save-btn:hover{opacity:.9}
+
+/* DECHARGE BANNER */
+.decharge-banner{background:linear-gradient(135deg,rgba(155,93,229,.2),rgba(76,201,240,.2));border:1px solid rgba(155,93,229,.4);border-radius:var(--radius);padding:14px 16px;margin:10px 14px 0}
+.decharge-title{font-family:var(--fd);font-size:14px;font-weight:800;text-transform:uppercase;color:var(--mob);margin-bottom:4px}
+.decharge-text{font-size:12px;color:var(--muted);line-height:1.6}
+.decharge-badge{display:inline-block;background:var(--mob);color:white;font-family:var(--fd);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px}
+
+/* SUGGESTION CHIP */
+.suggestion-chip{background:rgba(255,215,10,.1);border:1px solid rgba(255,215,10,.3);border-radius:var(--rsm);padding:6px 10px;font-size:11px;color:var(--jambes);font-weight:600;margin-top:6px;display:inline-block}
+.suggestion-chip::before{content:'💡 '}
+
+/* LIGHT THEME PROFILE */
+body.light .profile-input{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+body.light .profile-select{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+body.light .profile-section{background:var(--bg2);border-color:var(--border)}
+
 </style>
 </head>
 <body>
@@ -727,12 +767,66 @@ body.light .theme-toggle { background:var(--bg3); border-color:var(--border2) }
       </div>
     </div>
 
+
+    <div class="tab" id="tab-profile">
+      <div id="profile-hero-wrap"></div>
+      <div id="decharge-wrap"></div>
+
+      <div class="profile-section">
+        <div class="profile-section-title">👤 Mon profil</div>
+        <div class="profile-field">
+          <label>Prénom</label>
+          <input class="profile-input" id="p-name" type="text" placeholder="Ton prénom">
+        </div>
+        <div class="profile-grid">
+          <div class="profile-field">
+            <label>Poids (kg)</label>
+            <input class="profile-input" id="p-weight" type="number" placeholder="75" min="30" max="200">
+          </div>
+          <div class="profile-field">
+            <label>Âge</label>
+            <input class="profile-input" id="p-age" type="number" placeholder="30" min="15" max="80">
+          </div>
+        </div>
+        <div class="profile-field">
+          <label>Objectif principal</label>
+          <select class="profile-select" id="p-goal">
+            <option value="physique">💪 Physique athlétique & musclé</option>
+            <option value="force">🏋️ Gagner en force pure</option>
+            <option value="endurance">🏃 Améliorer l'endurance cardio</option>
+            <option value="sante">❤️ Santé & prévention blessures</option>
+            <option value="poids">⚖️ Perte de poids & rééquilibrage</option>
+          </select>
+        </div>
+        <div class="profile-field">
+          <label>Niveau</label>
+          <select class="profile-select" id="p-level">
+            <option value="debutant">🌱 Débutant (< 1 an)</option>
+            <option value="intermediaire" selected>📈 Intermédiaire (1-3 ans)</option>
+            <option value="avance">🔥 Avancé (> 3 ans)</option>
+          </select>
+        </div>
+        <button class="profile-save-btn" onclick="saveProfile()">💾 Sauvegarder mon profil</button>
+      </div>
+
+      <div class="profile-section">
+        <div class="profile-section-title">🎯 Objectifs de charges</div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">Tes objectifs sur les 12 semaines — mis à jour automatiquement selon ta progression.</p>
+        <div id="charge-goals"></div>
+      </div>
+
+      <div class="profile-section" style="margin-bottom:14px">
+        <div class="profile-section-title">📊 Mes stats</div>
+        <div id="profile-stats"></div>
+      </div>
+    </div>
   </main>
   <nav class="app-nav">
     <button class="nav-btn active" id="nav-programme" onclick="showTab('programme')"><span class="nav-icon">📅</span>Programme</button>
     <button class="nav-btn" id="nav-dashboard" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Progrès</button>
     <button class="nav-btn" id="nav-nutrition" onclick="showTab('nutrition')"><span class="nav-icon">🥗</span>Nutrition</button>
     <button class="nav-btn" id="nav-notifs" onclick="showTab('notifs')"><span class="nav-icon">🔔</span>Rappels</button>
+    <button class="nav-btn" id="nav-profile" onclick="showTab('profile')"><span class="nav-icon">👤</span>Profil</button>
   </nav>
 </div>
 
@@ -871,7 +965,7 @@ async function handleLogout() {
 // ══════════════════════════════════════════════
 // USER DATA — Supabase
 // ══════════════════════════════════════════════
-let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{}, logData:{}, prData:{}, journal:{} };
+let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{}, logData:{}, prData:{}, journal:{}, profile:{} };
 
 async function loadUserData() {
   if (!currentUser) return;
@@ -970,6 +1064,7 @@ function showTab(id){
   if(id==='dashboard')renderDashboard();
   if(id==='nutrition')renderNutrition();
   if(id==='notifs'){setTimeout(()=>{try{loadNotifSettings();updateNotifStatus();}catch(e){}},100);}
+  if(id==='profile'){setTimeout(()=>{try{loadProfile();renderProfileHero();renderDechargeWrap();renderChargeGoals();renderProfileStats();}catch(e){}},100);}
 }
 window.showTab = showTab;
 window.changeWeek = function changeWeek(d){S.week=Math.max(1,Math.min(12,S.week+d));save();renderProgramme();}
@@ -994,7 +1089,7 @@ function renderProgramme(){
   const pct=total>0?Math.round(done/total*100):0;
   const sesDone=days.filter((_,di)=>S.done&&S.done[w+'-'+di]).length;
   let html=`<div class="hero-week"><div class="hero-bg"></div><div class="hero-content">
-    <div class="hero-top"><div><div class="hero-week-label">Semaine ${w} sur 12</div><div class="hero-title">SEMAINE ${w}</div></div><div class="hero-phase">${getPhase(w)}</div></div>
+    <div class="hero-top"><div><div class="hero-week-label">${(S.profile&&S.profile.name)?'Bonjour '+S.profile.name+' !':'Semaine '+w+' sur 12'}</div><div class="hero-title">SEMAINE ${w}</div></div><div class="hero-phase">${getPhase(w)}</div></div>
     <div class="hero-bottom"><div style="display:flex;gap:18px"><div><div class="hero-stat-num">${sesDone}</div><div class="hero-stat-label">Validées</div></div><div><div class="hero-stat-num">${w%2===0?'B':'A'}</div><div class="hero-stat-label">Semaine</div></div></div><div><div class="hero-pct">${pct}%</div><div class="hero-pct-label">Complété</div></div></div>
   </div></div>
   <div class="week-nav-bar"><div class="week-nav-title">Planning</div><div class="week-nav-btns"><button class="wn-btn" onclick="changeWeek(-1)" ${w===1?'disabled':''}>‹</button><button class="wn-btn" onclick="changeWeek(1)" ${w===12?'disabled':''}>›</button></div></div>
@@ -1429,6 +1524,190 @@ function startScheduleChecker() {
 
 // Init SW on app start
 initServiceWorker();
+
+
+// ── PROFILE ──
+window.saveProfile = function saveProfile() {
+  S.profile = {
+    name: document.getElementById('p-name')?.value || '',
+    weight: parseFloat(document.getElementById('p-weight')?.value) || 0,
+    age: parseInt(document.getElementById('p-age')?.value) || 0,
+    goal: document.getElementById('p-goal')?.value || 'physique',
+    level: document.getElementById('p-level')?.value || 'intermediaire',
+  };
+  save();
+  renderProfileHero();
+  renderChargeGoals();
+  showSaveToast();
+}
+
+window.loadProfile = function loadProfile() {
+  if (!S.profile) return;
+  const p = S.profile;
+  const n = document.getElementById('p-name'); if(n) n.value = p.name||'';
+  const w = document.getElementById('p-weight'); if(w) w.value = p.weight||'';
+  const a = document.getElementById('p-age'); if(a) a.value = p.age||'';
+  const g = document.getElementById('p-goal'); if(g) g.value = p.goal||'physique';
+  const l = document.getElementById('p-level'); if(l) l.value = p.level||'intermediaire';
+}
+
+window.renderProfileHero = function renderProfileHero() {
+  const wrap = document.getElementById('profile-hero-wrap');
+  if (!wrap) return;
+  const p = S.profile || {};
+  const name = p.name || (currentUser?.email?.split('@')[0]) || 'Athlète';
+  const week = S.week || 1;
+  const phase = week<=4 ? 'Phase 1 — Adaptation' : week<=8 ? 'Phase 2 — Progression' : 'Phase 3 — Consolidation';
+  const goal = {physique:'💪 Physique athlétique',force:'🏋️ Force pure',endurance:'🏃 Endurance',sante:'❤️ Santé',poids:'⚖️ Perte de poids'}[p.goal||'physique'];
+  const level = {debutant:'🌱 Débutant',intermediaire:'📈 Intermédiaire',avance:'🔥 Avancé'}[p.level||'intermediaire'];
+
+  // Count sessions done
+  let done = 0;
+  for(let w=1;w<=12;w++) getDays(w).forEach((_,di)=>{ if(S.done&&S.done[w+'-'+di]) done++; });
+
+  wrap.innerHTML = `<div class="profile-hero" style="margin-top:14px">
+    <div class="profile-hero-content">
+      <div class="profile-avatar">🧑‍💪</div>
+      <div class="profile-name">${name}</div>
+      <div class="profile-email">${currentUser?.email||''}</div>
+      <div class="profile-badges">
+        <span class="profile-badge">${phase}</span>
+        <span class="profile-badge">${goal}</span>
+        <span class="profile-badge">${level}</span>
+        <span class="profile-badge">S${S.week}/12</span>
+        ${p.weight ? `<span class="profile-badge">${p.weight} kg</span>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── DECHARGE WEEK ──
+window.renderDechargeWrap = function renderDechargeWrap() {
+  const wrap = document.getElementById('decharge-wrap');
+  if (!wrap) return;
+  const w = S.week || 1;
+  // Decharge every 4 weeks (weeks 4, 8, 12)
+  const isDecharge = (w % 4 === 0);
+  const nextDecharge = 4 - (w % 4);
+  if (isDecharge) {
+    wrap.innerHTML = `<div class="decharge-banner">
+      <div class="decharge-title">🧘 Semaine de décharge</div>
+      <div class="decharge-text">Cette semaine, réduis toutes tes charges de <strong>20%</strong> et le volume de course. C'est pendant cette semaine que les muscles progressent réellement — ne la saute pas !</div>
+      <span class="decharge-badge">Charges × 0.8 · Volume course −20%</span>
+    </div>`;
+  } else {
+    wrap.innerHTML = `<div style="margin:8px 14px 0;font-size:11px;color:var(--muted2);text-align:center">Prochaine semaine de décharge dans <strong style="color:var(--mob)">${nextDecharge} semaine${nextDecharge>1?'s':''}</strong></div>`;
+  }
+}
+
+// ── CHARGE SUGGESTIONS ──
+window.renderChargeGoals = function renderChargeGoals() {
+  const el = document.getElementById('charge-goals');
+  if (!el) return;
+  if (!S.logData) { el.innerHTML = '<p style="font-size:12px;color:var(--muted2)">Log tes charges pour voir les suggestions.</p>'; return; }
+
+  const KEY_EXERCISES = [
+    {name:'Développé Couché Barre', unit:'kg', progression:2.5},
+    {name:'Développé Militaire Barre', unit:'kg', progression:2.5},
+    {name:'Tractions Pronation', unit:'reps', progression:1},
+    {name:'Rowing Barre Penché', unit:'kg', progression:2.5},
+    {name:'Soulevé de Terre Roumain', unit:'kg', progression:5},
+    {name:'Hip Thrust Barre', unit:'kg', progression:5},
+  ];
+
+  let html = '';
+  let hasData = false;
+  KEY_EXERCISES.forEach(ex => {
+    // Find last logged weight
+    let lastKg = null, lastWeek = 0;
+    for (let w = S.week; w >= 1; w--) {
+      const lk = ex.name + '_w' + w;
+      if (S.logData[lk]) {
+        const vals = Object.keys(S.logData[lk]).filter(k=>k.startsWith('kg')).map(k=>parseFloat(S.logData[lk][k])||0).filter(v=>v>0);
+        if (vals.length > 0) { lastKg = Math.max(...vals); lastWeek = w; break; }
+      }
+    }
+    if (!lastKg) return;
+    hasData = true;
+    const suggested = ex.unit === 'kg' ? (lastKg + ex.progression) : lastKg + ex.progression;
+    const isDecharge = (S.week % 4 === 0);
+    const target = isDecharge ? (ex.unit==='kg' ? (lastKg * 0.8).toFixed(1) : Math.floor(lastKg*0.8)) : suggested;
+    const label = isDecharge ? '🧘 Décharge' : '📈 Objectif';
+    const color = isDecharge ? 'var(--mob)' : 'var(--course)';
+
+    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text)">${ex.name}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:1px">Dernier log S${lastWeek} : ${lastKg} ${ex.unit}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:var(--fd);font-size:16px;font-weight:800;color:${color}">${target} ${ex.unit}</div>
+        <div style="font-size:10px;color:var(--muted);font-weight:600">${label}</div>
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = hasData ? html : '<p style="font-size:12px;color:var(--muted2)">Log tes charges pour voir les suggestions automatiques.</p>';
+}
+
+// ── PROFILE STATS ──
+window.renderProfileStats = function renderProfileStats() {
+  const el = document.getElementById('profile-stats');
+  if (!el) return;
+
+  let totalDone=0, muscuDone=0, courseDone=0, totalVol=0;
+  for(let w=1;w<=12;w++) getDays(w).forEach((d,di)=>{
+    if(S.done&&S.done[w+'-'+di]){
+      totalDone++;
+      if(['push','pull','upper','jambes'].includes(d.type)) muscuDone++;
+      if(d.type==='course') courseDone++;
+    }
+  });
+
+  // Compute total volume from logs
+  if (S.logData) {
+    Object.values(S.logData).forEach(ld => {
+      const kgs = Object.keys(ld).filter(k=>k.startsWith('kg')).map(k=>parseFloat(ld[k])||0);
+      const reps = Object.keys(ld).filter(k=>k.startsWith('reps')).map(k=>parseInt(ld[k])||0);
+      kgs.forEach((kg,i) => { totalVol += kg * (reps[i]||0); });
+    });
+  }
+
+  // Streak
+  let streak = 0;
+  for(let w=S.week;w>=1;w--) {
+    const days = getDays(w);
+    let weekDone = true;
+    days.forEach((_,di)=>{ if(!S.done||!S.done[w+'-'+di]) weekDone=false; });
+    if(weekDone) streak++; else break;
+  }
+
+  const p = S.profile || {};
+  const protNeeded = p.weight ? Math.round(p.weight * 2) : null;
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;text-align:center">
+        <div style="font-family:var(--fd);font-size:26px;font-weight:900;color:var(--push)">${totalDone}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.3px">Séances totales</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;text-align:center">
+        <div style="font-family:var(--fd);font-size:26px;font-weight:900;color:var(--course)">${streak}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.3px">Semaines streak</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;text-align:center">
+        <div style="font-family:var(--fd);font-size:26px;font-weight:900;color:var(--pull)">${muscuDone}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.3px">Séances muscu</div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;text-align:center">
+        <div style="font-family:var(--fd);font-size:26px;font-weight:900;color:var(--jambes)">${totalVol>0?Math.round(totalVol/1000)+'T':'—'}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.3px">Volume total</div>
+      </div>
+    </div>
+    ${protNeeded ? `<div class="suggestion-chip">Objectif protéines : ${protNeeded}g / jour (2g × ${p.weight}kg)</div>` : ''}
+    ${p.age ? `<div class="suggestion-chip" style="margin-left:6px">FCmax estimée : ${220-p.age} bpm · Zone 2 : ${Math.round((220-p.age)*0.6)}-${Math.round((220-p.age)*0.7)} bpm</div>` : ''}
+  `;
+}
 
 // ── INIT ──
 initAuth();
