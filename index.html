@@ -662,7 +662,7 @@ body.light .theme-toggle { background:var(--bg3); border-color:var(--border2) }
           <div class="notif-card-title">🔔 Statut des notifications</div>
           <div class="notif-status default" id="notif-status-badge">Vérification...</div>
           <button class="notif-enable-btn" id="notif-enable-btn" onclick="requestNotifPermission()">
-            Activer les notifications
+            🔔 Activer les notifications
           </button>
         </div>
         <div class="notif-card">
@@ -1302,7 +1302,7 @@ let swReg = null;
 async function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   try {
-    swReg = await navigator.serviceWorker.register('/12semaines/sw.js');
+    swReg = await navigator.serviceWorker.register('./sw.js', { scope: './' });
     console.log('SW registered');
     updateNotifStatus();
     startScheduleChecker();
@@ -1317,23 +1317,34 @@ function updateNotifStatus() {
   if (!badge) return;
   if (!('Notification' in window)) {
     badge.className = 'notif-status denied';
-    badge.textContent = '❌ Notifications non supportées sur ce navigateur';
-    if (btn) btn.disabled = true;
+    badge.textContent = '❌ Notifications non supportées — Essaie depuis Safari (iPhone) ou Chrome (Android)';
     return;
   }
   const perm = Notification.permission;
   if (perm === 'granted') {
     badge.className = 'notif-status granted';
-    badge.textContent = '✓ Notifications activées — Tu recevras tes rappels !';
-    if (btn) { btn.textContent = 'Envoyer un rappel test'; btn.onclick = sendTestNotif; }
+    badge.textContent = '✓ Notifications activées !';
+    if (btn) {
+      btn.textContent = '🔔 Envoyer un rappel test';
+      btn.disabled = false;
+      btn.onclick = sendTestNotif;
+    }
   } else if (perm === 'denied') {
     badge.className = 'notif-status denied';
-    badge.textContent = '❌ Notifications bloquées — Autorise-les dans les réglages du navigateur';
-    if (btn) btn.disabled = true;
+    badge.textContent = '❌ Bloquées — Va dans Réglages > Navigateur > Notifications pour autoriser';
+    if (btn) {
+      btn.textContent = 'Notifications bloquées';
+      btn.disabled = false;
+      btn.onclick = () => alert('Les notifications sont bloquées.\n\nPour les réactiver :\n• iPhone : Réglages > Safari > Notifications > Force & Performance\n• Android : Réglages > Applications > Chrome > Notifications');
+    }
   } else {
     badge.className = 'notif-status default';
-    badge.textContent = '⚪ Notifications non encore autorisées';
-    if (btn) btn.disabled = false;
+    badge.textContent = '⚪ Clique le bouton pour activer les rappels';
+    if (btn) {
+      btn.textContent = '🔔 Activer les notifications';
+      btn.disabled = false;
+      btn.onclick = requestNotifPermission;
+    }
   }
 }
 
@@ -1352,7 +1363,7 @@ function sendTestNotif() {
   if (swReg) {
     swReg.showNotification('💪 Force & Performance', {
       body: 'Rappels activés ! Tu recevras tes séances chaque jour.',
-      icon: '/12semaines/icon.png',
+      icon: './icon-192.png',
       tag: 'fp-test',
       vibrate: [200, 100, 200],
     });
@@ -1414,7 +1425,10 @@ const _origShowTab = showTab;
 function showTab(id) {
   _origShowTab(id);
   if (id === 'notifs') {
-    setTimeout(() => { loadNotifSettings(); updateNotifStatus(); }, 50);
+    setTimeout(() => {
+      loadNotifSettings();
+      updateNotifStatus();
+    }, 100);
   }
 }
 
