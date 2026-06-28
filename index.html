@@ -1149,7 +1149,7 @@ function renderProgramme(){
     if(day.type==='mob'){
       html+=`<div class="day-card ${isDone?'done-card t-mob':''}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':'REPOS'}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
       <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="warmup" style="background:rgba(155,93,229,.1);border:1px solid rgba(155,93,229,.3);color:rgba(200,180,255,.85)"><strong>🧘 Routine quotidienne</strong><br>Chevilles → Mollets → Hanches → Squat profond → Ouverture hanches → Gainage<br><span style="font-size:11px;opacity:.8">PRIORITÉ ABSOLUE — Chaque jour, même repos.</span></div>
-      ${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA MOBILITÉ'}</button></div></div></div>`;
+      ${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ VALIDÉE — Appuyer pour annuler':'✓ VALIDER LA MOBILITÉ'}</button></div></div></div>`;
       return;
     }
 
@@ -1184,7 +1184,27 @@ function renderProgramme(){
   document.getElementById('programme-content').innerHTML=html;
 }
 
-window.toggleDay = function toggleDay(sk){const b=document.getElementById('body-'+sk),c=document.getElementById('chev-'+sk);if(!S.openDays)S.openDays={};S.openDays[sk]=!S.openDays[sk];if(b)b.classList.toggle('open',S.openDays[sk]);if(c)c.classList.toggle('open',S.openDays[sk]);}
+window.toggleDay = function toggleDay(sk){
+  if(!S.openDays)S.openDays={};
+  const isOpening = !S.openDays[sk];
+  // Close all other open days first
+  if (isOpening) {
+    Object.keys(S.openDays).forEach(key => {
+      if (key !== sk && S.openDays[key]) {
+        S.openDays[key] = false;
+        const ob = document.getElementById('body-'+key);
+        const oc = document.getElementById('chev-'+key);
+        if(ob) ob.classList.remove('open');
+        if(oc) oc.classList.remove('open');
+      }
+    });
+  }
+  S.openDays[sk] = isOpening;
+  const b=document.getElementById('body-'+sk);
+  const ch=document.getElementById('chev-'+sk);
+  if(b)b.classList.toggle('open', isOpening);
+  if(ch)ch.classList.toggle('open', isOpening);
+}
 window.checkEx = function checkEx(e,sk,ei){e.stopPropagation();if(!S.checked)S.checked={};S.checked[sk+'-'+ei]=!S.checked[sk+'-'+ei];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
 window.toggleExDetail = function toggleExDetail(sk,ei,detKey){if(!S.exOpen)S.exOpen={};S.exOpen[detKey]=!S.exOpen[detKey];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
 window.switchExTab = function switchExTab(e,detKey,tab){e.stopPropagation();if(!S.exTab)S.exTab={};S.exTab[detKey]=tab;['tech','err','mus','log','vid'].forEach(t=>{const el=document.getElementById('edc-'+t+'-'+detKey);if(el)el.classList.toggle('active',t===tab);});const tabs=e.target.closest('.edt-tabs');if(tabs)tabs.querySelectorAll('.edt-btn').forEach((b,i)=>b.classList.toggle('active',['tech','err','mus','log','vid'][i]===tab));}
@@ -1822,11 +1842,20 @@ function launchConfetti(x, y) {
 // Override validateSession to add confetti
 const _origValidate = window.validateSession;
 window.validateSession = function validateSession(di) {
-  _origValidate(di);
-  // Launch confetti from bottom center
-  launchConfetti(window.innerWidth/2, window.innerHeight - 100);
-  // Re-render streak and badges
-  setTimeout(()=>{ renderStreakBar(); renderBadges(); }, 300);
+  const sk = S.week+'-'+di;
+  const isDone = !!(S.done && S.done[sk]);
+  if (isDone) {
+    // Un-validate with confirmation
+    if (!confirm('Annuler la validation de cette séance ?')) return;
+    S.done[sk] = false;
+    // Un-check all exercises
+    getDays(S.week)[di].exercises.forEach((_,ei)=>{ if(S.checked) S.checked[sk+'-'+ei]=false; });
+    save(); renderProgramme();
+  } else {
+    _origValidate(di);
+    launchConfetti(window.innerWidth/2, window.innerHeight - 100);
+    setTimeout(()=>{ renderStreakBar(); renderBadges(); }, 300);
+  }
 };
 
 // ── INIT ──
