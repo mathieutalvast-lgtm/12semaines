@@ -963,12 +963,16 @@ const PR_KEYS=[{key:'pr_dc',label:'Dév. Couché',unit:'kg'},{key:'pr_trac',labe
 function showTab(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
+  const tabEl = document.getElementById('tab-'+id);
+  const navEl = document.getElementById('nav-'+id);
+  if(tabEl) tabEl.classList.add('active');
+  if(navEl) navEl.classList.add('active');
   if(id==='dashboard')renderDashboard();
   if(id==='nutrition')renderNutrition();
+  if(id==='notifs'){setTimeout(()=>{try{loadNotifSettings();updateNotifStatus();}catch(e){}},100);}
 }
-function changeWeek(d){S.week=Math.max(1,Math.min(12,S.week+d));save();renderProgramme();}
+window.showTab = showTab;
+window.changeWeek = function changeWeek(d){S.week=Math.max(1,Math.min(12,S.week+d));save();renderProgramme();}
 
 // ── SWIPE ──
 let _tx=0;
@@ -1039,11 +1043,11 @@ function renderProgramme(){
   document.getElementById('programme-content').innerHTML=html;
 }
 
-function toggleDay(sk){const b=document.getElementById('body-'+sk),c=document.getElementById('chev-'+sk);if(!S.openDays)S.openDays={};S.openDays[sk]=!S.openDays[sk];if(b)b.classList.toggle('open',S.openDays[sk]);if(c)c.classList.toggle('open',S.openDays[sk]);}
-function checkEx(e,sk,ei){e.stopPropagation();if(!S.checked)S.checked={};S.checked[sk+'-'+ei]=!S.checked[sk+'-'+ei];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
-function toggleExDetail(sk,ei,detKey){if(!S.exOpen)S.exOpen={};S.exOpen[detKey]=!S.exOpen[detKey];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
-function switchExTab(e,detKey,tab){e.stopPropagation();if(!S.exTab)S.exTab={};S.exTab[detKey]=tab;['tech','err','mus','log','vid'].forEach(t=>{const el=document.getElementById('edc-'+t+'-'+detKey);if(el)el.classList.toggle('active',t===tab);});const tabs=e.target.closest('.edt-tabs');if(tabs)tabs.querySelectorAll('.edt-btn').forEach((b,i)=>b.classList.toggle('active',['tech','err','mus','log','vid'][i]===tab));}
-function validateSession(di){const sk=S.week+'-'+di;if(!S.done)S.done={};S.done[sk]=true;getDays(S.week)[di].exercises.forEach((_,ei)=>{if(!S.checked)S.checked={};S.checked[sk+'-'+ei]=true;});if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
+window.toggleDay = function toggleDay(sk){const b=document.getElementById('body-'+sk),c=document.getElementById('chev-'+sk);if(!S.openDays)S.openDays={};S.openDays[sk]=!S.openDays[sk];if(b)b.classList.toggle('open',S.openDays[sk]);if(c)c.classList.toggle('open',S.openDays[sk]);}
+window.checkEx = function checkEx(e,sk,ei){e.stopPropagation();if(!S.checked)S.checked={};S.checked[sk+'-'+ei]=!S.checked[sk+'-'+ei];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
+window.toggleExDetail = function toggleExDetail(sk,ei,detKey){if(!S.exOpen)S.exOpen={};S.exOpen[detKey]=!S.exOpen[detKey];if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
+window.switchExTab = function switchExTab(e,detKey,tab){e.stopPropagation();if(!S.exTab)S.exTab={};S.exTab[detKey]=tab;['tech','err','mus','log','vid'].forEach(t=>{const el=document.getElementById('edc-'+t+'-'+detKey);if(el)el.classList.toggle('active',t===tab);});const tabs=e.target.closest('.edt-tabs');if(tabs)tabs.querySelectorAll('.edt-btn').forEach((b,i)=>b.classList.toggle('active',['tech','err','mus','log','vid'][i]===tab));}
+window.validateSession = function validateSession(di){const sk=S.week+'-'+di;if(!S.done)S.done={};S.done[sk]=true;getDays(S.week)[di].exercises.forEach((_,ei)=>{if(!S.checked)S.checked={};S.checked[sk+'-'+ei]=true;});if(!S.openDays)S.openDays={};S.openDays[sk]=true;save();renderProgramme();}
 function saveLog(detKey,exName,n){if(!S.logData)S.logData={};const lk=exName+'_w'+S.week;if(!S.logData[lk])S.logData[lk]={};for(let s=1;s<=n;s++){const kg=document.getElementById('lk-'+detKey+'-'+s);const rp=document.getElementById('lr-'+detKey+'-'+s);if(kg&&kg.value)S.logData[lk]['kg'+s]=kg.value;if(rp&&rp.value)S.logData[lk]['reps'+s]=rp.value;}if(!S.prData)S.prData={};const kgVals=Object.keys(S.logData[lk]).filter(k=>k.startsWith('kg')).map(k=>parseFloat(S.logData[lk][k])||0);const maxKg=Math.max(...kgVals,0);if(exName==='Développé Couché Barre'&&maxKg>0)S.prData.pr_dc=Math.max(S.prData.pr_dc||0,maxKg);if(exName==='Développé Militaire Barre'&&maxKg>0)S.prData.pr_mil=Math.max(S.prData.pr_mil||0,maxKg);if(exName==='Tractions Pronation'){const tot=Object.keys(S.logData[lk]).filter(k=>k.startsWith('reps')).reduce((a,k)=>a+(parseInt(S.logData[lk][k])||0),0);if(tot>0)S.prData.pr_trac=Math.max(S.prData.pr_trac||0,tot);}save();const el=document.getElementById('ls-'+detKey);if(el){el.style.display='block';setTimeout(()=>el.style.display='none',2000);}}
 
 // ── DASHBOARD ──
@@ -1074,11 +1078,11 @@ function toggleNutri(ni){const b=document.getElementById('nb-'+ni),c=document.ge
 
 // ── TIMER ──
 let tSec=90,tCur=90,tInt=null,tOn=false;
-function openTimer(e,name,sec){e.stopPropagation();tSec=sec||90;tCur=tSec;document.getElementById('timerName').textContent=name;document.getElementById('timerSlider').value=tSec;document.getElementById('timerVal').textContent=tSec+'s';clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Démarrer';document.getElementById('timerDisp').className='timer-disp';updateTimerDisp();document.getElementById('timerModal').classList.add('open');}
-function closeTimer(){clearInterval(tInt);tOn=false;document.getElementById('timerModal').classList.remove('open');}
-function setTimerDur(v){tSec=v;tCur=v;document.getElementById('timerVal').textContent=v+'s';clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Démarrer';document.getElementById('timerDisp').className='timer-disp';updateTimerDisp();}
+window.openTimer = function openTimer(e,name,sec){e.stopPropagation();tSec=sec||90;tCur=tSec;document.getElementById('timerName').textContent=name;document.getElementById('timerSlider').value=tSec;document.getElementById('timerVal').textContent=tSec+'s';clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Démarrer';document.getElementById('timerDisp').className='timer-disp';updateTimerDisp();document.getElementById('timerModal').classList.add('open');}
+window.closeTimer = function closeTimer(){clearInterval(tInt);tOn=false;document.getElementById('timerModal').classList.remove('open');}
+window.setTimerDur = function setTimerDur(v){tSec=v;tCur=v;document.getElementById('timerVal').textContent=v+'s';clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Démarrer';document.getElementById('timerDisp').className='timer-disp';updateTimerDisp();}
 function updateTimerDisp(){document.getElementById('timerDisp').textContent=String(Math.floor(tCur/60)).padStart(2,'0')+':'+String(tCur%60).padStart(2,'0');}
-function toggleTimer(){if(tOn){clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Reprendre';document.getElementById('timerDisp').className='timer-disp';}else{if(tCur<=0){tCur=tSec;updateTimerDisp();}tOn=true;document.getElementById('timerBtn').textContent='Pause';document.getElementById('timerDisp').className='timer-disp running';tInt=setInterval(()=>{tCur--;updateTimerDisp();if(tCur<=0){clearInterval(tInt);tOn=false;document.getElementById('timerDisp').textContent='GO !';document.getElementById('timerDisp').className='timer-disp finished';document.getElementById('timerBtn').textContent='Recommencer';if(navigator.vibrate)navigator.vibrate([400,100,400]);}},1000);}}
+window.toggleTimer = function toggleTimer(){if(tOn){clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Reprendre';document.getElementById('timerDisp').className='timer-disp';}else{if(tCur<=0){tCur=tSec;updateTimerDisp();}tOn=true;document.getElementById('timerBtn').textContent='Pause';document.getElementById('timerDisp').className='timer-disp running';tInt=setInterval(()=>{tCur--;updateTimerDisp();if(tCur<=0){clearInterval(tInt);tOn=false;document.getElementById('timerDisp').textContent='GO !';document.getElementById('timerDisp').className='timer-disp finished';document.getElementById('timerBtn').textContent='Recommencer';if(navigator.vibrate)navigator.vibrate([400,100,400]);}},1000);}}
 document.getElementById('timerModal').addEventListener('click',e=>{if(e.target===document.getElementById('timerModal'))closeTimer();});
 
 
@@ -1421,17 +1425,7 @@ function startScheduleChecker() {
   }, 60000); // check every minute
 }
 
-// Override showTab to load notif settings when opening notif tab
-const _origShowTab = showTab;
-function showTab(id) {
-  _origShowTab(id);
-  if (id === 'notifs') {
-    setTimeout(() => {
-      loadNotifSettings();
-      updateNotifStatus();
-    }, 100);
-  }
-}
+
 
 // Init SW on app start
 initServiceWorker();
