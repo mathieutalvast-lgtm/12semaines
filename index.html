@@ -23,7 +23,7 @@
   --fb:'Inter',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
 /* ── AUTH SCREEN ── */
 .auth-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:var(--bg)}
@@ -285,6 +285,265 @@ input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
 .loading-txt{font-family:var(--fd);font-size:16px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 .sync-badge{font-size:11px;color:var(--course);font-weight:600;margin-top:8px;display:none}
 .sync-badge.show{display:block}
+
+/* JOURNAL */
+.journal-wrap{padding:14px}
+.journal-title{font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mob);margin-bottom:14px}
+.slider-block{margin-bottom:14px}
+.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.slider-label span{font-size:12px;font-weight:600;color:var(--text)}
+.slider-val{font-family:var(--fd);font-size:16px;font-weight:800;min-width:28px;text-align:right}
+.slider-val.mood{color:#ffd60a}
+.slider-val.energy{color:#06d6a0}
+.slider-val.pain{color:#ff4d6d}
+.journal-slider{width:100%;height:5px;border-radius:3px;outline:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+.journal-slider.mood{accent-color:#ffd60a}
+.journal-slider.energy{accent-color:#06d6a0}
+.journal-slider.pain{accent-color:#ff4d6d}
+.emoji-row{display:flex;justify-content:space-between;font-size:13px;margin-top:3px;color:var(--muted2)}
+.journal-textarea{width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);padding:11px 13px;color:var(--text);font-size:13px;font-family:var(--fb);outline:none;resize:none;transition:border-color .15s;line-height:1.6;margin-bottom:10px}
+.journal-textarea:focus{border-color:var(--mob)}
+.journal-textarea::placeholder{color:var(--muted2)}
+.journal-save-btn{width:100%;padding:10px;background:rgba(155,93,229,.15);border:1px solid rgba(155,93,229,.4);border-radius:var(--rsm);color:var(--mob);font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:background .15s}
+.journal-save-btn:hover{background:rgba(155,93,229,.25)}
+.journal-saved{font-size:11px;color:var(--course);font-weight:600;text-align:center;margin-top:6px;display:none}
+.journal-history{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.jh-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.jh-entry{background:var(--bg4);border-radius:var(--rsm);padding:10px 12px;margin-bottom:7px;font-size:12px}
+.jh-entry-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.jh-week{font-family:var(--fd);font-size:12px;font-weight:700;color:var(--mob)}
+.jh-scores{display:flex;gap:10px;font-size:12px}
+.jh-note{color:var(--muted);line-height:1.5;font-style:italic}
+
+
+/* CHARTS */
+.chart-section{margin-bottom:20px}
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.chart-title{font-family:var(--fd);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--text)}
+.chart-max{font-size:11px;color:var(--muted);font-weight:500}
+.chart-max span{font-family:var(--fd);font-size:14px;font-weight:800;color:var(--push)}
+.chart-wrap{position:relative;height:120px;width:100%}
+.chart-wrap svg{width:100%;height:100%;overflow:visible}
+.chart-empty{height:80px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted2);font-style:italic}
+.chart-select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rsm);padding:5px 10px;font-family:var(--fd);font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;outline:none;text-transform:uppercase;letter-spacing:.5px}
+.chart-select:focus{border-color:var(--push)}
+.chart-x-labels{display:flex;justify-content:space-between;margin-top:4px;padding:0 2px}
+.chart-x-label{font-size:10px;color:var(--muted2);font-weight:600;font-family:var(--fd)}
+.chart-legend{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:8px}
+.chart-legend-dot{width:8px;height:8px;border-radius:50%;background:var(--push)}
+
+
+
+
+/* LIGHT THEME VARIABLES */
+body.light {
+  --bg:#f4f4f8;
+  --bg2:#ffffff;
+  --bg3:#eeeff5;
+  --bg4:#e4e5ee;
+  --border:#d8d9e8;
+  --border2:#c8c9da;
+  --text:#111118;
+  --muted:#666680;
+  --muted2:#9999b0;
+  --push:#e0304a;
+  --pull:#1a9fd4;
+  --upper:#d4650a;
+  --course:#05a87a;
+  --mob:#7b3fc0;
+  --jambes:#c9a800;
+  --accent:#e0304a;
+  background: #f4f4f8;
+  color: #111118;
+}
+body.light .app-header { background: rgba(244,244,248,.95) !important; }
+body.light .app-nav { background: rgba(245,245,250,.97) !important; }
+body.light .hero-bg { opacity: .15; }
+body.light .card-photo img { filter: brightness(.65); }
+body.light .ex-detail-photo { filter: brightness(.75) saturate(.9); }
+body.light .day-card { background: var(--bg2); border-color: var(--border); }
+body.light .card-body { border-color: var(--border); }
+body.light .ex-item { border-color: var(--border); }
+body.light .ex-detail { background: var(--bg3); }
+body.light .edt-tabs { background: var(--bg4); border-color: var(--border); }
+body.light .stat-card { background: var(--bg2); border-color: var(--border); }
+body.light .phase-card { background: var(--bg2); border-color: var(--border); }
+body.light .chart-card { background: var(--bg2); border-color: var(--border); }
+body.light .nutri-card { background: var(--bg2); border-color: var(--border); }
+body.light .nutri-body { border-color: var(--border); }
+body.light .rest-card { background: var(--bg2); border-color: var(--border); }
+body.light .ses-meta { border-color: var(--border); }
+body.light .timer-box { background: var(--bg2); border-color: var(--border); }
+body.light .auth-card { background: var(--bg2); border-color: var(--border); }
+body.light .auth-screen { background: var(--bg); }
+
+/* LIGHT THEME — TEXT FIXES */
+body.light .brand-name,
+body.light .brand-sub,
+body.light .week-nav-title,
+body.light .dash-h2,
+body.light .stat-num,
+body.light .stat-lbl,
+body.light .sec-title,
+body.light .phase-info h4,
+body.light .phase-info p,
+body.light .phase-weeks,
+body.light .phase-n,
+body.light .chart-title,
+body.light .chart-max,
+body.light .nutri-title,
+body.light .nutri-sub,
+body.light .meal-food,
+body.light .meal-desc,
+body.light .macro-lbl { color: var(--text) }
+
+body.light .header-week { background:rgba(224,48,74,.12); color:var(--push); border-color:rgba(224,48,74,.3) }
+body.light .logout-btn { background:var(--bg3); border-color:var(--border2); color:var(--muted) }
+
+/* Day cards */
+body.light .card-day-lbl { color:rgba(0,0,0,.5) }
+body.light .card-ses-name { color:#111 !important; -webkit-text-fill-color:#111 !important }
+body.light .card-ses-sub { color:rgba(0,0,0,.5) }
+body.light .card-chev { color:rgba(0,0,0,.35) }
+body.light .badge-pending { background:rgba(0,0,0,.06); color:var(--muted); border-color:var(--border2) }
+body.light .card-overlay { background:linear-gradient(to right,rgba(244,244,248,.85) 0%,transparent 65%) }
+
+/* Exercise items */
+body.light .ex-name { color:var(--text) }
+body.light .ex-name.done { color:var(--muted2) }
+body.light .ex-sets { color:var(--muted) }
+body.light .ex-num { color:var(--muted2) }
+body.light .ex-check { border-color:var(--border2) }
+body.light .rest-chip { background:var(--bg3); color:var(--muted); border-color:var(--border2) }
+body.light .ex-chev { color:var(--muted2) }
+
+/* Session meta */
+body.light .smi-val { color:var(--text) }
+body.light .smi-lbl { color:var(--muted) }
+body.light .ses-meta { border-color:var(--border) }
+body.light .ses-meta-item { border-color:var(--border) }
+
+/* Exercise detail */
+body.light .edt-btn { color:var(--muted) }
+body.light .edt-btn.active { color:var(--accent) }
+body.light .tip-txt { color:rgba(0,0,0,.75) }
+body.light .breath-txt { color:rgba(0,0,0,.7) }
+body.light .err-item { color:rgba(0,0,0,.75) }
+body.light .m-tag { background:rgba(224,48,74,.1); color:var(--push) }
+body.light .tip-box { background:rgba(5,168,122,.08); border-color:rgba(5,168,122,.25) }
+body.light .breath-box { background:rgba(123,63,192,.08); border-color:rgba(123,63,192,.25) }
+
+/* Log */
+body.light .log-title { color:var(--push) }
+body.light .log-serie-lbl { color:var(--muted) }
+body.light .log-input { background:var(--bg3); border-color:var(--border2); color:var(--text) }
+body.light .log-input::placeholder { color:var(--muted2) }
+body.light .log-sep { color:var(--muted) }
+
+/* Journal */
+body.light .journal-title { color:var(--mob) }
+body.light .slider-label span { color:var(--text) }
+body.light .emoji-row { color:var(--muted2) }
+body.light .journal-textarea { background:var(--bg3); border-color:var(--border2); color:var(--text) }
+body.light .journal-textarea::placeholder { color:var(--muted2) }
+body.light .jh-entry { background:var(--bg3) }
+body.light .jh-note { color:var(--muted) }
+body.light .jh-title { color:var(--muted) }
+
+/* Warmup */
+body.light .warmup { color:rgba(0,0,0,.75) !important }
+
+/* Timer */
+body.light .timer-box { background:var(--bg2); border-color:var(--border) }
+body.light .timer-ex { color:var(--muted) }
+body.light .timer-disp { color:var(--text) }
+body.light .timer-val { color:var(--text) }
+body.light .tbtn-sec { background:var(--bg3); border-color:var(--border2); color:var(--text) }
+
+/* Auth */
+body.light .auth-title { color:var(--text) }
+body.light .auth-sub { color:var(--muted) }
+body.light .auth-card { background:var(--bg2); border-color:var(--border) }
+body.light .auth-tab { color:var(--muted) }
+body.light .auth-tab.active { color:var(--text) }
+body.light .auth-input { background:var(--bg3); border-color:var(--border2); color:var(--text) }
+body.light .auth-input::placeholder { color:var(--muted2) }
+body.light .auth-input:focus { border-color:var(--push) }
+body.light .auth-gh-btn { background:var(--bg3); border-color:var(--border2); color:var(--text) }
+body.light .auth-gh-btn svg { fill:var(--text) }
+body.light .auth-divider span { color:var(--muted2) }
+body.light .auth-divider::before,
+body.light .auth-divider::after { background:var(--border) }
+body.light .pwd-hint { color:var(--muted) }
+
+/* Nav */
+body.light .nav-btn { color:var(--muted2) }
+body.light .nav-btn.active { color:var(--accent) }
+
+/* Hero */
+body.light .hero-week-label { color:rgba(255,255,255,.8) }
+body.light .hero-title { color:#fff }
+body.light .hero-phase { background:rgba(0,0,0,.25) }
+body.light .hero-stat-num { color:#fff }
+body.light .hero-stat-label { color:rgba(255,255,255,.7) }
+body.light .hero-pct { color:#fff }
+body.light .hero-pct-label { color:rgba(255,255,255,.7) }
+body.light .swipe-hint { color:var(--muted2) }
+
+/* Dashboard */
+body.light .prog-meta-l { color:var(--muted) }
+body.light .prog-meta-r { color:var(--text) }
+body.light .pr-val { color:var(--text) }
+body.light .pr-lbl { color:var(--muted) }
+body.light .chart-empty { color:var(--muted2) }
+body.light .chart-x-label { color:var(--muted2) }
+
+/* Nutrition */
+body.light .macro-cell { background:var(--bg3) }
+body.light .nutri-hero-txt p { color:rgba(0,0,0,.5) }
+body.light .nutri-chev { color:var(--muted) }
+
+/* Rest card */
+body.light .rest-card h3 { color:var(--text) }
+body.light .rest-card p { color:var(--muted) }
+
+/* Save toast */
+body.light .save-toast { background:rgba(5,168,122,.12); border-color:rgba(5,168,122,.4); color:var(--course) }
+
+/* Theme btn */
+body.light .theme-toggle { background:var(--bg3); border-color:var(--border2) }
+
+/* THEME TOGGLE */
+.theme-toggle{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:5px 10px;font-size:16px;cursor:pointer;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.theme-toggle:hover{background:var(--bg4)}
+
+
+/* NOTIFICATIONS SETTINGS */
+.notif-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;padding:16px}
+.notif-card-title{font-family:var(--fd);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.notif-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)}
+.notif-row:last-child{border-bottom:none}
+.notif-row-info{flex:1}
+.notif-row-label{font-size:13px;font-weight:600;color:var(--text)}
+.notif-row-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.notif-toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.notif-toggle input{opacity:0;width:0;height:0;position:absolute}
+.notif-slider{position:absolute;inset:0;background:var(--bg4);border-radius:12px;cursor:pointer;transition:.2s;border:1px solid var(--border2)}
+.notif-slider::before{content:'';position:absolute;width:18px;height:18px;left:2px;top:2px;background:var(--muted);border-radius:50%;transition:.2s}
+.notif-toggle input:checked + .notif-slider{background:var(--accent);border-color:var(--accent)}
+.notif-toggle input:checked + .notif-slider::before{transform:translateX(20px);background:#fff}
+.time-picker{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.time-picker label{font-size:12px;color:var(--muted);font-weight:600;flex-shrink:0}
+.time-select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rsm);padding:7px 10px;color:var(--text);font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;outline:none;flex:1}
+.notif-enable-btn{width:100%;padding:13px;background:linear-gradient(135deg,#ff4d6d,#f77f00);border:none;border-radius:var(--radius);font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:white;cursor:pointer;margin-top:14px;transition:opacity .15s}
+.notif-enable-btn:hover{opacity:.9}
+.notif-enable-btn:disabled{opacity:.5;cursor:not-allowed}
+.notif-status{font-size:12px;font-weight:600;text-align:center;margin-top:8px;padding:8px;border-radius:var(--rsm)}
+.notif-status.granted{background:rgba(6,214,160,.1);color:var(--course)}
+.notif-status.denied{background:rgba(255,77,109,.1);color:var(--push)}
+.notif-status.default{background:var(--bg3);color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -298,7 +557,7 @@ input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
 
 <!-- AUTH -->
 <div class="auth-screen hidden" id="authScreen">
-  <div class="auth-logo">⚡</div>
+  <div style="position:absolute;top:20px;right:20px"><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Changer le thème">🌙</button></div><div class="auth-logo">⚡</div>
   <div class="auth-title">Force & Performance</div>
   <div class="auth-sub">Programme 12 semaines · Muscu + Course<br>Connecte-toi pour sauvegarder ta progression</div>
   <div class="auth-card">
@@ -355,7 +614,7 @@ input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
         <div class="brand-sub">12 semaines</div>
       </div>
     </div>
-    <div class="header-right">
+    <div class="header-right"><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Changer le thème">🌙</button>
       <div class="header-week" id="header-week">S1 / 12</div>
       <button class="logout-btn" onclick="handleLogout()">Déco</button>
     </div>
@@ -371,6 +630,8 @@ input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
           <div class="stat-card"><div class="stat-num" id="d-run">0</div><div class="stat-lbl">séances course</div></div>
           <div class="stat-card"><div class="stat-num" id="d-muscu">0</div><div class="stat-lbl">séances muscu</div></div>
         </div>
+        <div class="sec-title">Courbes de progression</div>
+        <div id="charts-container"></div>
         <div class="sec-title">Records personnels</div>
         <div class="pr-grid" id="pr-grid"></div>
         <div class="sec-title">Progression</div>
@@ -394,12 +655,83 @@ input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
       </div>
       <div id="nutri-list"></div>
       <div style="height:14px"></div>
+    <div class="tab" id="tab-notifs">
+      <div class="dash-wrap">
+        <div class="dash-h2">Rappels</div>
+        <div class="notif-card">
+          <div class="notif-card-title">🔔 Statut des notifications</div>
+          <div class="notif-status default" id="notif-status-badge">Vérification...</div>
+          <button class="notif-enable-btn" id="notif-enable-btn" onclick="requestNotifPermission()">
+            Activer les notifications
+          </button>
+        </div>
+        <div class="notif-card">
+          <div class="notif-card-title">⏰ Heure du rappel quotidien</div>
+          <div class="time-picker">
+            <label>Rappel à</label>
+            <select class="time-select" id="notif-hour">
+              <option value="6">06h00</option>
+              <option value="7" selected>07h00</option>
+              <option value="8">08h00</option>
+              <option value="9">09h00</option>
+              <option value="10">10h00</option>
+              <option value="11">11h00</option>
+              <option value="12">12h00</option>
+              <option value="17">17h00</option>
+              <option value="18">18h00</option>
+              <option value="19">19h00</option>
+              <option value="20">20h00</option>
+            </select>
+            <label>:</label>
+            <select class="time-select" id="notif-min" style="flex:0;width:80px">
+              <option value="0">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+            </select>
+          </div>
+        </div>
+        <div class="notif-card">
+          <div class="notif-card-title">📅 Rappels par séance</div>
+          <div class="notif-row">
+            <div class="notif-row-info"><div class="notif-row-label">🏋️ Séance muscu (Lun, Mer, Ven)</div><div class="notif-row-sub">PUSH · PULL · UPPER · JAMBES</div></div>
+            <label class="notif-toggle"><input type="checkbox" id="notif-muscu" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
+          </div>
+          <div class="notif-row">
+            <div class="notif-row-info"><div class="notif-row-label">🏃 Séance course (Mar, Jeu, Sam)</div><div class="notif-row-sub">Endurance · Fractionné · Sortie longue</div></div>
+            <label class="notif-toggle"><input type="checkbox" id="notif-course" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
+          </div>
+          <div class="notif-row">
+            <div class="notif-row-info"><div class="notif-row-label">🧘 Mobilité quotidienne</div><div class="notif-row-sub">Chaque matin — Non négociable</div></div>
+            <label class="notif-toggle"><input type="checkbox" id="notif-mob" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
+          </div>
+          <div class="notif-row">
+            <div class="notif-row-info"><div class="notif-row-label">😴 Dimanche repos / jambes</div><div class="notif-row-sub">Récupération · Semaines paires = Jambes</div></div>
+            <label class="notif-toggle"><input type="checkbox" id="notif-repos" checked onchange="saveNotifSettings()"><span class="notif-slider"></span></label>
+          </div>
+          <button class="notif-enable-btn" onclick="saveNotifSettings(true)" style="margin-top:14px;background:linear-gradient(135deg,#9b5de5,#4cc9f0)">
+            💾 Enregistrer les rappels
+          </button>
+        </div>
+        <div class="notif-card">
+          <div class="notif-card-title">📱 Installer l'appli</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">Pour recevoir les notifications, installe d'abord l'appli sur ton téléphone.</p>
+          <div style="background:var(--bg3);border-radius:var(--rsm);padding:12px;font-size:12px;color:var(--muted);line-height:1.8">
+            <strong style="color:var(--text)">iPhone / iPad :</strong><br>
+            Safari → bouton Partager → "Sur l'écran d'accueil"<br><br>
+            <strong style="color:var(--text)">Android :</strong><br>
+            Chrome → menu ⋮ → "Ajouter à l'écran d'accueil"
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </main>
   <nav class="app-nav">
     <button class="nav-btn active" id="nav-programme" onclick="showTab('programme')"><span class="nav-icon">📅</span>Programme</button>
     <button class="nav-btn" id="nav-dashboard" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Progrès</button>
     <button class="nav-btn" id="nav-nutrition" onclick="showTab('nutrition')"><span class="nav-icon">🥗</span>Nutrition</button>
+    <button class="nav-btn" id="nav-notifs" onclick="showTab('notifs')"><span class="nav-icon">🔔</span>Rappels</button>
   </nav>
 </div>
 
@@ -538,7 +870,7 @@ async function handleLogout() {
 // ══════════════════════════════════════════════
 // USER DATA — Supabase
 // ══════════════════════════════════════════════
-let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{}, logData:{}, prData:{} };
+let S = { week:1, checked:{}, done:{}, openDays:{}, exOpen:{}, exTab:{}, logData:{}, prData:{}, journal:{} };
 
 async function loadUserData() {
   if (!currentUser) return;
@@ -576,35 +908,35 @@ function showSaveToast() {
 // PROGRAMME DATA
 // ══════════════════════════════════════════════
 const EX = {
-  'Développé Couché Barre':{sets:'5 × 5 reps',rest:'2 min 30',restSec:150,muscles:['Pectoraux sternal + costal','Deltoïdes antérieurs','Triceps brachial'],technique:"Descente lente 3 sec, pause 1 sec en bas. Omoplates serrées et plaquées. Coudes à 60-75° du corps.",erreurs:["Ne jamais rebondir la barre sur la poitrine","Talons au sol en permanence","Pieds levés = instabilité"],respiration:"Descente = inspire · Poussée = expire",yt:'https://www.youtube.com/embed/rT7DgCr-3pg',photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'},
-  'Développé Incliné Haltères':{sets:'4 × 8 reps',rest:'90 sec',restSec:90,muscles:['Grand pectoral chef claviculaire','Deltoïdes antérieurs'],technique:"Banc à 30-45°. Coudes à 60° du corps. Tempo 3-1-1.",erreurs:["Si épaule craque → réduis l'angle à 20-25°","Coudes jamais à 90°"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/DbFgADa2PL8',photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'},
-  'Développé Militaire Barre':{sets:'4 × 6 reps',rest:'2 min',restSec:120,muscles:['Deltoïde (3 faisceaux)','Trapèzes supérieurs','Triceps'],technique:"Gainage strict AVANT de toucher la barre. Pousse droit vers le haut.",erreurs:["Dos qui creuse = réduis de 5 kg","Ne rentre jamais la tête vers l'arrière"],respiration:"Inspire avant · Expire pendant la poussée",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80'},
-  'Dips':{sets:'4 × 8-12 reps',rest:'90 sec',restSec:90,muscles:['Pectoraux inférieurs','Triceps brachial (3 chefs)','Deltoïdes antérieurs'],technique:"Incline le buste 15-20° vers l'avant. Descends jusqu'à 90° de flexion.",erreurs:["Épaules qui remontent vers les oreilles = stop","Douleur épaule = arrêt immédiat"],respiration:"Inspire en descendant · Expire en montant",yt:'https://www.youtube.com/embed/2z8JmcrW-As',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80'},
-  'Élévations Latérales':{sets:'4 × 15 reps',rest:'60 sec',restSec:60,muscles:['Faisceau médial du deltoïde'],technique:"Légère flexion du coude 15-20°. Arrête à la hauteur des épaules. Contrôle la descente 2 sec.",erreurs:["Pas d'élan avec le dos ou les genoux","Si tu triches → allège de 2 kg"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/3VcKaXpzqRo',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80'},
-  'Extension Triceps Poulie':{sets:'4 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Coudes immobiles, collés aux flancs. Écarte la corde à la fin pour le chef latéral.",erreurs:["Coudes qui décollent = charge trop lourde"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80'},
-  'Gainage Planche':{sets:'3 × 60 sec',rest:'45 sec',restSec:45,muscles:["Transverse de l'abdomen",'Obliques','Érecteurs du rachis'],technique:"Ligne neutre parfaite nuque-talons. Ne bloque jamais le souffle.",erreurs:["Hanches qui tombent = abdos qui lâchent","Hanches trop hautes = inefficace"],respiration:"Abdominale profonde et régulière",yt:'https://www.youtube.com/embed/pSHjTRCQxIw',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80'},
-  'Tractions Pronation':{sets:'5 × max reps',rest:'2 min',restSec:120,muscles:['Grand dorsal','Biceps brachial','Rhomboïdes','Trapèzes inférieurs'],technique:"Abaisse les omoplates AVANT de plier les coudes. Descente totalement contrôlée.",erreurs:["Kipping = ça ne construit rien","Descente complète à chaque rep"],respiration:"Inspire en bas · Expire en montant",yt:'https://www.youtube.com/embed/eGo4IYlbE5g',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80'},
-  'Rowing Barre Penché':{sets:'4 × 8 reps',rest:'90 sec',restSec:90,muscles:['Grand dorsal','Trapèzes moyens','Rhomboïdes','Biceps'],technique:"Dos à 45° strict, barre vers le bas des pectoraux. Omoplates serrées à fond.",erreurs:["Ne JAMAIS arrondir le dos — risque lombaire grave"],respiration:"Expire en tirant · Inspire en redescendant",yt:'https://www.youtube.com/embed/roCP6wCXPqo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Tirage Horizontal Poulie':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Trapèzes moyens','Rhomboïdes','Grand dorsal'],technique:"Assis droit. Pense 'coudes vers l'arrière'. Omoplates serrées en fin de rep.",erreurs:["Ne t'incline pas en arrière plus de 10°"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/GZbfZ033f74',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Face Pull Poulie Haute':{sets:'4 × 15 reps',rest:'60 sec',restSec:60,muscles:['Deltoïdes postérieurs','Rotateurs de la coiffe','Trapèzes moyens'],technique:"Coudes hauts à hauteur d'oreilles. Tire vers le visage + rotation externe max.",erreurs:["Ne supprime JAMAIS cet exercice — prévient 80% des blessures d'épaule"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/rep-qVOkqgk',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80'},
-  'Curl Barre EZ':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Biceps brachial','Brachial antérieur'],technique:"Coudes fixes le long du corps. Supination max en haut. Descente lente 2-3 sec.",erreurs:["Te pencher en arrière = charge trop lourde"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Curl Incliné Haltères':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Chef long du biceps — pic musculaire'],technique:"Bras entièrement étirés en position basse. Monte et redescends lentement.",erreurs:["Ne bloque pas la rotation de l'avant-bras"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Farmer Walk':{sets:'3 × 40 m',rest:'90 sec',restSec:90,muscles:['Avant-bras','Trapèzes supérieurs','Core','Grip'],technique:"Haltères très lourds, dos droit, épaules rétractées. Chaque pas contrôlé.",erreurs:["Épaules qui s'affaissent = stop"],respiration:"Respiration régulière et contrôlée",yt:'https://www.youtube.com/embed/Fkzk_RqlYig',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80'},
-  'Développé Haltères Assis':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Deltoïdes (3 faisceaux)','Triceps brachial','Trapèzes'],technique:"Descends jusqu'à la hauteur des oreilles pour amplitude max.",erreurs:["Ne verrouille pas les coudes en haut"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80'},
-  'Rowing Poulie Basse':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Grand dorsal','Rhomboïdes','Trapèzes moyens','Biceps'],technique:"Assis droit. Omoplates à fond, retiens 1 sec en fin.",erreurs:["Pencher en arrière = réduis de 10%"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/GZbfZ033f74',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Curl Marteau':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Brachial antérieur','Brachio-radial','Biceps (prise neutre)'],technique:"Prise neutre (pouces vers le haut). Coudes fixes, descente 2 secondes.",erreurs:["Coudes qui avancent = non isolé"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80'},
-  'Triceps Corde Poulie':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Écarte les poignets vers l'extérieur en bas du mouvement.",erreurs:["Coudes complètement immobiles, collés aux flancs"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80'},
-  'Gainage Latéral':{sets:'3 × 45 sec chaque côté',rest:'45 sec',restSec:45,muscles:['Obliques','Abducteurs de hanche','Stabilisateurs latéraux'],technique:"Alignement parfait épaule-hanche-cheville. Nuque longue.",erreurs:["Hanches qui tombent → réduis le temps"],respiration:"Respiration régulière et continue",yt:'https://www.youtube.com/embed/K-o98XzmEJ8',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80'},
-  'Presse Inclinée':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Quadriceps (4 chefs)','Ischio-jambiers','Grand fessier'],technique:"Pieds hauts = plus d'ischio-jambiers, moins de pression rotule.",erreurs:["Ne verrouille JAMAIS les genoux en extension"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/IZxyjW7MPJQ',photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80'},
-  'Soulevé de Terre Roumain':{sets:'4 × 8 reps',rest:'2 min',restSec:120,muscles:['Ischio-jambiers','Grand fessier','Érecteurs du rachis'],technique:"Dos parfaitement plat, genoux légèrement fléchis et FIXES. Montée = poussée des hanches.",erreurs:["Ce n'est PAS un squat — mouvement des hanches","Dos arrondit = réduis de 5 kg"],respiration:"Grande inspiration avant de descendre · Expire en remontant",yt:'https://www.youtube.com/embed/jEy_czb3RKA',photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80'},
-  'Fentes Marchées':{sets:'3 × 12 reps',rest:'90 sec',restSec:90,muscles:['Quadriceps','Grand fessier','Stabilisateurs du genou'],technique:"Grand pas, torse droit, genou avant jamais devant la pointe du pied.",erreurs:["Genou vers l'intérieur = VALGUS DYNAMIQUE — arrête et corrige"],respiration:"Inspire en descendant · Expire en remontant",yt:'https://www.youtube.com/embed/D7KaRcUTQeE',photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80'},
-  'Hip Thrust Barre':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Grand fessier — clé anti-valgus','Stabilisateurs du genou'],technique:"Menton rentré. Rétroversion max du bassin en haut. Contraction max 1 sec.",erreurs:["Ne creuse pas le bas du dos en position haute"],respiration:"Expire en poussant les hanches vers le haut",yt:'https://www.youtube.com/embed/xDmFkJxPzeM',photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80'},
-  'Mollets Debout (Step)':{sets:'4 × 20 reps',rest:'60 sec',restSec:60,muscles:["Gastrocnémiens","Soléaire — tendon d'Achille"],technique:"Amplitude TOTALE : talon très bas puis montée maximale. Tempo 3-3.",erreurs:["Pas de rebond en bas — la descente lente est essentielle"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/gwLzBJYoWlI',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80'},
-  'Tibialis Raises':{sets:'4 × 20 reps',rest:'45 sec',restSec:45,muscles:['Tibial antérieur — PRÉVENTION périostites'],technique:"Dos au mur, pieds à 30 cm, soulève les orteils vers le tibia au maximum.",erreurs:["Exercice CRUCIAL en reprise course — ne jamais sauter"],respiration:"Libre et régulière",yt:'https://www.youtube.com/embed/AcVORl3SZSo',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80'},
-  'Course Endurance Z2':{sets:'45 minutes',rest:'',restSec:0,muscles:['Cardio Zone 2 (60-70% FCmax)','Endurance aérobie — 130-150 bpm'],technique:"Tu dois pouvoir parler sans être essoufflé. Allure = +2 à +3 min/km vs ta vitesse 5 km.",erreurs:["Trop vite = détruit l'effet Zone 2","Sem. 1-4 : marche 1 min toutes les 10 min si chevilles tirent"],respiration:"Nasale si possible — rythme conversationnel",yt:'https://www.youtube.com/embed/BYLn1kA0rEo',photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80'},
-  'Fractionné 10×1 min':{sets:'10 × 1 min rapide / 1 min récup',rest:'',restSec:0,muscles:['VO2max — Zone 4-5 (85-92% FCmax)','Vitesse et puissance cardiaque'],technique:"10 min échauffement OBLIGATOIRE. Sem. 1-4 : 6 reps. +1 rep toutes les 2 semaines.",erreurs:["Ne pars pas trop vite sur le 1er intervalle","Récup = trot lent, pas arrêt total"],respiration:"Haletante pendant l'effort · Récupération progressive",yt:'https://www.youtube.com/embed/5tLfNh5MZ8A',photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80'},
-  'Sortie Longue':{sets:'60 à 90 minutes',rest:'',restSec:0,muscles:['Endurance Zone 2 (120-140 bpm)','Lipolyse · Renforcement tendons'],technique:"Rythme conversationnel absolu. +5-10 min toutes les 2 semaines. Hydratation 500 ml/h.",erreurs:["Au-dessus de 140 bpm → marche 30 secondes","Stop si douleur aiguë genou ou cheville"],respiration:"Lente et profonde, nasale si possible",yt:'https://www.youtube.com/embed/kVnyY17VS9Y',photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80'},
-  'Mobilité Quotidienne':{sets:'10 minutes — NON NÉGOCIABLE',rest:'',restSec:0,muscles:['Chevilles · Mollets · Hanches · Genou · Posture'],technique:"1) Chevilles 2×60s  2) Mollets 2×45s  3) Hanches 2×45s  4) Squat profond 3×30s  5) Ouverture hanches 2×40s  6) Gainage 2×60s",erreurs:["Fais-la CHAQUE jour, même les jours de repos","Résultats visibles en 3 semaines"],respiration:"Longues expirations pour relâcher les tensions",yt:'https://www.youtube.com/embed/F9vTuT7HHXU',photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80'},
+  'Développé Couché Barre':{sets:'5 × 5 reps',rest:'2 min 30',restSec:150,muscles:['Pectoraux sternal + costal','Deltoïdes antérieurs','Triceps brachial'],technique:"Descente lente 3 sec, pause 1 sec en bas. Omoplates serrées et plaquées. Coudes à 60-75° du corps.",erreurs:["Ne jamais rebondir la barre sur la poitrine","Talons au sol en permanence","Pieds levés = instabilité"],respiration:"Descente = inspire · Poussée = expire",yt:'https://www.youtube.com/embed/rT7DgCr-3pg',photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80&fit=crop'},
+  'Développé Incliné Haltères':{sets:'4 × 8 reps',rest:'90 sec',restSec:90,muscles:['Grand pectoral chef claviculaire','Deltoïdes antérieurs'],technique:"Banc à 30-45°. Coudes à 60° du corps. Tempo 3-1-1.",erreurs:["Si épaule craque → réduis l'angle à 20-25°","Coudes jamais à 90°"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/DbFgADa2PL8',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80&fit=crop'},
+  'Développé Militaire Barre':{sets:'4 × 6 reps',rest:'2 min',restSec:120,muscles:['Deltoïde (3 faisceaux)','Trapèzes supérieurs','Triceps'],technique:"Gainage strict AVANT de toucher la barre. Pousse droit vers le haut.",erreurs:["Dos qui creuse = réduis de 5 kg","Ne rentre jamais la tête vers l'arrière"],respiration:"Inspire avant · Expire pendant la poussée",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80&fit=crop'},
+  'Dips':{sets:'4 × 8-12 reps',rest:'90 sec',restSec:90,muscles:['Pectoraux inférieurs','Triceps brachial (3 chefs)','Deltoïdes antérieurs'],technique:"Incline le buste 15-20° vers l'avant. Descends jusqu'à 90° de flexion.",erreurs:["Épaules qui remontent vers les oreilles = stop","Douleur épaule = arrêt immédiat"],respiration:"Inspire en descendant · Expire en montant",yt:'https://www.youtube.com/embed/2z8JmcrW-As',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80&fit=crop'},
+  'Élévations Latérales':{sets:'4 × 15 reps',rest:'60 sec',restSec:60,muscles:['Faisceau médial du deltoïde'],technique:"Légère flexion du coude 15-20°. Arrête à la hauteur des épaules. Contrôle la descente 2 sec.",erreurs:["Pas d'élan avec le dos ou les genoux","Si tu triches → allège de 2 kg"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/3VcKaXpzqRo',photo:'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80&fit=crop'},
+  'Extension Triceps Poulie':{sets:'4 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Coudes immobiles, collés aux flancs. Écarte la corde à la fin pour le chef latéral.",erreurs:["Coudes qui décollent = charge trop lourde"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80&fit=crop'},
+  'Gainage Planche':{sets:'3 × 60 sec',rest:'45 sec',restSec:45,muscles:["Transverse de l'abdomen",'Obliques','Érecteurs du rachis'],technique:"Ligne neutre parfaite nuque-talons. Ne bloque jamais le souffle.",erreurs:["Hanches qui tombent = abdos qui lâchent","Hanches trop hautes = inefficace"],respiration:"Abdominale profonde et régulière",yt:'https://www.youtube.com/embed/pSHjTRCQxIw',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop'},
+  'Tractions Pronation':{sets:'5 × max reps',rest:'2 min',restSec:120,muscles:['Grand dorsal','Biceps brachial','Rhomboïdes','Trapèzes inférieurs'],technique:"Abaisse les omoplates AVANT de plier les coudes. Descente totalement contrôlée.",erreurs:["Kipping = ça ne construit rien","Descente complète à chaque rep"],respiration:"Inspire en bas · Expire en montant",yt:'https://www.youtube.com/embed/eGo4IYlbE5g',photo:'https://images.unsplash.com/photo-1598971639058-fab3c3109a55?w=600&q=80&fit=crop'},
+  'Rowing Barre Penché':{sets:'4 × 8 reps',rest:'90 sec',restSec:90,muscles:['Grand dorsal','Trapèzes moyens','Rhomboïdes','Biceps'],technique:"Dos à 45° strict, barre vers le bas des pectoraux. Omoplates serrées à fond.",erreurs:["Ne JAMAIS arrondir le dos — risque lombaire grave"],respiration:"Expire en tirant · Inspire en redescendant",yt:'https://www.youtube.com/embed/roCP6wCXPqo',photo:'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&q=80&fit=crop'},
+  'Tirage Horizontal Poulie':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Trapèzes moyens','Rhomboïdes','Grand dorsal'],technique:"Assis droit. Pense 'coudes vers l'arrière'. Omoplates serrées en fin de rep.",erreurs:["Ne t'incline pas en arrière plus de 10°"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/GZbfZ033f74',photo:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80&fit=crop'},
+  'Face Pull Poulie Haute':{sets:'4 × 15 reps',rest:'60 sec',restSec:60,muscles:['Deltoïdes postérieurs','Rotateurs de la coiffe','Trapèzes moyens'],technique:"Coudes hauts à hauteur d'oreilles. Tire vers le visage + rotation externe max.",erreurs:["Ne supprime JAMAIS cet exercice — prévient 80% des blessures d'épaule"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/rep-qVOkqgk',photo:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80&fit=crop'},
+  'Curl Barre EZ':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Biceps brachial','Brachial antérieur'],technique:"Coudes fixes le long du corps. Supination max en haut. Descente lente 2-3 sec.",erreurs:["Te pencher en arrière = charge trop lourde"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80&fit=crop'},
+  'Curl Incliné Haltères':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Chef long du biceps — pic musculaire'],technique:"Bras entièrement étirés en position basse. Monte et redescends lentement.",erreurs:["Ne bloque pas la rotation de l'avant-bras"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80&fit=crop'},
+  'Farmer Walk':{sets:'3 × 40 m',rest:'90 sec',restSec:90,muscles:['Avant-bras','Trapèzes supérieurs','Core','Grip'],technique:"Haltères très lourds, dos droit, épaules rétractées. Chaque pas contrôlé.",erreurs:["Épaules qui s'affaissent = stop"],respiration:"Respiration régulière et contrôlée",yt:'https://www.youtube.com/embed/Fkzk_RqlYig',photo:'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=80&fit=crop'},
+  'Développé Haltères Assis':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Deltoïdes (3 faisceaux)','Triceps brachial','Trapèzes'],technique:"Descends jusqu'à la hauteur des oreilles pour amplitude max.",erreurs:["Ne verrouille pas les coudes en haut"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80&fit=crop'},
+  'Rowing Poulie Basse':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Grand dorsal','Rhomboïdes','Trapèzes moyens','Biceps'],technique:"Assis droit. Omoplates à fond, retiens 1 sec en fin.",erreurs:["Pencher en arrière = réduis de 10%"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/GZbfZ033f74',photo:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80&fit=crop'},
+  'Curl Marteau':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Brachial antérieur','Brachio-radial','Biceps (prise neutre)'],technique:"Prise neutre (pouces vers le haut). Coudes fixes, descente 2 secondes.",erreurs:["Coudes qui avancent = non isolé"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80&fit=crop'},
+  'Triceps Corde Poulie':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Écarte les poignets vers l'extérieur en bas du mouvement.",erreurs:["Coudes complètement immobiles, collés aux flancs"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80&fit=crop'},
+  'Gainage Latéral':{sets:'3 × 45 sec chaque côté',rest:'45 sec',restSec:45,muscles:['Obliques','Abducteurs de hanche','Stabilisateurs latéraux'],technique:"Alignement parfait épaule-hanche-cheville. Nuque longue.",erreurs:["Hanches qui tombent → réduis le temps"],respiration:"Respiration régulière et continue",yt:'https://www.youtube.com/embed/K-o98XzmEJ8',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop'},
+  'Presse Inclinée':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Quadriceps (4 chefs)','Ischio-jambiers','Grand fessier'],technique:"Pieds hauts = plus d'ischio-jambiers, moins de pression rotule.",erreurs:["Ne verrouille JAMAIS les genoux en extension"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/IZxyjW7MPJQ',photo:'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80&fit=crop'},
+  'Soulevé de Terre Roumain':{sets:'4 × 8 reps',rest:'2 min',restSec:120,muscles:['Ischio-jambiers','Grand fessier','Érecteurs du rachis'],technique:"Dos parfaitement plat, genoux légèrement fléchis et FIXES. Montée = poussée des hanches.",erreurs:["Ce n'est PAS un squat — mouvement des hanches","Dos arrondit = réduis de 5 kg"],respiration:"Grande inspiration avant de descendre · Expire en remontant",yt:'https://www.youtube.com/embed/jEy_czb3RKA',photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80&fit=crop'},
+  'Fentes Marchées':{sets:'3 × 12 reps',rest:'90 sec',restSec:90,muscles:['Quadriceps','Grand fessier','Stabilisateurs du genou'],technique:"Grand pas, torse droit, genou avant jamais devant la pointe du pied.",erreurs:["Genou vers l'intérieur = VALGUS DYNAMIQUE — arrête et corrige"],respiration:"Inspire en descendant · Expire en remontant",yt:'https://www.youtube.com/embed/D7KaRcUTQeE',photo:'https://images.unsplash.com/photo-1434608519344-49d77a124f7a?w=600&q=80&fit=crop'},
+  'Hip Thrust Barre':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Grand fessier — clé anti-valgus','Stabilisateurs du genou'],technique:"Menton rentré. Rétroversion max du bassin en haut. Contraction max 1 sec.",erreurs:["Ne creuse pas le bas du dos en position haute"],respiration:"Expire en poussant les hanches vers le haut",yt:'https://www.youtube.com/embed/xDmFkJxPzeM',photo:'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&q=80&fit=crop'},
+  'Mollets Debout (Step)':{sets:'4 × 20 reps',rest:'60 sec',restSec:60,muscles:["Gastrocnémiens","Soléaire — tendon d'Achille"],technique:"Amplitude TOTALE : talon très bas puis montée maximale. Tempo 3-3.",erreurs:["Pas de rebond en bas — la descente lente est essentielle"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/gwLzBJYoWlI',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop'},
+  'Tibialis Raises':{sets:'4 × 20 reps',rest:'45 sec',restSec:45,muscles:['Tibial antérieur — PRÉVENTION périostites'],technique:"Dos au mur, pieds à 30 cm, soulève les orteils vers le tibia au maximum.",erreurs:["Exercice CRUCIAL en reprise course — ne jamais sauter"],respiration:"Libre et régulière",yt:'https://www.youtube.com/embed/AcVORl3SZSo',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop'},
+  'Course Endurance Z2':{sets:'45 minutes',rest:'',restSec:0,muscles:['Cardio Zone 2 (60-70% FCmax)','Endurance aérobie — 130-150 bpm'],technique:"Tu dois pouvoir parler sans être essoufflé. Allure = +2 à +3 min/km vs ta vitesse 5 km.",erreurs:["Trop vite = détruit l'effet Zone 2","Sem. 1-4 : marche 1 min toutes les 10 min si chevilles tirent"],respiration:"Nasale si possible — rythme conversationnel",yt:'https://www.youtube.com/embed/BYLn1kA0rEo',photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80&fit=crop'},
+  'Fractionné 10×1 min':{sets:'10 × 1 min rapide / 1 min récup',rest:'',restSec:0,muscles:['VO2max — Zone 4-5 (85-92% FCmax)','Vitesse et puissance cardiaque'],technique:"10 min échauffement OBLIGATOIRE. Sem. 1-4 : 6 reps. +1 rep toutes les 2 semaines.",erreurs:["Ne pars pas trop vite sur le 1er intervalle","Récup = trot lent, pas arrêt total"],respiration:"Haletante pendant l'effort · Récupération progressive",yt:'https://www.youtube.com/embed/5tLfNh5MZ8A',photo:'https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?w=600&q=80&fit=crop'},
+  'Sortie Longue':{sets:'60 à 90 minutes',rest:'',restSec:0,muscles:['Endurance Zone 2 (120-140 bpm)','Lipolyse · Renforcement tendons'],technique:"Rythme conversationnel absolu. +5-10 min toutes les 2 semaines. Hydratation 500 ml/h.",erreurs:["Au-dessus de 140 bpm → marche 30 secondes","Stop si douleur aiguë genou ou cheville"],respiration:"Lente et profonde, nasale si possible",yt:'https://www.youtube.com/embed/kVnyY17VS9Y',photo:'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80&fit=crop'},
+  'Mobilité Quotidienne':{sets:'10 minutes — NON NÉGOCIABLE',rest:'',restSec:0,muscles:['Chevilles · Mollets · Hanches · Genou · Posture'],technique:"1) Chevilles 2×60s  2) Mollets 2×45s  3) Hanches 2×45s  4) Squat profond 3×30s  5) Ouverture hanches 2×40s  6) Gainage 2×60s",erreurs:["Fais-la CHAQUE jour, même les jours de repos","Résultats visibles en 3 semaines"],respiration:"Longues expirations pour relâcher les tensions",yt:'https://www.youtube.com/embed/F9vTuT7HHXU',photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80&fit=crop'},
 };
 
 const TYPE_GRAD={push:'linear-gradient(135deg,#ff4d6d,#f77f00)',pull:'linear-gradient(135deg,#4cc9f0,#9b5de5)',upper:'linear-gradient(135deg,#f77f00,#ff4d6d)',course:'linear-gradient(135deg,#06d6a0,#4cc9f0)',mob:'linear-gradient(135deg,#9b5de5,#4cc9f0)',jambes:'linear-gradient(135deg,#ffd60a,#f77f00)'};
@@ -669,9 +1001,9 @@ function renderProgramme(){
     const checkedCount=day.exercises.filter((_,ei)=>S.checked&&S.checked[sk+'-'+ei]).length;
 
     if(day.type==='mob'){
-      html+=`<div class="day-card ${isDone?'done-card t-mob':''}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':'REPOS'}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
+      html+=`<div class="day-card ${isDone?'done-card t-mob':''}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':'REPOS'}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
       <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="warmup" style="background:rgba(155,93,229,.1);border:1px solid rgba(155,93,229,.3);color:rgba(200,180,255,.85)"><strong>🧘 Routine quotidienne</strong><br>Chevilles → Mollets → Hanches → Squat profond → Ouverture hanches → Gainage<br><span style="font-size:11px;opacity:.8">PRIORITÉ ABSOLUE — Chaque jour, même repos.</span></div>
-      <div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA MOBILITÉ'}</button></div></div></div>`;
+      ${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA MOBILITÉ'}</button></div></div></div>`;
       return;
     }
 
@@ -688,7 +1020,7 @@ function renderProgramme(){
       let logRows='';
       for(let s=1;s<=n;s++){logRows+=`<div class="log-row"><span class="log-serie-lbl">Série ${s}</span><input class="log-input" type="number" placeholder="kg" min="0" max="500" value="${ld['kg'+s]||''}" id="lk-${detKey}-${s}" inputmode="decimal" style="max-width:72px"><span class="log-sep">×</span><input class="log-input" type="number" placeholder="reps" min="0" max="100" value="${ld['reps'+s]||''}" id="lr-${detKey}-${s}" inputmode="numeric" style="max-width:65px"></div>`;}
       exRows+=`<div class="ex-item"><div class="ex-header" onclick="toggleExDetail('${sk}',${ei},'${detKey}')"><div class="ex-check ${ck?'checked':''}" onclick="checkEx(event,'${sk}',${ei})">${ck?'✓':''}</div><span class="ex-num">${String(ei+1).padStart(2,'0')}</span><div class="ex-info"><div class="ex-name ${ck?'done':''}">${exName}</div><div class="ex-sets">${ex.sets||''}</div></div><div class="ex-right">${ex.rest?`<span class="rest-chip">⏸ ${ex.rest}</span>`:''} ${ex.restSec?`<span class="timer-chip" onclick="openTimer(event,'${exName}',${ex.restSec})">⏱</span>`:''}<span class="ex-chev ${isExOpen?'open':''}">▾</span></div></div>
-      <div class="ex-detail ${isExOpen?'open':''}" id="exd-${detKey}"><img class="ex-detail-photo" src="${ex.photo||photoUrl}" alt="${exName}" loading="lazy">
+      <div class="ex-detail ${isExOpen?'open':''}" id="exd-${detKey}"><img class="ex-detail-photo" src="${ex.photo||photoUrl}" alt="${exName}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80&fit=crop'">
       <div class="edt-tabs"><button class="edt-btn ${activeTab==='tech'?'active':''}" onclick="switchExTab(event,'${detKey}','tech')">Technique</button><button class="edt-btn ${activeTab==='err'?'active':''}" onclick="switchExTab(event,'${detKey}','err')">Erreurs</button><button class="edt-btn ${activeTab==='mus'?'active':''}" onclick="switchExTab(event,'${detKey}','mus')">Muscles</button><button class="edt-btn ${activeTab==='log'?'active':''}" onclick="switchExTab(event,'${detKey}','log')">📝 Log</button><button class="edt-btn ${activeTab==='vid'?'active':''}" onclick="switchExTab(event,'${detKey}','vid')">Vidéo</button></div>
       <div id="edc-tech-${detKey}" class="edt-content ${activeTab==='tech'?'active':''}"><div class="tip-box"><div class="tip-lbl">✓ Conseil technique</div><div class="tip-txt">${ex.technique||''}</div></div><div class="breath-box"><div class="breath-lbl">Respiration</div><div class="breath-txt">${ex.respiration||''}</div></div></div>
       <div id="edc-err-${detKey}" class="edt-content ${activeTab==='err'?'active':''}">${(ex.erreurs||[]).map(e=>`<div class="err-item"><span style="color:#ffd60a">⚠</span>&nbsp;<span>${e}</span></div>`).join('')}</div>
@@ -698,10 +1030,10 @@ function renderProgramme(){
       </div></div>`;
     });
 
-    html+=`<div class="day-card ${isDone?'done-card t-'+day.type:''}" id="card-${sk}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name" style="background:${TYPE_GRAD[day.type]};-webkit-background-clip:text;-webkit-text-fill-color:transparent">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><div class="card-dot" style="background:${col}"></div><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':checkedCount+'/'+day.exercises.length}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
+    html+=`<div class="day-card ${isDone?'done-card t-'+day.type:''}" id="card-${sk}"><div class="card-photo" onclick="toggleDay('${sk}')"><img src="${photoUrl}" alt="${day.label}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80'"><div class="card-overlay"><div><div class="card-day-lbl">${day.jour}</div><div class="card-ses-name" style="background:${TYPE_GRAD[day.type]};-webkit-background-clip:text;-webkit-text-fill-color:transparent">${day.label}</div><div class="card-ses-sub">${day.sub}</div></div><div class="card-right"><div class="card-dot" style="background:${col}"></div><span class="card-badge ${isDone?'badge-done':'badge-pending'}">${isDone?'✓ FAIT':checkedCount+'/'+day.exercises.length}</span><span class="card-chev ${isOpen?'open':''}" id="chev-${sk}">▾</span></div></div></div>
     <div class="card-body ${isOpen?'open':''}" id="body-${sk}"><div class="ses-meta"><div class="ses-meta-item"><div class="smi-val">${day.dur}</div><div class="smi-lbl">Durée</div></div><div class="ses-meta-item"><div class="smi-val">${day.exercises.length}</div><div class="smi-lbl">Exercices</div></div><div class="ses-meta-item"><div class="smi-val" style="color:${col}">${day.type.toUpperCase()}</div><div class="smi-lbl">Type</div></div></div>
     ${day.warmup?`<div class="warmup" style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);color:rgba(255,200,150,.9)"><strong>🔥 Échauffement</strong><br>${day.warmup}</div>`:''}
-    ${exRows}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA SÉANCE'}</button></div></div></div>`;
+    ${exRows}${renderJournal(sk)}<div class="validate-section"><button class="validate-btn ${isDone?'done':''}" onclick="validateSession(${di})">${isDone?'✓ SÉANCE VALIDÉE':'✓ VALIDER LA SÉANCE'}</button></div></div></div>`;
   });
   document.getElementById('programme-content').innerHTML=html;
 }
@@ -715,6 +1047,7 @@ function saveLog(detKey,exName,n){if(!S.logData)S.logData={};const lk=exName+'_w
 
 // ── DASHBOARD ──
 function renderDashboard(){
+  setTimeout(renderCharts, 50);
   let total=0,done=0,muscuD=0,courseD=0,totalMuscu=0,totalCourse=0;
   for(let w=1;w<=12;w++)getDays(w).forEach((d,di)=>{total++;if(['push','pull','upper','jambes'].includes(d.type))totalMuscu++;if(d.type==='course')totalCourse++;if(S.done&&S.done[w+'-'+di]){done++;if(['push','pull','upper','jambes'].includes(d.type))muscuD++;if(d.type==='course')courseD++;}});
   const pct=total>0?Math.round(done/total*100):0,mP=totalMuscu>0?Math.round(muscuD/totalMuscu*100):0,cP=totalCourse>0?Math.round(courseD/totalCourse*100):0;
@@ -746,6 +1079,347 @@ function setTimerDur(v){tSec=v;tCur=v;document.getElementById('timerVal').textCo
 function updateTimerDisp(){document.getElementById('timerDisp').textContent=String(Math.floor(tCur/60)).padStart(2,'0')+':'+String(tCur%60).padStart(2,'0');}
 function toggleTimer(){if(tOn){clearInterval(tInt);tOn=false;document.getElementById('timerBtn').textContent='Reprendre';document.getElementById('timerDisp').className='timer-disp';}else{if(tCur<=0){tCur=tSec;updateTimerDisp();}tOn=true;document.getElementById('timerBtn').textContent='Pause';document.getElementById('timerDisp').className='timer-disp running';tInt=setInterval(()=>{tCur--;updateTimerDisp();if(tCur<=0){clearInterval(tInt);tOn=false;document.getElementById('timerDisp').textContent='GO !';document.getElementById('timerDisp').className='timer-disp finished';document.getElementById('timerBtn').textContent='Recommencer';if(navigator.vibrate)navigator.vibrate([400,100,400]);}},1000);}}
 document.getElementById('timerModal').addEventListener('click',e=>{if(e.target===document.getElementById('timerModal'))closeTimer();});
+
+
+// ── JOURNAL ──
+function renderJournal(sk) {
+  const j = (S.journal && S.journal[sk]) || {};
+  const mood = j.mood || 3;
+  const energy = j.energy || 3;
+  const pain = j.pain || 0;
+  const note = j.note || '';
+
+  // Build history entries
+  let historyHtml = '';
+  if (S.journal) {
+    const entries = Object.keys(S.journal)
+      .filter(k => {
+        const parts = k.split('-');
+        return parts[1] === sk.split('-')[1]; // same day index
+      })
+      .sort((a,b) => parseInt(b.split('-')[0]) - parseInt(a.split('-')[0]))
+      .slice(0, 5);
+    if (entries.length > 1) {
+      historyHtml = `<div class="journal-history">
+        <div class="jh-title">Historique</div>
+        ${entries.filter(k => k !== sk).slice(0,4).map(k => {
+          const e = S.journal[k];
+          const w = k.split('-')[0];
+          return `<div class="jh-entry">
+            <div class="jh-entry-top">
+              <span class="jh-week">Semaine ${w}</span>
+              <span class="jh-scores">😊${e.mood||'—'} ⚡${e.energy||'—'} 🩹${e.pain||'—'}</span>
+            </div>
+            ${e.note ? `<div class="jh-note">"${e.note}"</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>`;
+    }
+  }
+
+  return `<div class="journal-wrap">
+    <div class="journal-title">📓 Ressenti de la séance</div>
+    <div class="slider-block">
+      <div class="slider-label"><span>😊 Humeur</span><span class="slider-val mood" id="mood-val-${sk}">${mood}/5</span></div>
+      <input class="journal-slider mood" type="range" min="1" max="5" step="1" value="${mood}" oninput="document.getElementById('mood-val-${sk}').textContent=this.value+'/5'">
+      <div class="emoji-row"><span>😞</span><span>😐</span><span>🙂</span><span>😊</span><span>🤩</span></div>
+    </div>
+    <div class="slider-block">
+      <div class="slider-label"><span>⚡ Énergie</span><span class="slider-val energy" id="energy-val-${sk}">${energy}/5</span></div>
+      <input class="journal-slider energy" type="range" min="1" max="5" step="1" value="${energy}" oninput="document.getElementById('energy-val-${sk}').textContent=this.value+'/5'">
+      <div class="emoji-row"><span>🪫</span><span>😴</span><span>🙂</span><span>💪</span><span>🔥</span></div>
+    </div>
+    <div class="slider-block">
+      <div class="slider-label"><span>🩹 Douleurs</span><span class="slider-val pain" id="pain-val-${sk}">${pain}/5</span></div>
+      <input class="journal-slider pain" type="range" min="0" max="5" step="1" value="${pain}" oninput="document.getElementById('pain-val-${sk}').textContent=this.value+'/5'">
+      <div class="emoji-row"><span>0️⃣</span><span>faible</span><span>modéré</span><span>fort</span><span>🆘</span></div>
+    </div>
+    <textarea class="journal-textarea" id="journal-note-${sk}" rows="3" placeholder="Notes libres... technique, sensations, PR, météo intérieure...">${note}</textarea>
+    <button class="journal-save-btn" onclick="saveJournal('${sk}')">📓 Enregistrer le ressenti</button>
+    <div class="journal-saved" id="journal-saved-${sk}">✓ Ressenti sauvegardé !</div>
+    ${historyHtml}
+  </div>`;
+}
+
+function saveJournal(sk) {
+  if (!S.journal) S.journal = {};
+  const mood = document.getElementById('mood-val-' + sk)?.textContent?.split('/')[0];
+  const energy = document.getElementById('energy-val-' + sk)?.textContent?.split('/')[0];
+  const pain = document.getElementById('pain-val-' + sk)?.textContent?.split('/')[0];
+  const note = document.getElementById('journal-note-' + sk)?.value || '';
+  S.journal[sk] = { mood: parseInt(mood), energy: parseInt(energy), pain: parseInt(pain), note, date: new Date().toISOString() };
+  save();
+  const el = document.getElementById('journal-saved-' + sk);
+  if (el) { el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 2000); }
+}
+
+
+// ── CHARTS ──
+const CHART_EXERCISES = [
+  {key:'Développé Couché Barre', label:'Dév. Couché', color:'#ff4d6d'},
+  {key:'Développé Militaire Barre', label:'Militaire', color:'#f77f00'},
+  {key:'Tractions Pronation', label:'Tractions', color:'#4cc9f0', useReps:true},
+  {key:'Rowing Barre Penché', label:'Rowing Barre', color:'#9b5de5'},
+  {key:'Développé Incliné Haltères', label:'Dév. Incliné', color:'#ff4d6d'},
+  {key:'Soulevé de Terre Roumain', label:'SDT Roumain', color:'#ffd60a'},
+  {key:'Hip Thrust Barre', label:'Hip Thrust', color:'#ffd60a'},
+  {key:'Presse Inclinée', label:'Presse', color:'#ffd60a'},
+];
+
+function getMaxKgForExercise(exName, week) {
+  if (!S.logData) return null;
+  const lk = exName + '_w' + week;
+  const ld = S.logData[lk];
+  if (!ld) return null;
+  const vals = Object.keys(ld).filter(k => k.startsWith('kg')).map(k => parseFloat(ld[k]) || 0).filter(v => v > 0);
+  return vals.length > 0 ? Math.max(...vals) : null;
+}
+
+function getMaxRepsForExercise(exName, week) {
+  if (!S.logData) return null;
+  const lk = exName + '_w' + week;
+  const ld = S.logData[lk];
+  if (!ld) return null;
+  const vals = Object.keys(ld).filter(k => k.startsWith('reps')).map(k => parseInt(ld[k]) || 0).filter(v => v > 0);
+  return vals.length > 0 ? Math.max(...vals) : null;
+}
+
+function buildSparkline(data, color, width, height) {
+  // data = array of {week, val} - only weeks with data
+  if (!data || data.length < 2) return null;
+
+  const weeks = data.map(d => d.week);
+  const vals = data.map(d => d.val);
+  const minW = Math.min(...weeks), maxW = Math.max(...weeks);
+  const minV = Math.min(...vals) * 0.9;
+  const maxV = Math.max(...vals) * 1.05;
+  const range = maxV - minV || 1;
+
+  const toX = w => ((w - minW) / (maxW - minW || 1)) * (width - 20) + 10;
+  const toY = v => height - ((v - minV) / range) * (height - 20) - 5;
+
+  // Build path
+  let path = '';
+  let fillPath = '';
+  data.forEach((d, i) => {
+    const x = toX(d.week), y = toY(d.val);
+    if (i === 0) { path += `M${x},${y}`; fillPath += `M${x},${height} L${x},${y}`; }
+    else { path += ` L${x},${y}`; fillPath += ` L${x},${y}`; }
+  });
+  fillPath += ` L${toX(data[data.length-1].week)},${height} Z`;
+
+  // Dots
+  const dots = data.map(d => `<circle cx="${toX(d.week)}" cy="${toY(d.val)}" r="3.5" fill="${color}" stroke="var(--bg2)" stroke-width="2"/>`).join('');
+
+  // Grid lines
+  const gridVals = [minV + range*0.25, minV + range*0.5, minV + range*0.75].map(v => Math.round(v));
+  const gridLines = gridVals.map(v => {
+    const y = toY(v);
+    return `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3,3"/><text x="0" y="${y-2}" fill="var(--muted2)" font-size="8" font-family="sans-serif">${v}</text>`;
+  }).join('');
+
+  return `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    ${gridLines}
+    <defs><linearGradient id="grad-${color.replace('#','')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity="0.3"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    <path d="${fillPath}" fill="url(#grad-${color.replace('#','')})" />
+    <path d="${path}" stroke="${color}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    ${dots}
+  </svg>`;
+}
+
+function renderCharts() {
+  const container = document.getElementById('charts-container');
+  if (!container) return;
+
+  let html = '';
+  CHART_EXERCISES.forEach(ex => {
+    const data = [];
+    for (let w = 1; w <= 12; w++) {
+      const val = ex.useReps ? getMaxRepsForExercise(ex.key, w) : getMaxKgForExercise(ex.key, w);
+      if (val) data.push({ week: w, val });
+    }
+
+    const maxVal = data.length > 0 ? Math.max(...data.map(d => d.val)) : null;
+    const unit = ex.useReps ? 'reps' : 'kg';
+    const trend = data.length >= 2 ? (data[data.length-1].val - data[0].val) : null;
+    const trendHtml = trend !== null
+      ? `<span style="font-size:11px;font-weight:700;color:${trend >= 0 ? 'var(--course)' : 'var(--push)'}"> ${trend >= 0 ? '↑' : '↓'} ${Math.abs(trend)}${unit}</span>`
+      : '';
+
+    const svg = data.length >= 2 ? buildSparkline(data, ex.color, 320, 110) : null;
+    const xLabels = data.length >= 2
+      ? `<div class="chart-x-labels">${data.map(d => `<span class="chart-x-label">S${d.week}</span>`).join('')}</div>`
+      : '';
+
+    html += `<div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title" style="color:${ex.color}">${ex.label}</div>
+          ${maxVal ? `<div class="chart-max">Max : <span>${maxVal} ${unit}</span>${trendHtml}</div>` : '<div class="chart-max" style="color:var(--muted2)">Pas encore de données</div>'}
+        </div>
+        <div style="width:8px;height:8px;border-radius:50%;background:${ex.color};margin-top:4px"></div>
+      </div>
+      ${svg
+        ? `<div class="chart-wrap">${svg}</div>${xLabels}`
+        : `<div class="chart-empty">${data.length === 1 ? '📊 Encore 1 semaine pour voir la courbe' : '📝 Log tes charges pour voir ta progression'}</div>`
+      }
+    </div>`;
+  });
+
+  container.innerHTML = html || '<div class="chart-empty">Commence à logger tes charges pour voir tes courbes de progression !</div>';
+}
+
+
+// ── THEME ──
+function initTheme() {
+  const saved = localStorage.getItem('fp_theme') || 'dark';
+  applyTheme(saved);
+}
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.body.classList.add('light');
+    document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = '☀️');
+  } else {
+    document.body.classList.remove('light');
+    document.querySelectorAll('.theme-toggle').forEach(b => b.textContent = '🌙');
+  }
+  localStorage.setItem('fp_theme', theme);
+}
+function toggleTheme() {
+  const isLight = document.body.classList.contains('light');
+  applyTheme(isLight ? 'dark' : 'light');
+  // Force repaint
+  document.body.style.display='none';
+  document.body.offsetHeight;
+  document.body.style.display='';
+}
+initTheme();
+
+
+// ── NOTIFICATIONS & SERVICE WORKER ──
+let swReg = null;
+
+async function initServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+  try {
+    swReg = await navigator.serviceWorker.register('/12semaines/sw.js');
+    console.log('SW registered');
+    updateNotifStatus();
+    startScheduleChecker();
+  } catch(e) {
+    console.log('SW failed:', e);
+  }
+}
+
+function updateNotifStatus() {
+  const badge = document.getElementById('notif-status-badge');
+  const btn = document.getElementById('notif-enable-btn');
+  if (!badge) return;
+  if (!('Notification' in window)) {
+    badge.className = 'notif-status denied';
+    badge.textContent = '❌ Notifications non supportées sur ce navigateur';
+    if (btn) btn.disabled = true;
+    return;
+  }
+  const perm = Notification.permission;
+  if (perm === 'granted') {
+    badge.className = 'notif-status granted';
+    badge.textContent = '✓ Notifications activées — Tu recevras tes rappels !';
+    if (btn) { btn.textContent = 'Envoyer un rappel test'; btn.onclick = sendTestNotif; }
+  } else if (perm === 'denied') {
+    badge.className = 'notif-status denied';
+    badge.textContent = '❌ Notifications bloquées — Autorise-les dans les réglages du navigateur';
+    if (btn) btn.disabled = true;
+  } else {
+    badge.className = 'notif-status default';
+    badge.textContent = '⚪ Notifications non encore autorisées';
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function requestNotifPermission() {
+  if (!('Notification' in window)) { alert('Notifications non supportées.'); return; }
+  const perm = await Notification.requestPermission();
+  updateNotifStatus();
+  if (perm === 'granted') {
+    sendTestNotif();
+    saveNotifSettings();
+  }
+}
+
+function sendTestNotif() {
+  if (Notification.permission !== 'granted') return;
+  if (swReg) {
+    swReg.showNotification('💪 Force & Performance', {
+      body: 'Rappels activés ! Tu recevras tes séances chaque jour.',
+      icon: '/12semaines/icon.png',
+      tag: 'fp-test',
+      vibrate: [200, 100, 200],
+    });
+  } else {
+    new Notification('💪 Force & Performance', {
+      body: 'Rappels activés ! Tu recevras tes séances chaque jour.',
+    });
+  }
+}
+
+function saveNotifSettings(showConfirm) {
+  const hour = document.getElementById('notif-hour')?.value || '7';
+  const min = document.getElementById('notif-min')?.value || '0';
+  const settings = {
+    hour: parseInt(hour),
+    minute: parseInt(min),
+    muscu: document.getElementById('notif-muscu')?.checked ?? true,
+    course: document.getElementById('notif-course')?.checked ?? true,
+    mob: document.getElementById('notif-mob')?.checked ?? true,
+    repos: document.getElementById('notif-repos')?.checked ?? true,
+  };
+  localStorage.setItem('fp_notif_settings', JSON.stringify(settings));
+  if (showConfirm) showSaveToast();
+  startScheduleChecker();
+}
+
+function loadNotifSettings() {
+  try {
+    const saved = localStorage.getItem('fp_notif_settings');
+    if (!saved) return;
+    const s = JSON.parse(saved);
+    const h = document.getElementById('notif-hour');
+    const m = document.getElementById('notif-min');
+    if (h) h.value = s.hour ?? 7;
+    if (m) m.value = s.minute ?? 0;
+    ['muscu','course','mob','repos'].forEach(k => {
+      const el = document.getElementById('notif-' + k);
+      if (el && s[k] !== undefined) el.checked = s[k];
+    });
+  } catch(e) {}
+}
+
+let scheduleInterval = null;
+function startScheduleChecker() {
+  clearInterval(scheduleInterval);
+  scheduleInterval = setInterval(() => {
+    try {
+      const saved = localStorage.getItem('fp_notif_settings');
+      const schedule = saved ? JSON.parse(saved) : { hour: 7, minute: 0 };
+      if (swReg?.active) {
+        swReg.active.postMessage({ type: 'SCHEDULE_CHECK', schedule });
+      }
+    } catch(e) {}
+  }, 60000); // check every minute
+}
+
+// Override showTab to load notif settings when opening notif tab
+const _origShowTab = showTab;
+function showTab(id) {
+  _origShowTab(id);
+  if (id === 'notifs') {
+    setTimeout(() => { loadNotifSettings(); updateNotifStatus(); }, 50);
+  }
+}
+
+// Init SW on app start
+initServiceWorker();
 
 // ── INIT ──
 initAuth();
