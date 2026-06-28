@@ -633,6 +633,183 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
 .nav-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .brand-icon-svg{width:20px;height:20px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
+
+/* ══════════════════════════════════════════════
+   DESKTOP LAYOUT — 768px+
+══════════════════════════════════════════════ */
+@media (min-width: 768px) {
+
+  /* AUTH — centered card */
+  .auth-screen {
+    background: var(--bg);
+    background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .auth-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(6,6,13,.82);
+    backdrop-filter: blur(4px);
+  }
+  .auth-screen > * { position: relative; z-index: 1; }
+
+  /* DESKTOP SHELL */
+  .app-screen.show {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 60px 1fr;
+    min-height: 100vh;
+  }
+
+  /* HEADER — full width top bar */
+  .app-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding: 0 24px;
+    height: 60px;
+  }
+
+  /* SIDEBAR — replaces bottom nav */
+  .app-nav {
+    position: fixed;
+    left: 0; top: 60px; bottom: 0;
+    width: 240px;
+    flex-direction: column;
+    border-top: none;
+    border-right: 1px solid rgba(255,255,255,.06);
+    padding: 16px 12px calc(16px + env(safe-area-inset-bottom,0px));
+    gap: 4px;
+    background: rgba(6,6,13,.95);
+    backdrop-filter: blur(24px);
+  }
+  .nav-btn {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  .nav-btn.active {
+    background: rgba(255,51,85,.1);
+    color: var(--accent);
+  }
+  .nav-btn.active::before { display: none; }
+  .nav-icon svg { width: 20px; height: 20px; }
+  .nav-icon { font-size: 20px; }
+
+  /* SIDEBAR LOGO */
+  .app-nav::before {
+    content: '';
+    display: none;
+  }
+
+  /* MAIN CONTENT — shifted right */
+  main {
+    grid-column: 2;
+    grid-row: 2;
+    margin-left: 0;
+    padding: 24px 32px 40px;
+    max-width: 100%;
+    overflow-y: auto;
+  }
+
+  /* HERO — bigger on desktop */
+  .hero-week {
+    margin: 0 0 20px;
+    min-height: 180px;
+  }
+  .hero-title { font-size: 52px; }
+
+  /* WEEK NAV */
+  .week-nav-bar { padding: 0 0 12px; }
+  .swipe-hint { display: none; }
+
+  /* DAY CARDS — 2 column grid */
+  #days-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .day-card { margin: 0; }
+  .rest-card { margin: 0; }
+
+  /* Streak + badges full width */
+  #streak-bar-wrap, #badges-wrap { margin: 0 0 10px; }
+
+  /* DASHBOARD — wider layout */
+  .stat-grid { grid-template-columns: repeat(4, 1fr); }
+  .pr-grid { grid-template-columns: repeat(3, 1fr); }
+  .phase-cards { flex-direction: row; gap: 12px; }
+  .phase-card { flex: 1; }
+  .week-dots { gap: 10px; }
+  .wdot { width: 44px; height: 44px; font-size: 14px; }
+
+  /* CHARTS — 2 col */
+  #charts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .chart-card { margin: 0; }
+
+  /* NUTRITION */
+  #nutri-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .nutri-card { margin: 0; }
+  .nutri-hero { margin: 0 0 16px; }
+
+  /* PROFILE */
+  #tab-profile .profile-hero { margin-top: 0; }
+  .profile-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  /* TIMER — centered */
+  .timer-modal { align-items: center; }
+  .timer-box {
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.08);
+    max-width: 440px;
+  }
+
+  /* DASH wrap */
+  .dash-wrap { padding: 0; }
+
+  /* PROFILE sections — 2col */
+  #tab-profile > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  #profile-hero-wrap, #decharge-wrap {
+    grid-column: 1 / -1;
+  }
+}
+
+/* LARGE DESKTOP — 1280px+ */
+@media (min-width: 1280px) {
+  .app-nav { width: 260px; }
+  main { padding: 28px 48px 40px; }
+  #days-list { grid-template-columns: 1fr 1fr 1fr; }
+  .stat-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* LIGHT THEME desktop */
+@media (min-width: 768px) {
+  body.light .app-nav {
+    background: rgba(244,244,248,.97);
+    border-right-color: var(--border);
+  }
+  body.light .auth-screen::before { background: rgba(244,244,248,.75); }
+}
+
 </style>
 </head>
 <body>
