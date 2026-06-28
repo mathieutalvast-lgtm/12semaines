@@ -17,12 +17,12 @@ self.addEventListener('push', e => {
   const title = data.title || '💪 Force & Performance';
   const options = {
     body: data.body || 'Ta séance t\'attend !',
-    icon: data.icon || '/12semaines/icon.png',
-    badge: data.badge || '/12semaines/icon.png',
+    icon: data.icon || './icon-192.png',
+    badge: data.badge || './icon-192.png',
     tag: data.tag || 'fp-notif',
     renotify: true,
     vibrate: [200, 100, 200],
-    data: { url: data.url || '/12semaines/' },
+    data: { url: data.url || './' },
     actions: [
       { action: 'open', title: '🏋️ Voir la séance' },
       { action: 'dismiss', title: 'Plus tard' }
@@ -35,7 +35,7 @@ self.addEventListener('push', e => {
 self.addEventListener('notificationclick', e => {
   e.notification.close();
   if (e.action === 'dismiss') return;
-  const url = e.notification.data?.url || '/12semaines/';
+  const url = e.notification.data?.url || './';
   e.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
       for (const client of list) {
@@ -82,10 +82,10 @@ function checkScheduledNotifications(schedule) {
     const title = `${todaySession.emoji} ${todaySession.label} aujourd'hui !`;
     self.registration.showNotification(title, {
       body: todaySession.msg,
-      icon: '/12semaines/icon.png',
+      icon: './icon-192.png',
       tag: 'fp-daily-' + day,
       vibrate: [300, 100, 300],
-      data: { url: '/12semaines/' }
+      data: { url: './' }
     });
   }
 }
