@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Force & Performance</title>
+<title>Apex Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -70,7 +70,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 /* HEADER */
 .app-header{position:sticky;top:0;z-index:200;background:rgba(6,6,13,.85);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.04)}
 .header-brand{display:flex;align-items:center;gap:10px}
-.brand-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ff3355,#ff8800);display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:var(--glow-push);flex-shrink:0}
+.brand-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.4)}
 .brand-name{font-family:var(--fd);font-size:18px;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
 .brand-sub{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
 .header-right{display:flex;align-items:center;gap:10px}
@@ -680,7 +680,7 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
     z-index: 300;
   }
   .app-nav::before {
-    content: 'FORCE & PERF';
+    content: 'APEX TRAINING';
     display: block;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 16px;
@@ -1000,11 +1000,15 @@ body.light .coach-input-row{border-color:var(--border)}
 
   <!-- LOGO -->
   <div style="text-align:center;margin-bottom:28px">
-    <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#ff3355,#ff8800);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 8px 32px rgba(255,51,85,.35)">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    </div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--text)">Force & Performance</div>
-    <div style="font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:.5px">12 semaines · Muscu + Course</div>
+    <div style="margin:0 auto 14px"><svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs><linearGradient id="apexIL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs>
+  <rect width="64" height="64" rx="18" fill="#0a0a0f"/>
+  <polygon points="32,10 52,48 12,48" fill="url(#apexIL)" opacity="0.9"/>
+  <line x1="32" y1="10" x2="32" y2="28" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="32" cy="10" r="3" fill="white"/>
+</svg></div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--text)">Apex Training</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:.5px">Plus fort. Plus loin. Chaque jour.</div>
   </div>
 
   <!-- GOOGLE — primary CTA -->
@@ -1155,10 +1159,16 @@ body.light .coach-input-row{border-color:var(--border)}
   <div class="save-toast" id="saveToast">✓ Sauvegardé</div>
   <header class="app-header">
     <div class="header-brand">
-      <div class="brand-icon"><svg class="brand-icon-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="brand-icon" style="background:#0a0a0f;padding:0;overflow:hidden"><svg width="36" height="36" viewBox="0 0 64 64" fill="none">
+  <defs><linearGradient id="apexI" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="#0a0a0f"/>
+  <polygon points="32,10 52,48 12,48" fill="url(#apexI)" opacity="0.9"/>
+  <line x1="32" y1="10" x2="32" y2="28" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="32" cy="10" r="3" fill="white"/>
+</svg></div>
       <div>
-        <div class="brand-name">Force & Perf</div>
-        <div class="brand-sub">12 semaines</div>
+        <div class="brand-name">Apex Training</div>
+        <div class="brand-sub">Plus fort. Plus loin.</div>
       </div>
     </div>
     <div class="header-right"><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Changer le thème">🌙</button>
@@ -1346,15 +1356,22 @@ body.light .coach-input-row{border-color:var(--border)}
     </div>
 <!-- COACH IA -->
 <button class="coach-fab" onclick="toggleCoach()" id="coachFab" title="Coach IA">
-  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg>
+  <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+  <defs><linearGradient id="apexIF" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs>
+  <polygon points="32,8 54,52 10,52" fill="url(#apexIF)" opacity="0.95"/>
+  <circle cx="32" cy="8" r="4" fill="white"/>
+</svg>
   <div class="notif-dot show" id="coachDot"></div>
 </button>
 
 <div class="coach-modal" id="coachModal">
   <div class="coach-header">
-    <div class="coach-avatar">
-      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    </div>
+    <div <div class="coach-avatar" style="background:#0a0a0f"><svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+      <defs><linearGradient id="apexIC" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs>
+      <rect width="64" height="64" rx="14" fill="#0a0a0f"/>
+      <polygon points="32,10 52,48 12,48" fill="url(#apexIC)" opacity="0.9"/>
+      <circle cx="32" cy="10" r="3.5" fill="white"/>
+    </svg></div>
     <div>
       <div class="coach-title">Coach IA</div>
       <div class="coach-subtitle">En ligne · Répond en quelques secondes</div>
@@ -1589,7 +1606,7 @@ function showSaveToast() {
 
 
 // ══════════════════════════════════════════════════════════════
-// BIBLIOTHÈQUE D'EXERCICES — Force & Performance
+// BIBLIOTHÈQUE D'EXERCICES — Apex Training
 // 50+ exercices · Tags complets · Variantes · Alternatives
 // ══════════════════════════════════════════════════════════════
 
@@ -2760,7 +2777,7 @@ function updateNotifStatus() {
     if (btn) {
       btn.textContent = 'Notifications bloquées';
       btn.disabled = false;
-      btn.onclick = () => alert('Les notifications sont bloquées.\n\nPour les réactiver :\n• iPhone : Réglages > Safari > Notifications > Force & Performance\n• Android : Réglages > Applications > Chrome > Notifications');
+      btn.onclick = () => alert('Les notifications sont bloquées.\n\nPour les réactiver :\n• iPhone : Réglages > Safari > Notifications > Apex Training\n• Android : Réglages > Applications > Chrome > Notifications');
     }
   } else {
     badge.className = 'notif-status default';
@@ -2786,14 +2803,14 @@ async function requestNotifPermission() {
 function sendTestNotif() {
   if (Notification.permission !== 'granted') return;
   if (swReg) {
-    swReg.showNotification('💪 Force & Performance', {
+    swReg.showNotification('💪 Apex Training', {
       body: 'Rappels activés ! Tu recevras tes séances chaque jour.',
       icon: './icon-192.png',
       tag: 'fp-test',
       vibrate: [200, 100, 200],
     });
   } else {
-    new Notification('💪 Force & Performance', {
+    new Notification('💪 Apex Training', {
       body: 'Rappels activés ! Tu recevras tes séances chaque jour.',
     });
   }
@@ -3053,14 +3070,25 @@ window.renderProfileStats = function renderProfileStats() {
 
 // ── GAMIFICATION ──
 const BADGES = [
-  {id:'first', emoji:'🎯', name:'Premier pas', condition: s => Object.values(s.done||{}).some(v=>v)},
-  {id:'week1', emoji:'🔥', name:'Semaine 1', condition: s => [0,1,2,3,4,5,6].every(i=>s.done&&s.done['1-'+i])},
-  {id:'runner', emoji:'🏃', name:'Coureur', condition: s => Object.keys(s.done||{}).filter(k=>{const [w,di]=k.split('-');return getDays(parseInt(w))[parseInt(di)]?.type==='course';}).length>=3},
-  {id:'iron', emoji:'🏋️', name:'Iron', condition: s => (s.prData?.pr_dc||0)>=80},
-  {id:'streak2', emoji:'⚡', name:'2 semaines', condition: s => {let str=0;for(let w=S.week;w>=1;w--){let ok=true;getDays(w).forEach((_,di)=>{if(!s.done||!s.done[w+'-'+di])ok=false;});if(ok)str++;else break;}return str>=2;}},
-  {id:'log5', emoji:'📊', name:'Analytique', condition: s => Object.keys(s.logData||{}).length>=5},
-  {id:'month', emoji:'🏆', name:'1 mois', condition: s => Object.values(s.done||{}).filter(v=>v).length>=24},
-  {id:'allweek', emoji:'💎', name:'Parfait', condition: s => {const w=s.week||1;return getDays(w).every((_,di)=>s.done&&s.done[w+'-'+di]);}},
+  // Démarrage
+  {id:'first',    emoji:'▲', name:'Premier pas',   desc:'Valider sa 1ère séance',         condition: s => Object.values(s.done||{}).filter(v=>v).length >= 1},
+  {id:'triple',   emoji:'▲', name:'Triptyque',      desc:'3 séances validées',              condition: s => Object.values(s.done||{}).filter(v=>v).length >= 3},
+  {id:'week1',    emoji:'▲', name:'1ère semaine',   desc:'Semaine 1 complète',              condition: s => [0,1,2,3,4,5,6].every(i => s.done && s.done['1-'+i])},
+  // Régularité
+  {id:'streak2',  emoji:'▲', name:'2 semaines',     desc:'2 semaines consécutives complètes', condition: s => { let str=0; for(let w=S.week;w>=1;w--){let ok=true;getDays(w).forEach((_,di)=>{if(!s.done||!s.done[w+'-'+di])ok=false;});if(ok)str++;else break;} return str>=2; }},
+  {id:'streak4',  emoji:'▲', name:'1 mois',         desc:'4 semaines consécutives',         condition: s => { let str=0; for(let w=S.week;w>=1;w--){let ok=true;getDays(w).forEach((_,di)=>{if(!s.done||!s.done[w+'-'+di])ok=false;});if(ok)str++;else break;} return str>=4; }},
+  {id:'allweek',  emoji:'▲', name:'Semaine parfaite', desc:'7/7 dans une semaine',          condition: s => { const w=s.week||1; return getDays(w).every((_,di)=>s.done&&s.done[w+'-'+di]); }},
+  // Volume
+  {id:'ten',      emoji:'▲', name:'10 séances',     desc:'10 séances au total',             condition: s => Object.values(s.done||{}).filter(v=>v).length >= 10},
+  {id:'twenty',   emoji:'▲', name:'20 séances',     desc:'20 séances au total',             condition: s => Object.values(s.done||{}).filter(v=>v).length >= 20},
+  {id:'halfway',  emoji:'▲', name:'Mi-parcours',    desc:'Semaine 6 atteinte',              condition: s => (s.week||1) >= 6},
+  // Spécialités
+  {id:'runner',   emoji:'▲', name:'Coureur',        desc:'5 séances cardio validées',       condition: s => Object.keys(s.done||{}).filter(k=>{const [w,di]=k.split('-');return (s.done[k] && getDays(parseInt(w))[parseInt(di)]?.type==='course');}).length>=5},
+  {id:'logger',   emoji:'▲', name:'Analytique',     desc:'10 logs de charges enregistrés',  condition: s => Object.keys(s.logData||{}).length>=10},
+  {id:'mobil',    emoji:'▲', name:'Mobilité',       desc:'5 séances mobilité validées',     condition: s => Object.keys(s.done||{}).filter(k=>{const [w,di]=k.split('-');return (s.done[k] && getDays(parseInt(w))[parseInt(di)]?.type==='mob');}).length>=5},
+  // Élite
+  {id:'summit',   emoji:'▲', name:'Sommet',         desc:'Programme 12 semaines terminé',   condition: s => (s.week||1) >= 12 && Object.values(s.done||{}).filter(v=>v).length >= 70},
+  {id:'apex',     emoji:'▲', name:'Apex',           desc:'Tous les badges débloqués',       condition: s => false}, // unlocked last
 ];
 
 function getEarnedBadges() {
@@ -3096,11 +3124,16 @@ function renderBadges() {
   const wrap = document.getElementById('badges-wrap');
   if (!wrap) return;
   const earned = getEarnedBadges().map(b=>b.id);
-  wrap.innerHTML = '<div class="badge-row">' + BADGES.map(b=>`
-    <div class="badge-item ${earned.includes(b.id)?'earned':''}">
-      <span class="badge-emoji">${earned.includes(b.id)?b.emoji:'—'}</span>
+  wrap.innerHTML = '<div class="badge-row">' + BADGES.map(b => {
+    const isEarned = earned.includes(b.id);
+    const icon = isEarned
+      ? `<svg width="22" height="22" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="bg${b.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs><polygon points="32,8 54,52 10,52" fill="url(#bg${b.id})"/><circle cx="32" cy="8" r="4" fill="white"/></svg>`
+      : `<svg width="22" height="22" viewBox="0 0 64 64" fill="none"><polygon points="32,8 54,52 10,52" fill="none" stroke="var(--muted2)" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="8" r="3" fill="var(--muted2)" opacity="0.5"/></svg>`;
+    return `<div class="badge-item ${isEarned?'earned':''}" title="${b.desc||b.name}">
+      <span class="badge-emoji">${icon}</span>
       <span class="badge-name">${b.name}</span>
-    </div>`).join('') + '</div>';
+    </div>`;
+  }).join('') + '</div>';
 }
 
 function launchConfetti(x, y) {
