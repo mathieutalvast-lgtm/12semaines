@@ -657,23 +657,22 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
   /* HEADER */
   .app-header {
     position: fixed;
-    top: 0; left: 240px; right: 0;
-    padding: 0 28px;
-    height: 60px;
-    z-index: 200;
+    top: 0; left: 220px; right: 0;
+    padding: 0 32px;
+    height: 56px;
   }
 
-  /* SIDEBAR */
+  /* SIDEBAR — fine et épurée */
   .app-nav {
     position: fixed;
     left: 0; top: 0; bottom: 0;
-    width: 240px;
+    width: 220px;
     flex-direction: column;
     border-top: none;
-    border-right: 1px solid rgba(255,255,255,.06);
-    padding: 20px 12px 20px;
-    gap: 4px;
-    background: rgba(8,8,16,.98);
+    border-right: 1px solid rgba(255,255,255,.05);
+    padding: 24px 10px 20px;
+    gap: 2px;
+    background: rgba(6,6,13,.99);
     backdrop-filter: blur(24px);
     justify-content: flex-start;
     align-items: stretch;
@@ -683,112 +682,109 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
     content: 'APEX TRAINING';
     display: block;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: var(--text);
-    padding: 8px 16px 24px;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--muted2);
+    padding: 0 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    margin-bottom: 8px;
   }
   .nav-btn {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 12px;
-    padding: 11px 16px;
-    border-radius: 10px;
-    font-size: 13px;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: .3px;
     text-align: left;
     width: 100%;
   }
-  .nav-btn.active {
-    background: rgba(255,51,85,.12);
-    color: var(--accent);
-  }
+  .nav-btn.active { background: rgba(255,51,85,.1); color: var(--accent); }
   .nav-btn.active::before { display: none; }
-  .nav-icon { font-size: 18px; flex-shrink: 0; }
-  .nav-icon svg { width: 18px; height: 18px; }
-  .nav-btn .nav-icon + * { flex: 1; }
+  .nav-icon { font-size: 16px; flex-shrink: 0; }
+  .nav-icon svg { width: 16px; height: 16px; }
 
-  /* MAIN */
+  /* MAIN — centré avec max-width */
   main {
-    margin-left: 240px;
-    margin-top: 60px;
-    padding: 28px 32px 40px;
-    max-width: 100%;
+    margin-left: 220px;
+    margin-top: 56px;
+    padding: 28px 40px 48px;
     overflow-y: auto;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  .tab { width: 100%; max-width: 860px; }
 
-  /* HERO */
-  .hero-week { margin: 0 0 16px; min-height: 170px; }
-  .hero-title { font-size: 50px; }
+  /* HERO — compact */
+  .hero-week { margin: 0 0 16px; min-height: 140px; }
+  .hero-title { font-size: 42px; }
 
   /* WEEK NAV */
-  .week-nav-bar { padding: 0 0 10px; }
+  .week-nav-bar { padding: 0 0 8px; }
   .swipe-hint { display: none; }
 
-  /* DAY CARDS — 2 col */
+  /* BADGES — plus compact */
+  #streak-bar-wrap, #badges-wrap { margin: 0 0 10px; }
+  .badge-item { min-width: 58px; padding: 8px 10px; }
+
+  /* DAY CARDS — 2 colonnes bien proportionnées */
   #days-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
   }
   .day-card, .rest-card { margin: 0; }
-
-  /* Streak + badges */
-  #streak-bar-wrap, #badges-wrap { margin: 0 0 12px; }
+  .card-photo { height: 90px; }
 
   /* DASHBOARD */
   .dash-wrap { padding: 0; }
-  .stat-grid { grid-template-columns: repeat(4, 1fr); }
-  .pr-grid { grid-template-columns: repeat(3, 1fr); }
-  .phase-cards { flex-direction: row; gap: 12px; }
+  .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .pr-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .phase-cards { flex-direction: row; gap: 10px; }
   .phase-card { flex: 1; }
-  .week-dots { gap: 10px; }
-  .wdot { width: 44px; height: 44px; }
+  .week-dots { gap: 8px; }
+  .wdot { width: 38px; height: 38px; font-size: 12px; }
 
   /* CHARTS 2 col */
-  #charts-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
+  #charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .chart-card { margin: 0; }
 
   /* NUTRITION 2 col */
-  #nutri-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 16px;
-  }
+  #nutri-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
   .nutri-card { margin: 0; }
-  .nutri-hero { margin: 0 0 0; border-radius: var(--radius); }
+  .nutri-hero { margin: 0; border-radius: var(--radius); }
 
   /* PROFILE */
   #tab-profile .profile-hero { margin-top: 0; }
-  #decharge-wrap, #profile-hero-wrap { margin: 0 0 12px; }
+  #decharge-wrap, #profile-hero-wrap { margin: 0 0 10px; }
 
-  /* TIMER centered */
+  /* TIMER */
   .timer-modal { align-items: center; }
   .timer-box { border-radius: 24px; border: 1px solid rgba(255,255,255,.08); }
 
   /* LIGHT */
-  body.light .app-nav { background: rgba(248,248,252,.98); border-right-color: var(--border); }
-  body.light .app-nav::before { color: var(--text); border-bottom-color: var(--border); }
+  body.light .app-nav { background: rgba(250,250,253,.99); border-right-color: var(--border); }
+  body.light .app-nav::before { color: var(--muted); border-bottom-color: var(--border); }
 }
+
 
 /* LARGE DESKTOP — 1280px+ */
 @media (min-width: 1280px) {
-  .app-nav { width: 260px; }
-  main { padding: 28px 48px 40px; }
-  #days-list { grid-template-columns: 1fr 1fr 1fr; }
+  .app-nav { width: 240px; }
+  .app-header { left: 240px; }
+  main { margin-left: 240px; padding: 32px 60px 56px; }
+  .tab { max-width: 960px; }
+  #days-list { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .hero-title { font-size: 48px; }
   .stat-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
 
 /* LIGHT THEME desktop */
 @media (min-width: 768px) {
