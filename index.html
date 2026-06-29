@@ -830,6 +830,72 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
 .ob-next:disabled{opacity:.4;cursor:not-allowed}
 .ob-skip{width:100%;padding:10px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;margin-top:8px}
 
+
+/* NUTRITION ENHANCED */
+.nutri-tabs{display:flex;background:var(--bg3);border-radius:var(--rsm);padding:3px;margin:12px 14px 0;gap:3px}
+.nutri-tab{flex:1;padding:8px;font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:none;border:none;color:var(--muted);cursor:pointer;border-radius:7px;transition:all .15s;text-align:center}
+.nutri-tab.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.nutri-panel{display:none}.nutri-panel.active{display:block}
+
+/* PLAN 7 JOURS */
+.plan-day-card{margin:10px 14px 0;background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);overflow:hidden}
+.plan-day-hdr{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer}
+.plan-day-dot{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.plan-day-info{flex:1}
+.plan-day-name{font-family:var(--fd);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
+.plan-day-cal{font-size:11px;color:var(--muted);margin-top:2px}
+.plan-day-chev{color:var(--muted);font-size:11px;transition:transform .2s}
+.plan-day-chev.open{transform:rotate(180deg)}
+.plan-day-body{display:none;border-top:1px solid rgba(255,255,255,.04)}
+.plan-day-body.open{display:block}
+.plan-meal{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04)}
+.plan-meal:last-child{border-bottom:none}
+.plan-meal-title{font-family:var(--fd);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--push);margin-bottom:8px}
+.plan-meal-item{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.plan-meal-item:last-child{border-bottom:none}
+.plan-meal-dot{width:4px;height:4px;border-radius:50%;background:var(--push);flex-shrink:0;margin-top:6px}
+.plan-meal-food{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.plan-meal-macro{font-size:11px;color:var(--muted);text-align:right;flex-shrink:0;font-family:var(--fd);font-weight:700}
+.plan-macros-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 16px;background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.04)}
+.plan-macro{text-align:center}
+.plan-macro-val{font-family:var(--fd);font-size:16px;font-weight:800}
+.plan-macro-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-top:1px}
+.pro-val{color:var(--pull)}
+.carb-val{color:var(--jambes)}
+.fat-val{color:var(--push)}
+.kcal-val{color:var(--course)}
+
+/* RECETTES */
+.recipe-card{margin:10px 14px 0;background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);overflow:hidden}
+.recipe-img{height:130px;object-fit:cover;width:100%;filter:brightness(.65) saturate(.8)}
+.recipe-hdr{padding:14px 16px 10px}
+.recipe-name{font-family:var(--fd);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
+.recipe-tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.recipe-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.tag-proteines{background:rgba(0,200,255,.12);color:var(--pull)}
+.tag-rapide{background:rgba(0,229,160,.12);color:var(--course)}
+.tag-masse{background:rgba(255,136,0,.12);color:var(--upper)}
+.tag-seche{background:rgba(255,51,85,.12);color:var(--push)}
+.tag-perf{background:rgba(155,93,229,.12);color:var(--mob)}
+.tag-veggie{background:rgba(99,214,0,.12);color:#63d600}
+.recipe-body{padding:0 16px 14px}
+.recipe-section-title{font-family:var(--fd);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:12px 0 8px}
+.recipe-ingredient{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.recipe-ingredient:last-child{border-bottom:none}
+.recipe-qty{color:var(--muted);font-weight:600;font-family:var(--fd)}
+.recipe-step{display:flex;gap:10px;padding:7px 0;font-size:13px;color:rgba(255,255,255,.75);line-height:1.5}
+.recipe-step-num{font-family:var(--fd);font-size:14px;font-weight:900;color:var(--push);flex-shrink:0;min-width:20px}
+.recipe-macros{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.04);padding:12px 16px}
+
+/* ADAPTED NOTICE */
+.adapted-notice{margin:10px 14px 0;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);border-radius:12px;padding:11px 14px;font-size:12px;color:var(--course);line-height:1.5}
+.adapted-notice strong{display:block;margin-bottom:3px;font-size:13px}
+
+/* LIGHT THEME */
+body.light .plan-day-card{background:var(--bg2);border-color:var(--border)}
+body.light .recipe-card{background:var(--bg2);border-color:var(--border)}
+body.light .plan-meal-food{color:var(--text)}
+
 </style>
 </head>
 <body>
@@ -1047,9 +1113,24 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
     <div class="tab" id="tab-nutrition">
       <div class="nutri-hero">
         <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80" alt="Nutrition">
-        <div class="nutri-hero-txt"><h2>Plan Nutrition</h2><p>Adapté à ton programme · Timing optimal</p></div>
+        <div class="nutri-hero-txt"><h2>Plan Nutrition</h2><p>Plans · Recettes · Adapté à ton objectif</p></div>
       </div>
-      <div id="nutri-list"></div>
+      <!-- TABS -->
+      <div class="nutri-tabs">
+        <button class="nutri-tab active" onclick="showNutriPanel('principes')">Principes</button>
+        <button class="nutri-tab" onclick="showNutriPanel('plan7j')">Plan 7 jours</button>
+        <button class="nutri-tab" onclick="showNutriPanel('recettes')">Recettes</button>
+      </div>
+      <!-- PANELS -->
+      <div class="nutri-panel active" id="nutri-principes">
+        <div id="nutri-list"></div>
+      </div>
+      <div class="nutri-panel" id="nutri-plan7j">
+        <div id="nutri-plan7j-content"></div>
+      </div>
+      <div class="nutri-panel" id="nutri-recettes">
+        <div id="nutri-recettes-content"></div>
+      </div>
       <div style="height:14px"></div>
     </div>
     <div class="tab" id="tab-notifs">
@@ -3058,6 +3139,472 @@ window.toggleZone = toggleZone;
 window.toggleEquip = toggleEquip;
 window.finishOnboarding = finishOnboarding;
 window.skipOnboarding = skipOnboarding;
+
+
+// ══════════════════════════════════════════════
+// NUTRITION — PLANS & RECETTES
+// ══════════════════════════════════════════════
+
+// ── PLAN 7 JOURS ──
+const PLAN_7J = [
+  { jour:'Lundi', type:'push', kcal:2800, pro:180, carb:340, fat:72,
+    meals:[
+      { name:'Petit-déjeuner', items:[
+        {f:"Flocons d'avoine", q:'80g', p:10, c:56, l:5},
+        {f:'Œufs entiers', q:'3 œufs', p:18, c:0, l:15},
+        {f:'Banane', q:'1 moyenne', p:1, c:27, l:0},
+        {f:'Café noir', q:'1 tasse', p:0, c:0, l:0},
+      ]},
+      { name:'Déjeuner (avant séance)', items:[
+        {f:'Riz blanc cuit', q:'200g', p:4, c:56, l:0},
+        {f:'Blanc de poulet', q:'200g', p:44, c:0, l:4},
+        {f:'Brocolis vapeur', q:'200g', p:5, c:8, l:0},
+        {f:"Huile d'olive", q:'1 cs', p:0, c:0, l:14},
+      ]},
+      { name:'Collation post-séance', items:[
+        {f:'Whey protéine', q:'40g', p:32, c:4, l:2},
+        {f:'Dattes', q:'4 dattes', p:1, c:28, l:0},
+        {f:'Amandes', q:'30g', p:6, c:5, l:15},
+      ]},
+      { name:'Dîner', items:[
+        {f:'Saumon', q:'200g', p:42, c:0, l:16},
+        {f:'Patate douce cuite', q:'200g', p:3, c:40, l:0},
+        {f:'Épinards sautés', q:'150g', p:4, c:4, l:3},
+        {f:'Yaourt grec 0%', q:'150g', p:15, c:6, l:0},
+      ]},
+    ]},
+  { jour:'Mardi', type:'course', kcal:2600, pro:155, carb:320, fat:68,
+    meals:[
+      { name:'Petit-déjeuner (2h avant sortie)', items:[
+        {f:'Pain complet', q:'3 tranches', p:9, c:42, l:3},
+        {f:'Œufs brouillés', q:'2 œufs', p:12, c:0, l:10},
+        {f:'Banane + miel', q:'1 banane + 1 cc', p:1, c:32, l:0},
+        {f:'Café', q:'1 tasse', p:0, c:0, l:0},
+      ]},
+      { name:'Pendant la course (>45 min)', items:[
+        {f:'Gel énergétique', q:'1 gel', p:0, c:22, l:0},
+        {f:'Eau', q:'500ml min', p:0, c:0, l:0},
+      ]},
+      { name:'Déjeuner (récup)', items:[
+        {f:"Pâtes complètes cuites", q:'250g', p:10, c:60, l:2},
+        {f:"Thon en boîte", q:'1 boîte 160g', p:38, c:0, l:2},
+        {f:'Tomates cerise + concombre', q:'200g', p:2, c:8, l:0},
+        {f:"Huile d'olive", q:'1 cs', p:0, c:0, l:14},
+      ]},
+      { name:'Dîner', items:[
+        {f:'Poulet rôti', q:'180g', p:40, c:0, l:6},
+        {f:'Quinoa cuit', q:'180g', p:7, c:35, l:3},
+        {f:"Légumes grillés", q:'200g', p:4, c:12, l:4},
+        {f:'Fromage blanc', q:'100g', p:12, c:4, l:1},
+      ]},
+    ]},
+  { jour:'Mercredi', type:'pull', kcal:2750, pro:175, carb:330, fat:70,
+    meals:[
+      { name:'Petit-déjeuner', items:[
+        {f:'Granola maison', q:'70g', p:7, c:48, l:8},
+        {f:'Lait végétal', q:'200ml', p:2, c:10, l:4},
+        {f:'Myrtilles', q:'100g', p:1, c:14, l:0},
+        {f:'Café + lait', q:'1 tasse', p:2, c:3, l:2},
+      ]},
+      { name:'Déjeuner', items:[
+        {f:'Riz complet cuit', q:'200g', p:5, c:48, l:2},
+        {f:'Bœuf haché 5%', q:'180g', p:40, c:0, l:9},
+        {f:"Haricots verts", q:'200g', p:4, c:8, l:0},
+        {f:"Sauce tomate", q:'100g', p:2, c:8, l:0},
+      ]},
+      { name:'Collation post-séance', items:[
+        {f:'Whey protéine', q:'40g', p:32, c:4, l:2},
+        {f:'Banane', q:'1 grande', p:1, c:30, l:0},
+        {f:'Beurre de cacahuète', q:'1 cs', p:4, c:3, l:8},
+      ]},
+      { name:'Dîner', items:[
+        {f:'Cabillaud au four', q:'200g', p:40, c:0, l:2},
+        {f:'Lentilles cuites', q:'200g', p:16, c:30, l:1},
+        {f:'Courgettes sautées', q:'200g', p:3, c:6, l:2},
+        {f:'Yaourt grec', q:'150g', p:15, c:6, l:0},
+      ]},
+    ]},
+  { jour:'Jeudi', type:'fractione', kcal:2650, pro:160, carb:315, fat:68,
+    meals:[
+      { name:'Petit-déjeuner', items:[
+        {f:"Flocons d'avoine", q:'80g', p:10, c:56, l:5},
+        {f:'Protéine en poudre', q:'25g', p:20, c:2, l:1},
+        {f:'Pomme', q:'1 moyenne', p:0, c:25, l:0},
+      ]},
+      { name:'Avant fractionné', items:[
+        {f:'Banane', q:'1', p:1, c:27, l:0},
+        {f:'Café (optionnel)', q:'1 tasse', p:0, c:0, l:0},
+      ]},
+      { name:'Déjeuner', items:[
+        {f:'Poulet grillé', q:'200g', p:44, c:0, l:4},
+        {f:'Patate douce', q:'200g', p:3, c:40, l:0},
+        {f:'Salade verte + vinaigrette', q:'100g', p:1, c:3, l:7},
+      ]},
+      { name:'Dîner', items:[
+        {f:'Omelette 4 œufs', q:'4 œufs', p:28, c:0, l:20},
+        {f:'Saumon fumé', q:'80g', p:17, c:0, l:8},
+        {f:'Pain complet', q:'2 tranches', p:6, c:28, l:2},
+        {f:'Avocat', q:'1/2', p:1, c:6, l:11},
+      ]},
+    ]},
+  { jour:'Vendredi', type:'upper', kcal:2800, pro:180, carb:340, fat:70,
+    meals:[
+      { name:'Petit-déjeuner', items:[
+        {f:'Pancakes protéinés', q:'3 pancakes', p:25, c:40, l:5},
+        {f:"Sirop d'érable", q:'1 cs', p:0, c:13, l:0},
+        {f:'Myrtilles', q:'100g', p:1, c:14, l:0},
+      ]},
+      { name:'Déjeuner', items:[
+        {f:'Riz jasmin', q:'200g cuit', p:4, c:52, l:0},
+        {f:'Crevettes sautées', q:'200g', p:38, c:0, l:3},
+        {f:'Légumes wok', q:'200g', p:4, c:12, l:2},
+        {f:'Sauce soja légère', q:'2 cs', p:2, c:4, l:0},
+      ]},
+      { name:'Collation', items:[
+        {f:'Whey + lait', q:'40g + 200ml', p:36, c:14, l:4},
+        {f:'Noix de cajou', q:'30g', p:5, c:9, l:13},
+      ]},
+      { name:'Dîner', items:[
+        {f:'Steak de bœuf', q:'180g', p:40, c:0, l:12},
+        {f:'Pommes de terre vapeur', q:'200g', p:4, c:36, l:0},
+        {f:"Brocolis + huile d'olive", q:'200g', p:5, c:8, l:7},
+      ]},
+    ]},
+  { jour:'Samedi', type:'sortie', kcal:3000, pro:170, carb:390, fat:75,
+    meals:[
+      { name:'Avant sortie longue', items:[
+        {f:'Pain complet + confiture', q:'3 tr + 2 cc', p:8, c:55, l:2},
+        {f:'Banane', q:'1', p:1, c:27, l:0},
+        {f:'Café', q:'1 tasse', p:0, c:0, l:0},
+      ]},
+      { name:'Pendant sortie (si >60 min)', items:[
+        {f:'Dattes Medjool', q:'4-6', p:1, c:36, l:0},
+        {f:'Eau + électrolytes', q:'500ml par heure', p:0, c:0, l:0},
+      ]},
+      { name:'Déjeuner (récupération)', items:[
+        {f:'Pâtes blanches cuites', q:'300g', p:12, c:72, l:2},
+        {f:'Sauce bolognaise', q:'150g', p:18, c:10, l:8},
+        {f:'Parmesan', q:'30g', p:10, c:0, l:9},
+        {f:'Salade + vinaigrette', q:'100g', p:1, c:3, l:7},
+      ]},
+      { name:'Dîner (récup active)', items:[
+        {f:'Saumon grillé', q:'200g', p:42, c:0, l:16},
+        {f:'Riz complet', q:'200g cuit', p:5, c:48, l:2},
+        {f:'Avocat', q:'1', p:3, c:12, l:22},
+        {f:'Yaourt grec + miel', q:'150g', p:15, c:12, l:0},
+      ]},
+    ]},
+  { jour:'Dimanche', type:'repos', kcal:2200, pro:150, carb:240, fat:65,
+    meals:[
+      { name:'Petit-déjeuner tardif', items:[
+        {f:'Œufs brouillés', q:'3 œufs', p:18, c:0, l:15},
+        {f:'Avocat', q:'1/2', p:1, c:6, l:11},
+        {f:'Pain complet', q:'2 tranches', p:6, c:28, l:2},
+        {f:'Fruits rouges', q:'100g', p:1, c:12, l:0},
+      ]},
+      { name:'Déjeuner', items:[
+        {f:'Poulet rôti maison', q:'200g', p:44, c:0, l:6},
+        {f:'Légumes rôtis au four', q:'300g', p:6, c:24, l:6},
+        {f:'Quinoa', q:'150g cuit', p:6, c:28, l:2},
+      ]},
+      { name:'Dîner léger', items:[
+        {f:'Soupe de légumes', q:'400ml', p:5, c:18, l:3},
+        {f:'Fromage blanc 0%', q:'200g', p:18, c:8, l:0},
+        {f:'Amandes', q:'20g', p:4, c:3, l:10},
+      ]},
+    ]},
+];
+
+// ── RECETTES ──
+const RECIPES = [
+  {
+    name:'Bol de riz protéiné poulet',
+    tags:['proteines','rapide','masse'],
+    time:'15 min', kcal:580, pro:52, carb:58, fat:12,
+    img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80',
+    objectifs:['physique','force','masse'],
+    ingredients:[
+      {name:'Blanc de poulet', qty:'200g'},
+      {name:'Riz blanc cuit', qty:'200g'},
+      {name:'Brocolis vapeur', qty:'150g'},
+      {name:'Sauce soja', qty:'2 cs'},
+      {name:'Huile de sésame', qty:'1 cc'},
+      {name:'Gingembre frais', qty:'1 cc'},
+    ],
+    steps:[
+      'Cuire le riz et les brocolis vapeur 5 min.',
+      'Couper le poulet en dés et faire dorer 6-8 min.',
+      'Mélanger sauce soja, huile de sésame et gingembre.',
+      'Assembler dans un bol : riz, brocolis, poulet. Napper de sauce.',
+    ],
+  },
+  {
+    name:'Pancakes protéinés avoine',
+    tags:['proteines','rapide','perf'],
+    time:'10 min', kcal:420, pro:35, carb:48, fat:8,
+    img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80',
+    objectifs:['physique','force','endurance'],
+    ingredients:[
+      {name:'Flocons d\'avoine', qty:'80g'},
+      {name:'Whey vanille', qty:'30g'},
+      {name:'Oeufs', qty:'2'},
+      {name:'Lait', qty:'100ml'},
+      {name:'Levure chimique', qty:'1/2 cc'},
+    ],
+    steps:[
+      'Mixer tous les ingrédients jusqu\'à obtenir une pâte lisse.',
+      'Chauffer une poêle antiadhésive à feu moyen.',
+      'Verser des cercles de pâte. Cuire 2 min de chaque côté.',
+      'Servir avec myrtilles fraîches et sirop d\'érable léger.',
+    ],
+  },
+  {
+    name:'Saumon patate douce miel',
+    tags:['proteines','perf'],
+    time:'25 min', kcal:620, pro:48, carb:52, fat:20,
+    img:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80',
+    objectifs:['physique','sante','endurance'],
+    ingredients:[
+      {name:'Pavé de saumon', qty:'200g'},
+      {name:'Patate douce', qty:'250g'},
+      {name:'Miel', qty:'1 cs'},
+      {name:'Moutarde', qty:'1 cc'},
+      {name:'Citron', qty:'1/2'},
+      {name:'Aneth frais', qty:'quelques brins'},
+    ],
+    steps:[
+      'Préchauffer le four à 200°C. Couper la patate en rondelles.',
+      'Enfourner la patate douce 15 min avec huile d\'olive et sel.',
+      'Mélanger miel + moutarde + jus de citron. Badigeonner le saumon.',
+      'Cuire le saumon au four 12 min. Servir avec l\'aneth frais.',
+    ],
+  },
+  {
+    name:'Bowl récupération post-course',
+    tags:['rapide','perf'],
+    time:'5 min', kcal:480, pro:30, carb:72, fat:8,
+    img:'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80',
+    objectifs:['endurance','poids'],
+    ingredients:[
+      {name:'Banane', qty:'1 grande'},
+      {name:'Flocons d\'avoine', qty:'60g'},
+      {name:'Whey chocolat', qty:'30g'},
+      {name:'Lait d\'amande', qty:'200ml'},
+      {name:'Beurre de cacahuète', qty:'1 cs'},
+      {name:'Miel', qty:'1 cc'},
+    ],
+    steps:[
+      'Mixer banane + lait + whey jusqu\'à consistance lisse.',
+      'Verser dans un bol, ajouter les flocons d\'avoine.',
+      'Garnir de beurre de cacahuète et miel.',
+      'Consommer dans les 30 min après l\'effort.',
+    ],
+  },
+  {
+    name:'Omelette avocat saumon fumé',
+    tags:['proteines','rapide','seche'],
+    time:'8 min', kcal:450, pro:38, carb:4, fat:30,
+    img:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80',
+    objectifs:['physique','poids','sante'],
+    ingredients:[
+      {name:'Oeufs', qty:'4'},
+      {name:'Saumon fumé', qty:'80g'},
+      {name:'Avocat', qty:'1/2'},
+      {name:'Ciboulette', qty:'quelques tiges'},
+      {name:'Sel, poivre', qty:''},
+    ],
+    steps:[
+      'Battre les oeufs avec sel, poivre et ciboulette ciselée.',
+      'Cuire dans une poêle beurrée à feu moyen 3-4 min.',
+      'Disposer le saumon fumé et l\'avocat en tranches sur une moitié.',
+      'Plier l\'omelette et servir immédiatement.',
+    ],
+  },
+  {
+    name:'Curry pois chiches lentilles',
+    tags:['veggie','masse','rapide'],
+    time:'20 min', kcal:520, pro:28, carb:72, fat:10,
+    img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80',
+    objectifs:['sante','physique','poids'],
+    ingredients:[
+      {name:'Pois chiches', qty:'240g égouttés'},
+      {name:'Lentilles corail', qty:'100g sèches'},
+      {name:'Tomates concassées', qty:'400g'},
+      {name:'Lait de coco light', qty:'200ml'},
+      {name:'Curry en poudre', qty:'2 cc'},
+      {name:'Curcuma + gingembre', qty:'1 cc chacun'},
+    ],
+    steps:[
+      'Cuire les lentilles à l\'eau 10 min. Égoutter.',
+      'Faire revenir ail + épices 2 min dans une poêle.',
+      'Ajouter tomates, pois chiches, lentilles et lait de coco.',
+      'Mijoter 8 min. Servir avec riz basmati.',
+    ],
+  },
+  {
+    name:'Steak betterave roquette',
+    tags:['proteines','seche'],
+    time:'12 min', kcal:380, pro:42, carb:18, fat:14,
+    img:'https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80',
+    objectifs:['physique','poids'],
+    ingredients:[
+      {name:'Rumsteck', qty:'180g'},
+      {name:'Betterave cuite', qty:'150g'},
+      {name:'Roquette', qty:'60g'},
+      {name:'Parmesan', qty:'20g'},
+      {name:'Vinaigrette balsamique', qty:'2 cs'},
+    ],
+    steps:[
+      'Sortir le steak du frigo 20 min avant. Assaisonner.',
+      'Saisir 2-3 min de chaque côté dans une poêle très chaude.',
+      'Laisser reposer 3 min recouvert de papier alu.',
+      'Dresser sur lit de roquette avec betterave et parmesan.',
+    ],
+  },
+  {
+    name:'Smoothie récupération nuit',
+    tags:['proteines','rapide'],
+    time:'3 min', kcal:310, pro:32, carb:28, fat:6,
+    img:'https://images.unsplash.com/photo-1577805947697-89e18249d767?w=600&q=80',
+    objectifs:['physique','sante','force'],
+    ingredients:[
+      {name:'Fromage blanc 0%', qty:'200g'},
+      {name:'Caséine vanille', qty:'25g'},
+      {name:'Cerises surgelées', qty:'100g'},
+      {name:'Lait', qty:'100ml'},
+      {name:'Cannelle', qty:'1 pincée'},
+    ],
+    steps:[
+      'Mixer fromage blanc + caséine + lait jusqu\'à consistance crémeuse.',
+      'Ajouter les cerises et mixer 20 sec en gardant des morceaux.',
+      'Verser dans un verre, saupoudrer de cannelle.',
+      'Idéal 30-60 min avant le coucher pour la récupération nocturne.',
+    ],
+  },
+];
+
+// ── FUNCTIONS ──
+const TYPE_COLORS_NUTRI = {
+  push:'var(--push)', pull:'var(--pull)', upper:'var(--upper)',
+  course:'var(--course)', fractione:'var(--course)', sortie:'var(--course)',
+  repos:'var(--mob)', mob:'var(--mob)',
+};
+const TYPE_LABELS_NUTRI = {
+  push:'Jour muscu PUSH', pull:'Jour muscu PULL', upper:'Jour muscu UPPER',
+  course:'Jour course', fractione:'Jour fractionné', sortie:'Sortie longue',
+  repos:'Jour de repos', mob:'Mobilité',
+};
+
+let openPlanDay = null;
+function showNutriPanel(id) {
+  document.querySelectorAll('.nutri-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nutri-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('nutri-' + id)?.classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'plan7j') renderPlan7j();
+  if (id === 'recettes') renderRecettes();
+}
+
+function renderPlan7j() {
+  const el = document.getElementById('nutri-plan7j-content');
+  if (!el) return;
+  const obj = S.profile?.prefs?.objectif || 'physique';
+  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Plan adapté à ton objectif : ${
+    {physique:'Corps athlétique',force:'Force pure',endurance:'Endurance',sante:'Santé',poids:'Perte de poids'}[obj]||'Physique'
+  }</strong>Les calories et macros sont indicatives — ajuste selon ton poids (${S.profile?.weight||70}kg) et ta sensation de satiété.</div>`;
+
+  PLAN_7J.forEach((day, i) => {
+    const col = TYPE_COLORS_NUTRI[day.type] || 'var(--push)';
+    const label = TYPE_LABELS_NUTRI[day.type] || day.jour;
+    const isOpen = openPlanDay === i;
+    html += `<div class="plan-day-card">
+      <div class="plan-day-hdr" onclick="togglePlanDay(${i})">
+        <div class="plan-day-dot" style="background:${col}20;color:${col}">${day.jour.slice(0,3).toUpperCase()}</div>
+        <div class="plan-day-info">
+          <div class="plan-day-name">${day.jour} — ${label}</div>
+          <div class="plan-day-cal">${day.kcal} kcal · ${day.pro}g prot · ${day.carb}g glucides</div>
+        </div>
+        <span class="plan-day-chev ${isOpen?'open':''}">▾</span>
+      </div>
+      <div class="plan-day-body ${isOpen?'open':''}">
+        ${day.meals.map(meal=>`
+          <div class="plan-meal">
+            <div class="plan-meal-title">${meal.name}</div>
+            ${meal.items.map(item=>`
+              <div class="plan-meal-item">
+                <div class="plan-meal-dot"></div>
+                <div class="plan-meal-food">${item.f} <span style="font-size:11px;color:var(--muted)">${item.q}</span></div>
+                <div class="plan-meal-macro">${item.p+item.c+item.l>0?item.p+'g P':''}</div>
+              </div>`).join('')}
+          </div>`).join('')}
+        <div class="plan-macros-bar">
+          <div class="plan-macro"><div class="plan-macro-val pro-val">${day.pro}g</div><div class="plan-macro-lbl">Protéines</div></div>
+          <div class="plan-macro"><div class="plan-macro-val carb-val">${day.carb}g</div><div class="plan-macro-lbl">Glucides</div></div>
+          <div class="plan-macro"><div class="plan-macro-val fat-val">${day.fat}g</div><div class="plan-macro-lbl">Lipides</div></div>
+          <div class="plan-macro"><div class="plan-macro-val kcal-val">${day.kcal}</div><div class="plan-macro-lbl">Kcal</div></div>
+        </div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+function togglePlanDay(i) {
+  openPlanDay = openPlanDay === i ? null : i;
+  renderPlan7j();
+}
+
+function renderRecettes() {
+  const el = document.getElementById('nutri-recettes-content');
+  if (!el) return;
+  const obj = S.profile?.prefs?.objectif || 'physique';
+  const TAG_LABELS = {proteines:'Protéines',rapide:'Rapide',masse:'Prise de masse',seche:'Sèche',perf:'Performance',veggie:'Végétarien'};
+
+  // Sort by relevance to objective
+  const sorted = [...RECIPES].sort((a,b) => {
+    const ar = a.objectifs.includes(obj) ? 0 : 1;
+    const br = b.objectifs.includes(obj) ? 0 : 1;
+    return ar - br;
+  });
+
+  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Recettes adaptées à ton objectif</strong>Les recettes les plus pertinentes pour toi apparaissent en premier.</div>`;
+  sorted.forEach(r => {
+    html += `<div class="recipe-card">
+      <img class="recipe-img" src="${r.img}" alt="${r.name}" loading="lazy">
+      <div class="recipe-hdr">
+        <div class="recipe-name">${r.name}</div>
+        <div class="recipe-tags">
+          ${r.tags.map(t=>`<span class="recipe-tag tag-${t}">${TAG_LABELS[t]||t}</span>`).join('')}
+          <span class="recipe-tag" style="background:var(--bg3);color:var(--muted)">${r.time}</span>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <div class="recipe-section-title">Ingrédients</div>
+        ${r.ingredients.map(ing=>`
+          <div class="recipe-ingredient">
+            <span>${ing.name}</span>
+            <span class="recipe-qty">${ing.qty}</span>
+          </div>`).join('')}
+        <div class="recipe-section-title">Préparation</div>
+        ${r.steps.map((s,i)=>`
+          <div class="recipe-step">
+            <span class="recipe-step-num">${i+1}</span>
+            <span>${s}</span>
+          </div>`).join('')}
+      </div>
+      <div class="recipe-macros">
+        <div class="plan-macro"><div class="plan-macro-val pro-val">${r.pro}g</div><div class="plan-macro-lbl">Protéines</div></div>
+        <div class="plan-macro"><div class="plan-macro-val carb-val">${r.carb}g</div><div class="plan-macro-lbl">Glucides</div></div>
+        <div class="plan-macro"><div class="plan-macro-val fat-val">${r.fat}g</div><div class="plan-macro-lbl">Lipides</div></div>
+        <div class="plan-macro"><div class="plan-macro-val kcal-val">${r.kcal}</div><div class="plan-macro-lbl">Kcal</div></div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+window.showNutriPanel = showNutriPanel;
+window.togglePlanDay = togglePlanDay;
 
 // ── INIT ──
 initAuth();
