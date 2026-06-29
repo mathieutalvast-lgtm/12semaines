@@ -898,17 +898,18 @@ body.light .plan-meal-food{color:var(--text)}
 
 
 /* ── COACH IA ── */
-.coach-fab{position:fixed;bottom:calc(80px + env(safe-area-inset-bottom,0px));right:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#ff3355,#ff8800);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,51,85,.4);z-index:400;transition:all .2s}
+.coach-fab{position:fixed;bottom:calc(80px + env(safe-area-inset-bottom,0px));right:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#ff3355,#ff8800);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,51,85,.4);z-index:400;transition:all .2s}
 .coach-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(255,51,85,.5)}
 .coach-fab svg{width:24px;height:24px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .coach-fab .notif-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(--course);border:2px solid var(--bg);display:none}
 .coach-fab .notif-dot.show{display:block}
 
 @media(min-width:768px){
-  .coach-fab{bottom:24px;right:24px}
+  .coach-fab{bottom:24px;right:24px;width:48px;height:48px}
+  .coach-modal{left:auto;right:24px;bottom:88px;width:380px;border-radius:20px;border:1px solid rgba(255,255,255,.08);height:520px;max-height:70vh}
 }
 
-.coach-modal{position:fixed;bottom:0;left:0;right:0;z-index:600;display:flex;flex-direction:column;background:var(--bg2);border-radius:22px 22px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;height:80vh;max-height:680px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.6)}
+.coach-modal{position:fixed;bottom:0;left:0;right:0;z-index:600;display:none;flex-direction:column;background:var(--bg2);border-radius:22px 22px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;height:80vh;max-height:680px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.6)}
 .coach-modal.open{transform:translateY(0)}
 @media(min-width:768px){
   .coach-modal{left:auto;right:24px;bottom:80px;width:400px;height:600px;border-radius:20px;border:1px solid rgba(255,255,255,.08);max-height:70vh}
@@ -962,6 +963,26 @@ body.light .coach-input{background:var(--bg3);border-color:var(--border2);color:
 body.light .coach-sugg{background:var(--bg3);border-color:var(--border2);color:var(--muted)}
 body.light .coach-header{border-color:var(--border)}
 body.light .coach-input-row{border-color:var(--border)}
+
+
+/* PROFILE PHOTO */
+.profile-avatar-wrap{position:relative;width:72px;height:72px;margin-bottom:12px}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;transition:all .2s;overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-avatar:hover{border-color:white;opacity:.9}
+.profile-avatar-edit{position:absolute;bottom:0;right:0;width:24px;height:24px;border-radius:50%;background:var(--push);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s}
+.profile-avatar-edit:hover{transform:scale(1.1)}
+.profile-avatar-edit svg{width:12px;height:12px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+#photoInput{display:none}
+.photo-options{position:absolute;top:80px;left:0;background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:6px;z-index:100;display:none;min-width:180px;box-shadow:var(--shadow)}
+.photo-options.show{display:block}
+.photo-opt-btn{width:100%;padding:9px 12px;background:none;border:none;color:var(--text);font-size:13px;font-weight:500;cursor:pointer;text-align:left;border-radius:8px;transition:background .15s;font-family:var(--fb)}
+.photo-opt-btn:hover{background:var(--bg3)}
+
+
+/* Show coach only when logged in */
+.app-screen.show .coach-fab { display: flex !important; }
+.app-screen.show .coach-modal.open { display: flex !important; }
 
 </style>
 </head>
@@ -1335,46 +1356,6 @@ body.light .coach-input-row{border-color:var(--border)}
 </div>
 
 
-<!-- COACH IA -->
-<button class="coach-fab" onclick="toggleCoach()" id="coachFab" title="Coach IA">
-  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg>
-  <div class="notif-dot show" id="coachDot"></div>
-</button>
-
-<div class="coach-modal" id="coachModal">
-  <div class="coach-header">
-    <div class="coach-avatar">
-      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    </div>
-    <div>
-      <div class="coach-title">Coach IA</div>
-      <div class="coach-subtitle">En ligne · Répond en quelques secondes</div>
-    </div>
-    <button class="coach-close" onclick="toggleCoach()">Fermer</button>
-  </div>
-  <div class="coach-messages" id="coachMessages">
-    <div class="msg ai">
-      <div class="msg-bubble">Bonjour ! Je suis ton coach personnel.<br><br>Je connais ton programme, ton profil et ta progression. Pose-moi n'importe quelle question — technique, nutrition, douleurs, charges...</div>
-      <div class="msg-time">Maintenant</div>
-    </div>
-  </div>
-  <div class="coach-typing" id="coachTyping">
-    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-  </div>
-  <div class="coach-suggestions" id="coachSuggs">
-    <button class="coach-sugg" onclick="sendCoachSugg(this)">Technique développé couché ?</button>
-    <button class="coach-sugg" onclick="sendCoachSugg(this)">Mes charges cette semaine</button>
-    <button class="coach-sugg" onclick="sendCoachSugg(this)">J'ai mal au genou</button>
-    <button class="coach-sugg" onclick="sendCoachSugg(this)">Que manger avant la séance ?</button>
-    <button class="coach-sugg" onclick="sendCoachSugg(this)">Quand reposer ?</button>
-  </div>
-  <div class="coach-input-row">
-    <textarea class="coach-input" id="coachInput" placeholder="Pose ta question au coach..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCoachMsg()}" oninput="autoResize(this)"></textarea>
-    <button class="coach-send" id="coachSend" onclick="sendCoachMsg()">
-      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-  </div>
-</div>
 
 <!-- TIMER -->
 <div class="timer-modal" id="timerModal">
@@ -2277,7 +2258,7 @@ const EX = {
   'Développé Couché Barre':{sets:'5 × 5 reps',rest:'2 min 30',restSec:150,muscles:['Pectoraux sternal + costal','Deltoïdes antérieurs','Triceps brachial'],technique:"Descente lente 3 sec, pause 1 sec en bas. Omoplates serrées et plaquées. Coudes à 60-75° du corps.",erreurs:["Ne jamais rebondir la barre sur la poitrine","Talons au sol en permanence","Pieds levés = instabilité"],respiration:"Descente = inspire · Poussée = expire",yt:'https://www.youtube.com/embed/rT7DgCr-3pg',photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80&fit=crop'},
   'Développé Incliné Haltères':{sets:'4 × 8 reps',rest:'90 sec',restSec:90,muscles:['Grand pectoral chef claviculaire','Deltoïdes antérieurs'],technique:"Banc à 30-45°. Coudes à 60° du corps. Tempo 3-1-1.",erreurs:["Si épaule craque → réduis l'angle à 20-25°","Coudes jamais à 90°"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/DbFgADa2PL8',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80&fit=crop'},
   'Développé Militaire Barre':{sets:'4 × 6 reps',rest:'2 min',restSec:120,muscles:['Deltoïde (3 faisceaux)','Trapèzes supérieurs','Triceps'],technique:"Gainage strict AVANT de toucher la barre. Pousse droit vers le haut.",erreurs:["Dos qui creuse = réduis de 5 kg","Ne rentre jamais la tête vers l'arrière"],respiration:"Inspire avant · Expire pendant la poussée",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80&fit=crop'},
-  'Dips':{sets:'4 × 8-12 reps',rest:'90 sec',restSec:90,muscles:['Pectoraux inférieurs','Triceps brachial (3 chefs)','Deltoïdes antérieurs'],technique:"Incline le buste 15-20° vers l'avant. Descends jusqu'à 90° de flexion.",erreurs:["Épaules qui remontent vers les oreilles = stop","Douleur épaule = arrêt immédiat"],respiration:"Inspire en descendant · Expire en montant",yt:'https://www.youtube.com/embed/2z8JmcrW-As',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80&fit=crop'},
+  'Dips':{sets:'4 × 8-12 reps',rest:'90 sec',restSec:90,muscles:['Pectoraux inférieurs','Triceps brachial (3 chefs)','Deltoïdes antérieurs'],technique:"Incline le buste 15-20° vers l'avant. Descends jusqu\'à 90° de flexion.",erreurs:["Épaules qui remontent vers les oreilles = stop","Douleur épaule = arrêt immédiat"],respiration:"Inspire en descendant · Expire en montant",yt:'https://www.youtube.com/embed/2z8JmcrW-As',photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80&fit=crop'},
   'Élévations Latérales':{sets:'4 × 15 reps',rest:'60 sec',restSec:60,muscles:['Faisceau médial du deltoïde'],technique:"Légère flexion du coude 15-20°. Arrête à la hauteur des épaules. Contrôle la descente 2 sec.",erreurs:["Pas d'élan avec le dos ou les genoux","Si tu triches → allège de 2 kg"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/3VcKaXpzqRo',photo:'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80&fit=crop'},
   'Extension Triceps Poulie':{sets:'4 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Coudes immobiles, collés aux flancs. Écarte la corde à la fin pour le chef latéral.",erreurs:["Coudes qui décollent = charge trop lourde"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80&fit=crop'},
   'Gainage Planche':{sets:'3 × 60 sec',rest:'45 sec',restSec:45,muscles:["Transverse de l'abdomen",'Obliques','Érecteurs du rachis'],technique:"Ligne neutre parfaite nuque-talons. Ne bloque jamais le souffle.",erreurs:["Hanches qui tombent = abdos qui lâchent","Hanches trop hautes = inefficace"],respiration:"Abdominale profonde et régulière",yt:'https://www.youtube.com/embed/pSHjTRCQxIw',photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&fit=crop'},
@@ -2288,7 +2269,7 @@ const EX = {
   'Curl Barre EZ':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Biceps brachial','Brachial antérieur'],technique:"Coudes fixes le long du corps. Supination max en haut. Descente lente 2-3 sec.",erreurs:["Te pencher en arrière = charge trop lourde"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80&fit=crop'},
   'Curl Incliné Haltères':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Chef long du biceps — pic musculaire'],technique:"Bras entièrement étirés en position basse. Monte et redescends lentement.",erreurs:["Ne bloque pas la rotation de l'avant-bras"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80&fit=crop'},
   'Farmer Walk':{sets:'3 × 40 m',rest:'90 sec',restSec:90,muscles:['Avant-bras','Trapèzes supérieurs','Core','Grip'],technique:"Haltères très lourds, dos droit, épaules rétractées. Chaque pas contrôlé.",erreurs:["Épaules qui s'affaissent = stop"],respiration:"Respiration régulière et contrôlée",yt:'https://www.youtube.com/embed/Fkzk_RqlYig',photo:'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=80&fit=crop'},
-  'Développé Haltères Assis':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Deltoïdes (3 faisceaux)','Triceps brachial','Trapèzes'],technique:"Descends jusqu'à la hauteur des oreilles pour amplitude max.",erreurs:["Ne verrouille pas les coudes en haut"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80&fit=crop'},
+  'Développé Haltères Assis':{sets:'4 × 10 reps',rest:'90 sec',restSec:90,muscles:['Deltoïdes (3 faisceaux)','Triceps brachial','Trapèzes'],technique:"Descends jusqu\'à la hauteur des oreilles pour amplitude max.",erreurs:["Ne verrouille pas les coudes en haut"],respiration:"Inspire en descendant · Expire en poussant",yt:'https://www.youtube.com/embed/2yjwXTZQDDI',photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80&fit=crop'},
   'Rowing Poulie Basse':{sets:'4 × 10 reps',rest:'75 sec',restSec:75,muscles:['Grand dorsal','Rhomboïdes','Trapèzes moyens','Biceps'],technique:"Assis droit. Omoplates à fond, retiens 1 sec en fin.",erreurs:["Pencher en arrière = réduis de 10%"],respiration:"Expire en tirant · Inspire en relâchant",yt:'https://www.youtube.com/embed/GZbfZ033f74',photo:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80&fit=crop'},
   'Curl Marteau':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Brachial antérieur','Brachio-radial','Biceps (prise neutre)'],technique:"Prise neutre (pouces vers le haut). Coudes fixes, descente 2 secondes.",erreurs:["Coudes qui avancent = non isolé"],respiration:"Expire en montant · Inspire en descendant",yt:'https://www.youtube.com/embed/ykJmrZ5v0Oo',photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80&fit=crop'},
   'Triceps Corde Poulie':{sets:'3 × 12 reps',rest:'60 sec',restSec:60,muscles:['Triceps brachial — 3 chefs'],technique:"Écarte les poignets vers l'extérieur en bas du mouvement.",erreurs:["Coudes complètement immobiles, collés aux flancs"],respiration:"Expire en descendant · Inspire en remontant",yt:'https://www.youtube.com/embed/vB5OHsJ3EME',photo:'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=600&q=80&fit=crop'},
@@ -2858,9 +2839,25 @@ window.renderProfileHero = function renderProfileHero() {
   let done = 0;
   for(let w=1;w<=12;w++) getDays(w).forEach((_,di)=>{ if(S.done&&S.done[w+'-'+di]) done++; });
 
+  const photoData = S.profile?.photo || null;
   wrap.innerHTML = `<div class="profile-hero" style="margin-top:14px">
     <div class="profile-hero-content">
-      <div class="profile-avatar"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" onclick="togglePhotoOptions()">
+          ${photoData 
+            ? `<img src="${photoData}" alt="Photo profil">`
+            : `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
+          }
+        </div>
+        <div class="profile-avatar-edit" onclick="togglePhotoOptions()">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="photo-options" id="photoOptions">
+          <button class="photo-opt-btn" onclick="triggerPhotoUpload()">Choisir une photo</button>
+          ${photoData ? '<button class="photo-opt-btn" style="color:var(--push)" onclick="removeProfilePhoto()">Supprimer la photo</button>' : ''}
+        </div>
+        <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
+      </div>
       <div class="profile-name">${name}</div>
       <div class="profile-email">${currentUser?.email||''}</div>
       <div class="profile-badges">
@@ -3724,13 +3721,19 @@ let coachHistory = [];
 
 function toggleCoach() {
   coachOpen = !coachOpen;
-  document.getElementById('coachModal').classList.toggle('open', coachOpen);
-  document.getElementById('coachDot').classList.remove('show');
+  const modal = document.getElementById('coachModal');
+  const dot = document.getElementById('coachDot');
   if (coachOpen) {
+    modal.style.display = 'flex';
+    modal.classList.add('open');
+    if (dot) dot.classList.remove('show');
     setTimeout(() => {
       document.getElementById('coachInput')?.focus();
       scrollCoachToBottom();
     }, 300);
+  } else {
+    modal.classList.remove('open');
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
   }
 }
 
@@ -3761,7 +3764,7 @@ function sendCoachSugg(el) {
   sendCoachMsg();
 }
 
-async function sendCoachMsg() {
+function sendCoachMsg() {
   const input = document.getElementById('coachInput');
   const msg = input?.value?.trim();
   if (!msg) return;
@@ -3769,105 +3772,206 @@ async function sendCoachMsg() {
   input.style.height = 'auto';
   document.getElementById('coachSend').disabled = true;
 
-  // Add user message
   addCoachMsg('user', msg);
-  coachHistory.push({role:'user', content: msg});
+  coachHistory.push(msg);
 
-  // Show typing
   const typing = document.getElementById('coachTyping');
   if (typing) typing.classList.add('show');
   scrollCoachToBottom();
 
-  // Hide suggestions after first message
   const suggs = document.getElementById('coachSuggs');
   if (suggs) suggs.style.display = 'none';
 
-  // Build context from user profile and logs
+  // Simulate thinking delay (0.8-1.5s)
+  const delay = 800 + Math.random() * 700;
+  setTimeout(() => {
+    const reply = generateCoachReply(msg);
+    if (typing) typing.classList.remove('show');
+    addCoachMsg('ai', reply);
+    coachHistory.push(reply);
+    document.getElementById('coachSend').disabled = false;
+    if (!coachOpen) document.getElementById('coachDot')?.classList.add('show');
+  }, delay);
+}
+
+// ── MOTEUR DE RÉPONSES INTELLIGENT ──
+function generateCoachReply(msg) {
+  const m = msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const p = S.profile || {};
   const prefs = p.prefs || {};
   const week = S.week || 1;
-  const today = getDays ? getDays(week) : [];
-  
-  // Get recent PR data
-  const prs = S.prData || {};
-  const prStr = Object.entries(prs).map(([k,v]) => {
-    const labels = {pr_dc:'Développé couché', pr_mil:'Militaire', pr_trac:'Tractions'};
-    return labels[k] ? labels[k] + ': ' + v : null;
-  }).filter(Boolean).join(', ');
+  const phase = week<=4 ? 'Adaptation' : week<=8 ? 'Progression' : 'Consolidation';
+  const name = p.name ? p.name : '';
+  const greet = name ? name + ', ' : '';
+  const zones = prefs.zones_sensibles || [];
+  const objectif = prefs.objectif || 'physique';
+  const niveau = prefs.niveau || 'intermediaire';
+  const poids = p.weight || 75;
+  const age = p.age || 30;
 
-  // Get recent logs
-  const logs = S.logData || {};
-  const recentLogs = Object.entries(logs)
-    .filter(([k]) => k.includes('_w'+week) || k.includes('_w'+(week-1)))
-    .slice(0,5)
-    .map(([k,v]) => {
-      const ex = k.split('_w')[0];
-      const kgs = Object.keys(v).filter(x=>x.startsWith('kg')).map(x=>v[x]).join('/');
-      return ex + ': ' + kgs + 'kg';
-    }).join(', ');
-
-  const systemPrompt = `Tu es le coach personnel de ${p.name || 'l\u2019utilisateur'}, une application de fitness Force & Performance.
-
-PROFIL UTILISATEUR:
-- Prénom: ${p.name || 'Non renseigné'}
-- Poids: ${p.weight || 'Non renseigné'}kg
-- Âge: ${p.age || 'Non renseigné'} ans
-- Objectif: ${prefs.objectif || 'physique'}
-- Niveau: ${prefs.niveau || 'intermédiaire'}
-- Zones sensibles: ${(prefs.zones_sensibles||[]).join(', ') || 'aucune'}
-- Course: ${prefs.cardio ? 'oui' : 'non'}
-
-PROGRAMME ACTUEL:
-- Semaine: ${week}/12
-- Phase: ${week<=4?'Adaptation':week<=8?'Progression':'Consolidation'}
-- Séances aujourd'hui: ${today.map?.(d=>d.label).join(', ') || 'N/A'}
-
-PERFORMANCE:
-- Records personnels: ${prStr || 'pas encore de données'}
-- Logs récents: ${recentLogs || 'pas encore de données'}
-
-RÔLE:
-Tu es un coach bienveillant, expert en musculation et course à pied, avec une spécialisation en prévention des blessures articulaires.
-
-Tes réponses:
-- Courtes et directes (3-5 phrases max sauf si explication technique nécessaire)
-- Toujours positives et motivantes
-- Personnalisées selon le profil ci-dessus
-- En français
-- Pratiques avec des conseils concrets
-- Si douleur: proposer des alternatives adaptées au profil
-- Ne jamais donner de conseils médicaux — recommander un médecin si nécessaire`;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: coachHistory.slice(-8), // last 8 messages for context
-      })
-    });
-
-    const data = await response.json();
-    const reply = data.content?.[0]?.text || 'Désolé, je n\'ai pas pu répondre. Réessaie !';
-
-    if (typing) typing.classList.remove('show');
-    addCoachMsg('ai', reply);
-    coachHistory.push({role:'assistant', content: reply});
-
-    // Show dot on FAB if coach is closed
-    if (!coachOpen) {
-      document.getElementById('coachDot')?.classList.add('show');
+  // Get last logged weights for key exercises
+  function getLastWeight(exName) {
+    if (!S.logData) return null;
+    for (let w = week; w >= 1; w--) {
+      const lk = exName + '_w' + w;
+      if (S.logData[lk]) {
+        const vals = Object.values(S.logData[lk]).filter((v,i,a) => Object.keys(S.logData[lk])[i].startsWith('kg')).map(Number).filter(v=>v>0);
+        if (vals.length) return Math.max(...vals);
+      }
     }
-  } catch(e) {
-    if (typing) typing.classList.remove('show');
-    addCoachMsg('ai', 'Oups, une erreur s\'est produite. Vérifie ta connexion et réessaie !');
-    console.error('Coach error:', e);
+    return null;
   }
 
-  document.getElementById('coachSend').disabled = false;
+  const dcMax = getLastWeight('Développé Couché Barre') || S.prData?.pr_dc;
+  const tracMax = S.prData?.pr_trac;
+  const milMax = getLastWeight('Développé Militaire Barre') || S.prData?.pr_mil;
+
+  // Count sessions done
+  let totalDone = 0;
+  if (S.done) Object.values(S.done).forEach(v => { if(v) totalDone++; });
+
+  // ── DOULEURS ──
+  if (m.includes('mal') || m.includes('douleur') || m.includes('bobo') || m.includes('gene') || m.includes('blesse')) {
+    if (m.includes('genou') || m.includes('rotule')) {
+      return greet + `pour les douleurs au genou, évite les squats profonds et les fentes pour l'instant.\n\nRemplace par : Presse inclinée avec pieds hauts (moins de pression sur la rotule), Hip Thrust, Leg curl.\n\nAjoute impérativement les Tibialis Raises et les Glute Bridge chaque jour — ce sont les exercices anti-valgus clés de ton programme.\n\nSi la douleur persiste plus de 3 jours, consulte un kiné avant de continuer.`
+    }
+    if (m.includes('epaule') || m.includes('coiffe') || m.includes('omoplate')) {
+      return greet + `douleur à l'épaule — arrête immédiatement les développés et dips jusqu'à résolution.\n\nCe que tu peux faire : Face Pull élastique (rééquilibre la coiffe), Rowing horizontal, Tirage vertical neutre.\n\nEvite tout ce qui passe les coudes au-dessus des épaules. Si douleur aiguë, glace 15 min et repos 48h avant de reprendre.\n\nLe Face Pull est TON exercice prioritaire — ne le saute plus jamais.`;
+    }
+    if (m.includes('dos') || m.includes('lombaire') || m.includes('colonne')) {
+      return greet + `pour le dos, passe immédiatement à des charges plus légères (-30%) sur tous les mouvements de soulevé.\n\nPrioritaire : gainage planche + dead bug chaque matin. Évite le soulevé de terre barre jusqu'à résolution complète.\n\nLe Soulevé de Terre Roumain avec haltères légers en amplitude réduite est autorisé si pas de douleur. Consulte un kiné si ça dure.`
+    }
+    if (m.includes('cheville') || m.includes('tendon') || m.includes('achille')) {
+      return greet + `pour la cheville/tendon d'Achille, c'est LE point critique en course.\n\nStop course immédiat si douleur aiguë. Remplace par vélo stationnaire ou natation pour le cardio.\n\nFais les Tibialis Raises et les mollets excentriques (descente très lente) CHAQUE JOUR — c'est le protocole Alfredson pour le tendon d'Achille.\n\nReprise course progressive seulement quand marche sans douleur.`
+    }
+    return greet + `décris-moi mieux la douleur — où exactement et quand elle apparaît (pendant l'effort, après, au repos) ? Je vais t'adapter le programme en conséquence.`;
+  }
+
+  // ── TECHNIQUE EXERCICES ──
+  if (m.includes('technique') || m.includes('comment faire') || m.includes('execution') || m.includes('conseil')) {
+    if (m.includes('developpe couche') || m.includes('bench') || m.includes('couche')) {
+      const poids_conseille = dcMax ? Math.round(dcMax * (week<=4?0.75:week<=8?0.85:0.9)) : '60-70% de ton max';
+      return greet + 'pour le développé couché :\n\n• Omoplates serrées et plaquées contre le banc AVANT de saisir la barre\n• Descente contrôlée 3 secondes, pause 1 sec en bas\n• Coudes à 60-75° du corps (pas à 90°)\n• Pieds à plat au sol, fessiers sur le banc\n\n' + (dcMax ? 'Cette semaine (phase ' + phase + ') vise ' + poids_conseille + 'kg — tu as déjà fait ' + dcMax + 'kg.' : 'Commence par trouver un poids sur lequel tu peux faire 5 reps propres.');
+    }
+    if (m.includes('traction') || m.includes('pull up') || m.includes('tractions')) {
+      return greet + 'pour les tractions :\n\n• Démarre en dépriment les omoplates AVANT de plier les coudes\n• Menton au-dessus de la barre à chaque rep\n• Descente totalement contrôlée (2-3 sec)\n• Jamais de kipping — 3 tractions propres > 10 bâclées\n\n' + (tracMax ? 'Ton record est ' + tracMax + ' reps. En phase ' + phase + ', vise des séries à ' + Math.round(tracMax*0.7) + '-' + Math.round(tracMax*0.8) + ' reps.' : 'Si tu ne fais pas encore une traction, utilise un élastique de résistance.');
+    }
+    if (m.includes('squat') || m.includes('squat')) {
+      return `Pour le squat :\n\n• Pieds à largeur d'épaules, orteils légèrement vers l'extérieur\n• Genou dans l'axe du 2ème orteil — jamais vers l'intérieur\n• Descends jusqu\'à ce que les cuisses soient parallèles au sol minimum\n• Dos droit, poitrine haute, regard vers l'avant\n• La montée commence par les fessiers — pousse le sol vers le bas`;
+    }
+    if (m.includes('souleve') || m.includes('deadlift') || m.includes('romaine')) {
+      return greet + `pour le soulevé de terre roumain :\n\n• Ce N'EST PAS un squat — les genoux restent quasi fixes\n• Glisse les haltères le long des cuisses en poussant les hanches vers l'arrière\n• Dos plat OBLIGATOIRE — dès que ça s\'arrondit, allège de 5kg\n• La montée = poussée des hanches vers l'avant\n\nC'est l\'exercice roi pour les ischio-jambiers et les fessiers.`;
+    }
+    if (m.includes('militaire') || m.includes('overhead') || m.includes('epaules')) {
+      return greet + 'pour le développé militaire :\n\n• Gainage abdominal strict AVANT de toucher la barre\n• Pousse en ligne droite vers le haut — la tête recule légèrement pour laisser passer la barre\n• Bloque en haut 1 sec, redescends lentement\n• Si le dos creuse = charge trop lourde, réduis de 5kg\n\n' + (milMax ? 'Tu as fait ' + milMax + 'kg. En ' + phase + ', reste à ' + Math.round(milMax*0.85) + '-' + milMax + 'kg.' : '');
+    }
+    if (m.includes('gainage') || m.includes('planche') || m.includes('core')) {
+      return greet + `pour le gainage :\n\n• Corps parfaitement droit de la nuque aux talons\n• Contracte les abdos comme si tu attendais un coup de poing\n• Respiration abdominale profonde — ne bloque JAMAIS le souffle\n• Si les hanches tombent = stop, récupère 20 sec\n\nQualité > durée. 3×30sec parfaits valent mieux que 3×60sec avec les hanches qui baissent.`
+    }
+    return greet + `quel exercice veux-tu que je t'explique ? Donne-moi le nom précis et je te détaille la technique complète.`;
+  }
+
+  // ── CHARGES & PROGRESSION ──
+  if (m.includes('charge') || m.includes('poids') || m.includes('combien') || m.includes('augmenter') || m.includes('progression') || m.includes('kilo')) {
+    let resp = greet + 'voici tes recommandations de charges pour la semaine ' + week + ' (phase ' + phase + ') :\n\n';
+    if (dcMax) resp += '• Développé couché : ' + Math.round(dcMax * (week<=4?0.75:week<=8?0.85:0.9)) + 'kg (base ' + dcMax + 'kg)\n';
+    if (milMax) resp += '• Militaire : ' + Math.round(milMax * (week<=4?0.75:week<=8?0.85:0.9)) + 'kg (base ' + milMax + 'kg)\n';
+    if (tracMax) resp += '• Tractions : ' + Math.round(tracMax * 0.7) + '-' + tracMax + ' reps par série\n';
+    if (!dcMax && !milMax && !tracMax) {
+      resp = greet + `je n'ai pas encore tes logs de charges — commence par enregistrer tes séances dans l'onglet Log de chaque exercice.\n\nRègle générale en phase ${phase} : démarre à 70-75% de ton max estimé sur 5 reps, puis augmente de 2.5kg dès que tu complètes toutes les séries proprement.`
+    } else {
+      resp += '\nRègle de progression : +2.5kg dès que tu complètes toutes les séries et reps proprement. En semaine de décharge (S4, S8, S12) = ×0.8.';
+    }
+    return resp;
+  }
+
+  // ── COURSE & CARDIO ──
+  if (m.includes('course') || m.includes('running') || m.includes('endurance') || m.includes('cardio') || m.includes('zone 2') || m.includes('fractionne')) {
+    if (m.includes('zone 2') || m.includes('endurance')) {
+      const fcmax = age ? 220 - age : 190;
+      const z2min = Math.round(fcmax * 0.60);
+      const z2max = Math.round(fcmax * 0.70);
+      return greet + 'la Zone 2 c\'est TA zone de développement aérobie.\n\nFC cible pour toi : ' + z2min + '-' + z2max + ' bpm (60-70% de ' + fcmax + ' bpm estimé)\n\nTest simple : tu dois pouvoir parler en phrases complètes sans être essoufflé. Si tu souffles trop = ralentis ou marche 30 sec.\n\nEn phase ' + phase + ', le travail en Zone 2 construit ta base cardio qui boostera aussi tes performances muscu.';
+    }
+    if (m.includes('fractionne') || m.includes('interval') || m.includes('vma')) {
+      return greet + `pour le fractionné 10×1 min :\n\n• 10 min d'échauffement OBLIGATOIRE en Zone 2\n• Effort : allure 5km (tu dois pouvoir tenir 1 min mais pas 2)\n• Récupération : trot lent ou marche — ne t\'arrête pas complètement\n• ' + (week<=4 ? 'Tu es en phase Adaptation : commence par 6 répétitions, pas 10.' : week<=8 ? 'Tu es en Progression : 8-10 répétitions.' : '10 répétitions complètes.') + '\n• 5 min de retour au calme après le dernier intervalle`;
+    }
+    return greet + 'ton programme cardio en semaine ' + week + ' : Endurance Zone 2 (mardi), Fractionné 10×1min (jeudi), Sortie longue 60-90min (samedi).\n\nSi tu ressens des douleurs aux chevilles ou genoux pendant la course — dis-moi et j\'adapte.';
+  }
+
+  // ── NUTRITION ──
+  if (m.includes('manger') || m.includes('nutrition') || m.includes('repas') || m.includes('proteine') || m.includes('calorie') || m.includes('avant') || m.includes('apres')) {
+    if (m.includes('avant')) {
+      return greet + `repas avant séance (2h avant) :\n\n• Glucides complexes : riz, pâtes, pain complet (150-200g cuits)\n• Protéines légères : poulet, thon, blanc d\'oeuf\n• Évite les graisses et fibres en excès (digestion lente)\n\nJuste avant (30min) : une banane suffit. Pas de gros repas.\n\nHydratation : 500ml d'eau dans les 2h avant, pas pendant l\'effort si <45min.`;
+    }
+    if (m.includes('apres') || m.includes('recuperation') || m.includes('post')) {
+      return greet + 'fenêtre anabolique post-séance (30min) :\n\n• Protéines : 30-40g (whey, œufs, fromage blanc)\n• Glucides rapides : banane, dattes, riz blanc\n' + (poids ? '• Objectif protéines total : ' + Math.round(poids * 2) + 'g/jour (' + poids + 'kg × 2g)' : '') + '\n\nMeilleure option rapide : shake whey + banane dans les 30 min. Puis repas complet 1h-1h30 après.';
+    }
+    if (m.includes('proteine')) {
+      const proNeeded = poids ? Math.round(poids * 2) : 150;
+      return greet + 'pour ton objectif ' + objectif + ', vise ' + proNeeded + 'g de protéines par jour (' + (poids||75) + 'kg × 2g/kg).\n\nSources de qualité : œufs, poulet, poisson, fromage blanc 0%, yaourt grec, whey.\n\nRépartis sur 4 repas — la synthèse protéique est optimale avec 30-40g par prise, pas plus.';
+    }
+    return greet + `pour l\'objectif ' + objectif + ' :\n\n• Jours muscu : 2g de protéines/kg, 4-5g glucides/kg\n• Jours course : légèrement plus de glucides (+50-100g)\n• Jours repos : réduis les glucides de 20%\n\nL'onglet Nutrition a le plan complet 7 jours et des recettes adaptées !`;
+  }
+
+  // ── RÉCUPÉRATION & REPOS ──
+  if (m.includes('repos') || m.includes('recuperer') || m.includes('fatigue') || m.includes('dormir') || m.includes('overtraining') || m.includes('surmenage')) {
+    return greet + `la récupération c'est là que les muscles progressent — pas pendant l'effort.\n\nSignes de surmenage : performance qui baisse, sommeil perturbé, irritabilité, douleurs articulaires.\n\nSi tu coches 2-3 de ces cases : prends 2 jours de repos complet + mobilité légère seulement.\n\nSommeil : 7-9h minimum. La créatine et le magnésium aident la récupération musculaire. La mobilité quotidienne (10 min) est non négociable.`
+  }
+
+  // ── PROGRAMME & SEMAINE ──
+  if (m.includes('programme') || m.includes('semaine') || m.includes('seance') || m.includes('planning') || m.includes('aujourd')) {
+    const days = getDays(week);
+    const dayNames = days.map(d => d.jour + ' : ' + d.label).join('\n');
+    return greet + 'ton planning semaine ' + week + ' (phase ' + phase + ') :\n\n' + dayNames + '\n\nTu as fait ' + totalDone + ' séances au total. ' + (week<=4 ? 'En phase Adaptation : technique avant les charges, écoute ton corps.' : week<=8 ? 'En phase Progression : augmente les charges progressivement.' : 'En phase Consolidation : vise tes nouveaux records !');
+  }
+
+  // ── MOTIVATION ──
+  if (m.includes('motiv') || m.includes('decourage') || m.includes('dur') || m.includes('abandon') || m.includes('facile') || m.includes('envie')) {
+    const messages = [
+      greet + `tu es à la semaine ${week}/12 — ${Math.round(week/12*100)}% du programme accompli. Chaque séance compte, même les petites.\n\nLe progrès n'est pas linéaire. Les semaines difficiles précèdent souvent les meilleures adaptations. Continue.`,
+      greet + `${totalDone} séances déjà au compteur. Ce n'est pas rien.\n\nLa régularité bat l'intensité sur 12 semaines. Une séance moyenne faite vaut mieux qu'une séance parfaite manquée.`,
+      greet + `la phase ${phase} est exigeante mais c'est là que ça se construit vraiment. Ton corps s'adapte en ce moment même, même si tu ne le vois pas encore.`,
+    ];
+    return messages[Math.floor(Math.random() * messages.length)];
+  }
+
+  // ── BADGES & PROGRESSION ──
+  if (m.includes('badge') || m.includes('record') || m.includes('pr') || m.includes('perso')) {
+    let resp = greet + 'tes records personnels actuels :\n\n';
+    if (dcMax) resp += '• Développé couché : ' + dcMax + 'kg\n';
+    if (milMax) resp += '• Militaire : ' + milMax + 'kg\n';
+    if (tracMax) resp += '• Tractions : ' + tracMax + ' reps\n';
+    if (!dcMax && !milMax && !tracMax) resp += 'Pas encore de records enregistrés — commence à logger tes charges dans les fiches exercices !';
+    else resp += '\nContinue à logger tes charges après chaque séance pour suivre ta progression.';
+    return resp;
+  }
+
+  // ── DÉCHARGE ──
+  if (m.includes('decharge') || m.includes('leger') || m.includes('semaine 4') || m.includes('semaine 8') || m.includes('semaine 12')) {
+    const nextDecharge = 4 - (week % 4) === 4 ? 0 : 4 - (week % 4);
+    if (week % 4 === 0) {
+      return greet + `cette semaine c\'est la semaine de décharge — absolument obligatoire !\n\nRéduis TOUTES tes charges de 20% (×0.8). Volume de course -20% aussi.\n\nC'est pendant ces semaines que les adaptations se consolident. Beaucoup de gens sautent les décharges et plafonnent — toi tu ne feras pas cette erreur.`;
+    }
+    return greet + 'la prochaine semaine de décharge dans ' + nextDecharge + ' semaine' + (nextDecharge>1?'s':'') + '.\n\nQuand elle arrive : toutes les charges ×0.8, volume course -20%, priorité au sommeil et à la nutrition.';
+  }
+
+  // ── SALUTATIONS ──
+  if (m.includes('bonjour') || m.includes('salut') || m.includes('hello') || m.includes('coucou') || m.includes('hey')) {
+    const days = getDays(week);
+    const todayIdx = new Date().getDay(); // 0=dim, 1=lun...
+    const dayMap = {1:0,2:1,3:2,4:3,5:4,6:5,0:6};
+    const todaySession = days[dayMap[todayIdx]];
+    return `${name ? 'Salut ' + name + ' !' : 'Salut !'} Prêt pour la semaine ${week} ?\n\n${todaySession ? "Aujourd'hui au programme : " + todaySession.label + ' — ' + todaySession.sub + '.' : "Pas de séance prévue aujourd'hui — repos actif et mobilité."}\n\nComment je peux t'aider ?`;
+  }
+
+  // ── RÉPONSE PAR DÉFAUT ──
+  const defaults = [
+    greet + 'je peux t\'aider sur : technique des exercices, charges recommandées, gestion des douleurs, nutrition, programme de la semaine, récupération.\n\nPose ta question précisément !',
+    greet + 'dis-moi sur quel exercice ou aspect tu veux des conseils — technique, charges, douleur, nutrition ou programme ?',
+    greet + 'je suis là pour t\'aider ! Exercice spécifique, charge à utiliser, douleur, nutrition ou programme — qu\'est-ce que tu veux savoir ?',
+  ];
+  return defaults[Math.floor(Math.random() * defaults.length)];
 }
 
 // Close coach when clicking outside
@@ -3884,8 +3988,116 @@ window.sendCoachMsg = sendCoachMsg;
 window.sendCoachSugg = sendCoachSugg;
 window.autoResize = autoResize;
 
+
+// ── PROFILE PHOTO ──
+function togglePhotoOptions() {
+  const opts = document.getElementById('photoOptions');
+  if (opts) opts.classList.toggle('show');
+  // Close when clicking outside
+  setTimeout(() => {
+    document.addEventListener('click', closePhotoOptions, {once:true});
+  }, 10);
+}
+
+function closePhotoOptions(e) {
+  const opts = document.getElementById('photoOptions');
+  if (opts && !opts.contains(e.target)) opts.classList.remove('show');
+}
+
+function triggerPhotoUpload() {
+  document.getElementById('photoInput')?.click();
+  document.getElementById('photoOptions')?.classList.remove('show');
+}
+
+function handlePhotoUpload(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Photo trop lourde — maximum 2MB.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    // Resize to max 400x400 before saving
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const size = Math.min(img.width, img.height);
+      canvas.width = 200; canvas.height = 200;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img,
+        (img.width-size)/2, (img.height-size)/2, size, size,
+        0, 0, 200, 200
+      );
+      const resized = canvas.toDataURL('image/jpeg', 0.8);
+      if (!S.profile) S.profile = {};
+      S.profile.photo = resized;
+      save();
+      renderProfileHero();
+      showSaveToast();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeProfilePhoto() {
+  if (!S.profile) return;
+  delete S.profile.photo;
+  save();
+  renderProfileHero();
+  document.getElementById('photoOptions')?.classList.remove('show');
+}
+
+window.togglePhotoOptions = togglePhotoOptions;
+window.triggerPhotoUpload = triggerPhotoUpload;
+window.handlePhotoUpload = handlePhotoUpload;
+window.removeProfilePhoto = removeProfilePhoto;
+
 // ── INIT ──
 initAuth();
 </script>
 </body>
 </html>
+<!-- COACH IA -->
+<button class="coach-fab" onclick="toggleCoach()" id="coachFab" title="Coach IA">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg>
+  <div class="notif-dot show" id="coachDot"></div>
+</button>
+
+<div class="coach-modal" id="coachModal">
+  <div class="coach-header">
+    <div class="coach-avatar">
+      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </div>
+    <div>
+      <div class="coach-title">Coach IA</div>
+      <div class="coach-subtitle">En ligne · Répond en quelques secondes</div>
+    </div>
+    <button class="coach-close" onclick="toggleCoach()">Fermer</button>
+  </div>
+  <div class="coach-messages" id="coachMessages">
+    <div class="msg ai">
+      <div class="msg-bubble">Bonjour ! Je suis ton coach personnel.<br><br>Je connais ton programme, ton profil et ta progression. Pose-moi n'importe quelle question — technique, nutrition, douleurs, charges...</div>
+      <div class="msg-time">Maintenant</div>
+    </div>
+  </div>
+  <div class="coach-typing" id="coachTyping">
+    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+  </div>
+  <div class="coach-suggestions" id="coachSuggs">
+    <button class="coach-sugg" onclick="sendCoachSugg(this)">Technique développé couché ?</button>
+    <button class="coach-sugg" onclick="sendCoachSugg(this)">Mes charges cette semaine</button>
+    <button class="coach-sugg" onclick="sendCoachSugg(this)">J'ai mal au genou</button>
+    <button class="coach-sugg" onclick="sendCoachSugg(this)">Que manger avant la séance ?</button>
+    <button class="coach-sugg" onclick="sendCoachSugg(this)">Quand reposer ?</button>
+  </div>
+  <div class="coach-input-row">
+    <textarea class="coach-input" id="coachInput" placeholder="Pose ta question au coach..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCoachMsg()}" oninput="autoResize(this)"></textarea>
+    <button class="coach-send" id="coachSend" onclick="sendCoachMsg()">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+
