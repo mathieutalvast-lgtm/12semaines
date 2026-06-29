@@ -799,6 +799,37 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
   body.light .auth-screen::before { background: rgba(244,244,248,.75); }
 }
 
+
+/* ONBOARDING QUESTIONNAIRE */
+.onboard-overlay{position:fixed;inset:0;z-index:1000;background:rgba(6,6,13,.97);display:flex;align-items:flex-end;justify-content:center;overflow-y:auto}
+.onboard-overlay.hidden{display:none}
+.onboard-box{background:var(--bg2);width:100%;max-width:520px;border-radius:22px 22px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;padding:28px 24px calc(28px + env(safe-area-inset-bottom,0px));max-height:90vh;overflow-y:auto}
+.ob-step{display:none}.ob-step.active{display:block}
+.ob-progress{display:flex;gap:6px;margin-bottom:24px}
+.ob-dot{flex:1;height:3px;border-radius:2px;background:var(--border2);transition:background .3s}
+.ob-dot.done{background:var(--push)}
+.ob-title{font-family:var(--fd);font-size:26px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;color:var(--text)}
+.ob-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5}
+.ob-options{display:grid;gap:8px}
+.ob-option{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px}
+.ob-option:hover{border-color:var(--push);background:rgba(255,51,85,.08)}
+.ob-option.selected{border-color:var(--push);background:rgba(255,51,85,.1);color:var(--push)}
+.ob-option.selected .ob-opt-icon{background:var(--push);color:#fff}
+.ob-opt-icon{width:36px;height:36px;border-radius:9px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s;text-transform:uppercase}
+.ob-opt-label{font-size:13px;font-weight:600;color:var(--text)}
+.ob-opt-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.ob-multi .ob-option.selected{border-color:var(--course);background:rgba(0,229,160,.1);color:var(--course)}
+.ob-multi .ob-option.selected .ob-opt-icon{background:var(--course);color:#000}
+.ob-checkboxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.ob-checkbox{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .15s}
+.ob-checkbox.checked{border-color:var(--course);background:rgba(0,229,160,.08)}
+.ob-checkbox-label{font-size:12px;font-weight:600;color:var(--text);pointer-events:none}
+.ob-checkbox.checked .ob-checkbox-label{color:var(--course)}
+.ob-next{width:100%;padding:15px;background:linear-gradient(135deg,#ff3355,#ff8800);border:none;border-radius:12px;font-family:var(--fd);font-size:16px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:white;cursor:pointer;margin-top:16px;transition:opacity .15s}
+.ob-next:hover{opacity:.9}
+.ob-next:disabled{opacity:.4;cursor:not-allowed}
+.ob-skip{width:100%;padding:10px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;margin-top:8px}
+
 </style>
 </head>
 <body>
@@ -871,6 +902,97 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
         <input class="auth-input" type="password" id="signup-pwd2" placeholder="••••••••" autocomplete="new-password">
       </div>
       <button class="auth-btn" id="signupBtn" onclick="handleSignup()">Créer mon compte</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ONBOARDING QUESTIONNAIRE -->
+<div class="onboard-overlay hidden" id="onboardingQ">
+  <div class="onboard-box">
+    <div class="ob-progress">
+      <div class="ob-dot done" id="odot0"></div>
+      <div class="ob-dot" id="odot1"></div>
+      <div class="ob-dot" id="odot2"></div>
+      <div class="ob-dot" id="odot3"></div>
+      <div class="ob-dot" id="odot4"></div>
+    </div>
+
+    <!-- STEP 0 — Objectif -->
+    <div class="ob-step active" id="ob-step-0">
+      <div class="ob-title">Quel est ton objectif ?</div>
+      <div class="ob-sub">On va personnaliser ton programme pour toi.</div>
+      <div class="ob-options">
+        <div class="ob-option" onclick="selectOb(0,'objectif','physique',this)"><div class="ob-opt-icon">CORP</div><div><div class="ob-opt-label">Corps athlétique</div><div class="ob-opt-sub">Muscle, galbe, physique visible</div></div></div>
+        <div class="ob-option" onclick="selectOb(0,'objectif','force',this)"><div class="ob-opt-icon">FORC</div><div><div class="ob-opt-label">Force pure</div><div class="ob-opt-sub">Performances, records, puissance</div></div></div>
+        <div class="ob-option" onclick="selectOb(0,'objectif','endurance',this)"><div class="ob-opt-icon">END</div><div><div class="ob-opt-label">Endurance & cardio</div><div class="ob-opt-sub">Course, VO2max, souffle</div></div></div>
+        <div class="ob-option" onclick="selectOb(0,'objectif','sante',this)"><div class="ob-opt-icon">SNT</div><div><div class="ob-opt-label">Santé & prévention</div><div class="ob-opt-sub">Articulaire, douleurs, longévité</div></div></div>
+        <div class="ob-option" onclick="selectOb(0,'objectif','poids',this)"><div class="ob-opt-icon">PESO</div><div><div class="ob-opt-label">Perte de poids</div><div class="ob-opt-sub">Cardio + muscu, rééquilibrage</div></div></div>
+      </div>
+      <button class="ob-next" id="ob-next-0" onclick="nextStep(1)" disabled>Continuer</button>
+    </div>
+
+    <!-- STEP 1 — Cardio -->
+    <div class="ob-step" id="ob-step-1">
+      <div class="ob-title">Tu cours ?</div>
+      <div class="ob-sub">On adapte les séances cardio selon ta pratique.</div>
+      <div class="ob-options">
+        <div class="ob-option" onclick="selectOb(1,'cardio',true,this)"><div class="ob-opt-icon">OUI</div><div><div class="ob-opt-label">Oui, je cours</div><div class="ob-opt-sub">Endurance + fractionné dans le programme</div></div></div>
+        <div class="ob-option" onclick="selectOb(1,'cardio','velo',this)"><div class="ob-opt-icon">VLO</div><div><div class="ob-opt-label">Vélo / natation</div><div class="ob-opt-sub">Cardio alternatif sans impact</div></div></div>
+        <div class="ob-option" onclick="selectOb(1,'cardio',false,this)"><div class="ob-opt-icon">NON</div><div><div class="ob-opt-label">Pas de cardio</div><div class="ob-opt-sub">Programme 100% musculation</div></div></div>
+      </div>
+      <button class="ob-next" id="ob-next-1" onclick="nextStep(2)" disabled>Continuer</button>
+    </div>
+
+    <!-- STEP 2 — Niveau -->
+    <div class="ob-step" id="ob-step-2">
+      <div class="ob-title">Ton niveau ?</div>
+      <div class="ob-sub">Pour calibrer les charges et les exercices.</div>
+      <div class="ob-options">
+        <div class="ob-option" onclick="selectOb(2,'niveau','debutant',this)"><div class="ob-opt-icon">DEB</div><div><div class="ob-opt-label">Débutant</div><div class="ob-opt-sub">Moins d'1 an de pratique régulière</div></div></div>
+        <div class="ob-option" onclick="selectOb(2,'niveau','intermediaire',this)"><div class="ob-opt-icon">INT</div><div><div class="ob-opt-label">Intermédiaire</div><div class="ob-opt-sub">1 à 3 ans, bases solides</div></div></div>
+        <div class="ob-option" onclick="selectOb(2,'niveau','avance',this)"><div class="ob-opt-icon">AVA</div><div><div class="ob-opt-label">Avancé</div><div class="ob-opt-sub">Plus de 3 ans, technique maîtrisée</div></div></div>
+      </div>
+      <button class="ob-next" id="ob-next-2" onclick="nextStep(3)" disabled>Continuer</button>
+    </div>
+
+    <!-- STEP 3 — Zones sensibles -->
+    <div class="ob-step" id="ob-step-3">
+      <div class="ob-title">Zones sensibles ?</div>
+      <div class="ob-sub">On retire les exercices qui sollicitent ces zones. Tu peux sélectionner plusieurs zones.</div>
+      <div class="ob-checkboxes ob-multi" id="zones-checkboxes">
+        <div class="ob-checkbox" onclick="toggleZone('genou',this)"><div class="ob-checkbox-label">Genou</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('cheville',this)"><div class="ob-checkbox-label">Cheville</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('epaule',this)"><div class="ob-checkbox-label">Épaule</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('dos',this)"><div class="ob-checkbox-label">Dos / lombaires</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('coude',this)"><div class="ob-checkbox-label">Coude</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('poignet',this)"><div class="ob-checkbox-label">Poignet</div></div>
+        <div class="ob-checkbox" onclick="toggleZone('nuque',this)"><div class="ob-checkbox-label">Nuque / cervicales</div></div>
+        <div class="ob-checkbox" onclick="toggleZone(null,this)" id="zone-none"><div class="ob-checkbox-label">Aucune</div></div>
+      </div>
+      <button class="ob-next" id="ob-next-3" onclick="nextStep(4)">Continuer</button>
+    </div>
+
+    <!-- STEP 4 — Équipements -->
+    <div class="ob-step" id="ob-step-4">
+      <div class="ob-title">Ton équipement ?</div>
+      <div class="ob-sub">Coche ce dont tu disposes. On s'adapte à ta salle ou chez toi.</div>
+      <div class="ob-checkboxes" id="equip-checkboxes">
+        <div class="ob-checkbox checked" onclick="toggleEquip('barre',this)"><div class="ob-checkbox-label">Barre olympique</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('banc',this)"><div class="ob-checkbox-label">Banc musculation</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('rack',this)"><div class="ob-checkbox-label">Rack / Cage squat</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('halteres',this)"><div class="ob-checkbox-label">Haltères</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('poulie',this)"><div class="ob-checkbox-label">Machine poulies</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('presse',this)"><div class="ob-checkbox-label">Presse à jambes</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('barre_traction',this)"><div class="ob-checkbox-label">Barre de traction</div></div>
+        <div class="ob-checkbox checked" onclick="toggleEquip('barres_paralleles',this)"><div class="ob-checkbox-label">Barres dips</div></div>
+        <div class="ob-checkbox" onclick="toggleEquip('elastique',this)"><div class="ob-checkbox-label">Élastiques</div></div>
+        <div class="ob-checkbox" onclick="toggleEquip('velo',this)"><div class="ob-checkbox-label">Vélo stationnaire</div></div>
+        <div class="ob-checkbox" onclick="toggleEquip('rameur',this)"><div class="ob-checkbox-label">Rameur</div></div>
+        <div class="ob-checkbox" onclick="toggleEquip('corde',this)"><div class="ob-checkbox-label">Corde à sauter</div></div>
+      </div>
+      <button class="ob-next" id="ob-next-4" onclick="finishOnboarding()">Générer mon programme</button>
+      <button class="ob-skip" onclick="skipOnboarding()">Passer — utiliser le programme standard</button>
     </div>
   </div>
 </div>
@@ -1119,6 +1241,7 @@ function showApp() {
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.add('show');
   renderProgramme();
+  checkOnboarding();
 }
 
 function showAuthScreen() {
@@ -1241,6 +1364,721 @@ function showSaveToast() {
   clearTimeout(_stT);
   _stT = setTimeout(() => t.classList.remove('show'), 1800);
 }
+
+
+// ══════════════════════════════════════════════════════════════
+// BIBLIOTHÈQUE D'EXERCICES — Force & Performance
+// 50+ exercices · Tags complets · Variantes · Alternatives
+// ══════════════════════════════════════════════════════════════
+
+const EX_LIBRARY = {
+
+  // ─── PUSH — Pectoraux ───────────────────────────────────────
+  'Développé Couché Barre': {
+    type:'push', group:'pec', sets:'5×5', rest:150,
+    equipment:['barre','banc','rack'],
+    muscles:['Pectoraux','Triceps','Deltoïdes ant.'],
+    zones_sensibles:[], // aucune contre-indication
+    niveau:'intermediaire',
+    cardio:false, salle:true, maison:false,
+    variantes:['Développé Couché Prise Large','Développé Couché Prise Serrée'],
+    alternatives_maison:['Pompes Lestées','Pompes Diamant'],
+    alternatives_sans_machine:['Développé Haltères Couché'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80',
+  },
+  'Développé Haltères Couché': {
+    type:'push', group:'pec', sets:'4×8', rest:90,
+    equipment:['halteres','banc'],
+    muscles:['Pectoraux','Triceps','Deltoïdes ant.'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Développé Haltères Incliné','Développé Haltères Décliné'],
+    alternatives_maison:['Pompes Lestées'],
+    objectifs:['force','physique','sante'],
+    photo:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80',
+  },
+  'Développé Incliné Haltères': {
+    type:'push', group:'pec_haut', sets:'4×8', rest:90,
+    equipment:['halteres','banc_incline'],
+    muscles:['Pectoraux sup.','Deltoïdes ant.'],
+    zones_sensibles:['epaule'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Pompes Inclinées'],
+    objectifs:['physique','force'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Pompes': {
+    type:'push', group:'pec', sets:'4×15', rest:60,
+    equipment:[],
+    muscles:['Pectoraux','Triceps','Épaules'],
+    zones_sensibles:['poignet'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Pompes Larges','Pompes Diamant','Pompes Déclinées','Pompes Inclinées','Pompes Archer'],
+    objectifs:['physique','sante','endurance'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Pompes Diamant': {
+    type:'push', group:'triceps', sets:'4×12', rest:60,
+    equipment:[],
+    muscles:['Triceps','Pectoraux int.'],
+    zones_sensibles:['poignet','coude'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','force'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Dips': {
+    type:'push', group:'triceps', sets:'4×10', rest:90,
+    equipment:['barres_paralleles'],
+    muscles:['Triceps','Pectoraux inf.','Épaules'],
+    zones_sensibles:['epaule'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Dips sur Chaise'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80',
+  },
+  'Dips sur Chaise': {
+    type:'push', group:'triceps', sets:'3×15', rest:60,
+    equipment:['chaise'],
+    muscles:['Triceps','Épaules'],
+    zones_sensibles:['epaule'], niveau:'debutant',
+    cardio:false, salle:false, maison:true,
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80',
+  },
+
+  // ─── PUSH — Épaules ─────────────────────────────────────────
+  'Développé Militaire Barre': {
+    type:'push', group:'epaule', sets:'4×6', rest:120,
+    equipment:['barre','rack'],
+    muscles:['Deltoïdes','Trapèzes','Triceps'],
+    zones_sensibles:['epaule','dos'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Développé Haltères Assis'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80',
+  },
+  'Développé Haltères Assis': {
+    type:'push', group:'epaule', sets:'4×10', rest:90,
+    equipment:['halteres'],
+    muscles:['Deltoïdes','Trapèzes','Triceps'],
+    zones_sensibles:['epaule'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['force','physique','sante'],
+    photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80',
+  },
+  'Élévations Latérales': {
+    type:'push', group:'epaule_lat', sets:'4×15', rest:60,
+    equipment:['halteres'],
+    muscles:['Deltoïde latéral'],
+    zones_sensibles:['epaule'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    alternatives_maison:['Élévations Élastique'],
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80',
+  },
+  'Élévations Élastique': {
+    type:'push', group:'epaule_lat', sets:'3×20', rest:45,
+    equipment:['elastique'],
+    muscles:['Deltoïde latéral'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Arnold Press': {
+    type:'push', group:'epaule', sets:'3×12', rest:75,
+    equipment:['halteres'],
+    muscles:['Deltoïdes (3 faisceaux)','Triceps'],
+    zones_sensibles:['epaule'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=600&q=80',
+  },
+
+  // ─── PUSH — Triceps ─────────────────────────────────────────
+  'Extension Triceps Poulie': {
+    type:'push', group:'triceps', sets:'4×12', rest:60,
+    equipment:['poulie'],
+    muscles:['Triceps brachial'],
+    zones_sensibles:['coude'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Extension Triceps Haltère'],
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80',
+  },
+  'Extension Triceps Haltère': {
+    type:'push', group:'triceps', sets:'3×12', rest:60,
+    equipment:['haltere'],
+    muscles:['Triceps brachial'],
+    zones_sensibles:['coude'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80',
+  },
+  'Triceps Corde Poulie': {
+    type:'push', group:'triceps', sets:'3×12', rest:60,
+    equipment:['poulie'],
+    muscles:['Triceps brachial'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1616803689943-5601631c7fec?w=600&q=80',
+  },
+
+  // ─── PULL — Dos ─────────────────────────────────────────────
+  'Tractions Pronation': {
+    type:'pull', group:'dos', sets:'5×max', rest:120,
+    equipment:['barre_traction'],
+    muscles:['Grand dorsal','Biceps','Rhomboïdes'],
+    zones_sensibles:['epaule'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    variantes:['Tractions Supination','Tractions Neutres','Tractions Lestées'],
+    alternatives_maison:['Rowing Élastique'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80',
+  },
+  'Rowing Barre Penché': {
+    type:'pull', group:'dos', sets:'4×8', rest:90,
+    equipment:['barre'],
+    muscles:['Grand dorsal','Trapèzes','Biceps'],
+    zones_sensibles:['dos'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Rowing Haltère','Rowing Élastique'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Rowing Haltère': {
+    type:'pull', group:'dos', sets:'4×10', rest:75,
+    equipment:['haltere','banc'],
+    muscles:['Grand dorsal','Rhomboïdes','Biceps'],
+    zones_sensibles:['dos'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['force','physique','sante'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Rowing Élastique': {
+    type:'pull', group:'dos', sets:'4×15', rest:60,
+    equipment:['elastique'],
+    muscles:['Grand dorsal','Rhomboïdes'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante','physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Tirage Horizontal Poulie': {
+    type:'pull', group:'dos', sets:'4×10', rest:75,
+    equipment:['poulie'],
+    muscles:['Trapèzes','Rhomboïdes','Dorsal'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Rowing Élastique'],
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Tirage Vertical Poulie': {
+    type:'pull', group:'dos', sets:'4×10', rest:75,
+    equipment:['poulie'],
+    muscles:['Grand dorsal','Biceps'],
+    zones_sensibles:['epaule'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Tractions Élastique'],
+    objectifs:['physique','force'],
+    photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80',
+  },
+  'Face Pull Poulie Haute': {
+    type:'pull', group:'epaule_post', sets:'4×15', rest:60,
+    equipment:['poulie'],
+    muscles:['Deltoïdes post.','Rotateurs','Trapèzes'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Face Pull Élastique'],
+    objectifs:['sante','physique'],
+    photo:'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&q=80',
+  },
+  'Face Pull Élastique': {
+    type:'pull', group:'epaule_post', sets:'3×20', rest:45,
+    equipment:['elastique'],
+    muscles:['Deltoïdes post.','Rotateurs'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Farmer Walk': {
+    type:'pull', group:'grip', sets:'3×40m', rest:90,
+    equipment:['halteres'],
+    muscles:['Avant-bras','Trapèzes','Core'],
+    zones_sensibles:[], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=80',
+  },
+
+  // ─── PULL — Biceps ──────────────────────────────────────────
+  'Curl Barre EZ': {
+    type:'pull', group:'biceps', sets:'4×10', rest:75,
+    equipment:['barre_ez'],
+    muscles:['Biceps brachial','Brachial ant.'],
+    zones_sensibles:['coude'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Curl Haltères'],
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Curl Haltères': {
+    type:'pull', group:'biceps', sets:'3×12', rest:60,
+    equipment:['halteres'],
+    muscles:['Biceps brachial'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Curl Marteau': {
+    type:'pull', group:'biceps', sets:'3×12', rest:60,
+    equipment:['halteres'],
+    muscles:['Brachial ant.','Brachio-radial'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Curl Incliné Haltères': {
+    type:'pull', group:'biceps', sets:'3×12', rest:60,
+    equipment:['halteres','banc_incline'],
+    muscles:['Chef long biceps'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80',
+  },
+  'Curl Élastique': {
+    type:'pull', group:'biceps', sets:'3×15', rest:45,
+    equipment:['elastique'],
+    muscles:['Biceps brachial'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+
+  // ─── JAMBES ─────────────────────────────────────────────────
+  'Squat Barre': {
+    type:'jambes', group:'quad', sets:'4×8', rest:120,
+    equipment:['barre','rack'],
+    muscles:['Quadriceps','Fessiers','Ischio-jambiers'],
+    zones_sensibles:['genou','dos'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Squat Poids de Corps','Squat Haltères'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Squat Poids de Corps': {
+    type:'jambes', group:'quad', sets:'4×20', rest:60,
+    equipment:[],
+    muscles:['Quadriceps','Fessiers'],
+    zones_sensibles:['genou'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Squat Sumo','Jump Squat'],
+    objectifs:['physique','sante','endurance'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Squat Haltères': {
+    type:'jambes', group:'quad', sets:'4×12', rest:90,
+    equipment:['halteres'],
+    muscles:['Quadriceps','Fessiers','Ischio-jambiers'],
+    zones_sensibles:['genou'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','force'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Presse Inclinée': {
+    type:'jambes', group:'quad', sets:'4×10', rest:90,
+    equipment:['presse'],
+    muscles:['Quadriceps','Fessiers','Ischio-jambiers'],
+    zones_sensibles:['genou'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Squat Haltères','Fentes'],
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80',
+  },
+  'Soulevé de Terre Roumain': {
+    type:'jambes', group:'ischio', sets:'4×8', rest:120,
+    equipment:['halteres'],
+    muscles:['Ischio-jambiers','Fessiers','Érecteurs'],
+    zones_sensibles:['dos'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    objectifs:['force','physique'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Soulevé de Terre Barre': {
+    type:'jambes', group:'ischio', sets:'3×6', rest:150,
+    equipment:['barre'],
+    muscles:['Ischio-jambiers','Fessiers','Dos','Trapèzes'],
+    zones_sensibles:['dos'], niveau:'avance',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Soulevé de Terre Roumain'],
+    objectifs:['force'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Fentes Marchées': {
+    type:'jambes', group:'quad', sets:'3×12', rest:90,
+    equipment:[],
+    muscles:['Quadriceps','Fessiers','Stabilisateurs'],
+    zones_sensibles:['genou'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Fentes Latérales','Fentes Bulgares','Fentes avec Haltères'],
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1434608519344-49d77a124f7a?w=600&q=80',
+  },
+  'Fentes Bulgares': {
+    type:'jambes', group:'quad', sets:'3×10', rest:90,
+    equipment:['banc'],
+    muscles:['Quadriceps','Fessiers'],
+    zones_sensibles:['genou'], niveau:'intermediaire',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','force'],
+    photo:'https://images.unsplash.com/photo-1434608519344-49d77a124f7a?w=600&q=80',
+  },
+  'Hip Thrust Barre': {
+    type:'jambes', group:'fessier', sets:'4×10', rest:90,
+    equipment:['barre','banc'],
+    muscles:['Grand fessier'],
+    zones_sensibles:['dos'], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    alternatives_maison:['Hip Thrust Poids de Corps','Glute Bridge'],
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Glute Bridge': {
+    type:'jambes', group:'fessier', sets:'4×15', rest:60,
+    equipment:[],
+    muscles:['Grand fessier','Ischio-jambiers'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Glute Bridge Unilatéral','Glute Bridge Élastique'],
+    objectifs:['sante','physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Mollets Debout (Step)': {
+    type:'jambes', group:'mollets', sets:'4×20', rest:60,
+    equipment:['step'],
+    muscles:['Gastrocnémiens','Soléaire'],
+    zones_sensibles:['cheville'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    alternatives_maison:['Mollets Poids de Corps'],
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Tibialis Raises': {
+    type:'jambes', group:'tibial', sets:'4×20', rest:45,
+    equipment:[],
+    muscles:['Tibial antérieur'],
+    zones_sensibles:['cheville','genou'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+
+  // ─── CORE ───────────────────────────────────────────────────
+  'Gainage Planche': {
+    type:'core', group:'core_ant', sets:'3×60s', rest:45,
+    equipment:[],
+    muscles:['Transverse','Obliques','Érecteurs'],
+    zones_sensibles:['dos'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Planche sur les Mains','Planche Dynamique'],
+    objectifs:['sante','physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Gainage Latéral': {
+    type:'core', group:'core_lat', sets:'3×45s', rest:45,
+    equipment:[],
+    muscles:['Obliques','Stabilisateurs latéraux'],
+    zones_sensibles:['dos'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante','physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Crunchs': {
+    type:'core', group:'core_ant', sets:'3×20', rest:45,
+    equipment:[],
+    muscles:['Grands droits'],
+    zones_sensibles:['dos','nuque'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    variantes:['Crunchs Obliques','Crunchs Inversés'],
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Russian Twist': {
+    type:'core', group:'core_lat', sets:'3×20', rest:45,
+    equipment:[],
+    muscles:['Obliques','Transverse'],
+    zones_sensibles:['dos'], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Dead Bug': {
+    type:'core', group:'core_ant', sets:'3×10', rest:45,
+    equipment:[],
+    muscles:['Transverse','Stabilisateurs'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+
+  // ─── COURSE ─────────────────────────────────────────────────
+  'Course Endurance Z2': {
+    type:'course', group:'endurance', sets:'45 min', rest:0,
+    equipment:[],
+    muscles:['Cardio Zone 2','130-150 bpm'],
+    zones_sensibles:['genou','cheville'], niveau:'debutant',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','sante','poids'],
+    photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80',
+  },
+  'Fractionné 10×1 min': {
+    type:'course', group:'fractione', sets:'10×1min', rest:0,
+    equipment:[],
+    muscles:['VO2max','Zone 4-5'],
+    zones_sensibles:['genou','cheville'], niveau:'intermediaire',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','physique'],
+    photo:'https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?w=600&q=80',
+  },
+  'Sortie Longue': {
+    type:'course', group:'endurance', sets:'60-90 min', rest:0,
+    equipment:[],
+    muscles:['Endurance fondamentale','120-140 bpm'],
+    zones_sensibles:['genou','cheville'], niveau:'debutant',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','poids','sante'],
+    photo:'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80',
+  },
+
+  // ─── CARDIO ALTERNATIF ──────────────────────────────────────
+  'Vélo Stationnaire Z2': {
+    type:'cardio', group:'endurance', sets:'45 min', rest:0,
+    equipment:['velo'],
+    muscles:['Cardio Zone 2 — sans impact'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:true, maison:true,
+    objectifs:['endurance','sante','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Rameur': {
+    type:'cardio', group:'full_body', sets:'20-30 min', rest:0,
+    equipment:['rameur'],
+    muscles:['Full body','Cardio Zone 2-3'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:true, maison:false,
+    objectifs:['endurance','physique','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Corde à Sauter': {
+    type:'cardio', group:'endurance', sets:'3×5 min', rest:60,
+    equipment:['corde'],
+    muscles:['Cardio','Mollets','Coordination'],
+    zones_sensibles:['genou','cheville'], niveau:'debutant',
+    cardio:true, salle:true, maison:true,
+    objectifs:['endurance','physique','poids'],
+    photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80',
+  },
+  'Natation Endurance': {
+    type:'cardio', group:'endurance', sets:'45 min', rest:0,
+    equipment:['piscine'],
+    muscles:['Cardio Zone 2 — full body sans impact'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','sante','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Burpees': {
+    type:'cardio', group:'full_body', sets:'4×10', rest:60,
+    equipment:[],
+    muscles:['Full body','Cardio'],
+    zones_sensibles:['genou','poignet','epaule'], niveau:'intermediaire',
+    cardio:true, salle:true, maison:true,
+    objectifs:['physique','endurance','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+
+  // ─── MOBILITÉ ───────────────────────────────────────────────
+  'Mobilité Quotidienne': {
+    type:'mob', group:'mobilite', sets:'10 min', rest:0,
+    equipment:[],
+    muscles:['Chevilles','Mollets','Hanches','Genou'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
+  },
+  'Yoga Mobilité': {
+    type:'mob', group:'mobilite', sets:'20-30 min', rest:0,
+    equipment:['tapis'],
+    muscles:['Souplesse globale','Posture'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
+  },
+  'Étirements Actifs': {
+    type:'mob', group:'mobilite', sets:'15 min', rest:0,
+    equipment:[],
+    muscles:['Souplesse','Récupération'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
+  },
+};
+
+// ── TAGS SYSTÈME ──
+const EQUIPMENT_LABELS = {
+  'barre': 'Barre olympique',
+  'banc': 'Banc de musculation',
+  'rack': 'Rack / Cage de squat',
+  'halteres': 'Haltères',
+  'haltere': 'Haltère',
+  'barre_ez': 'Barre EZ',
+  'poulie': 'Machine à poulies',
+  'presse': 'Presse à jambes',
+  'barres_paralleles': 'Barres parallèles / Dips',
+  'barre_traction': 'Barre de traction',
+  'banc_incline': 'Banc inclinable',
+  'elastique': 'Élastiques de résistance',
+  'step': 'Step / Marche',
+  'chaise': 'Chaise',
+  'velo': 'Vélo stationnaire',
+  'rameur': 'Rameur',
+  'corde': 'Corde à sauter',
+  'piscine': 'Piscine',
+  'tapis': 'Tapis de yoga',
+};
+
+const ZONES_LABELS = {
+  'genou': 'Douleurs au genou',
+  'cheville': 'Douleurs à la cheville',
+  'epaule': "Douleurs à l'épaule",
+  'dos': 'Douleurs au dos / lombaires',
+  'nuque': 'Douleurs à la nuque',
+  'coude': 'Douleurs au coude',
+  'poignet': 'Douleurs au poignet',
+};
+
+// ── MOTEUR D'ADAPTATION ──
+function buildAdaptedProgram(prefs) {
+  // prefs = { objectif, equipements[], zones_sensibles[], cardio, niveau, frequence }
+  const {
+    objectif = 'physique',
+    equipements = ['barre','banc','rack','halteres','poulie','presse','barres_paralleles','barre_traction','banc_incline','elastique','step'],
+    zones_sensibles = [],
+    cardio = true,
+    niveau = 'intermediaire',
+    frequence = 6, // jours par semaine
+  } = prefs;
+
+  // Filter exercises
+  function canDo(ex) {
+    // Check equipment
+    if (ex.equipment.length > 0) {
+      const hasEquip = ex.equipment.every(eq => equipements.includes(eq));
+      if (!hasEquip) return false;
+    }
+    // Check sensitive zones
+    if (zones_sensibles.some(z => ex.zones_sensibles.includes(z))) return false;
+    // Check level
+    if (ex.niveau === 'avance' && niveau === 'debutant') return false;
+    // Check cardio preference
+    if (ex.cardio && !cardio) return false;
+    // Check objectives (nice to have, not blocking)
+    return true;
+  }
+
+  // Get filtered pool
+  const pool = {};
+  Object.entries(EX_LIBRARY).forEach(([name, ex]) => {
+    if (canDo(ex)) pool[name] = ex;
+  });
+
+  // Build weekly structure based on frequency
+  function getWeekTemplate() {
+    if (!cardio) {
+      // Pure muscu
+      if (frequence >= 6) return [
+        {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
+        {jour:'Mardi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
+        {jour:'Mercredi',type:'jambes',label:'JAMBES',sub:'Quad · Ischio · Fessiers'},
+        {jour:'Jeudi',type:'push',label:'UPPER PUSH',sub:'Épaules · Triceps · Core'},
+        {jour:'Vendredi',type:'pull',label:'UPPER PULL',sub:'Dos · Biceps · Core'},
+        {jour:'Samedi',type:'jambes',label:'FULL BODY',sub:'Composés · Full corps'},
+        {jour:'Dimanche',type:'mob',label:'REPOS + MOBILITÉ',sub:'Récupération active'},
+      ];
+      if (frequence >= 4) return [
+        {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
+        {jour:'Mercredi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
+        {jour:'Vendredi',type:'jambes',label:'JAMBES',sub:'Quad · Ischio · Fessiers'},
+        {jour:'Samedi',type:'push',label:'UPPER BODY',sub:'Haut du corps complet'},
+        {jour:'Dimanche',type:'mob',label:'REPOS',sub:'Récupération'},
+      ];
+      return [
+        {jour:'Lundi',type:'push',label:'FULL BODY A',sub:'Push dominant'},
+        {jour:'Jeudi',type:'pull',label:'FULL BODY B',sub:'Pull dominant'},
+        {jour:'Samedi',type:'jambes',label:'JAMBES + CORE',sub:'Bas du corps'},
+        {jour:'Dimanche',type:'mob',label:'REPOS',sub:'Récupération'},
+      ];
+    } else {
+      // Muscu + cardio (programme original)
+      return [
+        {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
+        {jour:'Mardi',type:'course',label:'ENDURANCE',sub:'Zone 2 · FC 60-70%'},
+        {jour:'Mercredi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
+        {jour:'Jeudi',type:'course',label:'FRACTIONNÉ',sub:'Zone 4-5 · VO2max'},
+        {jour:'Vendredi',type:'upper',label:'UPPER COMPLET',sub:'Haut du corps'},
+        {jour:'Samedi',type:'course',label:'SORTIE LONGUE',sub:'60-90 min Zone 2'},
+        {jour:'Dimanche',type:'mob',label:'REPOS + MOBILITÉ',sub:'Récupération'},
+      ];
+    }
+  }
+
+  // Select exercises for a session type
+  function getSessionExos(type, count = 7) {
+    const typeMap = {
+      push: ['pec','pec_haut','epaule','epaule_lat','triceps','core_ant'],
+      pull: ['dos','epaule_post','biceps','grip'],
+      upper: ['pec','dos','epaule','biceps','triceps','core_lat'],
+      jambes: ['quad','ischio','fessier','mollets','tibial'],
+      course: ['endurance','fractione'],
+      mob: ['mobilite'],
+      cardio: ['endurance','full_body'],
+    };
+    const groups = typeMap[type] || [];
+    const exos = Object.entries(pool)
+      .filter(([, ex]) => groups.includes(ex.group))
+      .map(([name]) => name);
+    
+    // Prioritize by objective
+    const prioritized = exos.sort((a, b) => {
+      const aObj = EX_LIBRARY[a].objectifs.includes(objectif) ? 0 : 1;
+      const bObj = EX_LIBRARY[b].objectifs.includes(objectif) ? 0 : 1;
+      return aObj - bObj;
+    });
+    
+    return prioritized.slice(0, count);
+  }
+
+  const template = getWeekTemplate();
+  return {
+    template,
+    getSessionExos,
+    pool,
+    prefs,
+  };
+}
+
 
 // ══════════════════════════════════════════════
 // PROGRAMME DATA
@@ -2056,6 +2894,170 @@ window.validateSession = function validateSession(di) {
     setTimeout(()=>{ renderStreakBar(); renderBadges(); }, 300);
   }
 };
+
+
+// ══════════════════════════════════════════════
+// QUESTIONNAIRE & MOTEUR D'ADAPTATION
+// ══════════════════════════════════════════════
+
+// ── ONBOARDING STATE ──
+let obAnswers = {
+  objectif: null,
+  cardio: null,
+  niveau: null,
+  zones_sensibles: [],
+  equipements: ['barre','banc','rack','halteres','poulie','presse','barre_traction',
+    'barres_paralleles','banc_incline','barre_ez','step','chaise','tapis'],
+};
+let currentStep = 0;
+
+function showOnboarding() {
+  document.getElementById('onboardingQ').classList.remove('hidden');
+  goToStep(0);
+}
+
+function goToStep(n) {
+  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+  const step = document.getElementById('ob-step-' + n);
+  if (step) step.classList.add('active');
+  // Update progress dots
+  for (let i = 0; i < 5; i++) {
+    const dot = document.getElementById('odot' + i);
+    if (dot) dot.classList.toggle('done', i <= n);
+  }
+  currentStep = n;
+}
+
+function nextStep(n) {
+  goToStep(n);
+}
+
+function selectOb(step, key, value, el) {
+  obAnswers[key] = value;
+  // Visual update
+  el.closest('.ob-options').querySelectorAll('.ob-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  // Enable next
+  const nextBtn = document.getElementById('ob-next-' + step);
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function toggleZone(zone, el) {
+  if (zone === null) {
+    // "Aucune" clicked
+    obAnswers.zones_sensibles = [];
+    document.querySelectorAll('#zones-checkboxes .ob-checkbox').forEach(cb => cb.classList.remove('checked'));
+    el.classList.add('checked');
+    return;
+  }
+  document.getElementById('zone-none')?.classList.remove('checked');
+  el.classList.toggle('checked');
+  if (el.classList.contains('checked')) {
+    if (!obAnswers.zones_sensibles.includes(zone)) obAnswers.zones_sensibles.push(zone);
+  } else {
+    obAnswers.zones_sensibles = obAnswers.zones_sensibles.filter(z => z !== zone);
+  }
+}
+
+function toggleEquip(equip, el) {
+  el.classList.toggle('checked');
+  if (el.classList.contains('checked')) {
+    if (!obAnswers.equipements.includes(equip)) obAnswers.equipements.push(equip);
+  } else {
+    obAnswers.equipements = obAnswers.equipements.filter(e => e !== equip);
+  }
+}
+
+function finishOnboarding() {
+  // Save preferences to profile
+  if (!S.profile) S.profile = {};
+  S.profile.prefs = {
+    objectif: obAnswers.objectif || 'physique',
+    cardio: obAnswers.cardio !== false,
+    cardio_type: obAnswers.cardio,
+    niveau: obAnswers.niveau || 'intermediaire',
+    zones_sensibles: obAnswers.zones_sensibles,
+    equipements: obAnswers.equipements,
+    frequence: 6,
+  };
+  S.profile.onboarded = true;
+  save();
+  document.getElementById('onboardingQ').classList.add('hidden');
+  // Rebuild programme with adapted exercises
+  buildAndApplyAdaptedProgram();
+  renderProgramme();
+}
+
+function skipOnboarding() {
+  if (!S.profile) S.profile = {};
+  S.profile.onboarded = true;
+  save();
+  document.getElementById('onboardingQ').classList.add('hidden');
+}
+
+// ── PROGRAMME ADAPTATIF ──
+let ADAPTED_WEEK_A = null;
+let ADAPTED_WEEK_B = null;
+
+function buildAndApplyAdaptedProgram() {
+  const prefs = S.profile?.prefs;
+  if (!prefs || typeof buildAdaptedProgram === 'undefined') return;
+
+  const adapted = buildAdaptedProgram(prefs);
+  const template = adapted.template;
+
+  // Build WEEK_A from adapted template
+  ADAPTED_WEEK_A = template.map(day => {
+    const baseDay = WEEK_A.find(d => d.jour === day.jour) || {};
+    const exos = adapted.getSessionExos(day.type, 7);
+    return {
+      ...baseDay,
+      ...day,
+      photo: day.type === 'course' ? 'course' : day.type === 'mob' ? 'mob' : day.type,
+      dur: baseDay.dur || '~60 min',
+      warmup: baseDay.warmup || '',
+      exercises: exos.length > 0 ? exos : (baseDay.exercises || []),
+    };
+  });
+
+  // WEEK_B: replace Sunday with jambes if applicable
+  ADAPTED_WEEK_B = [...ADAPTED_WEEK_A.slice(0, 6), {
+    jour: 'Dimanche',
+    type: 'jambes',
+    photo: 'jambes',
+    label: 'JAMBES',
+    sub: 'Renforcement coureur · Genoux · Chevilles',
+    dur: '~60 min',
+    warmup: 'Mobilité 10 min OBLIGATOIRE avant cette séance.',
+    exercises: adapted.getSessionExos('jambes', 6),
+  }];
+}
+
+// Override getDays to use adapted program if available
+const _origGetDays = getDays;
+window.getDays = function(w) {
+  if (ADAPTED_WEEK_A) {
+    return w % 2 === 0 ? ADAPTED_WEEK_B : ADAPTED_WEEK_A;
+  }
+  return _origGetDays(w);
+};
+
+// ── INIT CHECK ──
+function checkOnboarding() {
+  if (!S.profile?.onboarded && currentUser) {
+    setTimeout(showOnboarding, 800);
+  } else if (S.profile?.prefs) {
+    buildAndApplyAdaptedProgram();
+  }
+}
+
+// Make functions global
+window.selectOb = selectOb;
+window.nextStep = nextStep;
+window.toggleZone = toggleZone;
+window.toggleEquip = toggleEquip;
+window.finishOnboarding = finishOnboarding;
+window.skipOnboarding = skipOnboarding;
 
 // ── INIT ──
 initAuth();
