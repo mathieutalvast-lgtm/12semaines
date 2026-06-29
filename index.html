@@ -906,13 +906,12 @@ body.light .plan-meal-food{color:var(--text)}
 
 @media(min-width:768px){
   .coach-fab{bottom:24px;right:24px;width:48px;height:48px}
-  .coach-modal{left:auto;right:24px;bottom:88px;width:380px;border-radius:20px;border:1px solid rgba(255,255,255,.08);height:520px;max-height:70vh}
-}
+  }
 
 .coach-modal{position:fixed;bottom:0;left:0;right:0;z-index:600;display:none;flex-direction:column;background:var(--bg2);border-radius:22px 22px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;height:80vh;max-height:680px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.6)}
 .coach-modal.open{transform:translateY(0)}
 @media(min-width:768px){
-  .coach-modal{left:auto;right:24px;bottom:80px;width:400px;height:600px;border-radius:20px;border:1px solid rgba(255,255,255,.08);max-height:70vh}
+  .coach-modal.open{left:auto;right:24px;bottom:80px;width:400px;height:600px;border-radius:20px;border:1px solid rgba(255,255,255,.08);max-height:70vh;transform:none}
 }
 
 .coach-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:12px;flex-shrink:0}
@@ -1411,6 +1410,16 @@ function showApp() {
   document.getElementById('loadingScreen').classList.add('hidden');
   document.getElementById('authScreen').classList.add('hidden');
   document.getElementById('appScreen').classList.add('show');
+  // Reset coach history and messages on login
+  coachHistory = [];
+  coachOpen = false;
+  const coachMsgs = document.getElementById('coachMessages');
+  if (coachMsgs) coachMsgs.innerHTML = `<div class="msg ai">
+    <div class="msg-bubble">Bonjour${S.profile?.name ? ' ' + S.profile.name : ''} ! Je suis ton coach.<br><br>Pose-moi n'importe quelle question — technique, nutrition, douleurs, charges...</div>
+    <div class="msg-time">Maintenant</div>
+  </div>`;
+  const coachSuggs = document.getElementById('coachSuggs');
+  if (coachSuggs) coachSuggs.style.display = '';
   renderProgramme();
   checkOnboarding();
 }
