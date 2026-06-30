@@ -84,7 +84,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px
 .nav-icon{font-size:21px;line-height:1}
 .nav-btn.active{color:var(--accent)}.nav-btn.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--accent);border-radius:0 0 4px 4px;box-shadow:var(--glow-push)}.nav-icon{font-size:22px;line-height:1;transition:transform .2s}.nav-btn.active .nav-icon{transform:scale(1.1)}
 
-main{padding:0 0 90px;max-width:680px;margin:0 auto}
+main{padding:0 0 130px;max-width:680px;margin:0 auto}
 .tab{display:none}.tab.active{display:block}
 
 /* HERO */
@@ -863,25 +863,30 @@ body.light body::before{background:radial-gradient(ellipse at 50% -20%, rgba(255
 
 /* RECETTES */
 .recipe-card{margin:10px 14px 0;background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);overflow:hidden}
-.recipe-img{height:130px;object-fit:cover;width:100%;filter:brightness(.65) saturate(.8)}
-.recipe-hdr{padding:14px 16px 10px}
-.recipe-name{font-family:var(--fd);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
-.recipe-tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
-.recipe-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.recipe-hdr-row{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+.recipe-thumb{width:56px;height:56px;border-radius:12px;object-fit:cover;flex-shrink:0;filter:brightness(.75) saturate(.9)}
+.recipe-hdr-info{flex:1;min-width:0}
+.recipe-name{font-family:var(--fd);font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--text);line-height:1.2}
+.recipe-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.recipe-tag{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
 .tag-proteines{background:rgba(0,200,255,.12);color:var(--pull)}
 .tag-rapide{background:rgba(0,229,160,.12);color:var(--course)}
 .tag-masse{background:rgba(255,136,0,.12);color:var(--upper)}
 .tag-seche{background:rgba(255,51,85,.12);color:var(--push)}
 .tag-perf{background:rgba(155,93,229,.12);color:var(--mob)}
 .tag-veggie{background:rgba(99,214,0,.12);color:#63d600}
-.recipe-body{padding:0 16px 14px}
+.recipe-quickmacros{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600}
+.recipe-chev{color:var(--muted);font-size:11px;flex-shrink:0;transition:transform .2s}
+.recipe-chev.open{transform:rotate(180deg)}
+.recipe-body{display:none;padding:0 16px 14px;border-top:1px solid rgba(255,255,255,.04)}
+.recipe-body.open{display:block;animation:slideDown .2s ease-out}
 .recipe-section-title{font-family:var(--fd);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:12px 0 8px}
 .recipe-ingredient{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
 .recipe-ingredient:last-child{border-bottom:none}
 .recipe-qty{color:var(--muted);font-weight:600;font-family:var(--fd)}
 .recipe-step{display:flex;gap:10px;padding:7px 0;font-size:13px;color:var(--text);opacity:.85;line-height:1.5}
 .recipe-step-num{font-family:var(--fd);font-size:14px;font-weight:900;color:var(--push);flex-shrink:0;min-width:20px}
-.recipe-macros{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.04);padding:12px 16px}
+.recipe-macros{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:rgba(255,255,255,.02);border-radius:10px;margin-top:12px;padding:12px 10px}
 
 /* ADAPTED NOTICE */
 .adapted-notice{margin:10px 14px 0;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.2);border-radius:12px;padding:11px 14px;font-size:12px;color:var(--course);line-height:1.5}
@@ -894,7 +899,7 @@ body.light .plan-meal-food{color:var(--text)}
 
 
 /* ── COACH IA ── */
-.coach-fab{position:fixed;bottom:calc(80px + env(safe-area-inset-bottom,0px));right:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#ff3355,#ff8800);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,51,85,.4);z-index:400;transition:all .2s}
+.coach-fab{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom,0px));right:16px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#ff3355,#ff8800);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,51,85,.4);z-index:400;transition:all .2s}
 .coach-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(255,51,85,.5)}
 .coach-fab svg{width:24px;height:24px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .coach-fab .notif-dot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(--course);border:2px solid var(--bg);display:none}
@@ -958,6 +963,97 @@ body.light .coach-input{background:var(--bg3);border-color:var(--border2);color:
 body.light .coach-sugg{background:var(--bg3);border-color:var(--border2);color:var(--muted)}
 body.light .coach-header{border-color:var(--border)}
 body.light .coach-input-row{border-color:var(--border)}
+
+
+/* ── EXPLORATEUR D'EXERCICES ── */
+.explorer-fab{position:fixed;bottom:calc(156px + env(safe-area-inset-bottom,0px));right:16px;width:52px;height:52px;border-radius:50%;background:var(--bg2);border:1px solid rgba(255,255,255,.12);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:400;transition:all .2s}
+.explorer-fab:hover{transform:scale(1.08);border-color:var(--pull)}
+.explorer-fab svg{width:22px;height:22px;stroke:var(--pull);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.app-screen.show .explorer-fab{display:flex!important}
+@media(min-width:768px){
+  .explorer-fab{bottom:84px;right:24px;width:48px;height:48px}
+}
+
+.explorer-modal{position:fixed;bottom:0;left:0;right:0;z-index:600;display:none;flex-direction:column;background:var(--bg2);border-radius:22px 22px 0 0;border:1px solid rgba(255,255,255,.08);border-bottom:none;height:85vh;max-height:720px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.6)}
+.explorer-modal.open{display:flex!important;transform:translateY(0)}
+@media(min-width:768px){
+  .explorer-modal.open{left:auto;right:24px;bottom:24px;width:440px;height:640px;border-radius:20px;border:1px solid rgba(255,255,255,.08);max-height:80vh;transform:none}
+}
+
+.explorer-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.explorer-icon{width:40px;height:40px;border-radius:12px;background:rgba(0,200,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.explorer-icon svg{width:20px;height:20px;stroke:var(--pull);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.explorer-title{font-family:var(--fd);font-size:16px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--text)}
+.explorer-subtitle{font-size:11px;color:var(--pull);font-weight:600;margin-top:1px}
+.explorer-close{margin-left:auto;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--muted);cursor:pointer}
+.explorer-close:hover{color:var(--text)}
+
+.explorer-zones{padding:12px 14px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.05)}
+.explorer-zones::-webkit-scrollbar{display:none}
+.zone-chip{white-space:nowrap;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;flex-shrink:0}
+.zone-chip:hover{border-color:var(--pull)}
+.zone-chip.active{background:rgba(0,200,255,.15);border-color:var(--pull);color:var(--pull)}
+
+.explorer-body{flex:1;overflow-y:auto;padding:10px 14px 14px}
+.explorer-list-item{display:flex;align-items:center;gap:12px;padding:11px 12px;background:var(--bg3);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .15s;border:1px solid transparent}
+.explorer-list-item:hover{border-color:rgba(0,200,255,.3)}
+.exl-thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;filter:brightness(.8)}
+.exl-info{flex:1;min-width:0}
+.exl-name{font-size:13px;font-weight:700;color:var(--text)}
+.exl-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.exl-arrow{color:var(--muted2);font-size:14px;flex-shrink:0}
+
+.explorer-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.explorer-empty p{font-size:13px;margin-top:8px}
+
+/* Fiche détail exercice */
+.exd-back{display:flex;align-items:center;gap:8px;padding:14px 14px 4px;cursor:pointer;color:var(--pull);font-size:13px;font-weight:600;flex-shrink:0}
+.exd-img{width:100%;height:140px;object-fit:cover;filter:brightness(.7) saturate(.9)}
+.exd-content{padding:14px 16px;overflow-y:auto;flex:1}
+.exd-name{font-family:var(--fd);font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:var(--text);margin-bottom:8px}
+.exd-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.exd-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px;background:var(--bg3);color:var(--muted)}
+.exd-section-title{font-family:var(--fd);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.exd-muscles{font-size:13px;color:var(--text);line-height:1.6}
+.exd-equip-row{display:flex;gap:6px;flex-wrap:wrap}
+.exd-equip-tag{font-size:11px;padding:4px 10px;border-radius:8px;background:var(--bg3);color:var(--text)}
+
+/* Mini log libre */
+.exd-log-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.exd-log-field label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;display:block;margin-bottom:4px}
+.exd-log-input{width:100%;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 10px;color:var(--text);font-size:14px;font-family:var(--fb);outline:none}
+.exd-log-input:focus{border-color:var(--pull)}
+.exd-log-save{width:100%;padding:12px;margin-top:12px;background:rgba(0,200,255,.12);border:1px solid var(--pull);border-radius:10px;color:var(--pull);font-family:var(--fd);font-size:13px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.exd-log-save:hover{background:rgba(0,200,255,.2)}
+.exd-log-saved{display:none;text-align:center;color:var(--course);font-size:12px;font-weight:600;margin-top:8px}
+.exd-log-saved.show{display:block}
+.exd-history{margin-top:6px}
+.exd-history-item{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.exd-history-item:last-child{border-bottom:none}
+
+body.light .explorer-modal{background:var(--bg2);border-color:var(--border)}
+body.light .explorer-fab{background:var(--bg2);border-color:var(--border)}
+body.light .zone-chip{background:var(--bg3);border-color:var(--border2);color:var(--muted)}
+body.light .explorer-list-item{background:var(--bg3)}
+body.light .exd-log-input{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+body.light .explorer-header{border-color:var(--border)}
+body.light .explorer-zones{border-color:var(--border)}
+
+
+/* ── TOUR GUIDÉ (coachmarks) ── */
+.tour-overlay{position:fixed;inset:0;z-index:900;display:none;background:rgba(6,6,13,.78);backdrop-filter:blur(1px)}
+.tour-overlay.show{display:block}
+.tour-spotlight{position:absolute;border-radius:16px;box-shadow:0 0 0 9999px rgba(6,6,13,.78);transition:all .35s cubic-bezier(.4,0,.2,1);pointer-events:none;border:2px solid var(--push)}
+.tour-bubble{position:absolute;width:260px;background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.5);transition:all .35s cubic-bezier(.4,0,.2,1);z-index:901}
+.tour-step-num{font-family:var(--fd);font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--push);margin-bottom:6px}
+.tour-bubble-title{font-family:var(--fd);font-size:16px;font-weight:900;text-transform:uppercase;letter-spacing:.3px;color:var(--text);margin-bottom:6px}
+.tour-bubble-text{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.tour-bubble-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tour-skip{font-size:11px;color:var(--muted2);background:none;border:none;cursor:pointer;padding:4px 0}
+.tour-next{font-family:var(--fd);font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:linear-gradient(135deg,#ff3355,#ff8800);color:white;border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
+.tour-arrow{position:absolute;width:14px;height:14px;background:var(--bg2);border:1px solid rgba(255,255,255,.1);transform:rotate(45deg);z-index:900}
+body.light .tour-bubble{background:var(--bg2);border-color:var(--border)}
+body.light .tour-arrow{background:var(--bg2);border-color:var(--border)}
 
 
 /* PROFILE PHOTO */
@@ -1056,6 +1152,24 @@ body.light .coach-input-row{border-color:var(--border)}
       </div>
       <button class="auth-btn" id="signupBtn" onclick="handleSignup()">Créer mon compte</button>
     </div>
+  </div>
+</div>
+
+
+<!-- BIENVENUE — premier écran avant le questionnaire -->
+<div class="onboard-overlay hidden" id="welcomeScreen" style="align-items:center">
+  <div class="onboard-box" style="text-align:center;max-width:420px">
+    <div style="width:64px;height:64px;margin:0 auto 18px">
+      <svg viewBox="0 0 64 64" width="64" height="64" fill="none">
+        <defs><linearGradient id="welcomeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff3355"/><stop offset="100%" stop-color="#ff7700"/></linearGradient></defs>
+        <rect width="64" height="64" rx="16" fill="#0a0a0f"/>
+        <polygon points="32,10 52,48 12,48" fill="url(#welcomeG)" opacity="0.95"/>
+        <circle cx="32" cy="10" r="3" fill="white"/>
+      </svg>
+    </div>
+    <div class="ob-title" style="margin-bottom:10px">Bienvenue sur Apex Training</div>
+    <div class="ob-sub" style="margin-bottom:24px">On va d'abord te poser quelques questions pour construire <strong>ton</strong> programme — objectif, niveau, matériel, zones sensibles. Ça prend 1 minute.<br><br>Ensuite, on te fera faire un petit tour des fonctionnalités clés.</div>
+    <button class="ob-next" onclick="closeWelcomeAndStartOnboarding()">Commencer</button>
   </div>
 </div>
 
@@ -1414,6 +1528,48 @@ body.light .coach-input-row{border-color:var(--border)}
     <button class="coach-send" id="coachSend" onclick="sendCoachMsg()">
       <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
+  </div>
+</div>
+
+<!-- EXPLORATEUR D'EXERCICES -->
+<button class="explorer-fab" onclick="toggleExplorer()" id="explorerFab" title="Choisir un exercice">
+  <svg viewBox="0 0 24 24"><path d="M6.5 6.5h11v11h-11z"/><path d="M2 9.5h4M2 14.5h4M18 9.5h4M18 14.5h4M9.5 2v4M14.5 2v4M9.5 18v4M14.5 18v4"/></svg>
+</button>
+
+<div class="explorer-modal" id="explorerModal">
+  <div id="explorer-list-view">
+    <div class="explorer-header">
+      <div class="explorer-icon"><svg viewBox="0 0 24 24"><path d="M6.5 6.5h11v11h-11z"/><path d="M2 9.5h4M2 14.5h4M18 9.5h4M18 14.5h4M9.5 2v4M14.5 2v4M9.5 18v4M14.5 18v4"/></svg></div>
+      <div>
+        <div class="explorer-title">Exercices libres</div>
+        <div class="explorer-subtitle">Sans suivre le programme</div>
+      </div>
+      <button class="explorer-close" onclick="toggleExplorer()">Fermer</button>
+    </div>
+    <div class="explorer-zones" id="explorerZones"></div>
+    <div class="explorer-body" id="explorerBody"></div>
+  </div>
+  <div id="explorer-detail-view" style="display:none;flex-direction:column;height:100%">
+    <div class="exd-back" onclick="closeExerciseDetail()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Retour aux exercices
+    </div>
+    <div id="explorer-detail-content" style="overflow-y:auto;flex:1"></div>
+  </div>
+</div>
+
+<!-- TOUR GUIDÉ -->
+<div class="tour-overlay" id="tourOverlay">
+  <div class="tour-spotlight" id="tourSpotlight"></div>
+  <div class="tour-arrow" id="tourArrow"></div>
+  <div class="tour-bubble" id="tourBubble">
+    <div class="tour-step-num" id="tourStepNum"></div>
+    <div class="tour-bubble-title" id="tourTitle"></div>
+    <div class="tour-bubble-text" id="tourText"></div>
+    <div class="tour-bubble-actions">
+      <button class="tour-skip" onclick="skipTour()">Passer</button>
+      <button class="tour-next" id="tourNextBtn" onclick="nextTourStep()">Suivant</button>
+    </div>
   </div>
 </div>
 
@@ -2546,7 +2702,7 @@ function renderProgramme(){
   for(let ww=1;ww<=12;ww++)getDays(ww).forEach((_,di)=>{total++;if(S.done&&S.done[ww+'-'+di])done++;});
   const pct=total>0?Math.round(done/total*100):0;
   const sesDone=days.filter((_,di)=>S.done&&S.done[w+'-'+di]).length;
-  let html=`<div class="hero-week"><div class="hero-bg"></div><div class="hero-content">
+  let html=`<div class="hero-week" id="hero-week-card"><div class="hero-bg"></div><div class="hero-content">
     <div class="hero-top"><div><div class="hero-week-label">${(S.profile&&S.profile.name)?'Bonjour '+S.profile.name+' !':'Semaine '+w+' sur 12'}</div><div class="hero-title">SEMAINE ${w}</div></div><div class="hero-phase">${getPhase(w)}</div></div>
     <div class="hero-bottom"><div style="display:flex;gap:18px"><div><div class="hero-stat-num">${sesDone}</div><div class="hero-stat-label">Validées</div></div><div><div class="hero-stat-num">${w%2===0?'B':'A'}</div><div class="hero-stat-label">Semaine</div></div></div><div><div class="hero-pct">${pct}%</div><div class="hero-pct-label">Complété</div></div></div>
   </div></div>
@@ -3378,6 +3534,11 @@ function toggleEquip(equip, el) {
 }
 
 function finishOnboarding() {
+  // Capturé AVANT d'écraser onboarded — distingue le tout premier passage
+  // d'un simple relaunch volontaire depuis l'onglet Profil (qui ne doit jamais
+  // redéclencher le tour guidé pour un utilisateur déjà expérimenté)
+  const isFirstTimeOnboarding = !S.profile?.onboarded;
+
   // Save preferences to profile
   if (!S.profile) S.profile = {};
   S.profile.prefs = {
@@ -3396,6 +3557,10 @@ function finishOnboarding() {
   buildAndApplyAdaptedProgram();
   renderProgramme();
   renderPrefsSummary();
+
+  if (isFirstTimeOnboarding && !S.profile.tourDone) {
+    setTimeout(startTour, 500);
+  }
 }
 
 function skipOnboarding() {
@@ -3403,6 +3568,9 @@ function skipOnboarding() {
   S.profile.onboarded = true;
   save();
   document.getElementById('onboardingQ').classList.add('hidden');
+  if (!S.profile.tourDone) {
+    setTimeout(startTour, 500);
+  }
 }
 
 // ── PROGRAMME ADAPTATIF ──
@@ -3462,7 +3630,9 @@ window.getDays = getDays;
 // ── INIT CHECK ──
 function checkOnboarding() {
   if (!S.profile?.onboarded && currentUser) {
-    setTimeout(showOnboarding, 800);
+    setTimeout(() => {
+      document.getElementById('welcomeScreen')?.classList.remove('hidden');
+    }, 800);
   } else if (S.profile?.prefs) {
     buildAndApplyAdaptedProgram();
   }
@@ -4168,6 +4338,7 @@ function togglePlanDay(i) {
   renderPlan7j();
 }
 
+let openRecipe = null;
 function renderRecettes() {
   const el = document.getElementById('nutri-recettes-content');
   if (!el) return;
@@ -4181,18 +4352,23 @@ function renderRecettes() {
     return ar - br;
   });
 
-  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Recettes adaptées à ton objectif</strong>Les recettes les plus pertinentes pour toi apparaissent en premier.</div>`;
-  sorted.forEach(r => {
+  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Recettes adaptées à ton objectif</strong>Les recettes les plus pertinentes pour toi apparaissent en premier. Touche une recette pour voir la préparation.</div>`;
+  sorted.forEach((r, i) => {
+    const isOpen = openRecipe === i;
     html += `<div class="recipe-card">
-      <img class="recipe-img" src="${r.img}" alt="${r.name}" loading="lazy">
-      <div class="recipe-hdr">
-        <div class="recipe-name">${r.name}</div>
-        <div class="recipe-tags">
-          ${r.tags.map(t=>`<span class="recipe-tag tag-${t}">${TAG_LABELS[t]||t}</span>`).join('')}
-          <span class="recipe-tag" style="background:var(--bg3);color:var(--muted)">${r.time}</span>
+      <div class="recipe-hdr-row" onclick="toggleRecipe(${i})">
+        <img class="recipe-thumb" src="${r.img}" alt="${r.name}" loading="lazy">
+        <div class="recipe-hdr-info">
+          <div class="recipe-name">${r.name}</div>
+          <div class="recipe-tags">
+            ${r.tags.map(t=>`<span class="recipe-tag tag-${t}">${TAG_LABELS[t]||t}</span>`).join('')}
+            <span class="recipe-tag" style="background:var(--bg3);color:var(--muted)">${r.time}</span>
+          </div>
+          <div class="recipe-quickmacros">${r.kcal} kcal · ${r.pro}g protéines</div>
         </div>
+        <span class="recipe-chev ${isOpen?'open':''}">▾</span>
       </div>
-      <div class="recipe-body">
+      <div class="recipe-body ${isOpen?'open':''}">
         <div class="recipe-section-title">Ingrédients</div>
         ${r.ingredients.map(ing=>`
           <div class="recipe-ingredient">
@@ -4205,17 +4381,23 @@ function renderRecettes() {
             <span class="recipe-step-num">${i+1}</span>
             <span>${s}</span>
           </div>`).join('')}
-      </div>
-      <div class="recipe-macros">
-        <div class="plan-macro"><div class="plan-macro-val pro-val">${r.pro}g</div><div class="plan-macro-lbl">Protéines</div></div>
-        <div class="plan-macro"><div class="plan-macro-val carb-val">${r.carb}g</div><div class="plan-macro-lbl">Glucides</div></div>
-        <div class="plan-macro"><div class="plan-macro-val fat-val">${r.fat}g</div><div class="plan-macro-lbl">Lipides</div></div>
-        <div class="plan-macro"><div class="plan-macro-val kcal-val">${r.kcal}</div><div class="plan-macro-lbl">Kcal</div></div>
+        <div class="recipe-macros">
+          <div class="plan-macro"><div class="plan-macro-val pro-val">${r.pro}g</div><div class="plan-macro-lbl">Protéines</div></div>
+          <div class="plan-macro"><div class="plan-macro-val carb-val">${r.carb}g</div><div class="plan-macro-lbl">Glucides</div></div>
+          <div class="plan-macro"><div class="plan-macro-val fat-val">${r.fat}g</div><div class="plan-macro-lbl">Lipides</div></div>
+          <div class="plan-macro"><div class="plan-macro-val kcal-val">${r.kcal}</div><div class="plan-macro-lbl">Kcal</div></div>
+        </div>
       </div>
     </div>`;
   });
   el.innerHTML = html;
 }
+
+function toggleRecipe(i) {
+  openRecipe = openRecipe === i ? null : i;
+  renderRecettes();
+}
+window.toggleRecipe = toggleRecipe;
 
 window.showNutriPanel = showNutriPanel;
 window.togglePlanDay = togglePlanDay;
@@ -4497,6 +4679,345 @@ window.sendCoachSugg = sendCoachSugg;
 window.autoResize = autoResize;
 
 
+// ══════════════════════════════════════════════
+// EXPLORATEUR D'EXERCICES — par zone, indépendant du programme
+// ══════════════════════════════════════════════
+let explorerOpen = false;
+let currentZone = 'pec';
+let currentExName = null;
+
+// Zones du corps simplifiées → groupes techniques de EX_LIBRARY
+const BODY_ZONES = [
+  { id:'pec',     label:'Pectoraux', groups:['pec','pec_haut'] },
+  { id:'dos',     label:'Dos',       groups:['dos','grip'] },
+  { id:'epaule',  label:'Épaules',   groups:['epaule','epaule_lat','epaule_post'] },
+  { id:'bras',    label:'Bras',      groups:['biceps','triceps'] },
+  { id:'jambes',  label:'Jambes',    groups:['quad','ischio','mollets','tibial'] },
+  { id:'fessier', label:'Fessiers',  groups:['fessier'] },
+  { id:'abdos',   label:'Abdos',     groups:['core_ant','core_lat'] },
+  { id:'cardio',  label:'Cardio',    groups:['endurance','full_body'] },
+  { id:'mobilite',label:'Mobilité',  groups:['mobilite'] },
+];
+
+function toggleExplorer() {
+  explorerOpen = !explorerOpen;
+  const modal = document.getElementById('explorerModal');
+  if (explorerOpen) {
+    modal.classList.add('open');
+    showExplorerList();
+    renderExplorerZones();
+    renderExplorerList();
+  } else {
+    modal.classList.remove('open');
+  }
+}
+
+function showExplorerList() {
+  document.getElementById('explorer-list-view').style.display = 'block';
+  document.getElementById('explorer-detail-view').style.display = 'none';
+}
+
+function renderExplorerZones() {
+  const el = document.getElementById('explorerZones');
+  if (!el) return;
+  el.innerHTML = BODY_ZONES.map(z =>
+    `<button class="zone-chip ${z.id===currentZone?'active':''}" onclick="selectZone('${z.id}')">${z.label}</button>`
+  ).join('');
+}
+
+function selectZone(zoneId) {
+  currentZone = zoneId;
+  renderExplorerZones();
+  renderExplorerList();
+}
+
+function renderExplorerList() {
+  const el = document.getElementById('explorerBody');
+  if (!el || typeof EX_LIBRARY === 'undefined') return;
+  const zone = BODY_ZONES.find(z => z.id === currentZone);
+  if (!zone) return;
+
+  // Respecte les zones sensibles déclarées dans le profil pour ne pas suggérer
+  // un exercice contre-indiqué, même en mode libre hors-programme
+  const sensitiveZones = S.profile?.prefs?.zones_sensibles || [];
+
+  const matches = Object.entries(EX_LIBRARY)
+    .filter(([, ex]) => zone.groups.includes(ex.group))
+    .filter(([, ex]) => !ex.zones_sensibles.some(zs => sensitiveZones.includes(zs)));
+
+  if (matches.length === 0) {
+    el.innerHTML = `<div class="explorer-empty">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17"/></svg>
+      <p>Aucun exercice disponible pour cette zone avec ton équipement actuel ou tes zones sensibles.</p>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = matches.map(([name, ex]) => `
+    <div class="explorer-list-item" onclick="openExerciseDetail('${name.replace(/'/g,"\\'")}')">
+      <img class="exl-thumb" src="${ex.photo}" alt="${name}">
+      <div class="exl-info">
+        <div class="exl-name">${name}</div>
+        <div class="exl-meta">${ex.sets} · ${ex.niveau}</div>
+      </div>
+      <span class="exl-arrow">›</span>
+    </div>`).join('');
+}
+
+function openExerciseDetail(name) {
+  currentExName = name;
+  const ex = EX_LIBRARY[name];
+  if (!ex) return;
+
+  document.getElementById('explorer-list-view').style.display = 'none';
+  document.getElementById('explorer-detail-view').style.display = 'flex';
+
+  const equipLabels = (ex.equipment.length ? ex.equipment.map(e => EQUIPMENT_LABELS[e] || e) : ['Aucun matériel nécessaire']);
+  const restMin = Math.floor(ex.rest / 60);
+  const restSec = ex.rest % 60;
+  const restStr = ex.rest === 0 ? '' : (restMin > 0 ? `${restMin}min${restSec ? restSec+'s' : ''}` : `${restSec}s`);
+
+  // Historique des logs libres pour cet exercice (les 5 plus récents)
+  const history = (S.freeLogData?.[name] || []).slice(-5).reverse();
+
+  const el = document.getElementById('explorer-detail-content');
+  el.innerHTML = `
+    <img class="exd-img" src="${ex.photo}" alt="${name}">
+    <div class="exd-content">
+      <div class="exd-name">${name}</div>
+      <div class="exd-tags">
+        <span class="exd-tag">${ex.sets}</span>
+        ${restStr ? `<span class="exd-tag">Repos ${restStr}</span>` : ''}
+        <span class="exd-tag">${ex.niveau}</span>
+      </div>
+
+      <div class="exd-section-title">Muscles sollicités</div>
+      <div class="exd-muscles">${ex.muscles.join(' · ')}</div>
+
+      <div class="exd-section-title">Équipement</div>
+      <div class="exd-equip-row">${equipLabels.map(e => `<span class="exd-equip-tag">${e}</span>`).join('')}</div>
+
+      ${ex.variantes ? `<div class="exd-section-title">Variantes</div><div class="exd-muscles">${ex.variantes.join(' · ')}</div>` : ''}
+      ${ex.alternatives_maison ? `<div class="exd-section-title">Alternative maison</div><div class="exd-muscles">${ex.alternatives_maison.join(' · ')}</div>` : ''}
+
+      <div class="exd-section-title">Logger une série libre</div>
+      <div class="exd-log-row">
+        <div class="exd-log-field"><label>Charge (kg)</label><input class="exd-log-input" id="exd-kg" type="number" inputmode="decimal" placeholder="0"></div>
+        <div class="exd-log-field"><label>Répétitions</label><input class="exd-log-input" id="exd-reps" type="number" inputmode="numeric" placeholder="0"></div>
+      </div>
+      <button class="exd-log-save" onclick="saveFreeLog('${name.replace(/'/g,"\\'")}')">Enregistrer cette série</button>
+      <div class="exd-log-saved" id="exd-log-saved">Série enregistrée</div>
+
+      ${history.length ? `<div class="exd-section-title">Historique récent</div><div class="exd-history">${history.map(h => `<div class="exd-history-item"><span>${h.date}</span><span>${h.kg}kg × ${h.reps}</span></div>`).join('')}</div>` : ''}
+    </div>`;
+}
+
+function closeExerciseDetail() {
+  showExplorerList();
+}
+
+// Stockage totalement séparé du programme 12 semaines (S.logData / S.week) —
+// une séance libre par zone ne doit jamais polluer les semaines/PR du programme officiel
+function saveFreeLog(name) {
+  const kgEl = document.getElementById('exd-kg');
+  const repsEl = document.getElementById('exd-reps');
+  const kg = parseFloat(kgEl?.value) || 0;
+  const reps = parseInt(repsEl?.value) || 0;
+  if (kg <= 0 && reps <= 0) return;
+
+  if (!S.freeLogData) S.freeLogData = {};
+  if (!S.freeLogData[name]) S.freeLogData[name] = [];
+  const today = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'2-digit'});
+  S.freeLogData[name].push({ date: today, kg, reps, ts: Date.now() });
+  // Garde un historique raisonnable par exercice
+  if (S.freeLogData[name].length > 30) S.freeLogData[name] = S.freeLogData[name].slice(-30);
+
+  save();
+  if (kgEl) kgEl.value = '';
+  if (repsEl) repsEl.value = '';
+  const savedEl = document.getElementById('exd-log-saved');
+  if (savedEl) {
+    savedEl.classList.add('show');
+    setTimeout(() => savedEl.classList.remove('show'), 1800);
+  }
+  // Rafraîchit l'historique affiché
+  openExerciseDetail(name);
+}
+
+// Ferme le panneau si on clique en dehors (même pattern que le coach)
+document.addEventListener('click', e => {
+  const modal = document.getElementById('explorerModal');
+  const fab = document.getElementById('explorerFab');
+  if (explorerOpen && modal && !modal.contains(e.target) && !fab?.contains(e.target)) {
+    toggleExplorer();
+  }
+});
+
+window.toggleExplorer = toggleExplorer;
+window.selectZone = selectZone;
+window.openExerciseDetail = openExerciseDetail;
+window.closeExerciseDetail = closeExerciseDetail;
+window.saveFreeLog = saveFreeLog;
+
+
+// ══════════════════════════════════════════════
+// TOUR GUIDÉ — bulles pointées sur les vrais boutons
+// ══════════════════════════════════════════════
+
+// Étapes du tour : chaque étape cible un élément réel du DOM via son id.
+// Le tab nécessaire (si besoin) est activé juste avant d'afficher l'étape,
+// pour que l'élément soit bien visible et mesurable à l'écran.
+const TOUR_STEPS = [
+  {
+    targetId: 'hero-week-card',
+    tab: 'programme',
+    title: 'Ton programme',
+    text: 'Voici ta semaine en cours, adaptée à ton profil. Chaque carte en dessous est une séance — touche-la pour voir les exercices et valider ta séance.',
+    placement: 'bottom',
+  },
+  {
+    targetId: 'coachFab',
+    tab: 'programme',
+    title: 'Le Coach',
+    text: 'Une question sur la technique, une douleur, la nutrition ou tes charges ? Le coach connaît ton profil et ton programme, demande-lui directement.',
+    placement: 'top',
+  },
+  {
+    targetId: 'explorerFab',
+    tab: 'programme',
+    title: 'Exercices libres',
+    text: 'Envie de bosser une zone précise sans suivre le programme du jour ? Choisis une zone du corps ici et logue ta séance librement.',
+    placement: 'top',
+  },
+  {
+    targetId: 'nav-nutrition',
+    tab: 'programme',
+    title: 'Nutrition',
+    text: 'Un plan repas complet sur 7 jours et des recettes détaillées, adaptés à ton objectif et ton programme réel.',
+    placement: 'top',
+  },
+  {
+    targetId: 'nav-profile',
+    tab: 'programme',
+    title: 'Profil & badges',
+    text: 'Modifie tes infos, refais le questionnaire si besoin, et suis tes badges débloqués au fil de ta progression.',
+    placement: 'top',
+  },
+];
+let tourStepIndex = 0;
+let tourResizeHandler = null;
+
+function closeWelcomeAndStartOnboarding() {
+  document.getElementById('welcomeScreen')?.classList.add('hidden');
+  showOnboarding();
+}
+
+function startTour() {
+  tourStepIndex = 0;
+  document.getElementById('tourOverlay')?.classList.add('show');
+  showTab('programme');
+  // Laisse le DOM du programme se peindre avant de mesurer les positions réelles
+  setTimeout(renderTourStep, 250);
+
+  tourResizeHandler = () => renderTourStep();
+  window.addEventListener('resize', tourResizeHandler);
+}
+
+function renderTourStep() {
+  const step = TOUR_STEPS[tourStepIndex];
+  if (!step) { endTour(); return; }
+
+  if (step.tab) showTab(step.tab);
+
+  // Le hero card du programme n'a pas d'id dédié à l'origine — on le cible
+  // via son sélecteur de classe existant si l'id explicite n'est pas trouvé
+  let target = document.getElementById(step.targetId);
+  if (!target && step.targetId === 'hero-week-card') {
+    target = document.querySelector('.hero-week');
+  }
+  if (!target) {
+    // Élément introuvable (ex: utilisateur sur petit écran où le FAB est masqué) — on saute cette étape
+    tourStepIndex++;
+    renderTourStep();
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
+  const spotlight = document.getElementById('tourSpotlight');
+  const bubble = document.getElementById('tourBubble');
+  const arrow = document.getElementById('tourArrow');
+
+  // Spotlight calé exactement sur l'élément, avec une petite marge
+  const pad = 6;
+  spotlight.style.top = (rect.top - pad) + 'px';
+  spotlight.style.left = (rect.left - pad) + 'px';
+  spotlight.style.width = (rect.width + pad*2) + 'px';
+  spotlight.style.height = (rect.height + pad*2) + 'px';
+
+  // Texte de l'étape
+  document.getElementById('tourStepNum').textContent = `Étape ${tourStepIndex+1} / ${TOUR_STEPS.length}`;
+  document.getElementById('tourTitle').textContent = step.title;
+  document.getElementById('tourText').textContent = step.text;
+  document.getElementById('tourNextBtn').textContent = tourStepIndex === TOUR_STEPS.length - 1 ? 'Terminer' : 'Suivant';
+
+  // Positionnement de la bulle au-dessus ou en dessous selon l'espace disponible,
+  // toujours dans les limites de l'écran (mobile en particulier)
+  const bubbleWidth = 260;
+  const margin = 12;
+  let bubbleLeft = rect.left + rect.width/2 - bubbleWidth/2;
+  bubbleLeft = Math.max(margin, Math.min(bubbleLeft, window.innerWidth - bubbleWidth - margin));
+
+  const placeAbove = step.placement === 'top' && rect.top > 220;
+  let bubbleTop;
+  if (placeAbove) {
+    bubbleTop = rect.top - pad - 14 - 150; // approx hauteur bulle
+    bubbleTop = Math.max(margin, bubbleTop);
+  } else {
+    bubbleTop = rect.bottom + pad + 14;
+  }
+  bubble.style.left = bubbleLeft + 'px';
+  bubble.style.top = bubbleTop + 'px';
+
+  // Petite flèche pointant vers le centre de l'élément ciblé
+  const arrowLeft = Math.max(rect.left + rect.width/2 - 7, bubbleLeft + 16);
+  arrow.style.left = Math.min(arrowLeft, bubbleLeft + bubbleWidth - 24) + 'px';
+  if (placeAbove) {
+    arrow.style.top = (bubbleTop + 150 - 7) + 'px';
+  } else {
+    arrow.style.top = (bubbleTop - 7) + 'px';
+  }
+}
+
+function nextTourStep() {
+  tourStepIndex++;
+  if (tourStepIndex >= TOUR_STEPS.length) {
+    endTour();
+  } else {
+    renderTourStep();
+  }
+}
+
+function skipTour() {
+  endTour();
+}
+
+function endTour() {
+  document.getElementById('tourOverlay')?.classList.remove('show');
+  if (tourResizeHandler) {
+    window.removeEventListener('resize', tourResizeHandler);
+    tourResizeHandler = null;
+  }
+  if (!S.profile) S.profile = {};
+  S.profile.tourDone = true;
+  save();
+}
+
+window.closeWelcomeAndStartOnboarding = closeWelcomeAndStartOnboarding;
+window.startTour = startTour;
+window.nextTourStep = nextTourStep;
+window.skipTour = skipTour;
+
+
 // ── PROFILE PHOTO ──
 function togglePhotoOptions() {
   const opts = document.getElementById('photoOptions');
@@ -4520,29 +5041,64 @@ function triggerPhotoUpload() {
 function handlePhotoUpload(event) {
   const file = event.target.files?.[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) {
-    alert('Photo trop lourde — maximum 2MB.');
+  if (file.size > 8 * 1024 * 1024) {
+    alert('Photo trop lourde — maximum 8MB.');
+    event.target.value = '';
     return;
   }
   const reader = new FileReader();
+  reader.onerror = () => {
+    alert('Impossible de lire ce fichier. Réessaie avec une autre photo.');
+    event.target.value = '';
+  };
   reader.onload = (e) => {
-    // Resize to max 400x400 before saving
     const img = new Image();
+    let settled = false;
+    // Filet de sécurité : si ni onload ni onerror ne se déclenchent dans les 8s
+    // (observé en test : certaines images restent bloquées sans jamais émettre
+    // d'événement), on prévient l'utilisateur au lieu de le laisser dans le vide.
+    const safetyTimer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      alert('Le chargement de la photo a pris trop de temps. Réessaie avec une autre image.');
+      event.target.value = '';
+    }, 8000);
+
+    img.onerror = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(safetyTimer);
+      // Cas fréquent : format HEIC (photos iPhone par défaut) non décodable par <img>
+      // dans certains navigateurs — on prévient clairement au lieu d'échouer en silence.
+      alert('Ce format de photo n\'est pas supporté par ton navigateur (souvent les photos .HEIC d\'iPhone). Essaie une photo JPEG ou PNG, ou active "Le plus compatible" dans Réglages > Appareil photo > Formats sur iPhone.');
+      event.target.value = '';
+    };
     img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const size = Math.min(img.width, img.height);
-      canvas.width = 200; canvas.height = 200;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img,
-        (img.width-size)/2, (img.height-size)/2, size, size,
-        0, 0, 200, 200
-      );
-      const resized = canvas.toDataURL('image/jpeg', 0.8);
-      if (!S.profile) S.profile = {};
-      S.profile.photo = resized;
-      save();
-      renderProfileHero();
-      showSaveToast();
+      if (settled) return;
+      settled = true;
+      clearTimeout(safetyTimer);
+      try {
+        const canvas = document.createElement('canvas');
+        const size = Math.min(img.width, img.height);
+        canvas.width = 200; canvas.height = 200;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Canvas context unavailable');
+        ctx.drawImage(img,
+          (img.width-size)/2, (img.height-size)/2, size, size,
+          0, 0, 200, 200
+        );
+        const resized = canvas.toDataURL('image/jpeg', 0.8);
+        if (!S.profile) S.profile = {};
+        S.profile.photo = resized;
+        save();
+        renderProfileHero();
+        showSaveToast();
+      } catch (err) {
+        console.error('Photo processing error:', err);
+        alert('Une erreur est survenue lors du traitement de la photo. Réessaie avec une autre image.');
+      } finally {
+        event.target.value = '';
+      }
     };
     img.src = e.target.result;
   };
