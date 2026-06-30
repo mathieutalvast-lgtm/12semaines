@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -2365,7 +2365,7 @@ const WEEK_A=[
 ];
 const WEEK_B=[...WEEK_A.slice(0,6),{jour:'Dimanche',type:'jambes',photo:'jambes',label:'JAMBES',sub:'Renforcement coureur · Genoux · Chevilles · ~60 min',dur:'~60 min',warmup:"Mobilité 10 min OBLIGATOIRE avant cette séance.",exercises:['Presse Inclinée','Soulevé de Terre Roumain','Fentes Marchées','Hip Thrust Barre','Mollets Debout (Step)','Tibialis Raises']}];
 
-const getDays=w=>w%2===0?WEEK_B:WEEK_A;
+let getDays=w=>w%2===0?WEEK_B:WEEK_A;
 const getPhase=w=>w<=4?'Phase 1 — Adaptation':w<=8?'Phase 2 — Progression':'Phase 3 — Consolidation';
 const PR_KEYS=[{key:'pr_dc',label:'Dév. Couché',unit:'kg'},{key:'pr_trac',label:'Tractions',unit:'reps'},{key:'pr_mil',label:'Militaire',unit:'kg'}];
 
@@ -2867,6 +2867,7 @@ initServiceWorker();
 // ── PROFILE ──
 window.saveProfile = function saveProfile() {
   S.profile = {
+    ...S.profile,
     name: document.getElementById('p-name')?.value || '',
     weight: parseFloat(document.getElementById('p-weight')?.value) || 0,
     age: parseInt(document.getElementById('p-age')?.value) || 0,
@@ -3302,12 +3303,13 @@ function buildAndApplyAdaptedProgram() {
 
 // Override getDays to use adapted program if available
 const _origGetDays = getDays;
-window.getDays = function(w) {
+getDays = function(w) {
   if (ADAPTED_WEEK_A) {
     return w % 2 === 0 ? ADAPTED_WEEK_B : ADAPTED_WEEK_A;
   }
   return _origGetDays(w);
 };
+window.getDays = getDays;
 
 // ── INIT CHECK ──
 function checkOnboarding() {
