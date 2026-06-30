@@ -1748,7 +1748,19 @@ async function loadUserData() {
   document.getElementById('syncBadge').classList.add('show');
   try {
     const { data } = await sb.from('user_progress').select('data').eq('user_id', currentUser.id).single();
-    if (data && data.data) S = { ...S, ...data.data };
+    if (data && data.data) {
+      // Fusion profonde sur `profile` plutôt qu'un remplacement complet : un fetch
+      // serveur déclenché juste avant qu'une sauvegarde locale (debounced 800ms)
+      // n'ait fini d'écrire pouvait écraser silencieusement des changements tout
+      // juste faits localement (ex: onboarded passé à true puis "réinitialisé"
+      // par une lecture distante obsolète qui arrivait juste après).
+      const remote = data.data;
+      const mergedProfile = { ...(remote.profile || {}), ...(S.profile || {}) };
+      // Un flag "fait" localement ne doit jamais régresser à cause d'une lecture distante en retard
+      if (S.profile?.onboarded) mergedProfile.onboarded = true;
+      if (S.profile?.tourDone) mergedProfile.tourDone = true;
+      S = { ...S, ...remote, profile: mergedProfile };
+    }
   } catch(e) { /* first time user, no data yet */ }
 }
 
