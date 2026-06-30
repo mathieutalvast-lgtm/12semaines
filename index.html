@@ -1069,6 +1069,7 @@ body.light .coach-input-row{border-color:var(--border)}
       <div class="ob-dot" id="odot2"></div>
       <div class="ob-dot" id="odot3"></div>
       <div class="ob-dot" id="odot4"></div>
+      <div class="ob-dot" id="odot5"></div>
     </div>
 
     <!-- STEP 0 — Objectif -->
@@ -1126,8 +1127,20 @@ body.light .coach-input-row{border-color:var(--border)}
       <button class="ob-next" id="ob-next-3" onclick="nextStep(4)">Continuer</button>
     </div>
 
-    <!-- STEP 4 — Équipements -->
+    <!-- STEP 4 — Fréquence -->
     <div class="ob-step" id="ob-step-4">
+      <div class="ob-title">Combien de séances par semaine ?</div>
+      <div class="ob-sub">Sois réaliste — un programme tenu à 3 séances bat un programme à 6 séances abandonné.</div>
+      <div class="ob-options">
+        <div class="ob-option" onclick="selectOb(4,'frequence',3,this)"><div class="ob-opt-icon">3J</div><div><div class="ob-opt-label">3 jours / semaine</div><div class="ob-opt-sub">Emploi du temps chargé, débuter en douceur</div></div></div>
+        <div class="ob-option" onclick="selectOb(4,'frequence',4,this)"><div class="ob-opt-icon">4J</div><div><div class="ob-opt-label">4 jours / semaine</div><div class="ob-opt-sub">Bon équilibre régularité / récupération</div></div></div>
+        <div class="ob-option" onclick="selectOb(4,'frequence',6,this)"><div class="ob-opt-icon">6J</div><div><div class="ob-opt-label">6 jours / semaine</div><div class="ob-opt-sub">Programme complet, forte disponibilité</div></div></div>
+      </div>
+      <button class="ob-next" id="ob-next-4" onclick="nextStep(5)" disabled>Continuer</button>
+    </div>
+
+    <!-- STEP 5 — Équipements -->
+    <div class="ob-step" id="ob-step-5">
       <div class="ob-title">Ton équipement ?</div>
       <div class="ob-sub">Coche ce dont tu disposes. On s'adapte à ta salle ou chez toi.</div>
       <div class="ob-checkboxes" id="equip-checkboxes">
@@ -1144,7 +1157,7 @@ body.light .coach-input-row{border-color:var(--border)}
         <div class="ob-checkbox" onclick="toggleEquip('rameur',this)"><div class="ob-checkbox-label">Rameur</div></div>
         <div class="ob-checkbox" onclick="toggleEquip('corde',this)"><div class="ob-checkbox-label">Corde à sauter</div></div>
       </div>
-      <button class="ob-next" id="ob-next-4" onclick="finishOnboarding()">Générer mon programme</button>
+      <button class="ob-next" id="ob-next-5" onclick="finishOnboarding()">Générer mon programme</button>
       <button class="ob-skip" onclick="skipOnboarding()">Passer — utiliser le programme standard</button>
     </div>
   </div>
@@ -2016,9 +2029,45 @@ const EX_LIBRARY = {
     type:'jambes', group:'tibial', sets:'4×20', rest:45,
     equipment:[],
     muscles:['Tibial antérieur'],
-    zones_sensibles:['cheville','genou'], niveau:'debutant',
+    zones_sensibles:['cheville'], niveau:'debutant',
     cardio:false, salle:true, maison:true,
     objectifs:['sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Leg Curl Allongé': {
+    type:'jambes', group:'ischio', sets:'4×12', rest:75,
+    equipment:['poulie'],
+    muscles:['Ischio-jambiers'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Leg Extension Amplitude Réduite': {
+    type:'jambes', group:'quad', sets:'4×15', rest:60,
+    equipment:['presse'],
+    muscles:['Quadriceps — amplitude protégée pour le genou'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:false,
+    objectifs:['physique','sante'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Demi-Squat Box (genou protégé)': {
+    type:'jambes', group:'quad', sets:'4×12', rest:75,
+    equipment:['chaise'],
+    muscles:['Quadriceps','Fessiers — amplitude limitée, faible stress articulaire'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','sante','poids'],
+    photo:'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80',
+  },
+  'Élévation Hanche Unilatérale': {
+    type:'jambes', group:'fessier', sets:'3×12', rest:60,
+    equipment:[],
+    muscles:['Grand fessier','Stabilisateurs — sans charge sur le genou'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:false, salle:true, maison:true,
+    objectifs:['physique','sante'],
     photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
   },
 
@@ -2073,7 +2122,7 @@ const EX_LIBRARY = {
 
   // ─── COURSE ─────────────────────────────────────────────────
   'Course Endurance Z2': {
-    type:'course', group:'endurance', sets:'45 min', rest:0,
+    type:'course', group:'endurance', subgroup:'endurance', sets:'45 min', rest:0,
     equipment:[],
     muscles:['Cardio Zone 2','130-150 bpm'],
     zones_sensibles:['genou','cheville'], niveau:'debutant',
@@ -2082,7 +2131,7 @@ const EX_LIBRARY = {
     photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80',
   },
   'Fractionné 10×1 min': {
-    type:'course', group:'fractione', sets:'10×1min', rest:0,
+    type:'course', group:'endurance', subgroup:'fractionne', sets:'10×1min', rest:0,
     equipment:[],
     muscles:['VO2max','Zone 4-5'],
     zones_sensibles:['genou','cheville'], niveau:'intermediaire',
@@ -2091,7 +2140,7 @@ const EX_LIBRARY = {
     photo:'https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?w=600&q=80',
   },
   'Sortie Longue': {
-    type:'course', group:'endurance', sets:'60-90 min', rest:0,
+    type:'course', group:'endurance', subgroup:'longue', sets:'60-90 min', rest:0,
     equipment:[],
     muscles:['Endurance fondamentale','120-140 bpm'],
     zones_sensibles:['genou','cheville'], niveau:'debutant',
@@ -2102,7 +2151,7 @@ const EX_LIBRARY = {
 
   // ─── CARDIO ALTERNATIF ──────────────────────────────────────
   'Vélo Stationnaire Z2': {
-    type:'cardio', group:'endurance', sets:'45 min', rest:0,
+    type:'cardio', group:'endurance', subgroup:'endurance', sets:'45 min', rest:0,
     equipment:['velo'],
     muscles:['Cardio Zone 2 — sans impact'],
     zones_sensibles:[], niveau:'debutant',
@@ -2110,8 +2159,26 @@ const EX_LIBRARY = {
     objectifs:['endurance','sante','poids'],
     photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
   },
+  'Vélo Fractionné': {
+    type:'cardio', group:'endurance', subgroup:'fractionne', sets:'10×1min rapide / 1min récup', rest:60,
+    equipment:['velo'],
+    muscles:['VO2max — sans impact sur les articulations'],
+    zones_sensibles:[], niveau:'intermediaire',
+    cardio:true, salle:true, maison:true,
+    objectifs:['endurance','physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Vélo Sortie Longue': {
+    type:'cardio', group:'endurance', subgroup:'longue', sets:'90-120 min', rest:0,
+    equipment:['velo'],
+    muscles:['Endurance fondamentale — sans impact'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:true, maison:true,
+    objectifs:['endurance','poids','sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
   'Rameur': {
-    type:'cardio', group:'full_body', sets:'20-30 min', rest:0,
+    type:'cardio', group:'full_body', subgroup:'fractionne', sets:'20-30 min', rest:0,
     equipment:['rameur'],
     muscles:['Full body','Cardio Zone 2-3'],
     zones_sensibles:[], niveau:'debutant',
@@ -2120,7 +2187,7 @@ const EX_LIBRARY = {
     photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
   },
   'Corde à Sauter': {
-    type:'cardio', group:'endurance', sets:'3×5 min', rest:60,
+    type:'cardio', group:'endurance', subgroup:'fractionne', sets:'3×5 min', rest:60,
     equipment:['corde'],
     muscles:['Cardio','Mollets','Coordination'],
     zones_sensibles:['genou','cheville'], niveau:'debutant',
@@ -2129,7 +2196,7 @@ const EX_LIBRARY = {
     photo:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80',
   },
   'Natation Endurance': {
-    type:'cardio', group:'endurance', sets:'45 min', rest:0,
+    type:'cardio', group:'endurance', subgroup:'endurance', sets:'45 min', rest:0,
     equipment:['piscine'],
     muscles:['Cardio Zone 2 — full body sans impact'],
     zones_sensibles:[], niveau:'debutant',
@@ -2137,13 +2204,49 @@ const EX_LIBRARY = {
     objectifs:['endurance','sante','poids'],
     photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
   },
+  'Natation Fractionnée': {
+    type:'cardio', group:'endurance', subgroup:'fractionne', sets:'10×50m rapide / 30s récup', rest:30,
+    equipment:['piscine'],
+    muscles:['VO2max — sans impact'],
+    zones_sensibles:[], niveau:'intermediaire',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','physique'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Natation Sortie Longue': {
+    type:'cardio', group:'endurance', subgroup:'longue', sets:'60-75 min', rest:0,
+    equipment:['piscine'],
+    muscles:['Endurance fondamentale — sans impact'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:false, maison:false,
+    objectifs:['endurance','poids','sante'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
   'Burpees': {
-    type:'cardio', group:'full_body', sets:'4×10', rest:60,
+    type:'cardio', group:'full_body', subgroup:'fractionne', sets:'4×10', rest:60,
     equipment:[],
     muscles:['Full body','Cardio'],
     zones_sensibles:['genou','poignet','epaule'], niveau:'intermediaire',
     cardio:true, salle:true, maison:true,
     objectifs:['physique','endurance','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'HIIT Sans Matériel': {
+    type:'cardio', group:'full_body', subgroup:'fractionne', sets:'8×30s effort / 30s récup', rest:30,
+    equipment:[],
+    muscles:['VO2max','Full body — aucun équipement requis'],
+    zones_sensibles:['genou'], niveau:'intermediaire',
+    cardio:true, salle:true, maison:true,
+    objectifs:['physique','endurance','poids'],
+    photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  'Marche Active Longue': {
+    type:'cardio', group:'endurance', subgroup:'longue', sets:'60-90 min', rest:0,
+    equipment:[],
+    muscles:['Endurance fondamentale — faible impact'],
+    zones_sensibles:[], niveau:'debutant',
+    cardio:true, salle:true, maison:true,
+    objectifs:['endurance','poids','sante'],
     photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
   },
 
@@ -2260,54 +2363,85 @@ function buildAdaptedProgram(prefs) {
       ];
       if (frequence >= 4) return [
         {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
+        {jour:'Mardi',type:'mob',label:'REPOS',sub:'Récupération'},
         {jour:'Mercredi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
+        {jour:'Jeudi',type:'mob',label:'REPOS',sub:'Récupération'},
         {jour:'Vendredi',type:'jambes',label:'JAMBES',sub:'Quad · Ischio · Fessiers'},
         {jour:'Samedi',type:'push',label:'UPPER BODY',sub:'Haut du corps complet'},
         {jour:'Dimanche',type:'mob',label:'REPOS',sub:'Récupération'},
       ];
       return [
         {jour:'Lundi',type:'push',label:'FULL BODY A',sub:'Push dominant'},
+        {jour:'Mardi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Mercredi',type:'mob',label:'REPOS',sub:'Récupération'},
         {jour:'Jeudi',type:'pull',label:'FULL BODY B',sub:'Pull dominant'},
+        {jour:'Vendredi',type:'mob',label:'REPOS',sub:'Récupération'},
         {jour:'Samedi',type:'jambes',label:'JAMBES + CORE',sub:'Bas du corps'},
         {jour:'Dimanche',type:'mob',label:'REPOS',sub:'Récupération'},
       ];
     } else {
-      // Muscu + cardio (programme original)
+      // Muscu + cardio
+      if (frequence <= 3) return [
+        {jour:'Lundi',type:'push',label:'PUSH + PULL',sub:'Full upper body'},
+        {jour:'Mardi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Mercredi',type:'course',subgroup:'fractionne',label:'FRACTIONNÉ',sub:'Zone 4-5 · VO2max'},
+        {jour:'Jeudi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Vendredi',type:'jambes',label:'JAMBES + COURSE',sub:'Renforcement coureur'},
+        {jour:'Samedi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Dimanche',type:'course',subgroup:'longue',label:'SORTIE LONGUE',sub:'60-90 min Zone 2'},
+      ];
+      if (frequence <= 4) return [
+        {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
+        {jour:'Mardi',type:'course',subgroup:'endurance',label:'ENDURANCE',sub:'Zone 2 · FC 60-70%'},
+        {jour:'Mercredi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Jeudi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
+        {jour:'Vendredi',type:'mob',label:'REPOS',sub:'Récupération'},
+        {jour:'Samedi',type:'course',subgroup:'longue',label:'SORTIE LONGUE',sub:'60-90 min Zone 2'},
+        {jour:'Dimanche',type:'mob',label:'REPOS + MOBILITÉ',sub:'Récupération'},
+      ];
       return [
         {jour:'Lundi',type:'push',label:'PUSH',sub:'Pecto · Épaules · Triceps'},
-        {jour:'Mardi',type:'course',label:'ENDURANCE',sub:'Zone 2 · FC 60-70%'},
+        {jour:'Mardi',type:'course',subgroup:'endurance',label:'ENDURANCE',sub:'Zone 2 · FC 60-70%'},
         {jour:'Mercredi',type:'pull',label:'PULL',sub:'Dos · Biceps'},
-        {jour:'Jeudi',type:'course',label:'FRACTIONNÉ',sub:'Zone 4-5 · VO2max'},
+        {jour:'Jeudi',type:'course',subgroup:'fractionne',label:'FRACTIONNÉ',sub:'Zone 4-5 · VO2max'},
         {jour:'Vendredi',type:'upper',label:'UPPER COMPLET',sub:'Haut du corps'},
-        {jour:'Samedi',type:'course',label:'SORTIE LONGUE',sub:'60-90 min Zone 2'},
+        {jour:'Samedi',type:'course',subgroup:'longue',label:'SORTIE LONGUE',sub:'60-90 min Zone 2'},
         {jour:'Dimanche',type:'mob',label:'REPOS + MOBILITÉ',sub:'Récupération'},
       ];
     }
   }
 
-  // Select exercises for a session type
-  function getSessionExos(type, count = 7) {
+  // Select exercises for a session type (+ optional subgroup for cardio days)
+  function getSessionExos(type, count = 7, subgroup = null) {
     const typeMap = {
       push: ['pec','pec_haut','epaule','epaule_lat','triceps','core_ant'],
       pull: ['dos','epaule_post','biceps','grip'],
       upper: ['pec','dos','epaule','biceps','triceps','core_lat'],
       jambes: ['quad','ischio','fessier','mollets','tibial'],
-      course: ['endurance','fractione'],
+      course: ['endurance','full_body'],
       mob: ['mobilite'],
       cardio: ['endurance','full_body'],
     };
     const groups = typeMap[type] || [];
-    const exos = Object.entries(pool)
+    let exos = Object.entries(pool)
       .filter(([, ex]) => groups.includes(ex.group))
       .map(([name]) => name);
-    
+
+    // For cardio/course days, prefer exercises matching the requested subgroup
+    // (endurance / fractionne / longue) so each day is genuinely different
+    if ((type === 'course' || type === 'cardio') && subgroup) {
+      const matching = exos.filter(name => EX_LIBRARY[name].subgroup === subgroup);
+      if (matching.length > 0) exos = matching;
+      // else: fall back to the full cardio pool rather than returning nothing
+    }
+
     // Prioritize by objective
     const prioritized = exos.sort((a, b) => {
       const aObj = EX_LIBRARY[a].objectifs.includes(objectif) ? 0 : 1;
       const bObj = EX_LIBRARY[b].objectifs.includes(objectif) ? 0 : 1;
       return aObj - bObj;
     });
-    
+
     return prioritized.slice(0, count);
   }
 
@@ -3180,6 +3314,7 @@ let obAnswers = {
   cardio: null,
   niveau: null,
   zones_sensibles: [],
+  frequence: null,
   equipements: ['barre','banc','rack','halteres','poulie','presse','barre_traction',
     'barres_paralleles','banc_incline','barre_ez','step','chaise','tapis'],
 };
@@ -3195,7 +3330,7 @@ function goToStep(n) {
   const step = document.getElementById('ob-step-' + n);
   if (step) step.classList.add('active');
   // Update progress dots
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const dot = document.getElementById('odot' + i);
     if (dot) dot.classList.toggle('done', i <= n);
   }
@@ -3252,7 +3387,7 @@ function finishOnboarding() {
     niveau: obAnswers.niveau || 'intermediaire',
     zones_sensibles: obAnswers.zones_sensibles,
     equipements: obAnswers.equipements,
-    frequence: 6,
+    frequence: obAnswers.frequence || 6,
   };
   S.profile.onboarded = true;
   save();
@@ -3284,7 +3419,7 @@ function buildAndApplyAdaptedProgram() {
   // Build WEEK_A from adapted template
   ADAPTED_WEEK_A = template.map(day => {
     const baseDay = WEEK_A.find(d => d.jour === day.jour) || {};
-    const exos = adapted.getSessionExos(day.type, 7);
+    const exos = adapted.getSessionExos(day.type, 7, day.subgroup);
     return {
       ...baseDay,
       ...day,
@@ -3295,17 +3430,23 @@ function buildAndApplyAdaptedProgram() {
     };
   });
 
-  // WEEK_B: replace Sunday with jambes if applicable
-  ADAPTED_WEEK_B = [...ADAPTED_WEEK_A.slice(0, 6), {
-    jour: 'Dimanche',
-    type: 'jambes',
-    photo: 'jambes',
-    label: 'JAMBES',
-    sub: 'Renforcement coureur · Genoux · Chevilles',
-    dur: '~60 min',
-    warmup: 'Mobilité 10 min OBLIGATOIRE avant cette séance.',
-    exercises: adapted.getSessionExos('jambes', 6),
-  }];
+  // WEEK_B: replace Sunday with jambes on alternating weeks — only for 6j/semaine
+  // (les plans 3-4j ont un dimanche volontairement vide, ne pas le forcer)
+  const freq = prefs.frequence || 6;
+  if (freq >= 6) {
+    ADAPTED_WEEK_B = [...ADAPTED_WEEK_A.slice(0, 6), {
+      jour: 'Dimanche',
+      type: 'jambes',
+      photo: 'jambes',
+      label: 'JAMBES',
+      sub: 'Renforcement coureur · Genoux · Chevilles',
+      dur: '~60 min',
+      warmup: 'Mobilité 10 min OBLIGATOIRE avant cette séance.',
+      exercises: adapted.getSessionExos('jambes', 6),
+    }];
+  } else {
+    ADAPTED_WEEK_B = ADAPTED_WEEK_A;
+  }
 }
 
 // Override getDays to use adapted program if available
@@ -3336,6 +3477,7 @@ function relaunchOnboarding() {
     cardio: p?.cardio === false ? false : (p?.cardio_type || (p?.cardio ? true : null)),
     niveau: p?.niveau || null,
     zones_sensibles: p?.zones_sensibles ? [...p.zones_sensibles] : [],
+    frequence: p?.frequence || null,
     equipements: p?.equipements ? [...p.equipements] : ['barre','banc','rack','halteres','poulie','presse','barre_traction','barres_paralleles','banc_incline','barre_ez','step','chaise','tapis'],
   };
   showOnboarding();
@@ -3742,13 +3884,55 @@ function renderPlan7j() {
   const el = document.getElementById('nutri-plan7j-content');
   if (!el) return;
   const obj = S.profile?.prefs?.objectif || 'physique';
-  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Plan adapté à ton objectif : ${
-    {physique:'Corps athlétique',force:'Force pure',endurance:'Endurance',sante:'Santé',poids:'Perte de poids'}[obj]||'Physique'
-  }</strong>Les calories et macros sont indicatives — ajuste selon ton poids (${S.profile?.weight||70}kg) et ta sensation de satiété.</div>`;
+  const weight = S.profile?.weight || 75;
+  // Scale factor vs the 75kg baseline the PLAN_7J values were authored for
+  const scale = weight / 75;
 
-  PLAN_7J.forEach((day, i) => {
-    const col = TYPE_COLORS_NUTRI[day.type] || 'var(--push)';
-    const label = TYPE_LABELS_NUTRI[day.type] || day.jour;
+  // Map a real day's session type/subgroup to the closest PLAN_7J meal template,
+  // so the nutrition plan always matches what the user actually trains that day —
+  // instead of a fixed Lundi=PUSH/Mardi=Course list independent of their program.
+  function findMealTemplate(day) {
+    const t = day.type;
+    // WEEK_A/WEEK_B (programme standard non adapté) n'ont pas de champ subgroup explicite —
+    // on le déduit du label pour ne pas perdre la distinction Endurance/Fractionné/Sortie longue
+    let sg = day.subgroup;
+    if (!sg && t === 'course') {
+      const lbl = (day.label || '').toLowerCase();
+      if (lbl.includes('fraction')) sg = 'fractionne';
+      else if (lbl.includes('longue')) sg = 'longue';
+      else sg = 'endurance';
+    }
+    if (t === 'mob') return PLAN_7J.find(p => p.type === 'repos');
+    if (t === 'jambes') return PLAN_7J.find(p => p.type === 'pull') || PLAN_7J[0]; // volume similaire
+    if (t === 'course' || t === 'cardio') {
+      if (sg === 'fractionne') return PLAN_7J.find(p => p.type === 'fractione');
+      if (sg === 'longue') return PLAN_7J.find(p => p.type === 'sortie');
+      return PLAN_7J.find(p => p.type === 'course');
+    }
+    if (t === 'upper') return PLAN_7J.find(p => p.type === 'upper');
+    if (t === 'pull') return PLAN_7J.find(p => p.type === 'pull');
+    return PLAN_7J.find(p => p.type === 'push') || PLAN_7J[0];
+  }
+
+  const realDays = (typeof getDays === 'function') ? getDays(S.week || 1) : [];
+  const daysToRender = realDays.length === 7 ? realDays : PLAN_7J; // fallback if program not yet adapted
+
+  let html = `<div class="adapted-notice" style="margin-top:10px"><strong>Plan adapté à ton programme réel et ton objectif : ${
+    {physique:'Corps athlétique',force:'Force pure',endurance:'Endurance',sante:'Santé',poids:'Perte de poids'}[obj]||'Physique'
+  }</strong>Calories ajustées pour ${weight}kg. Chaque jour correspond à ta vraie séance de la semaine ${S.week||1}.</div>`;
+
+  daysToRender.forEach((realDay, i) => {
+    const template = findMealTemplate(realDay) || PLAN_7J[i] || PLAN_7J[0];
+    const day = {
+      ...template,
+      jour: realDay.jour || template.jour,
+      kcal: Math.round(template.kcal * scale),
+      pro: Math.round(template.pro * scale),
+      carb: Math.round(template.carb * scale),
+      fat: Math.round(template.fat * scale),
+    };
+    const col = TYPE_COLOR[realDay.type] || TYPE_COLORS_NUTRI[template.type] || 'var(--push)';
+    const label = realDay.label || TYPE_LABELS_NUTRI[template.type] || day.jour;
     const isOpen = openPlanDay === i;
     html += `<div class="plan-day-card">
       <div class="plan-day-hdr" onclick="togglePlanDay(${i})">
@@ -3760,7 +3944,7 @@ function renderPlan7j() {
         <span class="plan-day-chev ${isOpen?'open':''}">▾</span>
       </div>
       <div class="plan-day-body ${isOpen?'open':''}">
-        ${day.meals.map(meal=>`
+        ${template.meals.map(meal=>`
           <div class="plan-meal">
             <div class="plan-meal-title">${meal.name}</div>
             ${meal.items.map(item=>`
