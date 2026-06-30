@@ -1340,6 +1340,12 @@ body.light .coach-input-row{border-color:var(--border)}
       </div>
 
       <div class="profile-section">
+        <div class="profile-section-title">Préférences d'entraînement</div>
+        <div id="prefs-summary"></div>
+        <button class="profile-save-btn" style="background:var(--bg3);color:var(--text);box-shadow:none;border:1px solid rgba(255,255,255,.08);margin-top:10px" onclick="relaunchOnboarding()">Refaire le questionnaire</button>
+      </div>
+
+      <div class="profile-section">
         <div class="profile-section-title">Objectifs de charges</div>
         <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">Tes objectifs sur les 12 semaines — mis à jour automatiquement selon ta progression.</p>
         <div id="charge-goals"></div>
@@ -2380,7 +2386,7 @@ function showTab(id){
   if(id==='dashboard')renderDashboard();
   if(id==='nutrition')renderNutrition();
   if(id==='notifs'){setTimeout(()=>{try{loadNotifSettings();updateNotifStatus();}catch(e){}},100);}
-  if(id==='profile'){setTimeout(()=>{try{loadProfile();renderProfileHero();renderDechargeWrap();renderChargeGoals();renderProfileStats();}catch(e){}},100);}
+  if(id==='profile'){setTimeout(()=>{try{loadProfile();renderProfileHero();renderDechargeWrap();renderChargeGoals();renderProfileStats();renderPrefsSummary();}catch(e){}},100);}
 }
 window.showTab = showTab;
 window.changeWeek = function changeWeek(d){S.week=Math.max(1,Math.min(12,S.week+d));save();renderProgramme();}
@@ -3254,6 +3260,7 @@ function finishOnboarding() {
   // Rebuild programme with adapted exercises
   buildAndApplyAdaptedProgram();
   renderProgramme();
+  renderPrefsSummary();
 }
 
 function skipOnboarding() {
@@ -3319,6 +3326,44 @@ function checkOnboarding() {
     buildAndApplyAdaptedProgram();
   }
 }
+
+function relaunchOnboarding() {
+  if (!confirm('Refaire le questionnaire va régénérer ton programme de la semaine selon tes nouvelles réponses. Continuer ?')) return;
+  // Reset onboarding answers to current prefs (if any) so the flow feels like editing, not starting blank
+  const p = S.profile?.prefs;
+  obAnswers = {
+    objectif: p?.objectif || null,
+    cardio: p?.cardio === false ? false : (p?.cardio_type || (p?.cardio ? true : null)),
+    niveau: p?.niveau || null,
+    zones_sensibles: p?.zones_sensibles ? [...p.zones_sensibles] : [],
+    equipements: p?.equipements ? [...p.equipements] : ['barre','banc','rack','halteres','poulie','presse','barre_traction','barres_paralleles','banc_incline','barre_ez','step','chaise','tapis'],
+  };
+  showOnboarding();
+}
+
+function renderPrefsSummary() {
+  const el = document.getElementById('prefs-summary');
+  if (!el) return;
+  const p = S.profile?.prefs;
+  if (!p) {
+    el.innerHTML = '<p style="font-size:12px;color:var(--muted2)">Pas encore de préférences personnalisées — ton programme utilise la version standard.</p>';
+    return;
+  }
+  const objLabels = {physique:'Physique athlétique',force:'Force pure',endurance:'Endurance',sante:'Santé',poids:'Perte de poids'};
+  const nivLabels = {debutant:'Débutant',intermediaire:'Intermédiaire',avance:'Avancé'};
+  const cardioLabel = p.cardio === false ? 'Pas de cardio — 100% musculation' : (p.cardio_type === 'velo' ? 'Vélo / natation' : 'Course à pied');
+  const zonesLabel = (p.zones_sensibles && p.zones_sensibles.length) ? p.zones_sensibles.map(z => ZONES_LABELS[z] || z).join(', ') : 'Aucune';
+  el.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Objectif</span><span style="font-weight:600;color:var(--text)">${objLabels[p.objectif]||p.objectif}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Cardio</span><span style="font-weight:600;color:var(--text)">${cardioLabel}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--muted)">Niveau</span><span style="font-weight:600;color:var(--text)">${nivLabels[p.niveau]||p.niveau}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;gap:12px"><span style="color:var(--muted);flex-shrink:0">Zones sensibles</span><span style="font-weight:600;color:var(--text);text-align:right">${zonesLabel}</span></div>
+    </div>`;
+}
+
+window.relaunchOnboarding = relaunchOnboarding;
+window.renderPrefsSummary = renderPrefsSummary;
 
 // Make functions global
 window.selectOb = selectOb;
